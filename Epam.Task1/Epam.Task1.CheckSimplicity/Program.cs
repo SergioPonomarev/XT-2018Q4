@@ -6,13 +6,11 @@ namespace Epam.Task1.CheckSimplicity
     {
         static void Main()
         {
-            Console.WriteLine("1 - " + CheckSimplicity(1).ToString());
-            Console.WriteLine("2 - " + CheckSimplicity(2).ToString());
-            Console.WriteLine("3 - " + CheckSimplicity(3).ToString());
-            Console.WriteLine("7 - " + CheckSimplicity(7).ToString());
-            Console.WriteLine("9 - " + CheckSimplicity(9).ToString());
-            Console.WriteLine("55 - " + CheckSimplicity(55).ToString());
-            Console.WriteLine("71 - " + CheckSimplicity(71).ToString());
+            for (int i = 0; i < 20; i++)
+            {
+                Console.WriteLine($"{i} is simple number - "
+                                  + CheckSimplicity(i).ToString());
+            }
         }
 
         public static bool CheckSimplicity(int n)
