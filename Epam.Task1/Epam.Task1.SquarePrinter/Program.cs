@@ -6,11 +6,11 @@ namespace Epam.Task1.SquarePrinter
     {
         static void Main()
         {
-            SquarePrinter(7);
-            Console.WriteLine();
-            SquarePrinter(5);
-            Console.WriteLine();
-            SquarePrinter(11);
+            for (int i = 5; i < 11; i+=2)
+            {
+                SquarePrinter(i);
+                Console.WriteLine();
+            }
         }
 
         public static void SquarePrinter(int n)
