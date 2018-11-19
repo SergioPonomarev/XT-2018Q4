@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task1.Sequence", "Epam.Task1.NumberSequencer\Epam.Task1.Sequence.csproj", "{38A58BF1-36BA-4802-89D7-D013FAAAD944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task1.CheckSimplicity", "Epam.Task1.CheckSimplicity\Epam.Task1.CheckSimplicity.csproj", "{92E06D04-EFA5-4F8B-9C5A-0B52A522A7B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task1.Simple", "Epam.Task1.CheckSimplicity\Epam.Task1.Simple.csproj", "{92E06D04-EFA5-4F8B-9C5A-0B52A522A7B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task1.SquarePrinter", "Epam.Task1.SquarePrinter\Epam.Task1.SquarePrinter.csproj", "{29E6D894-771C-4C7E-92E2-6DA7F3A2E4E6}"
 EndProject
