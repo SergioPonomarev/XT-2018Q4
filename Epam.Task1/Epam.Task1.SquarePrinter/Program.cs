@@ -1,19 +1,15 @@
 ﻿using System;
 
-namespace Epam.Task1.SquarePrinter
+namespace Epam.Task1.Square
 {
     class Program
     {
         static void Main()
         {
-            for (int i = 5; i < 11; i+=2)
-            {
-                SquarePrinter(i);
-                Console.WriteLine();
-            }
+
         }
 
-        public static void SquarePrinter(int n)
+        public static void Square(int n)
         {
             char ch = '*';
             char space = ' ';
