@@ -1,65 +1,56 @@
 ﻿using System;
-using System.Text;
 
-namespace Epam.Task1.NumberSequencer
+namespace Epam.Task1.Sequence
 {
     class Program
     {
         static void Main()
         {
-            Console.WriteLine(NumberSequencer(7));
-
+            Console.WriteLine("Greatings! You are using " +
+                              "The Number Sequencer Programm!");
             Console.WriteLine();
 
-            Console.WriteLine(NumberSequencerSB(100));
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Please, enter a number from 1 to "
+                                  + "some reasonable value: ");
+                    bool check = int.TryParse(Console.ReadLine(), out int number);
+                    Console.WriteLine();
+                    if (!check)
+                    {
+                        throw new ArgumentException("The entered value must be "
+                                                    + "a natural number from 1 "
+                                                    + "or more.");
+                    }
+                    
+                    Sequence(number);
+                    return;
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                }
+            }
         }
 
-        public static string NumberSequencer(int n)
+        public static void Sequence(int number)
         {
-            string result = string.Empty;
-            for (int i = 1; i <= n; i++)
+            for (int i = 1; i <= number; i++)
             {
-                if (i == n) result += i.ToString();
-                else result += i.ToString() + ", ";
+                if (i == number)
+                {
+                    Console.Write(i);
+                }
+                else
+                {
+                    Console.Write(i);
+                    Console.Write(", ");
+                }
             }
-            return result;
-        }
-
-        /* В случае операций со строками в цикле, лучше всего сразу
-         * задуматься об использовании класса StringBuilder,
-         * так как строка неизменяема и при каждой операции присвоения
-         * в цикле будет создаваться новая строка.
-         * После +- 20-30 итераций SB работает быстрее и дает меньшую
-         * нагрузку на память. Эффективнее всего будет, если сразу
-         * задавать размер SB в конструкторе.
-        */
-
-        public static string NumberSequencerSB(int n)
-        {
-            int size = 0;
-
-            if (n < 10) size += n;
-
-            if (n >= 10 && n < 100) size += (n - 9) * 2 + 9;
-
-            if (n >= 100 && n < 1000) size += (n - 99) * 3 + 189;
-
-            if (n >= 1000 && n < 10000) size += (n - 999) * 4 + 2889;
-
-            if (n >= 10000) size += 38894;
-
-            size = size + n * 2 - 2;
-
-            StringBuilder sb = new StringBuilder(size);
-
-            for (int i = 1; i <= n; i++)
-            {
-                if (i == n) sb.Append(i.ToString());
-                else sb.Append(i.ToString()).Append(", ");
-            }
-
-            string result = sb.ToString();
-            return result;
+            Console.WriteLine();
         }
     }
 }
