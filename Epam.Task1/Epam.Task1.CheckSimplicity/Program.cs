@@ -1,29 +1,68 @@
 ﻿using System;
 
-namespace Epam.Task1.CheckSimplicity
+namespace Epam.Task1.Simple
 {
     class Program
     {
         static void Main()
         {
-            for (int i = 0; i < 20; i++)
+            Console.WriteLine("Greatings! You are using " +
+                              "The Prime Number Check Programm!");
+            Console.WriteLine();
+
+            while (true)
             {
-                Console.WriteLine($"{i} is simple number - "
-                                  + CheckSimplicity(i).ToString());
+                try
+                {
+                    Console.Write("Please, enter a value to check if it is "
+                                      + "a prime number: ");
+                    bool check = int.TryParse(Console.ReadLine(), out int number);
+                    Console.WriteLine();
+
+                    if (!check)
+                    {
+                        throw new ArgumentException("The entered value must be "
+                                                    + "a number.");
+                    }
+                    
+                    Simple(number);
+                    return;
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                }
             }
         }
 
-        public static bool CheckSimplicity(int n)
+        public static void Simple(int number)
         {
-            if (n < 2) return false;
-            for (int i = 2; i <= n / i; i++)
+            if (number < 2)
             {
-                if (n % i == 0)
+                Console.WriteLine($"{number} is not a prime number.");
+                return;
+            }
+
+            bool isSimple = true;
+
+            for (int i = 2; i <= number / i; i++)
+            {
+                if (number % i == 0)
                 {
-                    return false;
+                    isSimple = false;
+                    break;
                 }
             }
-            return true;
+
+            if (isSimple)
+            {
+                Console.WriteLine($"{number} is a prime number.");
+            }
+            else
+            {
+                Console.WriteLine($"{number} is not a prime number.");
+            }
         }
     }
 }
