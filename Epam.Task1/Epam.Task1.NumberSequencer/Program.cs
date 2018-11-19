@@ -8,7 +8,7 @@ namespace Epam.Task1.Sequence
         {
             Console.WriteLine("Greatings! You are using " +
                               "The Number Sequencer Programm!");
-            Console.WriteLine();
+            Console.WriteLine(); // Could use an '\n' escape sequence instead
 
             while (true)
             {
