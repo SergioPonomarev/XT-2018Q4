@@ -18,6 +18,7 @@ namespace Epam.Task1.Sequence
                                   + "some reasonable value: ");
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
+
                     if (!check)
                     {
                         throw new ArgumentException("The entered value must be "
