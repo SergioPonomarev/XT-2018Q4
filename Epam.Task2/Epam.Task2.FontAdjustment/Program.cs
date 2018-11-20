@@ -73,8 +73,11 @@ namespace Epam.Task2.FontAdjustment
                 }
                 catch (ArgumentException ex)
                 {
+                    ConsoleColor color = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine();
                     Console.WriteLine(ex.Message);
+                    Console.ForegroundColor = color;
                 }
 
             }
@@ -120,11 +123,14 @@ namespace Epam.Task2.FontAdjustment
 
         private static void ShowMenu()
         {
+            ConsoleColor color = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("Please, choose font adjustment to apply:");
-            Console.WriteLine("1: Bold");
-            Console.WriteLine("2: Italic");
-            Console.WriteLine("3: Underline");
-            Console.WriteLine("4: for quit from the programm");
+            Console.WriteLine("\t1: Bold");
+            Console.WriteLine("\t2: Italic");
+            Console.WriteLine("\t3: Underline");
+            Console.WriteLine("\t4: for quit from the programm");
+            Console.ForegroundColor = color;
             Console.WriteLine();
         }
     }
