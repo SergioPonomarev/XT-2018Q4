@@ -32,10 +32,10 @@ namespace Epam.Task2.FontAdjustment
 
                     ShowMenu();
 
-                    Console.Write("Enter a number of adjustment: ");
+                    Console.Write("Enter a number of adjustment from menu: ");
                     bool check = int.TryParse(Console.ReadLine(), out int value);
                     
-                    if (!check || value < 0 || value > 4)
+                    if (!check || value < 1 || value > 4)
                     {
                         throw new ArgumentException("Entered value is not correct.");
                     }
