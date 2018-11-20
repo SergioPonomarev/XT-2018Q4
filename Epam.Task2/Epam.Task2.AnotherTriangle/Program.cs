@@ -7,7 +7,7 @@ namespace Epam.Task2.AnotherTriangle
         static void Main()
         {
             Console.WriteLine("Greatings! You are using "
-                             + "The Another Triangle Printer Programm!");
+                             + "The Another Triangle Printer Program!");
             Console.WriteLine();
 
             while (true)
