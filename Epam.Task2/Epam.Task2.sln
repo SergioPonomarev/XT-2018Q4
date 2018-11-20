@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.Triangle", "Epam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.AnotherTriangle", "Epam.Task2.AnotherTriangle\Epam.Task2.AnotherTriangle.csproj", "{537A3D63-07BF-4118-AEB1-9C6D5BA76EB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.XMasTree", "Epam.Task2.X-MasTree\Epam.Task2.XMasTree.csproj", "{0B1C3C45-0475-4A83-8EFB-A7EFE3D499EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{537A3D63-07BF-4118-AEB1-9C6D5BA76EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{537A3D63-07BF-4118-AEB1-9C6D5BA76EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{537A3D63-07BF-4118-AEB1-9C6D5BA76EB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1C3C45-0475-4A83-8EFB-A7EFE3D499EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1C3C45-0475-4A83-8EFB-A7EFE3D499EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1C3C45-0475-4A83-8EFB-A7EFE3D499EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1C3C45-0475-4A83-8EFB-A7EFE3D499EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
