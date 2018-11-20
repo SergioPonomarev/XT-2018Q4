@@ -18,7 +18,7 @@ namespace Epam.Task1.Square
                     bool check = int.TryParse(Console.ReadLine(), out int size);
                     Console.WriteLine();
 
-                    if (!check || (size % 2 == 0))
+                    if (!check || (size % 2 == 0) || size < 0)
                     {
                         throw new ArgumentException("The entered value must be "
                                                     + "an odd natural number.");
