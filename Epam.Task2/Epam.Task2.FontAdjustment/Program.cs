@@ -17,7 +17,7 @@ namespace Epam.Task2.FontAdjustment
 
         static void Main()
         {
-            Console.WriteLine("Greatings! You are using The"
+            Console.WriteLine("Greatings! You are using The "
                              + "Font Adjustment Programm");
 
             Fonts fonts = Fonts.None;
