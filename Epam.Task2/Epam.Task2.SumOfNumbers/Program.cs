@@ -6,11 +6,11 @@ namespace Epam.Task2.SumOfNumbers
     {
         static void Main()
         {
-            Console.Write("The sum of all multiples of 3 or 5 below 1000 is: ");
-            SumOfNumbers();
+            Console.Write("The sum of all multiples of 3 or 5 below 1000 "
+                          + $"is: {SumOfNumbers().ToString()}");
         }
 
-        public static void SumOfNumbers()
+        public static int SumOfNumbers()
         {
             int sum = 0;
 
@@ -22,7 +22,7 @@ namespace Epam.Task2.SumOfNumbers
                 }
             }
 
-            Console.WriteLine(sum);
+            return sum;
         }
     }
 }
