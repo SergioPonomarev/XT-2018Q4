@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.XMasTree", "Epam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.FontAdjustment", "Epam.Task2.FontAdjustment\Epam.Task2.FontAdjustment.csproj", "{7C0DF71E-1483-4721-A4F2-F14BCAEEA447}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.Rectangle", "Epam.Task2.Rectangle\Epam.Task2.Rectangle.csproj", "{CC16EE43-1AEF-416A-AD91-C529BCDC3A2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{7C0DF71E-1483-4721-A4F2-F14BCAEEA447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C0DF71E-1483-4721-A4F2-F14BCAEEA447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C0DF71E-1483-4721-A4F2-F14BCAEEA447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC16EE43-1AEF-416A-AD91-C529BCDC3A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC16EE43-1AEF-416A-AD91-C529BCDC3A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC16EE43-1AEF-416A-AD91-C529BCDC3A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC16EE43-1AEF-416A-AD91-C529BCDC3A2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
