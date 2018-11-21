@@ -30,7 +30,10 @@ namespace Epam.Task2.Rectangle
                     ValueCheck(check, ref sideB);
                     Console.WriteLine();
 
-                    RectArea(sideA, sideB);
+                    Console.WriteLine($"The area of the rectangle with "
+                                      + $"side a = {sideA} and side b = "
+                                      + $"{sideB} is: "
+                                      + $"{RectArea(sideA, sideB).ToString()}");
                     return;
                 }
                 catch (ArgumentException ex)
@@ -41,10 +44,10 @@ namespace Epam.Task2.Rectangle
             }
         }
 
-        public static void RectArea(int a, int b)
+        public static int RectArea(int a, int b)
         {
             int area = a * b;
-            Console.WriteLine(area);
+            return area;
         }
 
         private static void ValueCheck(bool check, ref int val)
