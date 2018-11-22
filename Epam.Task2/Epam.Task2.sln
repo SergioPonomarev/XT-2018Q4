@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.NoPositive", "Ep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.NonNegativeSum", "Epam.Task2.NonNegativeSum\Epam.Task2.NonNegativeSum.csproj", "{487A9E8D-88D7-4BC0-8A49-03542FEC05CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.2DArray", "Epam.Task2.2DArray\Epam.Task2.2DArray.csproj", "{D1356E33-6726-45D8-97D2-9F9FDB05E541}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,5 +63,9 @@ Global
 		{487A9E8D-88D7-4BC0-8A49-03542FEC05CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487A9E8D-88D7-4BC0-8A49-03542FEC05CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487A9E8D-88D7-4BC0-8A49-03542FEC05CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1356E33-6726-45D8-97D2-9F9FDB05E541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1356E33-6726-45D8-97D2-9F9FDB05E541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1356E33-6726-45D8-97D2-9F9FDB05E541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1356E33-6726-45D8-97D2-9F9FDB05E541}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
