@@ -4,10 +4,8 @@ namespace Epam.Task2.FontAdjustment
 {
     class Program
     {
-        private static int[] values = new int[3];
-
         [Flags]
-        private enum Fonts
+        private enum Fonts : byte
         {
             None = 0,
             Bold = 1,
@@ -33,7 +31,7 @@ namespace Epam.Task2.FontAdjustment
                     ShowMenu();
 
                     Console.Write("Enter a number of adjustment from menu: ");
-                    bool check = int.TryParse(Console.ReadLine(), out int value);
+                    bool check = byte.TryParse(Console.ReadLine(), out byte value);
                     
                     if (!check || value < 1 || value > 4)
                     {
@@ -44,24 +42,24 @@ namespace Epam.Task2.FontAdjustment
                     {
                         case 1:
                         case 2:
-                            if (CheckValue(value))
+                            if (fonts.HasFlag((Fonts)value))
                             {
-                                RemoveValue(ref fonts, value);
+                                fonts -= value;
                             }
                             else
                             {
-                                AddValue(ref fonts, value);
+                                fonts += value;
                             }
                             break;
 
                         case 3:
-                            if (CheckValue(value + 1))
+                            if (fonts.HasFlag((Fonts)value + 1))
                             {
-                                RemoveValue(ref fonts, value + 1);
+                                fonts -= (byte)(value + 1);
                             }
                             else
                             {
-                                AddValue(ref fonts, value + 1);
+                                fonts += (byte)(value + 1);
                             }
                             break;
 
@@ -81,44 +79,6 @@ namespace Epam.Task2.FontAdjustment
                 }
 
             }
-        }
-
-        private static bool CheckValue(int value)
-        {
-            for (int i = 0; i < values.Length; i++)
-            {
-                if (values[i] == value)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private static void AddValue(ref Fonts fonts, int value)
-        {
-            for (int i = 0; i < values.Length; i++)
-            {
-                if (values[i] == 0)
-                {
-                    values[i] = value;
-                    break;
-                }
-            }
-            fonts += value;
-        }
-
-        private static void RemoveValue(ref Fonts fonts, int value)
-        {
-            for (int i = 0; i < values.Length; i++)
-            {
-                if (values[i] == value)
-                {
-                    values[i] = 0;
-                    break;
-                }
-            }
-            fonts -= value;
         }
 
         private static void ShowMenu()
