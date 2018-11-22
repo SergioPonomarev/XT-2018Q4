@@ -23,10 +23,10 @@ namespace Epam.Task2.NoPositive
                 {
                     if (arrDimOne == 0)
                     {
-                        Console.Write($"Please, enter a natural number"
-                                      + $" more than 0 for the first "
+                        Console.Write("Please, enter a natural number"
+                                      + " more than 0 for the first "
                                       + $"dimension{Environment.NewLine}"
-                                      + $"of three-dimensional array: ");
+                                      + "of three-dimensional array: ");
                         check = int.TryParse(Console.ReadLine(),
                                              out arrDimOne);
                         DimensionCheck(check, ref arrDimOne);
@@ -35,10 +35,10 @@ namespace Epam.Task2.NoPositive
 
                     if (arrDimTwo == 0)
                     {
-                        Console.Write($"Please, enter a natural number"
-                                      + $" more than 0 for the second "
+                        Console.Write("Please, enter a natural number"
+                                      + " more than 0 for the second "
                                       + $"dimension{Environment.NewLine}"
-                                      + $"of three-dimensional array: ");
+                                      + "of three-dimensional array: ");
                         check = int.TryParse(Console.ReadLine(),
                                              out arrDimTwo);
                         DimensionCheck(check, ref arrDimTwo);
@@ -47,10 +47,10 @@ namespace Epam.Task2.NoPositive
 
                     if (arrDimThree == 0)
                     {
-                        Console.Write($"Please, enter a natural number"
-                                      + $" more than 0 for the third "
+                        Console.Write("Please, enter a natural number"
+                                      + " more than 0 for the third "
                                       + $"dimension{Environment.NewLine}"
-                                      + $"of three-dimensional array: ");
+                                      + "of three-dimensional array: ");
                         check = int.TryParse(Console.ReadLine(),
                                              out arrDimThree);
                         DimensionCheck(check, ref arrDimThree);
