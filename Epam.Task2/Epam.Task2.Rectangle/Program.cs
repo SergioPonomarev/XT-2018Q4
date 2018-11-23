@@ -44,7 +44,7 @@ namespace Epam.Task2.Rectangle
             }
         }
 
-        public static int RectArea(int a, int b)
+        private static int RectArea(int a, int b)
         {
             int area = a * b;
             return area;
