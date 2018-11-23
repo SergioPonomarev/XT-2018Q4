@@ -32,42 +32,39 @@ namespace Epam.Task2.FontAdjustment
 
                     Console.Write("Enter a number of adjustment from menu: ");
                     bool check = byte.TryParse(Console.ReadLine(), out byte value);
-                    
-                    if (!check || value < 1 || value > 4)
+
+                    if (ValueCheck(check, value))
                     {
-                        throw new ArgumentException("Entered value is not correct.");
+                        switch (value)
+                        {
+                            case 1:
+                            case 2:
+                                if (fonts.HasFlag((Fonts)value))
+                                {
+                                    fonts -= value;
+                                }
+                                else
+                                {
+                                    fonts += value;
+                                }
+                                break;
+                                
+                            case 3:
+                                if (fonts.HasFlag((Fonts)value + 1))
+                                {
+                                    fonts -= (byte)(value + 1);
+                                }
+                                else
+                                {
+                                    fonts += (byte)(value + 1);
+                                }
+                                break;
+                                
+                            case 4:
+                                Console.WriteLine("Quiting the program.");
+                                return;
+                        }
                     }
-
-                    switch (value)
-                    {
-                        case 1:
-                        case 2:
-                            if (fonts.HasFlag((Fonts)value))
-                            {
-                                fonts -= value;
-                            }
-                            else
-                            {
-                                fonts += value;
-                            }
-                            break;
-
-                        case 3:
-                            if (fonts.HasFlag((Fonts)value + 1))
-                            {
-                                fonts -= (byte)(value + 1);
-                            }
-                            else
-                            {
-                                fonts += (byte)(value + 1);
-                            }
-                            break;
-
-                        case 4:
-                            Console.WriteLine("Quiting the program.");
-                            return;
-                    }
-
                 }
                 catch (ArgumentException ex)
                 {
@@ -79,6 +76,16 @@ namespace Epam.Task2.FontAdjustment
                 }
 
             }
+        }
+
+        private static bool ValueCheck(bool check, byte value)
+        {
+            if (!check || value < 1 || value > 4)
+            {
+                throw new ArgumentException("Entered value is not correct.");
+            }
+
+            return true;
         }
 
         private static void ShowMenu()
