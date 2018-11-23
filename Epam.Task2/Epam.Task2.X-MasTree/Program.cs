@@ -19,14 +19,12 @@ namespace Epam.Task2.XMasTree
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
 
-                    if (!check || number < 1)
+                    if (ValueCheck(check, number))
                     {
-                        throw new ArgumentException("The entered value must "
-                                                    + "be a natural number.");
+                        XMasTree(number);
+                        return;
                     }
 
-                    XMasTree(number);
-                    return;
                 }
                 catch (ArgumentException ex)
                 {
@@ -36,7 +34,18 @@ namespace Epam.Task2.XMasTree
             }
         }
 
-        public static void XMasTree(int number)
+        private static bool ValueCheck(bool check, int number)
+        {
+            if (!check || number < 1)
+            {
+                throw new ArgumentException("The entered value must "
+                                            + "be a natural number.");
+            }
+
+            return true;
+        }
+
+        private static void XMasTree(int number)
         {
             for (int i = 0; i < number; i++)
             {
