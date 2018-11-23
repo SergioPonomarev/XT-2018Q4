@@ -36,7 +36,7 @@ namespace Epam.Task2.Triangle
             }
         }
 
-        public static void Triangle(int number)
+        private static void Triangle(int number)
         {
             for (int i = 0; i < number; i++)
             {
