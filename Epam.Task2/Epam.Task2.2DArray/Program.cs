@@ -131,7 +131,7 @@ namespace Epam.Task2._2DArray
             {
                 for (int j = 0; j < arr.GetLength(1); j++)
                 {
-                    arr[i, j] = random.Next(upperBound);
+                    arr[i, j] = random.Next(upperBound + 1);
                 }
             }
         }
