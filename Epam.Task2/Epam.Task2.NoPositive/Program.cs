@@ -172,7 +172,7 @@ namespace Epam.Task2.NoPositive
                 {
                     for (int k = 0; k < arr.GetLength(2); k++)
                     {
-                        arr[i, j, k] = random.Next(lowerBound, upperBound);
+                        arr[i, j, k] = random.Next(lowerBound, upperBound + 1);
                     }
                 }
             }
