@@ -10,7 +10,7 @@ namespace Epam.Task2.SumOfNumbers
                           + $"is: {SumOfNumbers().ToString()}");
         }
 
-        public static int SumOfNumbers()
+        private static int SumOfNumbers()
         {
             int sum = 0;
 
