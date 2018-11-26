@@ -8,6 +8,7 @@ namespace Epam.Task2._2DArray
         private static int arrDimTwo = 0;
         private static int upperBound = 0;
         private static bool check;
+        private static Random random = new Random();
 
         private static void Main()
         {
@@ -51,7 +52,8 @@ namespace Epam.Task2._2DArray
                     PrintArray(array);
                     Console.WriteLine();
 
-                    Console.WriteLine("The sum of even-positioned numbers in array is: {0}", EvenPositionSum(array).ToString());
+                    int evenPositionSum = EvenPositionSum(array);
+                    Console.WriteLine($"The sum of even-positioned numbers in array is: {evenPositionSum.ToString()}");
 
                     return;
                 }
@@ -106,8 +108,6 @@ namespace Epam.Task2._2DArray
 
         private static void ArrayFill(int[,] arr, int upperBound)
         {
-            Random random = new Random();
-
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 for (int j = 0; j < arr.GetLength(1); j++)
