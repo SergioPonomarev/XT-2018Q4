@@ -4,6 +4,9 @@ namespace Epam.Task2.AnotherTriangle
 {
     internal class Program
     {
+        private const char StarChar = '*';
+        private const char SpaceChar = ' ';
+
         private static void Main()
         {
             Console.WriteLine("Greatings! You are using The Another Triangle Printer Program!");
@@ -17,13 +20,11 @@ namespace Epam.Task2.AnotherTriangle
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
 
-                    if (!check || number < 1)
+                    if (ValueCheck(check, number))
                     {
-                        throw new ArgumentException("The entered value must be a natural number.");
+                        AnotherTriangle(number);
+                        return;
                     }
-
-                    AnotherTriangle(number);
-                    return;
                 }
                 catch (ArgumentException ex)
                 {
@@ -33,6 +34,16 @@ namespace Epam.Task2.AnotherTriangle
             }
         }
 
+        private static bool ValueCheck(bool check, int value)
+        {
+            if (!check || value < 1)
+            {
+                throw new ArgumentException("The entered value must be a natural number.");
+            }
+
+            return true;
+        }
+
         private static void AnotherTriangle(int number)
         {
             int count = 1;
@@ -40,12 +51,12 @@ namespace Epam.Task2.AnotherTriangle
             {
                 for (int j = 0; j < number - i; j++)
                 {
-                    Console.Write(" ");
+                    Console.Write(SpaceChar);
                 }
 
                 for (int k = 0; k < count; k++)
                 {
-                    Console.Write("*");
+                    Console.Write(StarChar);
                 }
 
                 Console.WriteLine();
