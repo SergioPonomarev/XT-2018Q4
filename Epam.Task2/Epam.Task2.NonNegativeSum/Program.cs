@@ -2,18 +2,18 @@
 
 namespace Epam.Task2.NonNegativeSum
 {
-    class Program
+    internal class Program
     {
-        static void Main()
-        {
-            Console.WriteLine("Greatings! You are using The "
-                             + "Non-Negative Numbers Summing in Array Program!");
-            Console.WriteLine();
+        private static int arrayLength = 0;
+        private static int lowerBound = -101;
+        private static int upperBound = -101;
+        private static bool check;
+        private static Random random = new Random();
 
-            int arrayLength = 0;
-            int lowerBound = -101;
-            int upperBound = -101;
-            bool check;
+        private static void Main()
+        {
+            Console.WriteLine("Greatings! You are using The Non-Negative Numbers Summing in Array Program!");
+            Console.WriteLine();
 
             while (true)
             {
@@ -21,11 +21,8 @@ namespace Epam.Task2.NonNegativeSum
                 {
                     if (arrayLength == 0)
                     {
-                        Console.Write("Please, enter a natural number"
-                                          + " more than 0 for array "
-                                          + "length: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out arrayLength);
+                        Console.Write("Please, enter a natural number more than 0 for array length: ");
+                        check = int.TryParse(Console.ReadLine(), out arrayLength);
                         LengthCheck(check, ref arrayLength);
                         Console.WriteLine();
                     }
@@ -34,37 +31,29 @@ namespace Epam.Task2.NonNegativeSum
 
                     if (lowerBound == -101)
                     {
-                        Console.Write("Please, enter a number from"
-                                     + " -100 to -1 for lower bound"
-                                      + " of numbers in array: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out lowerBound);
+                        Console.Write("Please, enter a number from -100 to -1 for lower bound of numbers in array: ");
+                        check = int.TryParse(Console.ReadLine(), out lowerBound);
                         LowerBoundCheck(check, ref lowerBound);
                         Console.WriteLine();
                     }
 
                     if (upperBound == -101)
                     {
-                        Console.Write("Please, enter a number from"
-                                     + " 0 to 100 for upper bound"
-                                      + " of numbers in array: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out upperBound);
+                        Console.Write("Please, enter a number from 0 to 100 for upper bound of numbers in array: ");
+                        check = int.TryParse(Console.ReadLine(), out upperBound);
                         UpperBoundCheck(check, ref upperBound);
                         Console.WriteLine();
                     }
 
                     ArrayFill(array, lowerBound, upperBound);
 
-                    Console.WriteLine("The array contents the following "
-                                      + "numbers:");
+                    Console.WriteLine("The array contents the following numbers:");
 
                     PrintArray(array);
                     Console.WriteLine();
 
-                    Console.WriteLine("The sum of non-negative numbers "
-                                      + "in array is: {0}",
-                                      NonNegativeSum(array).ToString());
+                    int nonNegativeSum = NonNegativeSum(array);
+                    Console.WriteLine($"The sum of non-negative numbers in array is: {nonNegativeSum.ToString()}");
 
                     return;
                 }
@@ -102,8 +91,7 @@ namespace Epam.Task2.NonNegativeSum
             if (!check || value < 1)
             {
                 value = 0;
-                throw new ArgumentException("The array length must be a "
-                                            + "natural number more than 0.");
+                throw new ArgumentException("The array length must be a natural number more than 0.");
             }
         }
 
@@ -112,8 +100,7 @@ namespace Epam.Task2.NonNegativeSum
             if (!check || value < -100 || value > -1)
             {
                 value = -101;
-                throw new ArgumentOutOfRangeException(null, "The bound of "
-                          + "numbers in array must be from -100 to -1.");
+                throw new ArgumentOutOfRangeException(null, "The bound of numbers in array must be from -100 to -1.");
             }
         }
 
@@ -122,17 +109,12 @@ namespace Epam.Task2.NonNegativeSum
             if (!check || value < 0 || value > 100)
             {
                 value = -101;
-                throw new ArgumentOutOfRangeException(null, "The bound of "
-                          + "numbers in array must be from 0 to 100.");
+                throw new ArgumentOutOfRangeException(null, "The bound of numbers in array must be from 0 to 100.");
             }
         }
 
-        private static void ArrayFill(int[] arr,
-                                      int lowerBound,
-                                      int upperBound)
+        private static void ArrayFill(int[] arr, int lowerBound, int upperBound)
         {
-            Random random = new Random();
-
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = random.Next(lowerBound, upperBound + 1);
@@ -152,6 +134,7 @@ namespace Epam.Task2.NonNegativeSum
                     Console.Write(arr[i].ToString() + ", ");
                 }
             }
+
             Console.WriteLine();
         }
     }
