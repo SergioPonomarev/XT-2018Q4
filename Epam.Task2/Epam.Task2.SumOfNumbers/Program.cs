@@ -2,12 +2,13 @@
 
 namespace Epam.Task2.SumOfNumbers
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            Console.Write("The sum of all multiples of 3 or 5 below 1000 "
-                          + $"is: {SumOfNumbers().ToString()}");
+            int sumOfNumbers = SumOfNumbers();
+
+            Console.WriteLine($"The sum of all multiples of 3 or 5 below 1000 is: {sumOfNumbers.ToString()}");
         }
 
         private static int SumOfNumbers()
