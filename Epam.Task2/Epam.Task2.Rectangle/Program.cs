@@ -2,17 +2,16 @@
 
 namespace Epam.Task2.Rectangle
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static int sideA = 0;
+        private static bool check;
+
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using "
-                             + "The Rectangle Area Calculator Program!");
+            Console.WriteLine("Greatings! You are using The Rectangle Area Calculator Program!");
             Console.WriteLine();
-
-            int sideA = 0;
-            bool check;
-
+            
             while (true)
             {
                 try
@@ -30,10 +29,8 @@ namespace Epam.Task2.Rectangle
                     ValueCheck(check, ref sideB);
                     Console.WriteLine();
 
-                    Console.WriteLine($"The area of the rectangle with "
-                                      + $"side a = {sideA} and side b = "
-                                      + $"{sideB} is: "
-                                      + $"{RectArea(sideA, sideB).ToString()}");
+                    int rectArea = RectArea(sideA, sideB);
+                    Console.WriteLine($"The area of the rectangle with side a = {sideA} and side b = {sideB} is: {rectArea.ToString()}");
                     return;
                 }
                 catch (ArgumentException ex)
@@ -55,8 +52,7 @@ namespace Epam.Task2.Rectangle
             if (!check || val < 1)
             {
                 val = 0;
-                throw new ArgumentException("The entered value must "
-                                            + "be a natural number.");
+                throw new ArgumentException("The entered value must be a natural number.");
             }
         }
     }
