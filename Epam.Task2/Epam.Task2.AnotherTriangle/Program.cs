@@ -2,27 +2,24 @@
 
 namespace Epam.Task2.AnotherTriangle
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using "
-                             + "The Another Triangle Printer Program!");
+            Console.WriteLine("Greatings! You are using The Another Triangle Printer Program!");
             Console.WriteLine();
 
             while (true)
             {
                 try
                 {
-                    Console.Write("Please, enter a number of strings "
-                                      + "to print a triangle: ");
+                    Console.Write("Please, enter a number of strings to print a triangle: ");
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
 
                     if (!check || number < 1)
                     {
-                        throw new ArgumentException("The entered value must "
-                                                    + "be a natural number.");
+                        throw new ArgumentException("The entered value must be a natural number.");
                     }
 
                     AnotherTriangle(number);
@@ -45,10 +42,12 @@ namespace Epam.Task2.AnotherTriangle
                 {
                     Console.Write(" ");
                 }
+
                 for (int k = 0; k < count; k++)
                 {
                     Console.Write("*");
                 }
+
                 Console.WriteLine();
                 count += 2;
             }
