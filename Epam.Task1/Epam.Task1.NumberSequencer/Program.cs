@@ -2,32 +2,26 @@
 
 namespace Epam.Task1.Sequence
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using " +
-                              "The Number Sequencer Programm!");
-            Console.WriteLine(); // Could use an '\n' escape sequence instead
+            Console.WriteLine("Greatings! You are using The Number Sequencer Programm!");
+            Console.WriteLine();
 
             while (true)
             {
                 try
                 {
-                    Console.Write("Please, enter a number from 1 to "
-                                  + "some reasonable value: ");
+                    Console.Write("Please, enter a number from 1 to some reasonable value: ");
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
 
-                    if (!check)
+                    if (ValueCheck(check, number))
                     {
-                        throw new ArgumentException("The entered value must be "
-                                                    + "a natural number from 1 "
-                                                    + "or more.");
+                        Sequence(number);
+                        return;
                     }
-                    
-                    Sequence(number);
-                    return;
                 }
                 catch (ArgumentException ex)
                 {
@@ -37,7 +31,17 @@ namespace Epam.Task1.Sequence
             }
         }
 
-        public static void Sequence(int number)
+        private static bool ValueCheck(bool check, int value)
+        {
+            if (!check || value < 1)
+            {
+                throw new ArgumentException("The entered value must be a natural number from 1 or more.");
+            }
+
+            return true;
+        }
+
+        private static void Sequence(int number)
         {
             for (int i = 1; i <= number; i++)
             {
@@ -51,6 +55,7 @@ namespace Epam.Task1.Sequence
                     Console.Write(", ");
                 }
             }
+
             Console.WriteLine();
         }
     }
