@@ -2,20 +2,21 @@
 
 namespace Epam.Task2.XMasTree
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private const char StarChar = '*';
+        private const char SpaceChar = ' ';
+
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using "
-                             + "The X-Mas Tree Printer Program!");
+            Console.WriteLine("Greatings! You are using The X-Mas Tree Printer Program!");
             Console.WriteLine();
 
             while (true)
             {
                 try
                 {
-                    Console.Write("Please, enter a number of tree levels "
-                                      + "to print a X-Mas Tree: ");
+                    Console.Write("Please, enter a number of tree levels to print a X-Mas Tree: ");
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
 
@@ -24,7 +25,6 @@ namespace Epam.Task2.XMasTree
                         XMasTree(number);
                         return;
                     }
-
                 }
                 catch (ArgumentException ex)
                 {
@@ -55,12 +55,12 @@ namespace Epam.Task2.XMasTree
                 {
                     for (int k = 0; k < number - j; k++)
                     {
-                        Console.Write(" ");
+                        Console.Write(SpaceChar);
                     }
 
                     for (int l = 0; l < counter; l++)
                     {
-                        Console.Write("*");
+                        Console.Write(StarChar);
                     }
 
                     Console.WriteLine();
