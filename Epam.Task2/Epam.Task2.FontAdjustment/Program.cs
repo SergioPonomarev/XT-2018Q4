@@ -2,7 +2,7 @@
 
 namespace Epam.Task2.FontAdjustment
 {
-    class Program
+    internal class Program
     {
         [Flags]
         private enum Fonts : byte
@@ -13,10 +13,9 @@ namespace Epam.Task2.FontAdjustment
             Underline = 4,
         }
 
-        static void Main()
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The "
-                             + "Font Adjustment Program!");
+            Console.WriteLine("Greatings! You are using The Font Adjustment Program!");
 
             Fonts fonts = Fonts.None;
             while (true)
@@ -47,6 +46,7 @@ namespace Epam.Task2.FontAdjustment
                                 {
                                     fonts += value;
                                 }
+
                                 break;
                                 
                             case 3:
@@ -58,6 +58,7 @@ namespace Epam.Task2.FontAdjustment
                                 {
                                     fonts += (byte)(value + 1);
                                 }
+
                                 break;
                                 
                             case 4:
@@ -74,7 +75,6 @@ namespace Epam.Task2.FontAdjustment
                     Console.WriteLine(ex.Message);
                     Console.ForegroundColor = color;
                 }
-
             }
         }
 
