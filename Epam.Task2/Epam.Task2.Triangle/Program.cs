@@ -2,31 +2,28 @@
 
 namespace Epam.Task2.Triangle
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private const char StarChar = '*';
+
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using "
-                             + "The Triangle Printer Program!");
+            Console.WriteLine("Greatings! You are using The Triangle Printer Program!");
             Console.WriteLine();
 
             while (true)
             {
                 try
                 {
-                    Console.Write("Please, enter a number of strings "
-                                      + "to print a triangle: ");
+                    Console.Write("Please, enter a number of strings to print a triangle: ");
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
 
-                    if (!check || number < 1)
+                    if (ValueCheck(check, number))
                     {
-                        throw new ArgumentException("The entered value must "
-                                                    + "be a natural number.");
+                        Triangle(number);
+                        return;
                     }
-
-                    Triangle(number);
-                    return;
                 }
                 catch (ArgumentException ex)
                 {
@@ -36,14 +33,25 @@ namespace Epam.Task2.Triangle
             }
         }
 
+        private static bool ValueCheck(bool check, int value)
+        {
+            if (!check || value < 1)
+            {
+                throw new ArgumentException("The entered value must be a natural number.");
+            }
+
+            return true;
+        }
+
         private static void Triangle(int number)
         {
             for (int i = 0; i < number; i++)
             {
                 for (int j = 0; j < i + 1; j++)
                 {
-                    Console.Write("*");
+                    Console.Write(StarChar);
                 }
+
                 Console.WriteLine();
             }
         }
