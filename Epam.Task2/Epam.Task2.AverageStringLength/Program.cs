@@ -3,30 +3,27 @@ using System.Text;
 
 namespace Epam.Task2.AverageStringLength
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Average "
-                             + "String Length Calculator Program!");
+            Console.WriteLine("Greatings! You are using The Average String Length Calculator Program!");
             Console.WriteLine();
 
             Console.WriteLine("Please, introduce the string:");
             string inputString = Console.ReadLine();
             Console.WriteLine();
 
-            Console.WriteLine("The string entered: ");
+            Console.WriteLine("The string entered:");
             Console.WriteLine(inputString);
             Console.WriteLine();
 
             string convertedString = StringConverter(inputString);
 
-            string[] words = 
-                convertedString.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            string[] words = convertedString.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            Console.WriteLine("The average word length in the entered "
-                              + "string is: {0:F2}",
-                              GetAverageLength(words));
+            double averageWordsLength = GetAverageLength(words);
+            Console.WriteLine($"The average word length in the entered string is: {averageWordsLength:F2}");
         }
 
         private static double GetAverageLength(string[] arr)
@@ -47,9 +44,7 @@ namespace Epam.Task2.AverageStringLength
 
             for (int i = 0; i < sb.Length; i++)
             {
-                if (char.IsDigit(sb[i]) ||
-                   char.IsNumber(sb[i]) ||
-                   char.IsPunctuation(sb[i]))
+                if (char.IsDigit(sb[i]) || char.IsNumber(sb[i]) || char.IsPunctuation(sb[i]))
                 {
                     sb.Remove(i, 1);
                     i--;
