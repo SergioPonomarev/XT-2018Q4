@@ -8,6 +8,7 @@ namespace Epam.Task2.ArrayProcessing
         private static int lowerBound = -101;
         private static int upperBound = -101;
         private static bool check;
+        private static Random random = new Random();
 
         private static void Main()
         {
@@ -149,8 +150,6 @@ namespace Epam.Task2.ArrayProcessing
 
         private static void ArrayFill(int[] arr, int lowerBound, int upperBound)
         {
-            Random random = new Random();
-
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = random.Next(lowerBound, upperBound + 1);
