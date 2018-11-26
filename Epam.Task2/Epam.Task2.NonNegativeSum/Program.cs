@@ -57,7 +57,6 @@ namespace Epam.Task2.NonNegativeSum
 
                     return;
                 }
-
                 catch (ArgumentOutOfRangeException ex)
                 {
                     Console.WriteLine(ex.Message);
