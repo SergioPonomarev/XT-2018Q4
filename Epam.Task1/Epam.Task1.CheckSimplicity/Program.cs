@@ -2,27 +2,24 @@
 
 namespace Epam.Task1.Simple
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using " +
-                              "The Prime Number Check Programm!");
+            Console.WriteLine("Greatings! You are using The Prime Number Check Programm!");
             Console.WriteLine();
 
             while (true)
             {
                 try
                 {
-                    Console.Write("Please, enter a value to check if it is "
-                                      + "a prime number: ");
+                    Console.Write("Please, enter a value to check if it is a prime number: ");
                     bool check = int.TryParse(Console.ReadLine(), out int number);
                     Console.WriteLine();
 
                     if (!check)
                     {
-                        throw new ArgumentException("The entered value must be "
-                                                    + "a number.");
+                        throw new ArgumentException("The entered value must be a number.");
                     }
                     
                     Simple(number);
@@ -36,7 +33,7 @@ namespace Epam.Task1.Simple
             }
         }
 
-        public static void Simple(int number)
+        private static void Simple(int number)
         {
             if (number < 2)
             {
