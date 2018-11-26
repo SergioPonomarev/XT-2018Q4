@@ -2,12 +2,14 @@
 
 namespace Epam.Task1.Square
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private const char StarChar = '*';
+        private const char SpaceChar = ' ';
+
+        private static void Main()
         {
-            Console.WriteLine("Greatings! You are using " +
-                              "The Square Printer Programm!");
+            Console.WriteLine("Greatings! You are using The Square Printer Programm!");
             Console.WriteLine();
 
             while (true)
@@ -18,14 +20,11 @@ namespace Epam.Task1.Square
                     bool check = int.TryParse(Console.ReadLine(), out int size);
                     Console.WriteLine();
 
-                    if (!check || (size % 2 == 0) || size < 0)
+                    if (ValueCheck(check, size))
                     {
-                        throw new ArgumentException("The entered value must be "
-                                                    + "an odd natural number.");
+                        Square(size);
+                        return;
                     }
-
-                    Square(size);
-                    return;
                 }
                 catch (ArgumentException ex)
                 {
@@ -35,7 +34,17 @@ namespace Epam.Task1.Square
             }
         }
 
-        public static void Square(int size)
+        private static bool ValueCheck(bool check, int value)
+        {
+            if (!check || (value % 2 == 0) || value < 0)
+            {
+                throw new ArgumentException("The entered value must be an odd natural number.");
+            }
+
+            return true;
+        }
+
+        private static void Square(int size)
         {
             for (int i = 0; i < size; i++)
             {
@@ -45,21 +54,23 @@ namespace Epam.Task1.Square
                     {
                         if (j == size / 2)
                         {
-                            Console.Write(" ");
+                            Console.Write(SpaceChar);
                         }
                         else
                         {
-                            Console.Write("*");
+                            Console.Write(StarChar);
                         }
                     }
+
                     Console.WriteLine();
                 }
                 else
                 {
                     for (int j = 0; j < size; j++)
                     {
-                        Console.Write("*");
+                        Console.Write(StarChar);
                     }
+
                     Console.WriteLine();
                 }
             }
