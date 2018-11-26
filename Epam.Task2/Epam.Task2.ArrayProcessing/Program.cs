@@ -2,18 +2,17 @@
 
 namespace Epam.Task2.ArrayProcessing
 {
-    class Program
+    internal class Program
     {
-        static void Main()
-        {
-            Console.WriteLine("Greatings! You are using The "
-                             + "Array Processing Program!");
-            Console.WriteLine();
+        private static int arrayLength = 0;
+        private static int lowerBound = -101;
+        private static int upperBound = -101;
+        private static bool check;
 
-            int arrayLength = 0;
-            int lowerBound = -101;
-            int upperBound = -101;
-            bool check;
+        private static void Main()
+        {
+            Console.WriteLine("Greatings! You are using The Array Processing Program!");
+            Console.WriteLine();
 
             while (true)
             {
@@ -21,11 +20,8 @@ namespace Epam.Task2.ArrayProcessing
                 {
                     if (arrayLength == 0)
                     {
-                        Console.Write("Please, enter a natural number"
-                                          + " more than 0 for array "
-                                          + "length: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out arrayLength);
+                        Console.Write("Please, enter a natural number more than 0 for array length: ");
+                        check = int.TryParse(Console.ReadLine(), out arrayLength);
                         LengthCheck(check, ref arrayLength);
                         Console.WriteLine();
                     }
@@ -34,46 +30,38 @@ namespace Epam.Task2.ArrayProcessing
 
                     if (lowerBound == -101)
                     {
-                        Console.Write("Please, enter a number from"
-                                     + " -100 to 100 for lower bound"
-                                      + " of numbers in array: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out lowerBound);
+                        Console.Write("Please, enter a number from -100 to 100 for lower bound of numbers in array: ");
+                        check = int.TryParse(Console.ReadLine(), out lowerBound);
                         BoundCheck(check, ref lowerBound);
                         Console.WriteLine();
                     }
 
                     if (upperBound == -101)
                     {
-                        Console.Write("Please, enter a number from"
-                                     + " -100 to 100 for upper bound"
-                                      + " of numbers in array: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out upperBound);
+                        Console.Write("Please, enter a number from -100 to 100 for upper bound of numbers in array: ");
+                        check = int.TryParse(Console.ReadLine(), out upperBound);
                         BoundCheck(check, ref upperBound);
                         Console.WriteLine();
                     }
 
                     ArrayFill(array, lowerBound, upperBound);
 
-                    Console.WriteLine("The array contents the following "
-                                      + "numbers:");
+                    Console.WriteLine("The array contents the following numbers:");
 
                     PrintArray(array);
                     Console.WriteLine();
 
-                    Console.WriteLine($"The smallest number in the array "
-                                      + "is: " + MinArrayValue(array).ToString());
+                    int minArrayValue = MinArrayValue(array);
+                    Console.WriteLine($"The smallest number in the array is: {minArrayValue.ToString()}");
                     Console.WriteLine();
 
-                    Console.WriteLine("The largest number in the array "
-                                      + "is: "+  MaxArrayValue(array).ToString());
+                    int maxArrayValue = MaxArrayValue(array);
+                    Console.WriteLine($"The largest number in the array is: {maxArrayValue.ToString()}");
                     Console.WriteLine();
 
                     ArraySort(array);
 
-                    Console.WriteLine("The array contents the following "
-                                      + "numbers after sorting:");
+                    Console.WriteLine("The array contents the following numbers after sorting:");
 
                     PrintArray(array);
                     Console.WriteLine();
@@ -90,7 +78,6 @@ namespace Epam.Task2.ArrayProcessing
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
                 }
-
             }
         }
 
@@ -99,8 +86,7 @@ namespace Epam.Task2.ArrayProcessing
             if (!check || value < 1)
             {
                 value = 0;
-                throw new ArgumentException("The array length must be a "
-                                            + "natural number more than 0.");
+                throw new ArgumentException("The array length must be a natural number more than 0.");
             }
         }
 
@@ -109,8 +95,7 @@ namespace Epam.Task2.ArrayProcessing
             if (!check || value < -100 || value > 101)
             {
                 value = -101;
-                throw new ArgumentOutOfRangeException(null, "The bound of "
-                                      + "numbers in array must be from -100 to 100.");
+                throw new ArgumentOutOfRangeException(null, "The bound of numbers in array must be from -100 to 100.");
             }
         }
 
@@ -162,9 +147,7 @@ namespace Epam.Task2.ArrayProcessing
             return temp;
         }
 
-        private static void ArrayFill(int[] arr, 
-                                      int lowerBound, 
-                                      int upperBound)
+        private static void ArrayFill(int[] arr, int lowerBound, int upperBound)
         {
             Random random = new Random();
 
@@ -187,6 +170,7 @@ namespace Epam.Task2.ArrayProcessing
                     Console.Write(arr[i].ToString() + ", ");
                 }
             }
+
             Console.WriteLine();
         }
     }
