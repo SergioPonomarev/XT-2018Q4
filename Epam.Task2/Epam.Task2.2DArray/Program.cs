@@ -2,19 +2,17 @@
 
 namespace Epam.Task2._2DArray
 {
-    class Program
+    internal class Program
     {
-        static void Main()
-        {
-            Console.WriteLine("Greatings! You are using The "
-                              + $"Even Position Numbers Summing{Environment.NewLine}"
-                              + "in Two-Dimensional Array Program!");
-            Console.WriteLine();
+        private static int arrDimOne = 0;
+        private static int arrDimTwo = 0;
+        private static int upperBound = 0;
+        private static bool check;
 
-            int arrDimOne = 0;
-            int arrDimTwo = 0;
-            int upperBound = 0;
-            bool check;
+        private static void Main()
+        {
+            Console.WriteLine($"Greatings! You are using The Even Position Numbers Summing{Environment.NewLine}in Two-Dimensional Array Program!");
+            Console.WriteLine();
 
             while (true)
             {
@@ -22,53 +20,38 @@ namespace Epam.Task2._2DArray
                 {
                     if (arrDimOne == 0)
                     {
-                        Console.Write("Please, enter a natural number"
-                                      + " more than 0 for the first "
-                                      + $"dimension{Environment.NewLine}"
-                                      + "of two-dimensional array: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out arrDimOne);
+                        Console.Write($"Please, enter a natural number more than 0 for the first dimension{Environment.NewLine}of two-dimensional array: ");
+                        check = int.TryParse(Console.ReadLine(), out arrDimOne);
                         DimensionCheck(check, ref arrDimOne);
                         Console.WriteLine();
                     }
 
                     if (arrDimTwo == 0)
                     {
-                        Console.Write("Please, enter a natural number"
-                                      + " more than 0 for the second "
-                                      + $"dimension{Environment.NewLine}"
-                                      + "of two-dimensional array: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out arrDimTwo);
+                        Console.Write($"Please, enter a natural number more than 0 for the second dimension{Environment.NewLine}of two-dimensional array: ");
+                        check = int.TryParse(Console.ReadLine(), out arrDimTwo);
                         DimensionCheck(check, ref arrDimTwo);
                         Console.WriteLine();
                     }
 
-                    int[,] array = new int[arrDimOne,
-                                            arrDimTwo];
+                    int[,] array = new int[arrDimOne, arrDimTwo];
 
                     if (upperBound == 0)
                     {
-                        Console.Write("Please, enter a number from"
-                                     + " 1 to 100 for upper bound"
-                                      + " of numbers in array: ");
-                        check = int.TryParse(Console.ReadLine(),
-                                             out upperBound);
+                        Console.Write("Please, enter a number from 1 to 100 for upper bound of numbers in array: ");
+                        check = int.TryParse(Console.ReadLine(), out upperBound);
                         BoundCheck(check, ref upperBound);
                         Console.WriteLine();
                     }
 
                     ArrayFill(array, upperBound);
 
-                    Console.WriteLine("The array contents the following "
-                                      + "numbers:");
+                    Console.WriteLine("The array contents the following numbers:");
 
                     PrintArray(array);
                     Console.WriteLine();
 
-                    Console.WriteLine("The sum of even-positioned numbers"
-                                      + " in array is: {0}",
-                                     EvenPositionSum(array).ToString());
+                    Console.WriteLine("The sum of even-positioned numbers in array is: {0}", EvenPositionSum(array).ToString());
 
                     return;
                 }
@@ -108,8 +91,7 @@ namespace Epam.Task2._2DArray
             if (!check || value < 1)
             {
                 value = 0;
-                throw new ArgumentException("The array dimension must be a "
-                                        + "natural number more than 0.");
+                throw new ArgumentException("The array dimension must be a natural number more than 0.");
             }
         }
 
@@ -118,8 +100,7 @@ namespace Epam.Task2._2DArray
             if (!check || value < 1 || value > 100)
             {
                 value = 0;
-                throw new ArgumentOutOfRangeException(null, "The upper bound of "
-                          + "numbers in array must be from 1 to 100.");
+                throw new ArgumentOutOfRangeException(null, "The upper bound of numbers in array must be from 1 to 100.");
             }
         }
 
@@ -151,6 +132,7 @@ namespace Epam.Task2._2DArray
                         Console.Write(arr[i, j] + ", ");
                     }
                 }
+
                 Console.WriteLine();
             }
         }
