@@ -74,10 +74,19 @@ namespace Epam.Task3.Round
             Round round = new Round(radius, xCoord, yCoord);
 
             Console.WriteLine("Round created:");
-            Console.WriteLine($"\t- the radius is: {round.Radius};");
-            Console.WriteLine($"\t- the center point is: x = {round.Center.X} and y = {round.Center.Y};");
-            Console.WriteLine($"\t- the length of circumference is: {round.Circumference};");
-            Console.WriteLine($"\t- the area is: {round.Area};");
+
+            int radiusRound = round.Radius;
+            Console.WriteLine($"\t- the radius is: {radiusRound.ToString()};");
+
+            int x = round.Center.X;
+            int y = round.Center.Y;
+            Console.WriteLine($"\t- the center point is: x = {x.ToString()} and y = {y.ToString()};");
+
+            double circum = round.Circumference;
+            Console.WriteLine($"\t- the length of circumference is: {circum.ToString()};");
+
+            double area = round.Area;
+            Console.WriteLine($"\t- the area is: {area.ToString()};");
         }
 
         private static bool CheckRadius(bool check, int value)
@@ -89,7 +98,7 @@ namespace Epam.Task3.Round
 
             return true;
         }
-
+        
         private static bool CheckCoord(bool check)
         {
             if (!check)
