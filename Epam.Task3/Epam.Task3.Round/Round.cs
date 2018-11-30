@@ -20,9 +20,9 @@ namespace Epam.Task3.Round
 
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
-                    throw new ArgumentException("The radius of the round must be more than 0.");
+                    throw new ArgumentException("The radius of the round must be greater than or equal to 0.");
                 }
 
                 this.radius = value;

@@ -91,9 +91,9 @@ namespace Epam.Task3.Round
 
         private static bool CheckRadius(bool check, int value)
         {
-            if (!check || value <= 0)
+            if (!check || value < 0)
             {
-                throw new ArgumentException("The radius of the round must be more than 0.");
+                throw new ArgumentException("The radius of the round must be greater than or equal to 0.");
             }
 
             return true;
