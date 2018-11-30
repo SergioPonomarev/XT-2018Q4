@@ -24,7 +24,7 @@ namespace Epam.Task3.Triangle
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("The value must be an integer more than 0.", nameof(this.SideA));
+                    throw new ArgumentException("The value must be an integer greater than 0.", nameof(this.SideA));
                 }
 
                 this.sideA = value;
@@ -47,7 +47,7 @@ namespace Epam.Task3.Triangle
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("The value must be an integer more than 0.", nameof(this.SideB));
+                    throw new ArgumentException("The value must be an integer greater than 0.", nameof(this.SideB));
                 }
 
                 this.sideB = value;
@@ -70,7 +70,7 @@ namespace Epam.Task3.Triangle
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("The value must be an integer more than 0.", nameof(this.SideC));
+                    throw new ArgumentException("The value must be an integer greater than 0.", nameof(this.SideC));
                 }
 
                 if (value >= this.SideA + this.SideB)
