@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task3.Triangle", "Epam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task3.MyString", "Epam.Task3.MyString\Epam.Task3.MyString.csproj", "{14F91450-8AC4-45E5-9B49-86C42CA3C3EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task3.User", "Epam.Task3.User\Epam.Task3.User.csproj", "{5353573F-340F-4288-BA23-98A687CDE850}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task3.UserProgram", "Epam.Task3.UserProgram\Epam.Task3.UserProgram.csproj", "{265C0005-4A58-43A9-9333-A9FB0BF926FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{14F91450-8AC4-45E5-9B49-86C42CA3C3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F91450-8AC4-45E5-9B49-86C42CA3C3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F91450-8AC4-45E5-9B49-86C42CA3C3EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5353573F-340F-4288-BA23-98A687CDE850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5353573F-340F-4288-BA23-98A687CDE850}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5353573F-340F-4288-BA23-98A687CDE850}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5353573F-340F-4288-BA23-98A687CDE850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265C0005-4A58-43A9-9333-A9FB0BF926FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265C0005-4A58-43A9-9333-A9FB0BF926FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265C0005-4A58-43A9-9333-A9FB0BF926FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265C0005-4A58-43A9-9333-A9FB0BF926FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
