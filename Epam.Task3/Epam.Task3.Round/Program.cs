@@ -73,7 +73,7 @@ namespace Epam.Task3.Round
 
             Round round = new Round(radius, xCoord, yCoord);
 
-            Console.WriteLine("Round created:");
+            Console.WriteLine("The Round is created:");
 
             int radiusRound = round.Radius;
             Console.WriteLine($"\t- the radius is: {radiusRound.ToString()};");
@@ -86,7 +86,7 @@ namespace Epam.Task3.Round
             Console.WriteLine($"\t- the length of circumference is: {circum.ToString()};");
 
             double area = round.Area;
-            Console.WriteLine($"\t- the area is: {area.ToString()};");
+            Console.WriteLine($"\t- the area is: {area.ToString()}.");
         }
 
         private static bool CheckRadius(bool check, int value)
