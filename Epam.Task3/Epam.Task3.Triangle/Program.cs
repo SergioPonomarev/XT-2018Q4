@@ -14,7 +14,8 @@ namespace Epam.Task3.Triangle
         {
             triangle = new Triangle();
 
-            Console.WriteLine($"Greetings! You are using The Triangle Creating Program!{Environment.NewLine}");
+            Console.WriteLine($"Greetings! You are using The Triangle Creating Program!");
+            Console.WriteLine();
 
             while (!checkSideA)
             {
