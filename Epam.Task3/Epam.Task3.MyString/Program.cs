@@ -10,7 +10,11 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            
+            string str1 = "hello";
+
+            string str2 = null;
+
+            string str = string.Concat(str1, str2);
         }
     }
 }

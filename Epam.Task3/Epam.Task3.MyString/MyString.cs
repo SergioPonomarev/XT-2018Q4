@@ -14,6 +14,13 @@ namespace Epam.Task3.MyString
 
         public int Length { get; }
 
+        private MyString()
+        {
+            this.chars = new char[0];
+
+            this.Length = 0;
+        }
+
         private MyString(string str)
         {
             this.chars = str.ToCharArray();
@@ -67,6 +74,154 @@ namespace Epam.Task3.MyString
             }
 
             this.Length = count;
+        }
+
+        public char this[int index]
+        {
+            get
+            {
+                if (index >= this.Length || index < 0)
+                {
+                    throw new IndexOutOfRangeException("Index is out of range. ");
+                }
+
+                return chars[index];
+            }
+        }
+
+        public static MyString Concat(object o1)
+        {
+            MyString myString;
+
+            if (o1 == null)
+            {
+                return myString = new MyString();
+            }
+
+            string obj = o1.ToString();
+
+            myString = new MyString(obj);
+
+            return myString;
+        }
+
+        public static MyString Concat(object o1, object o2)
+        {
+            MyString myString;
+
+            if (o1 == null && o2 == null)
+            {
+                return myString = new MyString();
+            }
+
+            if (o1 == null)
+            {
+                return myString = MyString.Concat(o2);
+            }
+
+            if (o2 == null)
+            {
+                return myString = MyString.Concat(o1);
+            }
+
+            string obj = o1.ToString() + o2.ToString();
+
+            myString = new MyString(obj);
+
+            return myString;
+        }
+
+        public static MyString Concat(object o1, object o2, object o3)
+        {
+            MyString myString;
+
+            if (o1 == null && o2 == null && o3 == null)
+            {
+                return myString = new MyString();
+            }
+
+            if (o1 == null && o2 == null)
+            {
+                return myString = MyString.Concat(o3);
+            }
+
+            if (o1 == null && o3 == null)
+            {
+                return myString = MyString.Concat(o2);
+            }
+
+            if (o2 == null && o3 == null)
+            {
+                return myString = MyString.Concat(o1);
+            }
+
+            if (o1 == null)
+            {
+                return myString = MyString.Concat(o2, o3);
+            }
+
+            if (o2 == null)
+            {
+                return myString = MyString.Concat(o1, o3);
+            }
+
+            if (o3 == null)
+            {
+                return myString = MyString.Concat(o1, o2);
+            }
+
+            string obj = o1.ToString() + o2.ToString() + o3.ToString();
+
+            myString = new MyString(obj);
+
+            return myString;
+        }
+
+        public static MyString Concat(params object[] args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("Collection of elements is null.");
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                sb.Append(args[i].ToString());
+            }
+
+            string result = sb.ToString();
+
+            MyString myString = new MyString(result);
+
+            return myString;
+        }
+
+        public static MyString Concat(MyString ms1, MyString ms2)
+        {
+            MyString myString;
+
+            if (ms1 == null && ms2 == null)
+            {
+                return myString = new MyString();
+            }
+
+            if (ms1 == null)
+            {
+                return myString = ms2;
+            }
+
+            if (ms2 == null)
+            {
+                return myString = ms1;
+            }
+
+            string result = ms1.ToString() + ms2.ToString();
+
+            myString = new MyString(result);
+
+            return myString;
         }
 
         public char[] ToCharArray()
