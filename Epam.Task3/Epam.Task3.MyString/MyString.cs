@@ -224,6 +224,145 @@ namespace Epam.Task3.MyString
             return myString;
         }
 
+        public static MyString Concat(MyString ms1, MyString ms2, MyString ms3)
+        {
+            MyString myString;
+
+            if (ms1 == null && ms2 == null && ms3 == null)
+            {
+                return myString = new MyString();
+            }
+
+            if (ms1 == null && ms2 == null)
+            {
+                return myString = ms3;
+            }
+
+            if (ms1 == null && ms3 == null)
+            {
+                return myString = ms2;
+            }
+
+            if (ms2 == null && ms3 == null)
+            {
+                return myString = ms1;
+            }
+
+            if (ms1 == null)
+            {
+                myString = MyString.Concat(ms2, ms3);
+            }
+
+            if (ms2 == null)
+            {
+                myString = MyString.Concat(ms1, ms3);
+            }
+
+            if (ms3 == null)
+            {
+                myString = MyString.Concat(ms1, ms2);
+            }
+
+            string result = ms1.ToString() + ms2.ToString() + ms3.ToString();
+
+            myString = new MyString(result);
+
+            return myString;
+        }
+
+        public static MyString Concat(params MyString[] args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("Collection of elements is null.");
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                sb.Append(args[i].ToString());
+            }
+
+            string result = sb.ToString();
+
+            MyString myString = new MyString(result);
+
+            return myString;
+        }
+
+        public bool Contains(MyString ms)
+        {
+            if (ms == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            bool check = false; ;
+
+            for (int i = 0; i <= this.Length - ms.Length; i++)
+            {
+                if (this.chars[i] == ms[0])
+                {
+                    int index = i;
+
+                    for (int j = 0; j < ms.Length; j++)
+                    {
+                        if (this.chars[index] != ms[j])
+                        {
+                            break;
+                        }
+
+                        index++;
+                    }
+
+                    if (this.chars[index - 1] == ms[ms.Length - 1])
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+            }
+
+            return check;
+        }
+
+        public static MyString Copy(MyString ms)
+        {
+            if (ms == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            string result = ms.ToString();
+
+            return new MyString(result);
+        }
+
+        public void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        {
+            if (destination == null)
+            {
+                throw new ArgumentNullException("Destination array is null.");
+            }
+
+            if (sourceIndex < 0 ||
+                destinationIndex < 0 ||
+                count < 0 ||
+                sourceIndex > this.chars.Length - 1 ||
+                destinationIndex > destination.Length - 1 ||
+                count + sourceIndex > this.chars.Length ||
+                count + destinationIndex > destination.Length)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                destination[destinationIndex + i] = this.chars[sourceIndex + i];
+            }
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;

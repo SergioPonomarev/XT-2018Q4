@@ -10,11 +10,47 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            string str1 = "hello";
+            char[] main = { 'b', 'r', 'o', 'w', 'n', ' ', 'f', 'o', 'g', ' ', 'f', 'o', 'x', ' ', 'j', 'u', 'f', 'o', 'k' };
 
-            string str2 = null;
+            char[] coin = { 'f', 'o', 'k' };
 
-            string str = string.Concat(str1, str2);
+            bool check = Contains(main, coin);
+        }
+
+        public static bool Contains(char[] main, char[] coin)
+        {
+            if (coin == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            bool check = false; ;
+
+            for (int i = 0; i <= main.Length - coin.Length; i++)
+            {
+                if (main[i] == coin[0])
+                {
+                    int index = i;
+
+                    for (int j = 0; j < coin.Length; j++)
+                    {
+                        if (main[index] != coin[j])
+                        {
+                            break;
+                        }
+
+                        index++;
+                    }
+
+                    if (main[index - 1] == coin[coin.Length - 1])
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+            }
+
+            return check;
         }
     }
 }
