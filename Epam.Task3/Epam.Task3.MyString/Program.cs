@@ -10,47 +10,31 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            char[] main = { 'b', 'r', 'o', 'w', 'n', ' ', 'f', 'o', 'g', ' ', 'f', 'o', 'x', ' ', 'j', 'u', 'f', 'o', 'k' };
+            char a = 'a';
+            char A = 'A';
+            char b = 'b';
+            char B = 'B';
 
-            char[] coin = { 'f', 'o', 'k' };
+            string s1 = "Advace";
+            string s2 = "advace";
 
-            bool check = Contains(main, coin);
-        }
+            Console.WriteLine(s1.CompareTo(s2));
+            Console.WriteLine(string.Compare(s1, s2, true));
 
-        public static bool Contains(char[] main, char[] coin)
-        {
-            if (coin == null)
+            string[] str =
             {
-                throw new ArgumentNullException("Value is null.");
-            }
+                "Advace",
+                "advace",
+                "Bdvace",
+                "bdvace",
+                "adv",
+                "bdv",
+                "Adv"
+            };
 
-            bool check = false; ;
+            Array.Sort(str);
 
-            for (int i = 0; i <= main.Length - coin.Length; i++)
-            {
-                if (main[i] == coin[0])
-                {
-                    int index = i;
-
-                    for (int j = 0; j < coin.Length; j++)
-                    {
-                        if (main[index] != coin[j])
-                        {
-                            break;
-                        }
-
-                        index++;
-                    }
-
-                    if (main[index - 1] == coin[coin.Length - 1])
-                    {
-                        check = true;
-                        break;
-                    }
-                }
-            }
-
-            return check;
+            Console.WriteLine();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.MyString
 {
-    public class MyString
+    public class MyString : IEquatable<MyString>
     {
         private char[] chars;
 
@@ -363,6 +363,24 @@ namespace Epam.Task3.MyString
             }
         }
 
+        public bool EndsWith(MyString ms)
+        {
+            if (ms == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            for (int i = this.Length - 1, j = ms.Length - 1; j >= 0 ; i--, j--)
+            {
+                if (this.chars[i] != ms[j])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
@@ -406,6 +424,80 @@ namespace Epam.Task3.MyString
             }
 
             return result = sb.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as MyString);
+        }
+
+        public bool Equals(MyString ms)
+        {
+            if (object.ReferenceEquals(ms, null))
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, ms))
+            {
+                return true;
+            }
+
+            if (this.GetType() != ms.GetType())
+            {
+                return false;
+            }
+
+            if (this.Length != ms.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < this.Length; i++)
+            {
+                if (this.chars[i] != ms[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            int num = 5381;
+            int num2 = num;
+            for (int i = 0; i < this.chars.Length; i += 2)
+            {
+                num = (((num << 5) + num) ^ this.chars[i]);
+                if (i + 1 == this.chars.Length)
+                {
+                    break;
+                }
+                num2 = (((num2 << 5) + num2) ^ this.chars[i + 1]);
+            }
+            return num + num2 * 1566083941;
+        }
+
+        public static bool operator ==(MyString lhs, MyString rhs)
+        {
+            if (object.ReferenceEquals(lhs, null))
+            {
+                if (object.ReferenceEquals(rhs, null))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(MyString lhs, MyString rhs)
+        {
+            return !(lhs == rhs);
         }
     }
 }
