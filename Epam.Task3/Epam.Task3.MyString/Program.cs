@@ -10,15 +10,15 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            string main = "hello";
+            string main = "llhelloll";
 
-            main = main.Replace('l', 'm');
+            main = main.Replace("ll", "m");
 
             Console.WriteLine(main);
 
-            MyString ms = "hello";
+            MyString ms = "llhelloll";
 
-            ms = ms.Replace('l', 'm');
+            ms = ms.Replace("ll", "m");
 
             Console.WriteLine(ms);
         }

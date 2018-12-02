@@ -759,6 +759,41 @@ namespace Epam.Task3.MyString
             return myString;
         }
 
+        public MyString Replace(MyString oldValue, MyString newValue)
+        {
+            if (newValue == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            if (oldValue == MyString.Empty)
+            {
+                throw new ArgumentException("The value to change mustn't have zero length.");
+            }
+
+            int indexOldValue = this.IndexOf(oldValue);
+
+            if (indexOldValue == -1)
+            {
+                return this;
+            }
+
+            char[] temp = this.ToCharArray();
+
+            MyString myString = new MyString(temp);
+
+            while (indexOldValue != -1)
+            {
+                myString = myString.Remove(indexOldValue, oldValue.Length);
+
+                myString = myString.Insert(indexOldValue, newValue);
+
+                indexOldValue = myString.IndexOf(oldValue);
+            }
+
+            return myString;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
