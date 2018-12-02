@@ -10,17 +10,15 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            string str = "hello";
+            string str = "ellohello";
 
-            char l = 'l';
+            MyString l = "ell";
 
-            Console.WriteLine(str.LastIndexOf('a'));
+            MyString ms = "ellohello";
 
-            Console.WriteLine();
+            Console.WriteLine(ms.LastIndexOf(l));
 
-            MyString ms = "hello";
-
-            Console.WriteLine(ms.LastIndexOf('a'));
+            Console.WriteLine(ms.LastIndexOf(l, 4, 5));
         }
     }
 }

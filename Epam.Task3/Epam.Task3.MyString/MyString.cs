@@ -606,6 +606,70 @@ namespace Epam.Task3.MyString
             return -1;
         }
 
+        public int LastIndexOf(MyString value)
+        {
+            return this.LastIndexOf(value, this.Length - 1);
+        }
+
+        public int LastIndexOf(MyString value, int startIndex)
+        {
+            return this.LastIndexOf(value, startIndex, this.Length - startIndex);
+        }
+
+        public int LastIndexOf(MyString value, int startIndex, int count)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            if (startIndex < 0 ||
+                count < 0 ||
+                startIndex >= this.Length ||
+                startIndex - count + 1 < 0)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            bool check = false;
+
+            int i;
+
+            for (i = startIndex; i >= 0; i--)
+            {
+                if (this[i] == value[0])
+                {
+                    int index = i;
+                    int j;
+
+                    for (j = 0; j < value.Length; j++)
+                    {
+                        if (this[index] != value[j])
+                        {
+                            break;
+                        }
+
+                        index++;
+                    }
+
+                    if (j == value.Length)
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+            }
+
+            if (check)
+            {
+                return i;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
