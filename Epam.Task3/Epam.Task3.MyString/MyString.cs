@@ -396,7 +396,7 @@ namespace Epam.Task3.MyString
 
         public int IndexOf(char ch, int startIndex)
         {
-            return IndexOf(ch, startIndex, this.Length - startIndex);
+            return this.IndexOf(ch, startIndex, this.Length - startIndex);
         }
 
         public int IndexOf(char ch, int startIndex, int count)
@@ -422,12 +422,12 @@ namespace Epam.Task3.MyString
 
         public int IndexOf(MyString value)
         {
-            return IndexOf(value, 0);
+            return this.IndexOf(value, 0);
         }
 
         public int IndexOf(MyString value, int startIndex)
         {
-            return IndexOf(value, startIndex, this.Length - startIndex);
+            return this.IndexOf(value, startIndex, this.Length - startIndex);
         }
 
         public int IndexOf(MyString value, int startIndex, int count)
@@ -543,7 +543,7 @@ namespace Epam.Task3.MyString
             int i = 0;
             int j = 0;
             int k = 0;
-            //bool done = false;
+            
             while (i < myString.Length)
             {
                 if (i == startIndex)
@@ -573,6 +573,37 @@ namespace Epam.Task3.MyString
             }
 
             return myString;
+        }
+
+        public int LastIndexOf(char ch)
+        {
+            return this.LastIndexOf(ch, this.Length - 1);
+        }
+
+        public int LastIndexOf(char ch, int startIndex)
+        {
+            return this.LastIndexOf(ch, startIndex, this.Length - startIndex);
+        }
+
+        public int LastIndexOf(char ch, int startIndex, int count)
+        {
+            if (startIndex < 0 ||
+                count < 0 ||
+                startIndex >= this.Length ||
+                startIndex - count + 1 < 0)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            for (int i = startIndex; i >= 0; i--)
+            {
+                if (this[i] == ch)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
         public char[] ToCharArray()
