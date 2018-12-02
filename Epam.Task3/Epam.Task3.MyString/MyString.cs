@@ -98,9 +98,9 @@ namespace Epam.Task3.MyString
                 return myString = new MyString();
             }
 
-            string obj = o1.ToString();
+            string result = o1.ToString();
 
-            myString = new MyString(obj);
+            myString = new MyString(result);
 
             return myString;
         }
@@ -170,9 +170,9 @@ namespace Epam.Task3.MyString
                 return myString = MyString.Concat(o1, o2);
             }
 
-            string obj = o1.ToString() + o2.ToString() + o3.ToString();
+            string result = o1.ToString() + o2.ToString() + o3.ToString();
 
-            myString = new MyString(obj);
+            myString = new MyString(result);
 
             return myString;
         }
@@ -298,15 +298,16 @@ namespace Epam.Task3.MyString
                 throw new ArgumentNullException("Value is null.");
             }
 
-            bool check = false; ;
+            bool check = false;
 
             for (int i = 0; i <= this.Length - ms.Length; i++)
             {
                 if (this[i] == ms[0])
                 {
                     int index = i;
+                    int j;
 
-                    for (int j = 0; j < ms.Length; j++)
+                    for (j = 0; j < ms.Length; j++)
                     {
                         if (this[index] != ms[j])
                         {
@@ -316,7 +317,7 @@ namespace Epam.Task3.MyString
                         index++;
                     }
 
-                    if (this[index - 1] == ms[ms.Length - 1])
+                    if (j == ms.Length)
                     {
                         check = true;
                         break;
@@ -381,6 +382,101 @@ namespace Epam.Task3.MyString
             return true;
         }
 
+        public int IndexOf(char ch)
+        {
+            return this.IndexOf(ch, 0);
+        }
+
+        public int IndexOf(char ch, int startIndex)
+        {
+            return IndexOf(ch, startIndex, this.Length - startIndex);
+        }
+
+        public int IndexOf(char ch, int startIndex, int count)
+        {
+            if (startIndex < 0 ||
+                count < 0 ||
+                startIndex >= this.Length ||
+                startIndex + count > this.Length)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            for (int i = startIndex; i < count; i++)
+            {
+                if (this[i] == ch)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public int IndexOf(MyString ms)
+        {
+            return IndexOf(ms, 0);
+        }
+
+        public int IndexOf(MyString ms, int startIndex)
+        {
+            return IndexOf(ms, startIndex, this.Length - startIndex);
+        }
+
+        public int IndexOf(MyString ms, int startIndex, int count)
+        {
+            if (ms == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            if (startIndex < 0 ||
+                count < 0 ||
+                startIndex >= this.Length ||
+                startIndex + count > this.Length)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            bool check = false;
+
+            int i;
+
+            for (i = startIndex; i <= count - ms.Length; i++)
+            {
+                if (this[i] == ms[0])
+                {
+                    int index = i;
+                    int j;
+
+                    for (j = 0; j < ms.Length; j++)
+                    {
+                        if (this[index] != ms[j])
+                        {
+                            break;
+                        }
+
+                        index++;
+                    }
+
+                    if (j == ms.Length)
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+            }
+
+            if (check)
+            {
+                return i;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
@@ -426,9 +522,16 @@ namespace Epam.Task3.MyString
             return result = sb.ToString();
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object value)
         {
-            return this.Equals(obj as MyString);
+            string temp = value as string;
+
+            if (temp == null)
+            {
+                throw new ArgumentNullException("Value is null or not supported type.");
+            }
+
+            return this.Equals(temp);
         }
 
         public bool Equals(MyString ms)
@@ -509,9 +612,7 @@ namespace Epam.Task3.MyString
                 throw new ArgumentNullException("Value is null or not supported type.");
             }
 
-            MyString myString = temp;
-
-            return this.CompareTo(myString);
+            return this.CompareTo(temp);
         }
 
         public int CompareTo(MyString ms)
@@ -539,6 +640,11 @@ namespace Epam.Task3.MyString
             if (this.Length > ms.Length)
             {
                 return 1;
+            }
+
+            if (char.IsLower(this[0]) && char.IsLower(ms[0]))
+            {
+                return 0;
             }
 
             if (char.IsLower(this[0]))

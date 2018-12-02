@@ -10,11 +10,13 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            MyString ms1 = "advice";
+            
 
-            object obj = 1;
+            MyString ms1 = "eeeece";
 
-            Console.WriteLine(ms1.CompareTo(obj));
+            string ch = "ece";
+
+            Console.WriteLine(ms1.IndexOf(ch));
         }
     }
 }
