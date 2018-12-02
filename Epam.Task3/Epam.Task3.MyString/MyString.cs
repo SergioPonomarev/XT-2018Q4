@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.MyString
 {
-    public class MyString : IEquatable<MyString>, IComparable<MyString>
+    public class MyString : IEquatable<MyString>, IComparable<MyString>, IComparable
     {
         private char[] chars;
 
@@ -498,6 +498,20 @@ namespace Epam.Task3.MyString
         public static bool operator !=(MyString lhs, MyString rhs)
         {
             return !(lhs == rhs);
+        }
+
+        public int CompareTo(object value)
+        {
+            string temp = value as string;
+
+            if (temp == null)
+            {
+                throw new ArgumentNullException("Value is null or not supported type.");
+            }
+
+            MyString myString = temp;
+
+            return this.CompareTo(myString);
         }
 
         public int CompareTo(MyString ms)
