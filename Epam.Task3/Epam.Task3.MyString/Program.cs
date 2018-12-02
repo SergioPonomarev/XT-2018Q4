@@ -10,49 +10,17 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            char[] chars = {'p', 'a', 'b', 'c', 'd' };
+            string main = "hello";
 
-            string str1 = "baptistp";
+            main = main.Remove(2, 1);
 
-            string str2 = "borov";
+            Console.WriteLine(main);
 
-            string str3 = "drotic";
+            MyString ms = "hello";
 
-            string str4 = "fopov";
+            ms = ms.Remove(2, 1);
 
-            string str5 = "gret";
-
-            Console.WriteLine(str5.LastIndexOfAny(chars));
-
-            Console.WriteLine(str1.LastIndexOfAny(chars, 3, 4));
-
-            Console.WriteLine(str2.LastIndexOfAny(chars));
-
-            Console.WriteLine(str3.LastIndexOfAny(chars));
-
-            Console.WriteLine(str4.LastIndexOfAny(chars));
-
-            Console.WriteLine();
-
-            MyString ms1 = "baptistp";
-
-            MyString ms2 = "borov";
-
-            MyString ms3 = "drotic";
-
-            MyString ms4 = "fopov";
-
-            MyString ms5 = "gret";
-
-            Console.WriteLine(ms5.LastIndexOfAny(chars));
-
-            Console.WriteLine(ms1.LastIndexOfAny(chars, 3, 4));
-
-            Console.WriteLine(ms2.LastIndexOfAny(chars));
-
-            Console.WriteLine(ms3.LastIndexOfAny(chars));
-
-            Console.WriteLine(ms4.LastIndexOfAny(chars));
+            Console.WriteLine(ms);
         }
     }
 }

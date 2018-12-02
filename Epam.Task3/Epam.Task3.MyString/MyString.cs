@@ -711,6 +711,35 @@ namespace Epam.Task3.MyString
             return -1;
         }
 
+        public MyString Remove(int startIndex)
+        {
+            return this.Remove(startIndex, this.Length - startIndex);
+        }
+
+        public MyString Remove(int startIndex, int count)
+        {
+            if (startIndex < 0 ||
+                count < 0 ||
+                startIndex + count > this.Length)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            MyString myString = new MyString(this.Length - count);
+
+            for (int i = 0, j = 0; j < myString.Length; i++, j++)
+            {
+                if (i == startIndex)
+                {
+                    i += count;
+                }
+
+                myString.chars[j] = this[i];
+            }
+
+            return myString;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
