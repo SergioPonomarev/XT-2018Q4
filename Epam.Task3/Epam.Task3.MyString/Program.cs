@@ -12,13 +12,13 @@ namespace Epam.Task3.MyString
         {
             string main = "hello";
 
-            main = main.Remove(2, 1);
+            main = main.Replace('l', 'm');
 
             Console.WriteLine(main);
 
             MyString ms = "hello";
 
-            ms = ms.Remove(2, 1);
+            ms = ms.Replace('l', 'm');
 
             Console.WriteLine(ms);
         }

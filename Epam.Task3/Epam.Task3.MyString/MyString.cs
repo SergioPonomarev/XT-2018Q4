@@ -12,7 +12,7 @@ namespace Epam.Task3.MyString
 
         public static readonly string Empty = "";
 
-        public int Length { get; private set; }
+        public int Length { get; }
 
         private MyString()
         {
@@ -735,6 +735,25 @@ namespace Epam.Task3.MyString
                 }
 
                 myString.chars[j] = this[i];
+            }
+
+            return myString;
+        }
+
+        public MyString Replace(char oldChar, char newChar)
+        {
+            MyString myString = new MyString(this.Length);
+
+            for (int i = 0; i < this.Length; i++)
+            {
+                if (this[i] == oldChar)
+                {
+                    myString.chars[i] = newChar;
+                }
+                else
+                {
+                    myString.chars[i] = this[i];
+                }
             }
 
             return myString;
