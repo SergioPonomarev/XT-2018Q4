@@ -12,13 +12,13 @@ namespace Epam.Task3.MyString
         {
             string main = "llhelloll";
 
-            bool b = main.StartsWith("llh");
+            string b = main.Substring(0, 5);
 
             Console.WriteLine(b);
 
-            MyString ms = "llelloll";
+            MyString ms = "llhelloll";
 
-            b = ms.StartsWith("llh");
+            b = ms.SubMyString(0, 5);
 
             Console.WriteLine(b);
         }

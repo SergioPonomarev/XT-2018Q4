@@ -812,6 +812,30 @@ namespace Epam.Task3.MyString
             return true;
         }
 
+        public string SubMyString(int startIndex)
+        {
+            return SubMyString(startIndex, this.Length - startIndex);
+        }
+
+        public string SubMyString(int startIndex, int length)
+        {
+            if (startIndex + length > this.Length ||
+                startIndex < 0 ||
+                length < 0)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            MyString myString = new MyString(length);
+
+            for (int i = startIndex, j = 0; j < myString.Length; i++, j++)
+            {
+                myString.chars[j] = this[i];
+            }
+
+            return myString;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
