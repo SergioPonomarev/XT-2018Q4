@@ -477,6 +477,47 @@ namespace Epam.Task3.MyString
             }
         }
 
+        public int IndexOfAny(char[] anyOf)
+        {
+            return IndexOfAny(anyOf, 0);
+        }
+
+        public int IndexOfAny(char[] anyOf, int startIndex)
+        {
+            return IndexOfAny(anyOf, startIndex, this.Length - startIndex);
+        }
+
+        public int IndexOfAny(char[] anyOf, int startIndex, int count)
+        {
+            if (anyOf == null)
+            {
+                throw new ArgumentNullException("Array is null.");
+            }
+
+            if (startIndex < 0 ||
+                count < 0 ||
+                startIndex >= this.Length ||
+                startIndex + count > this.Length)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            int i;
+
+            for (i = startIndex; i < count + startIndex; i++)
+            {
+                for (int j = 0; j < anyOf.Length; j++)
+                {
+                    if (this[i] == anyOf[j])
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
