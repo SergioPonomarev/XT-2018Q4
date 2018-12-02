@@ -836,6 +836,30 @@ namespace Epam.Task3.MyString
             return myString;
         }
 
+        public string ToLower()
+        {
+            MyString myString = new MyString(this.Length);
+
+            for (int i = 0; i < this.Length; i++)
+            {
+                myString.chars[i] = char.ToLower(this[i]);
+            }
+
+            return myString;
+        }
+
+        public string ToUpper()
+        {
+            MyString myString = new MyString(this.Length);
+
+            for (int i = 0; i < this.Length; i++)
+            {
+                myString.chars[i] = char.ToUpper(this[i]);
+            }
+
+            return myString;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;

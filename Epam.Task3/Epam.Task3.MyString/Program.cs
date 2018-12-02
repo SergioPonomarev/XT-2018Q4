@@ -10,15 +10,15 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            string main = "llhelloll";
+            string main = "hello";
 
-            string b = main.Substring(0, 5);
+            string b = main.ToUpper();
 
             Console.WriteLine(b);
 
-            MyString ms = "llhelloll";
+            MyString ms = "hello";
 
-            b = ms.SubMyString(0, 5);
+            b = ms.ToUpper();
 
             Console.WriteLine(b);
         }
