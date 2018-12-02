@@ -794,6 +794,24 @@ namespace Epam.Task3.MyString
             return myString;
         }
 
+        public bool StartsWith(MyString value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            for (int i = 0, j = 0; j < value.Length; i++, j++)
+            {
+                if (this[i] != value[j])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;

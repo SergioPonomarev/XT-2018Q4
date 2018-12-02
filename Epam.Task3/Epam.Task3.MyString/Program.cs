@@ -12,15 +12,15 @@ namespace Epam.Task3.MyString
         {
             string main = "llhelloll";
 
-            main = main.Replace("ll", "m");
+            bool b = main.StartsWith("llh");
 
-            Console.WriteLine(main);
+            Console.WriteLine(b);
 
-            MyString ms = "llhelloll";
+            MyString ms = "llelloll";
 
-            ms = ms.Replace("ll", "m");
+            b = ms.StartsWith("llh");
 
-            Console.WriteLine(ms);
+            Console.WriteLine(b);
         }
     }
 }
