@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.MyString
 {
-    public class MyString : IEquatable<MyString>
+    public class MyString : IEquatable<MyString>, IComparable<MyString>
     {
         private char[] chars;
 
@@ -124,9 +124,9 @@ namespace Epam.Task3.MyString
                 return myString = MyString.Concat(o1);
             }
 
-            string obj = o1.ToString() + o2.ToString();
+            string result = o1.ToString() + o2.ToString();
 
-            myString = new MyString(obj);
+            myString = new MyString(result);
 
             return myString;
         }
@@ -302,13 +302,13 @@ namespace Epam.Task3.MyString
 
             for (int i = 0; i <= this.Length - ms.Length; i++)
             {
-                if (this.chars[i] == ms[0])
+                if (this[i] == ms[0])
                 {
                     int index = i;
 
                     for (int j = 0; j < ms.Length; j++)
                     {
-                        if (this.chars[index] != ms[j])
+                        if (this[index] != ms[j])
                         {
                             break;
                         }
@@ -316,7 +316,7 @@ namespace Epam.Task3.MyString
                         index++;
                     }
 
-                    if (this.chars[index - 1] == ms[ms.Length - 1])
+                    if (this[index - 1] == ms[ms.Length - 1])
                     {
                         check = true;
                         break;
@@ -349,9 +349,9 @@ namespace Epam.Task3.MyString
             if (sourceIndex < 0 ||
                 destinationIndex < 0 ||
                 count < 0 ||
-                sourceIndex > this.chars.Length - 1 ||
+                sourceIndex > this.Length - 1 ||
                 destinationIndex > destination.Length - 1 ||
-                count + sourceIndex > this.chars.Length ||
+                count + sourceIndex > this.Length ||
                 count + destinationIndex > destination.Length)
             {
                 throw new ArgumentOutOfRangeException("Index is out of range.");
@@ -359,7 +359,7 @@ namespace Epam.Task3.MyString
 
             for (int i = 0; i < count; i++)
             {
-                destination[destinationIndex + i] = this.chars[sourceIndex + i];
+                destination[destinationIndex + i] = this[sourceIndex + i];
             }
         }
 
@@ -372,7 +372,7 @@ namespace Epam.Task3.MyString
 
             for (int i = this.Length - 1, j = ms.Length - 1; j >= 0 ; i--, j--)
             {
-                if (this.chars[i] != ms[j])
+                if (this[i] != ms[j])
                 {
                     return false;
                 }
@@ -418,9 +418,9 @@ namespace Epam.Task3.MyString
 
             string result;
 
-            for (int i = 0; i < this.chars.Length; i++)
+            for (int i = 0; i < this.Length; i++)
             {
-                sb.Append(this.chars[i]);
+                sb.Append(this[i]);
             }
 
             return result = sb.ToString();
@@ -455,7 +455,7 @@ namespace Epam.Task3.MyString
 
             for (int i = 0; i < this.Length; i++)
             {
-                if (this.chars[i] != ms[i])
+                if (this[i] != ms[i])
                 {
                     return false;
                 }
@@ -468,14 +468,14 @@ namespace Epam.Task3.MyString
         {
             int num = 5381;
             int num2 = num;
-            for (int i = 0; i < this.chars.Length; i += 2)
+            for (int i = 0; i < this.Length; i += 2)
             {
-                num = (((num << 5) + num) ^ this.chars[i]);
-                if (i + 1 == this.chars.Length)
+                num = (((num << 5) + num) ^ this[i]);
+                if (i + 1 == this.Length)
                 {
                     break;
                 }
-                num2 = (((num2 << 5) + num2) ^ this.chars[i + 1]);
+                num2 = (((num2 << 5) + num2) ^ this[i + 1]);
             }
             return num + num2 * 1566083941;
         }
@@ -498,6 +498,46 @@ namespace Epam.Task3.MyString
         public static bool operator !=(MyString lhs, MyString rhs)
         {
             return !(lhs == rhs);
+        }
+
+        public int CompareTo(MyString ms)
+        {
+            int min = this.Length < ms.Length ? this.Length : ms.Length;
+
+            for (int i = 0; i < min; i++)
+            {
+                if (char.ToUpper(this[i]) < char.ToUpper(ms[i]))
+                {
+                    return -1;
+                }
+
+                if (char.ToUpper(this[i]) > char.ToUpper(ms[i]))
+                {
+                    return 1;
+                }
+            }
+
+            if (this.Length < ms.Length)
+            {
+                return -1;
+            }
+
+            if (this.Length > ms.Length)
+            {
+                return 1;
+            }
+
+            if (char.IsLower(this[0]))
+            {
+                return -1;
+            }
+
+            if (char.IsLower(ms[0]))
+            {
+                return 1;
+            }
+
+            return 0;
         }
     }
 }

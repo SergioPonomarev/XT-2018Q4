@@ -18,9 +18,6 @@ namespace Epam.Task3.MyString
             string s1 = "Advace";
             string s2 = "advace";
 
-            Console.WriteLine(s1.CompareTo(s2));
-            Console.WriteLine(string.Compare(s1, s2, true));
-
             string[] str =
             {
                 "Advace",
@@ -29,12 +26,56 @@ namespace Epam.Task3.MyString
                 "bdvace",
                 "adv",
                 "bdv",
-                "Adv"
+                "Adv",
+                "azva"
             };
 
             Array.Sort(str);
 
-            Console.WriteLine();
+            Console.WriteLine(CompareTo(new char[] { 'A', 'd', 'v', 'a', 'c', 'e'}, new char[] { 'a', 'd', 'v', 'a', 'c', 'e'}));
+            Console.WriteLine(CompareTo(new char[] { 'a', 'd', 'v', 'a', 'c', 'e' }, new char[] { 'A', 'd', 'v'}));
+            Console.WriteLine(CompareTo(new char[] { 'a', 'd', 'v', 'a', 'c', 'e' }, new char[] { 'b', 'd', 'v' }));
+            Console.WriteLine(CompareTo(new char[] { 'A', 'd', 'v', 'a', 'c', 'e' }, new char[] { 'a', 'z', 'v', 'a' }));
+        }
+
+        public static int CompareTo(char[] ch1, char[] ch2)
+        {
+            int min = ch1.Length < ch2.Length ? ch1.Length : ch2.Length;
+
+            for (int i = 0; i < min; i++)
+            {
+                if (char.ToUpper(ch1[i]) < char.ToUpper(ch2[i]))
+                {
+                    return -1;
+                }
+
+                if (char.ToUpper(ch1[i]) > char.ToUpper(ch2[i]))
+                {
+                    return 1;
+                }
+            }
+
+            if (ch1.Length < ch2.Length)
+            {
+                return -1;
+            }
+            
+            if (ch1.Length > ch2.Length)
+            {
+                return 1;
+            }
+
+            if (char.IsLower(ch1[0]))
+            {
+                return -1;
+            }
+
+            if (char.IsLower(ch2[0]))
+            {
+                return 1;
+            }
+
+            return 0;
         }
     }
 }
