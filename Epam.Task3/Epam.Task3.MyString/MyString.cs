@@ -12,13 +12,20 @@ namespace Epam.Task3.MyString
 
         public static readonly string Empty = "";
 
-        public int Length { get; }
+        public int Length { get; private set; }
 
         private MyString()
         {
             this.chars = new char[0];
 
             this.Length = 0;
+        }
+
+        private MyString(int length)
+        {
+            this.chars = new char[length];
+
+            this.Length = length;
         }
 
         private MyString(string str)
@@ -291,25 +298,25 @@ namespace Epam.Task3.MyString
             return myString;
         }
 
-        public bool Contains(MyString ms)
+        public bool Contains(MyString value)
         {
-            if (ms == null)
+            if (value == null)
             {
                 throw new ArgumentNullException("Value is null.");
             }
 
             bool check = false;
 
-            for (int i = 0; i <= this.Length - ms.Length; i++)
+            for (int i = 0; i <= this.Length - value.Length; i++)
             {
-                if (this[i] == ms[0])
+                if (this[i] == value[0])
                 {
                     int index = i;
                     int j;
 
-                    for (j = 0; j < ms.Length; j++)
+                    for (j = 0; j < value.Length; j++)
                     {
-                        if (this[index] != ms[j])
+                        if (this[index] != value[j])
                         {
                             break;
                         }
@@ -317,7 +324,7 @@ namespace Epam.Task3.MyString
                         index++;
                     }
 
-                    if (j == ms.Length)
+                    if (j == value.Length)
                     {
                         check = true;
                         break;
@@ -328,14 +335,14 @@ namespace Epam.Task3.MyString
             return check;
         }
 
-        public static MyString Copy(MyString ms)
+        public static MyString Copy(MyString value)
         {
-            if (ms == null)
+            if (value == null)
             {
                 throw new ArgumentNullException("Value is null.");
             }
 
-            string result = ms.ToString();
+            string result = value.ToString();
 
             return new MyString(result);
         }
@@ -364,16 +371,16 @@ namespace Epam.Task3.MyString
             }
         }
 
-        public bool EndsWith(MyString ms)
+        public bool EndsWith(MyString value)
         {
-            if (ms == null)
+            if (value == null)
             {
                 throw new ArgumentNullException("Value is null.");
             }
 
-            for (int i = this.Length - 1, j = ms.Length - 1; j >= 0 ; i--, j--)
+            for (int i = this.Length - 1, j = value.Length - 1; j >= 0 ; i--, j--)
             {
-                if (this[i] != ms[j])
+                if (this[i] != value[j])
                 {
                     return false;
                 }
@@ -413,19 +420,19 @@ namespace Epam.Task3.MyString
             return -1;
         }
 
-        public int IndexOf(MyString ms)
+        public int IndexOf(MyString value)
         {
-            return IndexOf(ms, 0);
+            return IndexOf(value, 0);
         }
 
-        public int IndexOf(MyString ms, int startIndex)
+        public int IndexOf(MyString value, int startIndex)
         {
-            return IndexOf(ms, startIndex, this.Length - startIndex);
+            return IndexOf(value, startIndex, this.Length - startIndex);
         }
 
-        public int IndexOf(MyString ms, int startIndex, int count)
+        public int IndexOf(MyString value, int startIndex, int count)
         {
-            if (ms == null)
+            if (value == null)
             {
                 throw new ArgumentNullException("Value is null.");
             }
@@ -442,16 +449,16 @@ namespace Epam.Task3.MyString
 
             int i;
 
-            for (i = startIndex; i <= count - ms.Length; i++)
+            for (i = startIndex; i <= count - value.Length; i++)
             {
-                if (this[i] == ms[0])
+                if (this[i] == value[0])
                 {
                     int index = i;
                     int j;
 
-                    for (j = 0; j < ms.Length; j++)
+                    for (j = 0; j < value.Length; j++)
                     {
-                        if (this[index] != ms[j])
+                        if (this[index] != value[j])
                         {
                             break;
                         }
@@ -459,7 +466,7 @@ namespace Epam.Task3.MyString
                         index++;
                     }
 
-                    if (j == ms.Length)
+                    if (j == value.Length)
                     {
                         check = true;
                         break;
@@ -518,19 +525,69 @@ namespace Epam.Task3.MyString
             return -1;
         }
 
+        
+        public MyString Insert(int startIndex, MyString value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            if (startIndex < 0 || startIndex > this.Length)
+            {
+                throw new ArgumentOutOfRangeException("Index is out of range.");
+            }
+
+            MyString myString = new MyString(this.Length + value.Length);
+
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            //bool done = false;
+            while (i < myString.Length)
+            {
+                if (i == startIndex)
+                {
+                    while (j < value.Length)
+                    {
+                        myString.chars[i] = value[j];
+                        i++;
+                        j++;
+                    }
+                }
+
+                if (i != startIndex)
+                {
+                    while (k < this.Length)
+                    {
+                        myString.chars[i] = this[k];
+                        i++;
+                        k++;
+
+                        if (i == startIndex)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return myString;
+        }
+
         public char[] ToCharArray()
         {
             return this.chars;
         }
 
-        public static implicit operator string(MyString ms)
+        public static implicit operator string(MyString value)
         {
-            return ms.ToString();
+            return value.ToString();
         }
 
-        public static implicit operator StringBuilder(MyString ms)
+        public static implicit operator StringBuilder(MyString value)
         {
-            StringBuilder sb = new StringBuilder(ms.ToString());
+            StringBuilder sb = new StringBuilder(value.ToString());
 
             return sb;
         }
@@ -575,31 +632,31 @@ namespace Epam.Task3.MyString
             return this.Equals(temp);
         }
 
-        public bool Equals(MyString ms)
+        public bool Equals(MyString value)
         {
-            if (object.ReferenceEquals(ms, null))
+            if (object.ReferenceEquals(value, null))
             {
                 return false;
             }
 
-            if (object.ReferenceEquals(this, ms))
+            if (object.ReferenceEquals(this, value))
             {
                 return true;
             }
 
-            if (this.GetType() != ms.GetType())
+            if (this.GetType() != value.GetType())
             {
                 return false;
             }
 
-            if (this.Length != ms.Length)
+            if (this.Length != value.Length)
             {
                 return false;
             }
 
             for (int i = 0; i < this.Length; i++)
             {
-                if (this[i] != ms[i])
+                if (this[i] != value[i])
                 {
                     return false;
                 }
@@ -656,34 +713,34 @@ namespace Epam.Task3.MyString
             return this.CompareTo(temp);
         }
 
-        public int CompareTo(MyString ms)
+        public int CompareTo(MyString value)
         {
-            int min = this.Length < ms.Length ? this.Length : ms.Length;
+            int min = this.Length < value.Length ? this.Length : value.Length;
 
             for (int i = 0; i < min; i++)
             {
-                if (char.ToUpper(this[i]) < char.ToUpper(ms[i]))
+                if (char.ToUpper(this[i]) < char.ToUpper(value[i]))
                 {
                     return -1;
                 }
 
-                if (char.ToUpper(this[i]) > char.ToUpper(ms[i]))
+                if (char.ToUpper(this[i]) > char.ToUpper(value[i]))
                 {
                     return 1;
                 }
             }
 
-            if (this.Length < ms.Length)
+            if (this.Length < value.Length)
             {
                 return -1;
             }
 
-            if (this.Length > ms.Length)
+            if (this.Length > value.Length)
             {
                 return 1;
             }
 
-            if (char.IsLower(this[0]) && char.IsLower(ms[0]))
+            if (char.IsLower(this[0]) && char.IsLower(value[0]))
             {
                 return 0;
             }
@@ -693,7 +750,7 @@ namespace Epam.Task3.MyString
                 return -1;
             }
 
-            if (char.IsLower(ms[0]))
+            if (char.IsLower(value[0]))
             {
                 return 1;
             }

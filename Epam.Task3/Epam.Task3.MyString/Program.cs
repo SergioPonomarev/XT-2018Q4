@@ -10,49 +10,13 @@ namespace Epam.Task3.MyString
     {
         private static void Main()
         {
-            char[] chars = {'p', 'a', 'b', 'c', 'd' };
+            MyString main = "Great day!";
 
-            string str1 = "baptistp";
+            MyString add = "What a ";
 
-            string str2 = "borov";
+            main = main.Insert(0, add);
 
-            string str3 = "drotic";
-
-            string str4 = "fopov";
-
-            string str5 = "gret";
-
-            Console.WriteLine(str5.IndexOfAny(chars));
-
-            Console.WriteLine(str1.IndexOfAny(chars, 3, 5));
-
-            Console.WriteLine(str2.IndexOfAny(chars));
-
-            Console.WriteLine(str3.IndexOfAny(chars));
-
-            Console.WriteLine(str4.IndexOfAny(chars));
-
-            Console.WriteLine();
-
-            MyString ms1 = "baptistp";
-
-            MyString ms2 = "borov";
-
-            MyString ms3 = "drotic";
-
-            MyString ms4 = "fopov";
-
-            MyString ms5 = "gret";
-
-            Console.WriteLine(ms5.IndexOfAny(chars));
-
-            Console.WriteLine(ms1.IndexOfAny(chars, 3, 5));
-
-            Console.WriteLine(ms2.IndexOfAny(chars));
-
-            Console.WriteLine(ms3.IndexOfAny(chars));
-
-            Console.WriteLine(ms4.IndexOfAny(chars));
+            Console.WriteLine(main);
         }
     }
 }
