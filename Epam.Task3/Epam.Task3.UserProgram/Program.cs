@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.Task3.User
+namespace Epam.Task3.UserProgram
 {
     internal class Program
     {
