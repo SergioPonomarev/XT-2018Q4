@@ -116,7 +116,7 @@ namespace Epam.Task3.UserProgram
             Console.WriteLine("New user is created:");
             Console.WriteLine($"\t- surname is: {user.Surname};");
             Console.WriteLine($"\t- name is: {user.Name};");
-            Console.WriteLine($"\t- patronymic is: {user.MiddleName};");
+            Console.WriteLine($"\t- middle name is: {user.MiddleName};");
 
             string birth = user.Birthday.ToShortDateString();
             Console.WriteLine($"\t- date of birth is: {birth};");
