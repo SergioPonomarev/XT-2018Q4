@@ -895,7 +895,14 @@ namespace Epam.Task3.MyString
 
         public char[] ToCharArray()
         {
-            return this.chars;
+            char[] temp = new char[this.Length];
+
+            for (int i = 0; i < temp.Length; i++)
+            {
+                temp[i] = this[i];
+            }
+
+            return temp;
         }
 
         public override string ToString()
