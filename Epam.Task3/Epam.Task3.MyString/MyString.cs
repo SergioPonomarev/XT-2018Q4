@@ -443,17 +443,17 @@ namespace Epam.Task3.MyString
             }
 
             bool check = false;
-
             int i;
+            int internalCount = count;
 
-            for (i = startIndex; i <= count - value.Length; i++)
+            for (i = startIndex; i <= this.Length - value.Length && internalCount >= 0; i++, internalCount--)
             {
                 if (this[i] == value[0])
                 {
                     int index = i;
                     int j;
 
-                    for (j = 0; j < value.Length; j++)
+                    for (j = 0; j < internalCount && j < value.Length; j++)
                     {
                         if (this[index] != value[j])
                         {
@@ -592,7 +592,7 @@ namespace Epam.Task3.MyString
                 throw new ArgumentOutOfRangeException("Index is out of range.");
             }
 
-            for (int i = startIndex; i >= 0; i--)
+            for (int i = startIndex; i > startIndex - count; i--)
             {
                 if (this[i] == ch)
                 {
@@ -610,7 +610,7 @@ namespace Epam.Task3.MyString
 
         public int LastIndexOf(MyString value, int startIndex)
         {
-            return this.LastIndexOf(value, startIndex, this.Length - startIndex);
+            return this.LastIndexOf(value, startIndex, startIndex + 1);
         }
 
         public int LastIndexOf(MyString value, int startIndex, int count)
@@ -628,43 +628,34 @@ namespace Epam.Task3.MyString
                 throw new ArgumentOutOfRangeException("Index is out of range.");
             }
 
-            bool check = false;
-
             int i;
+            int internalCount = count;
 
-            for (i = startIndex; i >= 0; i--)
+            for (i = startIndex; internalCount >= 0 && i >= 0; i--, internalCount--)
             {
-                if (this[i] == value[0])
+                if (this[i] == value[value.Length - 1])
                 {
                     int index = i;
                     int j;
 
-                    for (j = 0; j < value.Length; j++)
+                    for (j = value.Length - 1; j >= 0 && value.Length <= internalCount; j--)
                     {
                         if (this[index] != value[j])
                         {
                             break;
                         }
 
-                        index++;
+                        index--;
                     }
 
-                    if (j == value.Length)
+                    if (j == -1)
                     {
-                        check = true;
-                        break;
+                        return index + 1;
                     }
                 }
             }
-
-            if (check)
-            {
-                return i;
-            }
-            else
-            {
-                return -1;
-            }
+            
+            return -1;
         }
 
         public int LastIndexOfAny(char[] anyOf)
@@ -674,7 +665,7 @@ namespace Epam.Task3.MyString
 
         public int LastIndexOfAny(char[] anyOf, int startIndex)
         {
-            return this.LastIndexOfAny(anyOf, startIndex, this.Length - startIndex);
+            return this.LastIndexOfAny(anyOf, startIndex, startIndex + 1);
         }
 
         public int LastIndexOfAny(char[] anyOf, int startIndex, int count)
@@ -809,12 +800,12 @@ namespace Epam.Task3.MyString
             return true;
         }
 
-        public string SubMyString(int startIndex)
+        public MyString SubMyString(int startIndex)
         {
             return SubMyString(startIndex, this.Length - startIndex);
         }
 
-        public string SubMyString(int startIndex, int length)
+        public MyString SubMyString(int startIndex, int length)
         {
             if (startIndex + length > this.Length ||
                 startIndex < 0 ||
