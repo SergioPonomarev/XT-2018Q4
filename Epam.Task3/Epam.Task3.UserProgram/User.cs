@@ -83,7 +83,7 @@ namespace Epam.Task3.UserProgram
 
             set
             {
-                BirthdayCheck(value);
+                DateCheck(value);
 
                 this.birthday = value;
             }
@@ -99,25 +99,25 @@ namespace Epam.Task3.UserProgram
             }
         }
 
-        private static bool BirthdayCheck(DateTime dt)
+        protected static bool DateCheck(DateTime dt)
         {
             DateTime today = DateTime.Now;
 
             if (dt.Year > today.Year)
             {
-                throw new ArgumentException("The user is not born yet. The year of birth must be at least same as this year or less.");
+                throw new ArgumentException("Invalid date. The year of must be at least same as this year or less.");
             }
 
             if (dt.Year == today.Year && dt.Month > today.Month)
             {
-                throw new ArgumentException("The user is not born yet. The month of birth must be at least same as this month or less.");
+                throw new ArgumentException("Invalid date. The month must be at least same as this month or less.");
             }
 
             if (dt.Year == today.Year &&
                 dt.Month == today.Month &&
                 dt.Day > today.Day)
             {
-                throw new ArgumentException("The user is not born yet. The day of birth must be at least same as this day or less.");
+                throw new ArgumentException("Invalid date. The day must be at least same as this day or less.");
             }
 
             return true;
@@ -135,7 +135,7 @@ namespace Epam.Task3.UserProgram
             return age;
         }
 
-        private static bool StringCheck(string value)
+        protected static bool StringCheck(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -146,7 +146,7 @@ namespace Epam.Task3.UserProgram
             {
                 if (!char.IsLetter(value[0]))
                 {
-                    throw new ArgumentException("Name, surname or middle name mustn't consist of only white spaces.");
+                    throw new ArgumentException("Value mustn't consist of only white spaces.");
                 }
             }
 
@@ -154,7 +154,7 @@ namespace Epam.Task3.UserProgram
             {
                 if (!char.IsLetter(value[i]) && !char.IsWhiteSpace(value[i]))
                 {
-                    throw new ArgumentException("Invalid characters. The name, surname or middle name must contain only letters and white spaces.");
+                    throw new ArgumentException("Invalid characters. Value must contain only letters and white spaces.");
                 }
             }
 
@@ -170,7 +170,7 @@ namespace Epam.Task3.UserProgram
 
                 if (whiteSpaceCount > 0)
                 {
-                    throw new ArgumentException("Name, surname and middle name mustn't consist of only white spaces.");
+                    throw new ArgumentException("Value mustn't consist of only white spaces.");
                 }
             }
 
@@ -183,7 +183,7 @@ namespace Epam.Task3.UserProgram
             {
                 if (!char.IsLetter(value[0]))
                 {
-                    throw new ArgumentException("Middle name mustn't consist of only white spaces.");
+                    throw new ArgumentException("Value mustn't consist of only white spaces.");
                 }
             }
 
@@ -191,7 +191,7 @@ namespace Epam.Task3.UserProgram
             {
                 if (!char.IsLetter(value[i]) && !char.IsWhiteSpace(value[i]))
                 {
-                    throw new ArgumentException("Invalid characters. Middle name must contain only letters and white spaces.");
+                    throw new ArgumentException("Invalid characters. Value must contain only letters and white spaces.");
                 }
             }
 
@@ -207,7 +207,7 @@ namespace Epam.Task3.UserProgram
 
                 if (whiteSpaceCount > 0)
                 {
-                    throw new ArgumentException("Middle name mustn't consist of only white spaces.");
+                    throw new ArgumentException("Value mustn't consist of only white spaces.");
                 }
             }
 
