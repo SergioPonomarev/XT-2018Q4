@@ -14,7 +14,7 @@ namespace Epam.Task3.MyString
             char[] chars = { 'H', 'e', 'l', 'l', 'o' };
             Console.Write("Char array has: ");
 
-            foreach  (char ch in chars)
+            foreach (char ch in chars)
             {
                 Console.Write(ch + ", ");
             }
@@ -124,12 +124,13 @@ namespace Epam.Task3.MyString
             Console.WriteLine();
 
             Console.WriteLine("There is three overloads for IndexOfAny method taking char array as a parameter to search:");
-            chars = new char[] { 't', 'H', 'i'};
+            chars = new char[] { 't', 'H', 'i' };
             Console.Write("Char array named 'chars' has: ");
             foreach (char ch in chars)
             {
                 Console.Write(ch + ", ");
             }
+
             Console.WriteLine();
             Console.WriteLine($"myString.IndexOfAny(chars): {myString.IndexOfAny(chars)}");
             Console.WriteLine($"myString.IndexOfAny(chars, 3): {myString.IndexOfAny(chars, 3)}");
@@ -160,6 +161,7 @@ namespace Epam.Task3.MyString
             {
                 Console.Write(ch + ", ");
             }
+
             Console.WriteLine();
             Console.WriteLine($"myString.LastIndexOfAny(chars): {myString.LastIndexOfAny(chars)}");
             Console.WriteLine($"myString.LastIndexOfAny(chars, 3): {myString.LastIndexOfAny(chars, 3)}");

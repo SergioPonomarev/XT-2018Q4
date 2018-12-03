@@ -5,32 +5,9 @@ namespace Epam.Task3.MyString
 {
     public class MyString : IEquatable<MyString>, IComparable<MyString>, IComparable
     {
+        public static readonly string Empty = string.Empty;
+
         private char[] chars;
-
-        public static readonly string Empty = "";
-
-        public int Length { get; }
-
-        private MyString()
-        {
-            this.chars = new char[0];
-
-            this.Length = 0;
-        }
-
-        private MyString(int length)
-        {
-            this.chars = new char[length];
-
-            this.Length = length;
-        }
-
-        private MyString(string str)
-        {
-            this.chars = str.ToCharArray();
-
-            this.Length = str.Length;
-        }
 
         public MyString(char[] value)
         {
@@ -80,6 +57,29 @@ namespace Epam.Task3.MyString
             this.Length = count;
         }
 
+        private MyString()
+        {
+            this.chars = new char[0];
+
+            this.Length = 0;
+        }
+
+        private MyString(int length)
+        {
+            this.chars = new char[length];
+
+            this.Length = length;
+        }
+
+        private MyString(string str)
+        {
+            this.chars = str.ToCharArray();
+
+            this.Length = str.Length;
+        }
+
+        public int Length { get; }
+
         public char this[int index]
         {
             get
@@ -89,8 +89,54 @@ namespace Epam.Task3.MyString
                     throw new IndexOutOfRangeException("Index is out of range. ");
                 }
 
-                return chars[index];
+                return this.chars[index];
             }
+        }
+
+        public static implicit operator string(MyString value)
+        {
+            return value.ToString();
+        }
+
+        public static implicit operator StringBuilder(MyString value)
+        {
+            StringBuilder sb = new StringBuilder(value.ToString());
+
+            return sb;
+        }
+
+        public static implicit operator MyString(string str)
+        {
+            MyString myString = new MyString(str);
+
+            return myString;
+        }
+
+        public static implicit operator MyString(StringBuilder sb)
+        {
+            MyString myString = new MyString(sb.ToString());
+
+            return myString;
+        }
+
+        public static bool operator ==(MyString lhs, MyString rhs)
+        {
+            if (object.ReferenceEquals(lhs, null))
+            {
+                if (object.ReferenceEquals(rhs, null))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(MyString lhs, MyString rhs)
+        {
+            return !(lhs == rhs);
         }
 
         public static MyString Concat(object o1)
@@ -295,6 +341,18 @@ namespace Epam.Task3.MyString
             return myString;
         }
 
+        public static MyString Copy(MyString value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("Value is null.");
+            }
+
+            string result = value.ToString();
+
+            return new MyString(result);
+        }
+
         public bool Contains(MyString value)
         {
             if (value == null)
@@ -332,18 +390,6 @@ namespace Epam.Task3.MyString
             return check;
         }
 
-        public static MyString Copy(MyString value)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException("Value is null.");
-            }
-
-            string result = value.ToString();
-
-            return new MyString(result);
-        }
-
         public void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
         {
             if (destination == null)
@@ -375,7 +421,7 @@ namespace Epam.Task3.MyString
                 throw new ArgumentNullException("Value is null.");
             }
 
-            for (int i = this.Length - 1, j = value.Length - 1; j >= 0 ; i--, j--)
+            for (int i = this.Length - 1, j = value.Length - 1; j >= 0; i--, j--)
             {
                 if (this[i] != value[j])
                 {
@@ -521,7 +567,6 @@ namespace Epam.Task3.MyString
 
             return -1;
         }
-
         
         public MyString Insert(int startIndex, MyString value)
         {
@@ -802,7 +847,7 @@ namespace Epam.Task3.MyString
 
         public MyString SubMyString(int startIndex)
         {
-            return SubMyString(startIndex, this.Length - startIndex);
+            return this.SubMyString(startIndex, this.Length - startIndex);
         }
 
         public MyString SubMyString(int startIndex, int length)
@@ -851,32 +896,6 @@ namespace Epam.Task3.MyString
         public char[] ToCharArray()
         {
             return this.chars;
-        }
-
-        public static implicit operator string(MyString value)
-        {
-            return value.ToString();
-        }
-
-        public static implicit operator StringBuilder(MyString value)
-        {
-            StringBuilder sb = new StringBuilder(value.ToString());
-
-            return sb;
-        }
-
-        public static implicit operator MyString(string str)
-        {
-            MyString myString = new MyString(str);
-
-            return myString;
-        }
-
-        public static implicit operator MyString(StringBuilder sb)
-        {
-            MyString myString = new MyString(sb.ToString());
-
-            return myString;
         }
 
         public override string ToString()
@@ -944,34 +963,16 @@ namespace Epam.Task3.MyString
             int num2 = num;
             for (int i = 0; i < this.Length; i += 2)
             {
-                num = (((num << 5) + num) ^ this[i]);
+                num = ((num << 5) + num) ^ this[i];
                 if (i + 1 == this.Length)
                 {
                     break;
                 }
-                num2 = (((num2 << 5) + num2) ^ this[i + 1]);
-            }
-            return num + num2 * 1566083941;
-        }
 
-        public static bool operator ==(MyString lhs, MyString rhs)
-        {
-            if (object.ReferenceEquals(lhs, null))
-            {
-                if (object.ReferenceEquals(rhs, null))
-                {
-                    return true;
-                }
-
-                return false;
+                num2 = ((num2 << 5) + num2) ^ this[i + 1];
             }
 
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator !=(MyString lhs, MyString rhs)
-        {
-            return !(lhs == rhs);
+            return num + (num2 * 1566083941);
         }
 
         public int CompareTo(object value)
