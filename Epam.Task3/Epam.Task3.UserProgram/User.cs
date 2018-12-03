@@ -6,7 +6,7 @@ namespace Epam.Task3.User
     {
         private string surname;
         private string name;
-        private string patronymic;
+        private string middleName;
         private DateTime birthday;
 
         public string Surname
@@ -49,23 +49,23 @@ namespace Epam.Task3.User
             }
         }
 
-        public string Patronymic
+        public string MiddleName
         {
             get
             {
-                if (this.patronymic == null)
+                if (this.middleName == null)
                 {
-                    throw new ArgumentException("The patronymic is not defined.", nameof(this.Patronymic));
+                    throw new ArgumentException("The patronymic is not defined.", nameof(this.MiddleName));
                 }
 
-                return this.patronymic;
+                return this.middleName;
             }
 
             set
             {
-                StringCheck(value);
+                MiddleNameCheck(value);
 
-                this.patronymic = value;
+                this.middleName = value;
             }
         }
 
@@ -137,13 +137,77 @@ namespace Epam.Task3.User
 
         private static bool StringCheck(string value)
         {
-            char[] arr = value.ToCharArray();
-
-            for (int i = 0; i < arr.Length; i++)
+            if (string.IsNullOrEmpty(value))
             {
-                if (!char.IsLetter(arr[i]) && !char.IsWhiteSpace(arr[i]))
+                throw new ArgumentException("This field is required.");
+            }
+
+            if (value.Length == 1)
+            {
+                if (!char.IsLetter(value[0]))
                 {
-                    throw new ArgumentException("Invalid characters. The name, surname or patronymic must contain only letters and white spaces.");
+                    throw new ArgumentException("Name, surname or middle name mustn't consist of only white spaces.");
+                }
+            }
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!char.IsLetter(value[i]) && !char.IsWhiteSpace(value[i]))
+                {
+                    throw new ArgumentException("Invalid characters. The name, surname or middle name must contain only letters and white spaces.");
+                }
+            }
+
+            int whiteSpaceCount = 0;
+
+            for (int i = 1; i < value.Length; i++)
+            {
+                if (char.IsWhiteSpace(value[i]) && 
+                    char.IsWhiteSpace(value[i - 1]))
+                {
+                    whiteSpaceCount++;
+                }
+
+                if (whiteSpaceCount > 0)
+                {
+                    throw new ArgumentException("Name, surname and middle name mustn't consist of only white spaces.");
+                }
+            }
+
+            return true;
+        }
+
+        private static bool MiddleNameCheck(string value)
+        {
+            if (value.Length == 1)
+            {
+                if (!char.IsLetter(value[0]))
+                {
+                    throw new ArgumentException("Middle name mustn't consist of only white spaces.");
+                }
+            }
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!char.IsLetter(value[i]) && !char.IsWhiteSpace(value[i]))
+                {
+                    throw new ArgumentException("Invalid characters. Middle name must contain only letters and white spaces.");
+                }
+            }
+
+            int whiteSpaceCount = 0;
+
+            for (int i = 1; i < value.Length; i++)
+            {
+                if (char.IsWhiteSpace(value[i]) &&
+                    char.IsWhiteSpace(value[i - 1]))
+                {
+                    whiteSpaceCount++;
+                }
+
+                if (whiteSpaceCount > 0)
+                {
+                    throw new ArgumentException("Middle name mustn't consist of only white spaces.");
                 }
             }
 

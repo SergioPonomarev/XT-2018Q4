@@ -6,7 +6,7 @@ namespace Epam.Task3.User
     {
         private static bool surnameCheck;
         private static bool nameCheck;
-        private static bool patronymicCheck;
+        private static bool middleNameCheck;
         private static bool birthdayCheck;
         private static bool check;
 
@@ -57,16 +57,16 @@ namespace Epam.Task3.User
 
             Console.WriteLine();
 
-            while (!patronymicCheck)
+            while (!middleNameCheck)
             {
                 try
                 {
-                    Console.Write("Please, enter the patronymic. In case of absence of the patronymic, please enter white space: ");
-                    string patronymic = Console.ReadLine();
+                    Console.Write("Please, enter the middle name if you have it: ");
+                    string middleName = Console.ReadLine();
 
-                    user.Patronymic = patronymic;
+                    user.MiddleName = middleName;
 
-                    patronymicCheck = true;
+                    middleNameCheck = true;
                 }
                 catch (ArgumentException ex)
                 {
@@ -116,7 +116,7 @@ namespace Epam.Task3.User
             Console.WriteLine("New user is created:");
             Console.WriteLine($"\t- surname is: {user.Surname};");
             Console.WriteLine($"\t- name is: {user.Name};");
-            Console.WriteLine($"\t- patronymic is: {user.Patronymic};");
+            Console.WriteLine($"\t- patronymic is: {user.MiddleName};");
 
             string birth = user.Birthday.ToShortDateString();
             Console.WriteLine($"\t- date of birth is: {birth};");
