@@ -12,6 +12,12 @@ namespace Epam.Task3.RoundProgram
             this.Center = new Point(centerX, centerY);
         }
 
+        public Round(int radius, Point center)
+        {
+            this.Radius = radius;
+            this.Center = center;
+        }
+
         public Point Center { get; set; }
 
         public int Radius
