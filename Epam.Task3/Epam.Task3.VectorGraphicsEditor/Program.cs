@@ -1,5 +1,5 @@
 ﻿using System;
-using Epam.Task3.VectorGraphicsEditor.instances;
+using Epam.Task3.VectorGraphicsEditor.Instances;
 
 namespace Epam.Task3.VectorGraphicsEditor
 {

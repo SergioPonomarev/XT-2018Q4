@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.Task3.VectorGraphicsEditor.instances
+namespace Epam.Task3.VectorGraphicsEditor.Instances
 {
     public class Round : Figure
     {
@@ -49,15 +49,6 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
             {
                 return Math.PI * this.radius * this.radius;
             }
-        }
-
-        public override string ShowFigure()
-        {
-            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
-                $"- Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
-                $"- Radius: {this.Radius}{Environment.NewLine}" +
-                $"- Area: {this.Area}{Environment.NewLine}" +
-                $"- Circumference: {this.Circumference}");
         }
 
         public static Round CreateFigure()
@@ -126,6 +117,15 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
             round = new Round(radius, xCoord, yCoord);
 
             return round;
+        }
+
+        public override string ShowFigure()
+        {
+            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
+                $"- Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
+                $"- Radius: {this.Radius}{Environment.NewLine}" +
+                $"- Area: {this.Area}{Environment.NewLine}" +
+                $"- Circumference: {this.Circumference}");
         }
 
         private static bool CheckRadius(bool check, int value)

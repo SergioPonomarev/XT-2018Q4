@@ -103,7 +103,6 @@ namespace Epam.Task3.Employee
                     {
                         birthdayCheck = true;
                     }
-
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
@@ -160,7 +159,6 @@ namespace Epam.Task3.Employee
                     employee.StartWorkDate = startingWorkDate;
 
                     startWorkDateCheck = true;
-
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {

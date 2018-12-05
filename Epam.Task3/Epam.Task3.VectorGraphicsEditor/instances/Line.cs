@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.Task3.VectorGraphicsEditor.instances
+namespace Epam.Task3.VectorGraphicsEditor.Instances
 {
     public class Line : Figure
     {
@@ -22,7 +22,7 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
 
         public int Length
         {
-            get => length;
+            get => this.length;
 
             set
             {
@@ -31,15 +31,8 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
                     throw new ArgumentException("Line length must be greater than or equal to 0.");
                 }
 
-                length = value;
+                this.length = value;
             }
-        }
-
-        public override string ShowFigure()
-        {
-            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
-                $"Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
-                $"Length: {this.Length}");
         }
 
         public static Line CreateFigure()
@@ -108,6 +101,13 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
             line = new Line(length, xCoord, yCoord);
 
             return line;
+        }
+
+        public override string ShowFigure()
+        {
+            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
+                $"Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
+                $"Length: {this.Length}");
         }
 
         private static bool CheckLength(bool check, int value)

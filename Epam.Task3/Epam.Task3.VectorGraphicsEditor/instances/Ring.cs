@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.Task3.VectorGraphicsEditor.instances
+namespace Epam.Task3.VectorGraphicsEditor.Instances
 {
     public class Ring : Figure
     {
@@ -40,7 +40,7 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
         {
             get
             {
-                double result = OuterRound.Area - InnerRound.Area;
+                double result = this.OuterRound.Area - this.InnerRound.Area;
 
                 return result;
             }
@@ -50,7 +50,7 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
         {
             get
             {
-                double result = OuterRound.Circumference + InnerRound.Circumference;
+                double result = this.OuterRound.Circumference + this.InnerRound.Circumference;
 
                 return result;
             }
@@ -58,13 +58,13 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
 
         public int InnerRadius
         {
-            get => innerRadius;
+            get => this.innerRadius;
 
             set
             {
-                if (InnerRound != null)
+                if (this.InnerRound != null)
                 {
-                    if (value > OuterRadius)
+                    if (value > this.OuterRadius)
                     {
                         throw new ArgumentException("Radius of the inner round mustn't be more that radius of the outer round.");
                     }
@@ -78,13 +78,13 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
 
         public int OuterRadius
         {
-            get => outerRadius;
+            get => this.outerRadius;
 
             set
             {
-                if (OuterRound != null)
+                if (this.OuterRound != null)
                 {
-                    if (value < InnerRadius)
+                    if (value < this.InnerRadius)
                     {
                         throw new ArgumentException("Radius of the inner round mustn't be more that radius of the outer round.");
                     }
@@ -98,18 +98,18 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
 
         public override Point Center
         {
-            get => center;
+            get => this.center;
 
             set
             {
                 this.center = value;
 
-                if (InnerRound != null)
+                if (this.InnerRound != null)
                 {
                     this.InnerRound.Center = value;
                 }
 
-                if (OuterRound != null)
+                if (this.OuterRound != null)
                 {
                     this.OuterRound.Center = value;
                 }
@@ -119,16 +119,6 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
         private Round InnerRound { get; set; }
 
         private Round OuterRound { get; set; }
-
-        public override string ShowFigure()
-        {
-            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
-                $"- Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
-                $"- Inner radius: {this.InnerRadius}{Environment.NewLine}" +
-                $"- Outer radius: {this.OuterRadius}{Environment.NewLine}" +
-                $"- Area: {this.Area}{Environment.NewLine}" +
-                $"- Sum of circumferences: {this.Circumference}");
-        }
 
         public static Ring CreateFigure()
         {
@@ -219,6 +209,16 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
             ring = new Ring(xCoord, yCoord, innRadius, outRadius);
 
             return ring;
+        }
+
+        public override string ShowFigure()
+        {
+            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
+                $"- Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
+                $"- Inner radius: {this.InnerRadius}{Environment.NewLine}" +
+                $"- Outer radius: {this.OuterRadius}{Environment.NewLine}" +
+                $"- Area: {this.Area}{Environment.NewLine}" +
+                $"- Sum of circumferences: {this.Circumference}");
         }
 
         private static bool CheckRadiusDiference(int innerR, int outerR)

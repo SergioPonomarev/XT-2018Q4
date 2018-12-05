@@ -123,18 +123,6 @@ namespace Epam.Task3.UserProgram
             return true;
         }
 
-        private static int AgeCalculation(DateTime dt)
-        {
-            DateTime today = DateTime.Now;
-
-            int a = (((today.Year * 100) + today.Month) * 100) + today.Day;
-            int b = (((dt.Year * 100) + dt.Month) * 100) + dt.Day;
-
-            int age = (a - b) / 10000;
-
-            return age;
-        }
-
         protected static bool StringCheck(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -177,7 +165,19 @@ namespace Epam.Task3.UserProgram
             return true;
         }
 
-        private static bool MiddleNameCheck(string value)
+        protected static int AgeCalculation(DateTime dt)
+        {
+            DateTime today = DateTime.Now;
+
+            int a = (((today.Year * 100) + today.Month) * 100) + today.Day;
+            int b = (((dt.Year * 100) + dt.Month) * 100) + dt.Day;
+
+            int age = (a - b) / 10000;
+
+            return age;
+        }
+
+        protected static bool MiddleNameCheck(string value)
         {
             if (value.Length == 1)
             {

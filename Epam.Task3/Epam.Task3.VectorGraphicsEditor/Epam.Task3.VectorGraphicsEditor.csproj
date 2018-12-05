@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="instances\Circle.cs" />
-    <Compile Include="instances\Figure.cs" />
-    <Compile Include="instances\Line.cs" />
-    <Compile Include="instances\Point.cs" />
-    <Compile Include="instances\Rectangle.cs" />
-    <Compile Include="instances\Ring.cs" />
-    <Compile Include="instances\Round.cs" />
+    <Compile Include="Instances\Circle.cs" />
+    <Compile Include="Instances\Figure.cs" />
+    <Compile Include="Instances\Line.cs" />
+    <Compile Include="Instances\Point.cs" />
+    <Compile Include="Instances\Rectangle.cs" />
+    <Compile Include="Instances\Ring.cs" />
+    <Compile Include="Instances\Round.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.Task3.VectorGraphicsEditor.instances
+namespace Epam.Task3.VectorGraphicsEditor.Instances
 {
     public abstract class Figure
     {

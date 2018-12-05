@@ -23,7 +23,7 @@ namespace Epam.Task3.Employee
 
             set
             {
-                StringCheck(value);
+                Employee.StringCheck(value);
 
                 this.position = value;
             }
@@ -43,7 +43,7 @@ namespace Epam.Task3.Employee
 
             set
             {
-                DateCheck(value);
+                Employee.DateCheck(value);
 
                 this.startWorkDate = value;
             }

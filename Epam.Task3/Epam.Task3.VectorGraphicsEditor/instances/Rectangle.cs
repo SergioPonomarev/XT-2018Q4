@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.Task3.VectorGraphicsEditor.instances
+namespace Epam.Task3.VectorGraphicsEditor.Instances
 {
     public class Rectangle : Figure
     {
@@ -25,7 +25,7 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
 
         public int Width
         {
-            get => width;
+            get => this.width;
 
             set
             {
@@ -34,13 +34,13 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
                     throw new ArgumentException("Rectangle width must be greater than or equal to 0.");
                 }
 
-                width = value;
+                this.width = value;
             }
         }
 
         public int Height
         {
-            get => height;
+            get => this.height;
 
             set
             {
@@ -49,7 +49,7 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
                     throw new ArgumentException("Rectangle height must be greater than or equal to 0.");
                 }
 
-                height = value;
+                this.height = value;
             }
         }
 
@@ -67,16 +67,6 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
             {
                 return 2 * (this.Height + this.Width);
             }
-        }
-
-        public override string ShowFigure()
-        {
-            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
-                $"Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
-                $"Width: {this.Width}{Environment.NewLine}" +
-                $"Height: {this.Height}{Environment.NewLine}" + 
-                $"Area: {this.Area}{Environment.NewLine}" +
-                $"Perimeter: {this.Perimeter}");
         }
 
         public static Rectangle CreateFigure()
@@ -165,6 +155,16 @@ namespace Epam.Task3.VectorGraphicsEditor.instances
             rectangle = new Rectangle(width, height, xCoord, yCoord);
 
             return rectangle;
+        }
+
+        public override string ShowFigure()
+        {
+            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
+                $"Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
+                $"Width: {this.Width}{Environment.NewLine}" +
+                $"Height: {this.Height}{Environment.NewLine}" + 
+                $"Area: {this.Area}{Environment.NewLine}" +
+                $"Perimeter: {this.Perimeter}");
         }
 
         private static bool CheckValue(bool check, int value)
