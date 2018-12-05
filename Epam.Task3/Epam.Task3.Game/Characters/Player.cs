@@ -4,7 +4,7 @@ namespace Epam.Task3.Game
 {
     public class Player : Character, IBuffable
     {
-        public Player(int maxHealth, int strength, int stamina, int agility) : base(maxHealth, strength, stamina, agility)
+        public Player(int maxHealth, int strength, int stamina, int agility, Position position) : base(maxHealth, strength, stamina, agility, position)
         {
         }
 
