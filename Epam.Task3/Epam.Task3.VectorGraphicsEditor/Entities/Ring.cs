@@ -4,8 +4,12 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 {
     public class Ring : Figure
     {
+        private static int count;
+
         private Point center;
+
         private int innerRadius;
+
         private int outerRadius;
 
         public Ring(int xCenter, int yCenter, int innerRadius, int outerRadius)
@@ -20,6 +24,8 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             this.OuterRadius = outerRadius;
             this.InnerRound = new Round(this.InnerRadius, this.Center);
             this.OuterRound = new Round(this.OuterRadius, this.Center);
+            Ring.count++;
+            this.Name = $"Ring{Ring.count.ToString()}";
         }
 
         public Ring(int innerRadius, int outerRadius, Point center)
@@ -34,7 +40,11 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             this.OuterRadius = outerRadius;
             this.InnerRound = new Round(this.InnerRadius, this.Center);
             this.OuterRound = new Round(this.OuterRadius, this.Center);
+            Ring.count++;
+            this.Name = $"Ring{Ring.count.ToString()}";
         }
+
+        public override string Name { get; }
 
         public double Area
         {

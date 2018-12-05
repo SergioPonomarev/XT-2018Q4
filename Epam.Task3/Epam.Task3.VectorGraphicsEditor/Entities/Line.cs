@@ -4,19 +4,27 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 {
     public class Line : Figure
     {
+        private static int count;
+
         private int length;
 
         public Line(int length, int xCoord, int yCoord)
         {
             this.Length = length;
             this.Center = new Point(xCoord, yCoord);
+            Line.count++;
+            this.Name = $"Line{Line.count.ToString()}";
         }
 
         public Line(int length, Point center)
         {
             this.Length = length;
             this.Center = center;
+            Line.count++;
+            this.Name = $"Line{Line.count.ToString()}";
         }
+
+        public override string Name { get; }
 
         public override Point Center { get; set; }
 

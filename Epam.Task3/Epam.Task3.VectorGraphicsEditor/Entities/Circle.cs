@@ -4,19 +4,27 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 {
     public class Circle : Figure
     {
+        private static int count;
+
         private int radius;
 
         public Circle(int radius, int centerX, int centerY)
         {
             this.Radius = radius;
             this.Center = new Point(centerX, centerY);
+            Circle.count++;
+            this.Name = $"Circle{Circle.count.ToString()}";
         }
 
         public Circle(int radius, Point center)
         {
             this.Radius = radius;
             this.Center = center;
+            Circle.count++;
+            this.Name = $"Circle{Circle.count.ToString()}";
         }
+
+        public override string Name { get; }
 
         public override Point Center { get; set; }
 

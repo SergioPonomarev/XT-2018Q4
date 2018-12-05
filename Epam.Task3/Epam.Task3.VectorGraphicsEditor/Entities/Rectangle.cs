@@ -4,7 +4,10 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 {
     public class Rectangle : Figure
     {
+        private static int count;
+
         private int width;
+
         private int height;
 
         public Rectangle(int width, int height, int centerX, int centerY)
@@ -12,6 +15,8 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             this.Width = width;
             this.Height = height;
             this.Center = new Point(centerX, centerY);
+            Rectangle.count++;
+            this.Name = $"Rectangle{Rectangle.count.ToString()}";
         }
 
         public Rectangle(int width, int height, Point center)
@@ -19,7 +24,11 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             this.Width = width;
             this.Height = height;
             this.Center = center;
+            Rectangle.count++;
+            this.Name = $"Rectangle{Rectangle.count.ToString()}";
         }
+
+        public override string Name { get; }
 
         public override Point Center { get; set; }
 
