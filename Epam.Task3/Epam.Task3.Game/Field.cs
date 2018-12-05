@@ -11,6 +11,7 @@ namespace Epam.Task3.Game
         }
 
         public int Width { get; }
+
         public int Height { get; }
     }
 }

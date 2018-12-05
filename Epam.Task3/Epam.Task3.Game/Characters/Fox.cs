@@ -2,7 +2,7 @@
 
 namespace Epam.Task3.Game
 {
-    class Fox : Character
+    public class Fox : Character
     {
         public Fox(int maxHealth, int strength, int stamina, int agility, Position position) : base(maxHealth, strength, stamina, agility, position)
         {

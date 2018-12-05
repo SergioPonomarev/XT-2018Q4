@@ -16,10 +16,15 @@ namespace Epam.Task3.Game
         }
 
         public int MaxHealth { get; private set; }
+
         public int CurrentHealth { get; private set; }
+
         public int Strength { get; private set; }
+
         public int Stamina { get; private set; }
+
         public int Agility { get; private set; }
+
         public Position CurrentPosition { get; private set; }
 
         public abstract IDamageable DoDamage(IDamageable target);

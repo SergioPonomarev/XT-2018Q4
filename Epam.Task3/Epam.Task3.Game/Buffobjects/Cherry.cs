@@ -2,7 +2,7 @@
 
 namespace Epam.Task3.Game
 {
-    class Cherry : BuffObject
+    public class Cherry : BuffObject
     {
         public Cherry(Position position) : base(position)
         {
