@@ -83,6 +83,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                                     break;
                             }
                         }
+
                         break;
 
                     case "list":
@@ -223,6 +224,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                 {
                     Console.WriteLine($"- {(i + 1).ToString()}. {figures[i].Name}");
                 }
+
                 Console.WriteLine();
             }
         }
