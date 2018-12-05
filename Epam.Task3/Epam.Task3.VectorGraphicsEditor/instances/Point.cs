@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.Task3.VectorGraphicsEditor
+namespace Epam.Task3.VectorGraphicsEditor.instances
 {
     public class Point
     {

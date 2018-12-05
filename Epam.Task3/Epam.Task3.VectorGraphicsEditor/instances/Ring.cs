@@ -1,12 +1,40 @@
 ﻿using System;
 
-namespace Epam.Task3.VectorGraphicsEditor
+namespace Epam.Task3.VectorGraphicsEditor.instances
 {
     public class Ring : Figure
     {
         private Point center;
         private int innerRadius;
         private int outerRadius;
+
+        public Ring(int xCenter, int yCenter, int innerRadius, int outerRadius)
+        {
+            if (innerRadius > outerRadius)
+            {
+                throw new ArgumentException("Radius of the inner round mustn't be more that radius of the outer round.");
+            }
+
+            this.Center = new Point(xCenter, yCenter);
+            this.InnerRadius = innerRadius;
+            this.OuterRadius = outerRadius;
+            this.InnerRound = new Round(this.InnerRadius, this.Center);
+            this.OuterRound = new Round(this.OuterRadius, this.Center);
+        }
+
+        public Ring(int innerRadius, int outerRadius, Point center)
+        {
+            if (innerRadius > outerRadius)
+            {
+                throw new ArgumentException("Radius of the inner round mustn't be more that radius of the outer round.");
+            }
+
+            this.Center = center;
+            this.InnerRadius = innerRadius;
+            this.OuterRadius = outerRadius;
+            this.InnerRound = new Round(this.InnerRadius, this.Center);
+            this.OuterRound = new Round(this.OuterRadius, this.Center);
+        }
 
         public double Area
         {
@@ -92,18 +120,135 @@ namespace Epam.Task3.VectorGraphicsEditor
 
         private Round OuterRound { get; set; }
 
-        public Ring(int xCenter, int yCenter, int innerRadius, int outerRadius)
+        public override string ShowFigure()
         {
-            if (innerRadius > outerRadius)
+            return string.Format($"Type figure: {this.GetType().Name}{Environment.NewLine}" +
+                $"- Center point coordinates: {this.Center.X}, {this.Center.Y}{Environment.NewLine}" +
+                $"- Inner radius: {this.InnerRadius}{Environment.NewLine}" +
+                $"- Outer radius: {this.OuterRadius}{Environment.NewLine}" +
+                $"- Area: {this.Area}{Environment.NewLine}" +
+                $"- Sum of circumferences: {this.Circumference}");
+        }
+
+        public static Ring CreateFigure()
+        {
+            bool check = false;
+            bool checkInnerRadius = false;
+            bool checkOuterRadius = false;
+            bool checkXCoord = false;
+            bool checkYCoord = false;
+            int innRadius = 0;
+            int outRadius = 0;
+            int xCoord = 0;
+            int yCoord = 0;
+            Ring ring;
+
+            while (!checkXCoord)
             {
-                throw new ArgumentException("Radius of the inner round mustn't be more that radius of the outer round.");
+                try
+                {
+                    Console.Write("Please, enter an integer for X coordinate of the center point of the ring: ");
+                    check = int.TryParse(Console.ReadLine(), out xCoord);
+
+                    checkXCoord = CheckCoord(check);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                }
             }
 
-            this.Center = new Point(xCenter, yCenter);
-            this.InnerRadius = innerRadius;
-            this.OuterRadius = outerRadius;
-            this.InnerRound = new Round(this.InnerRadius, this.Center);
-            this.OuterRound = new Round(this.OuterRadius, this.Center);
+            Console.WriteLine();
+
+            while (!checkYCoord)
+            {
+                try
+                {
+                    Console.Write("Please, enter an integer for Y coordinate of the center point of the ring: ");
+                    check = int.TryParse(Console.ReadLine(), out yCoord);
+
+                    checkYCoord = CheckCoord(check);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                }
+            }
+
+            Console.WriteLine();
+
+            while (!checkInnerRadius)
+            {
+                try
+                {
+                    Console.Write("Please, enter a natural number for the inner radius of the ring: ");
+                    check = int.TryParse(Console.ReadLine(), out innRadius);
+
+                    checkInnerRadius = CheckRadius(check, innRadius);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                }
+            }
+
+            Console.WriteLine();
+
+            while (!checkOuterRadius)
+            {
+                try
+                {
+                    Console.Write("Please, enter a natural number for the outer radius of the ring: ");
+                    check = int.TryParse(Console.ReadLine(), out outRadius);
+
+                    if (CheckRadius(check, outRadius))
+                    {
+                        checkOuterRadius = CheckRadiusDiference(innRadius, outRadius);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                }
+            }
+
+            ring = new Ring(xCoord, yCoord, innRadius, outRadius);
+
+            return ring;
+        }
+
+        private static bool CheckRadiusDiference(int innerR, int outerR)
+        {
+            if (innerR > outerR)
+            {
+                throw new ArgumentException("Inner radius of the ring mustn't be greater than outer radius of the ring.");
+            }
+
+            return true;
+        }
+
+        private static bool CheckRadius(bool check, int value)
+        {
+            if (!check || value < 0)
+            {
+                throw new ArgumentException("The radius must be greater than or equal to 0.");
+            }
+
+            return true;
+        }
+
+        private static bool CheckCoord(bool check)
+        {
+            if (!check)
+            {
+                throw new ArgumentException("The coordinate must be an integer.");
+            }
+
+            return true;
         }
     }
 }
