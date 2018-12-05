@@ -1,15 +1,14 @@
 ﻿using System;
-using Epam.Task3.RoundProgram;
 
-namespace Epam.Task3.RingProgram
+namespace Epam.Task3.VectorGraphicsEditor
 {
-    public class Ring
+    public class Ring : Figure
     {
         private Point center;
         private int innerRadius;
         private int outerRadius;
 
-        public double RingArea
+        public double Area
         {
             get
             {
@@ -19,7 +18,7 @@ namespace Epam.Task3.RingProgram
             }
         }
 
-        public double RingCircumference
+        public double Circumference
         {
             get
             {
@@ -69,7 +68,7 @@ namespace Epam.Task3.RingProgram
             }
         }
 
-        public Point Center
+        public override Point Center
         {
             get => center;
 
