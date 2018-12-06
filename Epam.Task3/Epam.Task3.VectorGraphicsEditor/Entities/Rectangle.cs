@@ -10,6 +10,11 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 
         private int height;
 
+        static Rectangle()
+        {
+            Rectangle.count = 0;
+        }
+
         public Rectangle(int width, int height, int centerX, int centerY)
         {
             this.Width = width;

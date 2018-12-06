@@ -14,7 +14,7 @@ namespace Epam.Task3.VectorGraphicsEditor
         private static bool listMenu = true;
         private static Figure[] figures;
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             Console.WriteLine("Greetings! You are using Vector Graphics Editor Program.");
             Console.WriteLine();

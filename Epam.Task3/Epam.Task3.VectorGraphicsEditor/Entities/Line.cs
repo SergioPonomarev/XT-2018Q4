@@ -8,6 +8,11 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 
         private int length;
 
+        static Line()
+        {
+            Line.count = 0;
+        }
+
         public Line(int length, int xCoord, int yCoord)
         {
             this.Length = length;

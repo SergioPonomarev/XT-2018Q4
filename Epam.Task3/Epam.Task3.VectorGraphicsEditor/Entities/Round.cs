@@ -8,6 +8,11 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 
         private int radius;
 
+        static Round()
+        {
+            Round.count = 0;
+        }
+
         public Round(int radius, int centerX, int centerY)
         {
             this.Radius = radius;

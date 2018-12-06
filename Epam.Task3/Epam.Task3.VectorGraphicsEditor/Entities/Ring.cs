@@ -12,6 +12,11 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 
         private int outerRadius;
 
+        static Ring()
+        {
+            Ring.count = 0;
+        }
+
         public Ring(int xCenter, int yCenter, int innerRadius, int outerRadius)
         {
             if (innerRadius > outerRadius)
