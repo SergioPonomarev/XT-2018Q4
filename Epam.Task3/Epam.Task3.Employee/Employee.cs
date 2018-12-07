@@ -11,15 +11,7 @@ namespace Epam.Task3.Employee
 
         public string Position
         {
-            get
-            {
-                if (this.position == null)
-                {
-                    throw new ArgumentException("The position is not defined.", nameof(this.Position));
-                }
-
-                return this.position;
-            }
+            get => this.position;
 
             set
             {
@@ -31,15 +23,7 @@ namespace Epam.Task3.Employee
 
         public DateTime StartWorkDate
         {
-            get
-            {
-                if (this.startWorkDate == DateTime.MinValue)
-                {
-                    throw new ArgumentException("The birthday is not defined.");
-                }
-
-                return this.startWorkDate;
-            }
+            get => this.startWorkDate;
 
             set
             {
