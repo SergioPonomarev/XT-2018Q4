@@ -11,15 +11,7 @@ namespace Epam.Task3.UserProgram
 
         public string Surname
         {
-            get
-            {
-                if (this.surname == null)
-                {
-                    throw new ArgumentException("The surname is not defined.", nameof(this.Surname));
-                }
-
-                return this.surname;
-            }
+            get => this.surname;
 
             set
             {
@@ -31,15 +23,7 @@ namespace Epam.Task3.UserProgram
 
         public string Name
         {
-            get
-            {
-                if (this.name == null)
-                {
-                    throw new ArgumentException("The name is not defined.", nameof(this.Name));
-                }
-
-                return this.name;
-            }
+            get => this.name;
 
             set
             {
@@ -51,15 +35,7 @@ namespace Epam.Task3.UserProgram
 
         public string MiddleName
         {
-            get
-            {
-                if (this.middleName == null)
-                {
-                    throw new ArgumentException("The patronymic is not defined.", nameof(this.MiddleName));
-                }
-
-                return this.middleName;
-            }
+            get => middleName;
 
             set
             {
@@ -71,15 +47,7 @@ namespace Epam.Task3.UserProgram
 
         public DateTime Birthday
         {
-            get
-            {
-                if (this.birthday == DateTime.MinValue)
-                {
-                    throw new ArgumentException("The birthday is not defined.");
-                }
-
-                return this.birthday;
-            }
+            get => this.birthday;
 
             set
             {
