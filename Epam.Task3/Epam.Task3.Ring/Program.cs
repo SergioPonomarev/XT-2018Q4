@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Epam.Task3.RoundProgram;
 
 namespace Epam.Task3.RingProgram
 {
     internal class Program
     {
         private static bool check;
-        private static bool checkInnerRadius;
-        private static bool checkOuterRadius;
-        private static bool checkXCoord;
-        private static bool checkYCoord;
+        private static bool blockCheck;
         private static int innerRadius;
         private static int outerRadius;
         private static int xCoord;
@@ -24,14 +16,14 @@ namespace Epam.Task3.RingProgram
             Console.WriteLine("Greetings! You are using The Ring Creating Program!");
             Console.WriteLine();
 
-            while (!checkXCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for X coordinate of the center point of the ring: ");
                     check = int.TryParse(Console.ReadLine(), out xCoord);
 
-                    checkXCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
                 catch (Exception ex)
                 {
@@ -41,15 +33,16 @@ namespace Epam.Task3.RingProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkYCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for Y coordinate of the center point of the round: ");
                     check = int.TryParse(Console.ReadLine(), out yCoord);
 
-                    checkYCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
                 catch (Exception ex)
                 {
@@ -59,15 +52,16 @@ namespace Epam.Task3.RingProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkInnerRadius)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter a natural number for the inner radius of the ring: ");
                     check = int.TryParse(Console.ReadLine(), out innerRadius);
 
-                    checkInnerRadius = CheckRadius(check, innerRadius);
+                    blockCheck = CheckRadius(check, innerRadius);
                 }
                 catch (Exception ex)
                 {
@@ -77,8 +71,9 @@ namespace Epam.Task3.RingProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkOuterRadius)
+            while (!blockCheck)
             {
                 try
                 {
@@ -87,7 +82,7 @@ namespace Epam.Task3.RingProgram
 
                     if (CheckRadius(check, outerRadius))
                     {
-                        checkOuterRadius = CheckRadiusDiference(innerRadius, outerRadius);
+                        blockCheck = CheckRadiusDiference(innerRadius, outerRadius);
                     }
                 }
                 catch (Exception ex)

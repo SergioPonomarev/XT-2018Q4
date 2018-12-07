@@ -59,24 +59,21 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
         public static Circle CreateFigure()
         {
             bool check = false;
-            bool checkRadius = false;
-            bool checkXCoord = false;
-            bool checkYCoord = false;
+            bool blockCheck = false;
             int radius = 0;
             int xCoord = 0;
             int yCoord = 0;
-            Circle circle;
 
-            while (!checkRadius)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter a natural number for the radius of the circle: ");
                     check = int.TryParse(Console.ReadLine(), out radius);
 
-                    checkRadius = CheckRadius(check, radius);
+                    blockCheck = CheckRadius(check, radius);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -84,17 +81,18 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkXCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for X coordinate of the center point of the circle: ");
                     check = int.TryParse(Console.ReadLine(), out xCoord);
 
-                    checkXCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -102,26 +100,25 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkYCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for Y coordinate of the center point of the circle: ");
                     check = int.TryParse(Console.ReadLine(), out yCoord);
 
-                    checkYCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
                 }
             }
 
-            circle = new Circle(radius, xCoord, yCoord);
-
-            return circle;
+            return new Circle(radius, xCoord, yCoord);
         }
 
         public override string ShowFigure()

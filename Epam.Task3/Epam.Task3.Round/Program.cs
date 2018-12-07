@@ -5,9 +5,7 @@ namespace Epam.Task3.RoundProgram
     internal class Program
     {
         private static bool check;
-        private static bool checkRadius;
-        private static bool checkXCoord;
-        private static bool checkYCoord;
+        private static bool blockCheck;
         private static int radius;
         private static int xCoord;
         private static int yCoord;
@@ -17,16 +15,16 @@ namespace Epam.Task3.RoundProgram
             Console.WriteLine("Greetings! You are using The Round Creating Program!");
             Console.WriteLine();
 
-            while (!checkRadius)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter a natural number for the radius of the round: ");
                     check = int.TryParse(Console.ReadLine(), out radius);
 
-                    checkRadius = CheckRadius(check, radius);
+                    blockCheck = CheckRadius(check, radius);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -34,17 +32,18 @@ namespace Epam.Task3.RoundProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkXCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for X coordinate of the center point of the round: ");
                     check = int.TryParse(Console.ReadLine(), out xCoord);
 
-                    checkXCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -52,17 +51,18 @@ namespace Epam.Task3.RoundProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkYCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for Y coordinate of the center point of the round: ");
                     check = int.TryParse(Console.ReadLine(), out yCoord);
 
-                    checkYCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

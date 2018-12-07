@@ -86,26 +86,22 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
         public static Rectangle CreateFigure()
         {
             bool check = false;
-            bool checkWidth = false;
-            bool checkHeight = false;
-            bool checkXCoord = false;
-            bool checkYCoord = false;
+            bool blockCheck = false;
             int width = 0;
             int height = 0;
             int xCoord = 0;
             int yCoord = 0;
-            Rectangle rectangle;
 
-            while (!checkWidth)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter a natural number for the width of the rectangle: ");
                     check = int.TryParse(Console.ReadLine(), out width);
 
-                    checkWidth = CheckValue(check, width);
+                    blockCheck = CheckValue(check, width);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -113,17 +109,18 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkHeight)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter a natural number for the height of the rectangle: ");
                     check = int.TryParse(Console.ReadLine(), out height);
 
-                    checkHeight = CheckValue(check, height);
+                    blockCheck = CheckValue(check, height);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -131,17 +128,18 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkXCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for X coordinate of the center point: ");
                     check = int.TryParse(Console.ReadLine(), out xCoord);
 
-                    checkXCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -149,26 +147,25 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkYCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for Y coordinate of the center point: ");
                     check = int.TryParse(Console.ReadLine(), out yCoord);
 
-                    checkYCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
                 }
             }
 
-            rectangle = new Rectangle(width, height, xCoord, yCoord);
-
-            return rectangle;
+            return new Rectangle(width, height, xCoord, yCoord);
         }
 
         public override string ShowFigure()

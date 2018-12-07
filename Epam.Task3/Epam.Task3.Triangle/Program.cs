@@ -5,9 +5,7 @@ namespace Epam.Task3.Triangle
     internal class Program
     {
         private static bool check;
-        private static bool checkSideA;
-        private static bool checkSideB;
-        private static bool checkSideC;
+        private static bool sideCheck;
         private static Triangle triangle;
 
         private static void Main()
@@ -17,7 +15,7 @@ namespace Epam.Task3.Triangle
             Console.WriteLine($"Greetings! You are using The Triangle Creating Program!");
             Console.WriteLine();
 
-            while (!checkSideA)
+            while (!sideCheck)
             {
                 try
                 {
@@ -26,9 +24,9 @@ namespace Epam.Task3.Triangle
 
                     triangle.SideA = value;
 
-                    checkSideA = true;
+                    sideCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -36,8 +34,9 @@ namespace Epam.Task3.Triangle
             }
 
             Console.WriteLine();
+            sideCheck = false;
 
-            while (!checkSideB)
+            while (!sideCheck)
             {
                 try
                 {
@@ -46,9 +45,9 @@ namespace Epam.Task3.Triangle
 
                     triangle.SideB = value;
 
-                    checkSideB = true;
+                    sideCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -56,8 +55,9 @@ namespace Epam.Task3.Triangle
             }
 
             Console.WriteLine();
+            sideCheck = false;
 
-            while (!checkSideC)
+            while (!sideCheck)
             {
                 try
                 {
@@ -66,9 +66,9 @@ namespace Epam.Task3.Triangle
 
                     triangle.SideC = value;
 
-                    checkSideC = true;
+                    sideCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

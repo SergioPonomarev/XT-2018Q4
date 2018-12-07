@@ -4,13 +4,8 @@ namespace Epam.Task3.Employee
 {
     internal class Program
     {
-        private static bool surnameCheck;
-        private static bool nameCheck;
-        private static bool middleNameCheck;
-        private static bool birthdayCheck;
-        private static bool positionCheck;
-        private static bool startWorkDateCheck;
         private static bool check;
+        private static bool blockCheck;
 
         private static void Main(string[] args)
         {
@@ -19,7 +14,7 @@ namespace Epam.Task3.Employee
             Console.WriteLine("Greetings! You are using The Employee Creating Program!");
             Console.WriteLine();
 
-            while (!surnameCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -28,9 +23,9 @@ namespace Epam.Task3.Employee
 
                     employee.Surname = surname;
 
-                    surnameCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -38,8 +33,9 @@ namespace Epam.Task3.Employee
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!nameCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -48,9 +44,9 @@ namespace Epam.Task3.Employee
 
                     employee.Name = name;
 
-                    nameCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -58,8 +54,9 @@ namespace Epam.Task3.Employee
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!middleNameCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -68,9 +65,9 @@ namespace Epam.Task3.Employee
 
                     employee.MiddleName = middleName;
 
-                    middleNameCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -78,8 +75,9 @@ namespace Epam.Task3.Employee
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!birthdayCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -101,15 +99,10 @@ namespace Epam.Task3.Employee
 
                     if (CheckAge(employee.Age))
                     {
-                        birthdayCheck = true;
+                        blockCheck = true;
                     }
                 }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -117,8 +110,9 @@ namespace Epam.Task3.Employee
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!positionCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -127,9 +121,9 @@ namespace Epam.Task3.Employee
 
                     employee.Position = position;
 
-                    positionCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -137,8 +131,9 @@ namespace Epam.Task3.Employee
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!startWorkDateCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -158,14 +153,9 @@ namespace Epam.Task3.Employee
 
                     employee.StartWorkDate = startingWorkDate;
 
-                    startWorkDateCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

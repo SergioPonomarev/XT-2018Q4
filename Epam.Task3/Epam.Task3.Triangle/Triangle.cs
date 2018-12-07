@@ -10,15 +10,7 @@ namespace Epam.Task3.Triangle
 
         public int SideA
         {
-            get
-            {
-                if (this.sideA <= 0)
-                {
-                    throw new ArgumentException("The Side A of the triangle is not defined.", nameof(this.SideA));
-                }
-
-                return this.sideA;
-            }
+            get => this.sideA;
 
             set
             {
@@ -33,15 +25,7 @@ namespace Epam.Task3.Triangle
 
         public int SideB
         {
-            get
-            {
-                if (this.sideB <= 0)
-                {
-                    throw new ArgumentException("The Side B of the triangle is not defined.", nameof(this.SideB));
-                }
-
-                return this.sideB;
-            }
+            get => this.sideB;
 
             set
             {
@@ -56,15 +40,7 @@ namespace Epam.Task3.Triangle
 
         public int SideC
         {
-            get
-            {
-                if (this.sideC <= 0)
-                {
-                    throw new ArgumentException("The Side C of the triangle is not defined.", nameof(this.SideC));
-                }
-
-                return this.sideC;
-            }
+            get => this.sideC;
 
             set
             {

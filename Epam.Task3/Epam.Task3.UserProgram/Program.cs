@@ -4,10 +4,7 @@ namespace Epam.Task3.UserProgram
 {
     internal class Program
     {
-        private static bool surnameCheck;
-        private static bool nameCheck;
-        private static bool middleNameCheck;
-        private static bool birthdayCheck;
+        private static bool blockCheck;
         private static bool check;
 
         private static void Main()
@@ -17,7 +14,7 @@ namespace Epam.Task3.UserProgram
             Console.WriteLine("Greetings! You are using The User Creating Program!");
             Console.WriteLine();
 
-            while (!surnameCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -26,9 +23,9 @@ namespace Epam.Task3.UserProgram
 
                     user.Surname = surname;
 
-                    surnameCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -36,8 +33,9 @@ namespace Epam.Task3.UserProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!nameCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -46,9 +44,9 @@ namespace Epam.Task3.UserProgram
 
                     user.Name = name;
 
-                    nameCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -56,8 +54,9 @@ namespace Epam.Task3.UserProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!middleNameCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -66,9 +65,9 @@ namespace Epam.Task3.UserProgram
 
                     user.MiddleName = middleName;
 
-                    middleNameCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -76,8 +75,9 @@ namespace Epam.Task3.UserProgram
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!birthdayCheck)
+            while (!blockCheck)
             {
                 try
                 {
@@ -97,14 +97,9 @@ namespace Epam.Task3.UserProgram
 
                     user.Birthday = birthday;
 
-                    birthdayCheck = true;
+                    blockCheck = true;
                 }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

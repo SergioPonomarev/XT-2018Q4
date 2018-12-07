@@ -138,24 +138,20 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
         public static Ring CreateFigure()
         {
             bool check = false;
-            bool checkInnerRadius = false;
-            bool checkOuterRadius = false;
-            bool checkXCoord = false;
-            bool checkYCoord = false;
+            bool blockCheck = false;
             int innRadius = 0;
             int outRadius = 0;
             int xCoord = 0;
             int yCoord = 0;
-            Ring ring;
 
-            while (!checkXCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for X coordinate of the center point of the ring: ");
                     check = int.TryParse(Console.ReadLine(), out xCoord);
 
-                    checkXCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
                 catch (Exception ex)
                 {
@@ -165,15 +161,16 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkYCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for Y coordinate of the center point of the ring: ");
                     check = int.TryParse(Console.ReadLine(), out yCoord);
 
-                    checkYCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
                 catch (Exception ex)
                 {
@@ -183,15 +180,16 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkInnerRadius)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter a natural number for the inner radius of the ring: ");
                     check = int.TryParse(Console.ReadLine(), out innRadius);
 
-                    checkInnerRadius = CheckRadius(check, innRadius);
+                    blockCheck = CheckRadius(check, innRadius);
                 }
                 catch (Exception ex)
                 {
@@ -201,8 +199,9 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkOuterRadius)
+            while (!blockCheck)
             {
                 try
                 {
@@ -211,7 +210,7 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
 
                     if (CheckRadius(check, outRadius))
                     {
-                        checkOuterRadius = CheckRadiusDiference(innRadius, outRadius);
+                        blockCheck = CheckRadiusDiference(innRadius, outRadius);
                     }
                 }
                 catch (Exception ex)
@@ -221,9 +220,7 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
                 }
             }
 
-            ring = new Ring(xCoord, yCoord, innRadius, outRadius);
-
-            return ring;
+            return new Ring(xCoord, yCoord, innRadius, outRadius);
         }
 
         public override string ShowFigure()

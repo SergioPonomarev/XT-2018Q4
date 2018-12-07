@@ -51,24 +51,21 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
         public static Line CreateFigure()
         {
             bool check = false;
-            bool checkLength = false;
-            bool checkXCoord = false;
-            bool checkYCoord = false;
+            bool blockCheck = false;
             int length = 0;
             int xCoord = 0;
             int yCoord = 0;
-            Line line;
 
-            while (!checkLength)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter a natural number for the length of the line: ");
                     check = int.TryParse(Console.ReadLine(), out length);
 
-                    checkLength = CheckLength(check, length);
+                    blockCheck = CheckLength(check, length);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -76,17 +73,18 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkXCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for X coordinate of the center point: ");
                     check = int.TryParse(Console.ReadLine(), out xCoord);
 
-                    checkXCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
@@ -94,26 +92,25 @@ namespace Epam.Task3.VectorGraphicsEditor.Entities
             }
 
             Console.WriteLine();
+            blockCheck = false;
 
-            while (!checkYCoord)
+            while (!blockCheck)
             {
                 try
                 {
                     Console.Write("Please, enter an integer for Y coordinate of the center point: ");
                     check = int.TryParse(Console.ReadLine(), out yCoord);
 
-                    checkYCoord = CheckCoord(check);
+                    blockCheck = CheckCoord(check);
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
                 }
             }
 
-            line = new Line(length, xCoord, yCoord);
-
-            return line;
+            return new Line(length, xCoord, yCoord);
         }
 
         public override string ShowFigure()
