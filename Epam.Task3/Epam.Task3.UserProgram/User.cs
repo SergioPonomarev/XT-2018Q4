@@ -35,7 +35,7 @@ namespace Epam.Task3.UserProgram
 
         public string MiddleName
         {
-            get => middleName;
+            get => this.middleName;
 
             set
             {
