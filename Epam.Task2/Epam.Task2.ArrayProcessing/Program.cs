@@ -102,19 +102,46 @@ namespace Epam.Task2.ArrayProcessing
 
         private static void ArraySort(int[] arr)
         {
-            int temp = 0;
+            QuickSort(arr, 0, arr.Length - 1);
+        }
 
-            for (int i = 0; i < arr.Length - 1; i++)
+        private static void QuickSort(int[] arr, int l, int r)
+        {
+            int temp;
+            int x = arr[(l + r) / 2];
+            int i = l;
+            int j = r;
+
+            while (i <= j)
             {
-                for (int j = i + 1; j < arr.Length; j++)
+                while (arr[i] < x)
                 {
-                    if (arr[i] > arr[j])
-                    {
-                        temp = arr[i];
-                        arr[i] = arr[j];
-                        arr[j] = temp;
-                    }
+                    i++;
                 }
+
+                while (arr[j] > x)
+                {
+                    j--;
+                }
+
+                if (i <= j)
+                {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                    i++;
+                    j--;
+                }
+            }
+
+            if (i < r)
+            {
+                QuickSort(arr, i, r);
+            }
+
+            if (l < j)
+            {
+                QuickSort(arr, l, j);
             }
         }
 
