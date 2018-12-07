@@ -12,7 +12,7 @@ namespace Epam.Task2.ArrayProcessing
 
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Array Processing Program!");
+            Console.WriteLine("Greetings! You are using The Array Processing Program!");
             Console.WriteLine();
 
             while (true)
@@ -69,12 +69,7 @@ namespace Epam.Task2.ArrayProcessing
 
                     return;
                 }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

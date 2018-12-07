@@ -13,17 +13,10 @@ namespace Epam.Task2.SumOfNumbers
 
         private static int SumOfNumbers()
         {
-            int sum = 0;
-
-            for (int i = 1; i < 1000; i++)
-            {
-                if (i % 3 == 0 || i % 5 == 0)
-                {
-                    sum += i;
-                }
-            }
-
-            return sum;
+            int sumThree = ((3 + 999) * 333) / 2;
+            int sumFive = ((5 + 995) * 199) / 2;
+            int sumFifteen = ((15 + 990) * 66) / 2;
+            return sumThree + sumFive - sumFifteen;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Epam.Task2.FontAdjustment
 
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Font Adjustment Program!");
+            Console.WriteLine("Greetings! You are using The Font Adjustment Program!");
 
             Fonts fonts = Fonts.None;
             while (true)
@@ -67,7 +67,7 @@ namespace Epam.Task2.FontAdjustment
                         }
                     }
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     ConsoleColor color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Red;

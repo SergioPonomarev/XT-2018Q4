@@ -8,7 +8,7 @@ namespace Epam.Task2.Triangle
 
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Triangle Printer Program!");
+            Console.WriteLine("Greetings! You are using The Triangle Printer Program!");
             Console.WriteLine();
 
             while (true)
@@ -25,7 +25,7 @@ namespace Epam.Task2.Triangle
                         return;
                     }
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

@@ -6,7 +6,7 @@ namespace Epam.Task1.Simple
     {
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Prime Number Check Programm!");
+            Console.WriteLine("Greetings! You are using The Prime Number Check Programm!");
             Console.WriteLine();
 
             while (true)
@@ -25,7 +25,7 @@ namespace Epam.Task1.Simple
                     Simple(number);
                     return;
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

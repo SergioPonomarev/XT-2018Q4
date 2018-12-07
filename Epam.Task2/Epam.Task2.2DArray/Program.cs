@@ -12,7 +12,7 @@ namespace Epam.Task2._2DArray
 
         private static void Main()
         {
-            Console.WriteLine($"Greatings! You are using The Even Position Numbers Summing{Environment.NewLine}in Two-Dimensional Array Program!");
+            Console.WriteLine($"Greetings! You are using The Even Position Numbers Summing{Environment.NewLine}in Two-Dimensional Array Program!");
             Console.WriteLine();
 
             while (true)
@@ -57,12 +57,7 @@ namespace Epam.Task2._2DArray
 
                     return;
                 }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

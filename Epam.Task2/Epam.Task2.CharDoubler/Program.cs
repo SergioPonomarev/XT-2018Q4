@@ -7,7 +7,7 @@ namespace Epam.Task2.CharDoubler
     {
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Char Doubler Program!");
+            Console.WriteLine("Greetings! You are using The Char Doubler Program!");
             Console.WriteLine();
 
             Console.WriteLine("Please, enter the main string:");

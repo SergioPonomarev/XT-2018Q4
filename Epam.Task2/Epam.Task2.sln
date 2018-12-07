@@ -1,29 +1,30 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.Triangle", "Epam.Task2.Triangle\Epam.Task2.Triangle.csproj", "{3FDE353D-1AC6-4154-B4BE-53DCBBEEF3C1}"
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.Triangle", "Epam.Task2.Triangle\Epam.Task2.Triangle.csproj", "{3FDE353D-1AC6-4154-B4BE-53DCBBEEF3C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.AnotherTriangle", "Epam.Task2.AnotherTriangle\Epam.Task2.AnotherTriangle.csproj", "{537A3D63-07BF-4118-AEB1-9C6D5BA76EB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.AnotherTriangle", "Epam.Task2.AnotherTriangle\Epam.Task2.AnotherTriangle.csproj", "{537A3D63-07BF-4118-AEB1-9C6D5BA76EB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.XMasTree", "Epam.Task2.X-MasTree\Epam.Task2.XMasTree.csproj", "{0B1C3C45-0475-4A83-8EFB-A7EFE3D499EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.XMasTree", "Epam.Task2.X-MasTree\Epam.Task2.XMasTree.csproj", "{0B1C3C45-0475-4A83-8EFB-A7EFE3D499EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.FontAdjustment", "Epam.Task2.FontAdjustment\Epam.Task2.FontAdjustment.csproj", "{7C0DF71E-1483-4721-A4F2-F14BCAEEA447}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.FontAdjustment", "Epam.Task2.FontAdjustment\Epam.Task2.FontAdjustment.csproj", "{7C0DF71E-1483-4721-A4F2-F14BCAEEA447}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.Rectangle", "Epam.Task2.Rectangle\Epam.Task2.Rectangle.csproj", "{CC16EE43-1AEF-416A-AD91-C529BCDC3A2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.Rectangle", "Epam.Task2.Rectangle\Epam.Task2.Rectangle.csproj", "{CC16EE43-1AEF-416A-AD91-C529BCDC3A2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.SumOfNumbers", "Epam.Task2.SumOfNumbers\Epam.Task2.SumOfNumbers.csproj", "{753DCA6F-1F99-40E6-BA56-B3B071CD2331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.SumOfNumbers", "Epam.Task2.SumOfNumbers\Epam.Task2.SumOfNumbers.csproj", "{753DCA6F-1F99-40E6-BA56-B3B071CD2331}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.ArrayProcessing", "Epam.Task2.ArrayProcessing\Epam.Task2.ArrayProcessing.csproj", "{9C8AC1C5-ED5B-438A-A264-FD3DB6DCEEAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.ArrayProcessing", "Epam.Task2.ArrayProcessing\Epam.Task2.ArrayProcessing.csproj", "{9C8AC1C5-ED5B-438A-A264-FD3DB6DCEEAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.NoPositive", "Epam.Task2.NoPositive\Epam.Task2.NoPositive.csproj", "{18391D5D-20CA-40EA-9B75-E880BD6CE933}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.NoPositive", "Epam.Task2.NoPositive\Epam.Task2.NoPositive.csproj", "{18391D5D-20CA-40EA-9B75-E880BD6CE933}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.NonNegativeSum", "Epam.Task2.NonNegativeSum\Epam.Task2.NonNegativeSum.csproj", "{487A9E8D-88D7-4BC0-8A49-03542FEC05CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.NonNegativeSum", "Epam.Task2.NonNegativeSum\Epam.Task2.NonNegativeSum.csproj", "{487A9E8D-88D7-4BC0-8A49-03542FEC05CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.2DArray", "Epam.Task2.2DArray\Epam.Task2.2DArray.csproj", "{D1356E33-6726-45D8-97D2-9F9FDB05E541}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.2DArray", "Epam.Task2.2DArray\Epam.Task2.2DArray.csproj", "{D1356E33-6726-45D8-97D2-9F9FDB05E541}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.AverageStringLength", "Epam.Task2.AverageStringLength\Epam.Task2.AverageStringLength.csproj", "{CBD2293E-CC8E-4DC1-A1C3-29E0F44C0E6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.AverageStringLength", "Epam.Task2.AverageStringLength\Epam.Task2.AverageStringLength.csproj", "{CBD2293E-CC8E-4DC1-A1C3-29E0F44C0E6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task2.CharDoubler", "Epam.Task2.CharDoubler\Epam.Task2.CharDoubler.csproj", "{84EE506A-2139-4DC0-83D6-7DCE08A9316D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epam.Task2.CharDoubler", "Epam.Task2.CharDoubler\Epam.Task2.CharDoubler.csproj", "{84EE506A-2139-4DC0-83D6-7DCE08A9316D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,5 +80,11 @@ Global
 		{84EE506A-2139-4DC0-83D6-7DCE08A9316D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84EE506A-2139-4DC0-83D6-7DCE08A9316D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84EE506A-2139-4DC0-83D6-7DCE08A9316D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {608251E4-AD76-4C00-9684-3A8E8EABF6EE}
 	EndGlobalSection
 EndGlobal

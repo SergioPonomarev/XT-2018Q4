@@ -9,7 +9,7 @@ namespace Epam.Task2.XMasTree
 
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The X-Mas Tree Printer Program!");
+            Console.WriteLine("Greetings! You are using The X-Mas Tree Printer Program!");
             Console.WriteLine();
 
             while (true)
@@ -26,7 +26,7 @@ namespace Epam.Task2.XMasTree
                         return;
                     }
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

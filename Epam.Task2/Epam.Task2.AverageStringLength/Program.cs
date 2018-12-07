@@ -7,7 +7,7 @@ namespace Epam.Task2.AverageStringLength
     {
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Average String Length Calculator Program!");
+            Console.WriteLine("Greetings! You are using The Average String Length Calculator Program!");
             Console.WriteLine();
 
             Console.WriteLine("Please, introduce the string:");

@@ -12,7 +12,7 @@ namespace Epam.Task2.NonNegativeSum
 
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Non-Negative Numbers Summing in Array Program!");
+            Console.WriteLine("Greetings! You are using The Non-Negative Numbers Summing in Array Program!");
             Console.WriteLine();
 
             while (true)
@@ -57,12 +57,7 @@ namespace Epam.Task2.NonNegativeSum
 
                     return;
                 }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

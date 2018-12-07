@@ -9,7 +9,7 @@ namespace Epam.Task1.Square
 
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Square Printer Programm!");
+            Console.WriteLine("Greetings! You are using The Square Printer Programm!");
             Console.WriteLine();
 
             while (true)
@@ -26,7 +26,7 @@ namespace Epam.Task1.Square
                         return;
                     }
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

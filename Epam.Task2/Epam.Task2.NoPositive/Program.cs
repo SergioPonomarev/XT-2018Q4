@@ -14,7 +14,7 @@ namespace Epam.Task2.NoPositive
 
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Positive Numbers Changer Program!");
+            Console.WriteLine("Greetings! You are using The Positive Numbers Changer Program!");
             Console.WriteLine();
 
             while (true)
@@ -77,12 +77,7 @@ namespace Epam.Task2.NoPositive
 
                     return;
                 }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();

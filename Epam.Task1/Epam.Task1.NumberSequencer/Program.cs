@@ -6,7 +6,7 @@ namespace Epam.Task1.Sequence
     {
         private static void Main()
         {
-            Console.WriteLine("Greatings! You are using The Number Sequencer Programm!");
+            Console.WriteLine("Greetings! You are using The Number Sequencer Programm!");
             Console.WriteLine();
 
             while (true)
@@ -23,7 +23,7 @@ namespace Epam.Task1.Sequence
                         return;
                     }
                 }
-                catch (ArgumentException ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine();
