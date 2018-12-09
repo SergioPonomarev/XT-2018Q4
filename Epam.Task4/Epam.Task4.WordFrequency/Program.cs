@@ -29,7 +29,7 @@ namespace Epam.Task4.WordFrequency
 
                     None of this had even a hope of any practical application in my life. But ten years later, when we were designing the first Macintosh computer, it all came back to me. And we designed it all into the Mac.";
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             Console.WriteLine("Greetings! You are using The Word Frequency Program.");
             Console.WriteLine();
