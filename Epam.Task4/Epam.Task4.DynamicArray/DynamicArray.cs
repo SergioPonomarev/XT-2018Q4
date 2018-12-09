@@ -315,7 +315,7 @@ namespace Epam.Task4.DynamicArray
             {
                 get
                 {
-                    return this.collection.array[this.currentIndex];
+                    return this.collection[this.currentIndex];
                 }
             }
 
