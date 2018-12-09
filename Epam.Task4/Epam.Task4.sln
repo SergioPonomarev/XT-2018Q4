@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task4.Lost", "Epam.Tas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task4.WordFrequency", "Epam.Task4.WordFrequency\Epam.Task4.WordFrequency.csproj", "{F1405198-98DB-4316-B6EB-EA2D84DCF0C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task4.DynamicArray", "Epam.Task4.DynamicArray\Epam.Task4.DynamicArray.csproj", "{F66D0D5F-B528-4C09-8D55-6D08E2E65B3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F1405198-98DB-4316-B6EB-EA2D84DCF0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1405198-98DB-4316-B6EB-EA2D84DCF0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1405198-98DB-4316-B6EB-EA2D84DCF0C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F66D0D5F-B528-4C09-8D55-6D08E2E65B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F66D0D5F-B528-4C09-8D55-6D08E2E65B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F66D0D5F-B528-4C09-8D55-6D08E2E65B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F66D0D5F-B528-4C09-8D55-6D08E2E65B3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
