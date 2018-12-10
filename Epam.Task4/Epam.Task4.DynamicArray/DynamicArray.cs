@@ -54,6 +54,11 @@ namespace Epam.Task4.DynamicArray
 
             set
             {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Capacity must be greater than or equal to zero.", nameof(value));
+                }
+
                 if (value > this.capacity)
                 {
                     this.ArrayExpansion(value);
