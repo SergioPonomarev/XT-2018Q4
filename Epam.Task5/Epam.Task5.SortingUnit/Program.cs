@@ -32,28 +32,51 @@ namespace Epam.Task5.SortingUnit
 
             ConsolePrintPersonArray(people);
 
-            Console.WriteLine($"Let's create a SortingUnit<Person> instance:{Environment.NewLine}SortingUnit<Person> su = new SortingUnit<Person>();");
+            Console.WriteLine($"Let's create a SortingUnit<Person> instance:{Environment.NewLine}SortingUnit<Person> su1 = new SortingUnit<Person>();");
             Console.WriteLine();
 
-            SortingUnit<Person> su = new SortingUnit<Person>();
+            SortingUnit<Person> su1 = new SortingUnit<Person>();
 
-            Console.WriteLine($"Add a listener to the End of sorting event:{Environment.NewLine}su.EndOfSorting += PrintSortingEvent;");
+            Console.WriteLine($"And another SortingUnit<Person> instance:{Environment.NewLine}SortingUnit<Person> su2 = new SortingUnit<Person>();");
             Console.WriteLine();
 
-            su.EndOfSorting += PrintSortingEvent;
+            SortingUnit<Person> su2 = new SortingUnit<Person>();
 
-            Console.WriteLine($"Run sorting comparing by Age in additional thread:{Environment.NewLine}su.RunSortInNewThread(people, CompareByAge);");
+            Console.WriteLine($"Add a listener to the End of sorting event for both SortingUnit instances:{Environment.NewLine}su1.EndOfSorting += PrintSortingEvent;{Environment.NewLine}su2.EndOfSorting += PrintSortingEvent;");
+            Console.WriteLine();
+
+            su1.EndOfSorting += PrintSortingEvent;
+            su2.EndOfSorting += PrintSortingEvent;
+
+            Console.WriteLine($"Run sorting comparing by Age in additional thread for the first Sorting Unit instance:{Environment.NewLine}su1.RunSortInNewThread(people, CompareByAge);");
             Console.WriteLine();
             
-            su.RunSortInNewThread(people, CompareByAge);
+            su1.RunSortInNewThread(people, CompareByAge);
 
-            Console.WriteLine($"Define the moment of thread ending:{Environment.NewLine}su.SortingUnitThread.Join();");
+            Console.WriteLine($"Define the moment of thread ending for the first Sorting Unit instance:{Environment.NewLine}su1.SortingUnitThread.Join();");
             Console.WriteLine();
 
-            su.SortingUnitThread.Join();
+            su1.SortingUnitThread.Join();
 
-            Console.WriteLine("And print the array again:");
+            Console.WriteLine("Print sorted array:");
             ConsolePrintPersonArray(people);
+
+            Console.WriteLine($"Run sorting comparing by Name in additional thread for the second Sorting Unit instance:{Environment.NewLine}su2.RunSortInNewThread(people, CompareByName);");
+            Console.WriteLine();
+
+            su2.RunSortInNewThread(people, CompareByName);
+
+            Console.WriteLine($"Define the moment of thread ending for the second Sorting Unit instance:{Environment.NewLine}su2.SortingUnitThread.Join();");
+            Console.WriteLine();
+
+            su2.SortingUnitThread.Join();
+
+            Console.WriteLine("Print sorted array:");
+            ConsolePrintPersonArray(people);
+
+            Console.WriteLine($"And this is the only way I'd found to work it stable correctly using or not lock object to sorting method:{Environment.NewLine}run first additional thread, then join it; run second additional thread, then join it.");
+            Console.WriteLine();
+            Console.WriteLine("In other cases it may work correct and may not.");
         }
 
         private static void PrintSortingEvent(object sender, SortingUnitEventArgs e)

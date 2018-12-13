@@ -24,12 +24,15 @@ namespace Epam.Task5.SortingUnit
 
         public void CustomSort(T[] arr, Func<T, T, int> compareMethod)
         {
-            SortingUnit<T>.sw.Start();
-            this.CustomSort(arr, 0, arr.Length - 1, compareMethod);
-            SortingUnit<T>.sw.Stop();
-            this.timePerformance = sw.Elapsed.TotalMilliseconds;
-            SortingUnit<T>.sw.Reset();
-            this.OnEndOfSorting(new SortingUnitEventArgs("End of sorting.", this.timePerformance));
+            lock (lockOn)
+            {
+                SortingUnit<T>.sw.Start();
+                this.CustomSort(arr, 0, arr.Length - 1, compareMethod);
+                SortingUnit<T>.sw.Stop();
+                this.timePerformance = sw.Elapsed.TotalMilliseconds;
+                SortingUnit<T>.sw.Reset();
+                this.OnEndOfSorting(new SortingUnitEventArgs("End of sorting.", this.timePerformance));
+            }
         }
 
         protected virtual void OnEndOfSorting(SortingUnitEventArgs e)
