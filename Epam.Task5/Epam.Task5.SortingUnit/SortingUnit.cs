@@ -24,7 +24,7 @@ namespace Epam.Task5.SortingUnit
 
         public void CustomSort(T[] arr, Func<T, T, int> compareMethod)
         {
-            lock (lockOn)
+            lock (this.lockOn)
             {
                 SortingUnit<T>.sw.Start();
                 this.CustomSort(arr, 0, arr.Length - 1, compareMethod);
