@@ -5,6 +5,8 @@ namespace Epam.Task5.SortingUnit
 {
     internal class Program
     {
+        private static SortingUnit<Person> su = new SortingUnit<Person>();
+
         private static void Main(string[] args)
         {
             Console.WriteLine("Greetings! This is The Sorting Unit demonstration program.");
@@ -28,55 +30,43 @@ namespace Epam.Task5.SortingUnit
                 new Person { Name = "Ksenia", Age = 22 }
             };
 
-            Console.WriteLine("Here is an array of Person instances:");
+            Console.WriteLine("Here is an array of Person instances named 'people':");
 
             ConsolePrintPersonArray(people);
 
-            Console.WriteLine($"Let's create a SortingUnit<Person> instance:{Environment.NewLine}SortingUnit<Person> su1 = new SortingUnit<Person>();");
+            Console.WriteLine("Let's do a copy of this array and name it 'peopleCopy':");
+
+            Person[] peopleCopy = new Person[people.Length];
+
+            Array.Copy(people, peopleCopy, people.Length);
+
+            ConsolePrintPersonArray(peopleCopy);
+
+            Console.WriteLine("There is a private static instance of SortingUnit class named su.");
+            Console.WriteLine($"Let's add a listener to the End of sorting event for the static SortingUnit instance:{Environment.NewLine}su.EndOfSorting += PrintSortingEvent;");
             Console.WriteLine();
 
-            SortingUnit<Person> su1 = new SortingUnit<Person>();
+            su.EndOfSorting += PrintSortingEvent;
 
-            Console.WriteLine($"And another SortingUnit<Person> instance:{Environment.NewLine}SortingUnit<Person> su2 = new SortingUnit<Person>();");
+            Console.WriteLine($"Now let's sort original array 'people' by age in new thread using method{Environment.NewLine}RunSortInNewThread(array, compareMethod, threadName).");
             Console.WriteLine();
 
-            SortingUnit<Person> su2 = new SortingUnit<Person>();
-
-            Console.WriteLine($"Add a listener to the End of sorting event for both SortingUnit instances:{Environment.NewLine}su1.EndOfSorting += PrintSortingEvent;{Environment.NewLine}su2.EndOfSorting += PrintSortingEvent;");
+            Console.WriteLine($"And let's sort 'peopleCopy' array by name in another new thread using same SortingUnit instance,{Environment.NewLine}but with another thread name.");
             Console.WriteLine();
 
-            su1.EndOfSorting += PrintSortingEvent;
-            su2.EndOfSorting += PrintSortingEvent;
+            su.RunSortInNewThread(people, CompareByAge, "Thread CompareByAge");
 
-            Console.WriteLine($"Run sorting comparing by Age in additional thread for the first Sorting Unit instance:{Environment.NewLine}su1.RunSortInNewThread(people, CompareByAge);");
-            Console.WriteLine();
-            
-            su1.RunSortInNewThread(people, CompareByAge);
+            su.RunSortInNewThread(peopleCopy, CompareByName, "Thread CompareByName");
 
-            Console.WriteLine($"Define the moment of thread ending for the first Sorting Unit instance:{Environment.NewLine}su1.SortingUnitThread.Join();");
+            su.SortingUnitThread.Join();
+
+            Console.WriteLine("Finally, terminate thread with .Join() method.");
             Console.WriteLine();
 
-            su1.SortingUnitThread.Join();
+            Console.WriteLine("And print both original and copy arrays:");
 
-            Console.WriteLine("Print sorted array:");
             ConsolePrintPersonArray(people);
-
-            Console.WriteLine($"Run sorting comparing by Name in additional thread for the second Sorting Unit instance:{Environment.NewLine}su2.RunSortInNewThread(people, CompareByName);");
-            Console.WriteLine();
-
-            su2.RunSortInNewThread(people, CompareByName);
-
-            Console.WriteLine($"Define the moment of thread ending for the second Sorting Unit instance:{Environment.NewLine}su2.SortingUnitThread.Join();");
-            Console.WriteLine();
-
-            su2.SortingUnitThread.Join();
-
-            Console.WriteLine("Print sorted array:");
-            ConsolePrintPersonArray(people);
-
-            Console.WriteLine($"And this is the only way I'd found to work it stable correctly using or not lock object to sorting method:{Environment.NewLine}run first additional thread, then join it; run second additional thread, then join it.");
-            Console.WriteLine();
-            Console.WriteLine("In other cases it may work correct and may not.");
+            ConsolePrintPersonArray(peopleCopy);
         }
 
         private static void PrintSortingEvent(object sender, SortingUnitEventArgs e)

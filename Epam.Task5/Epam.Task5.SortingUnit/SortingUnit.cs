@@ -16,9 +16,10 @@ namespace Epam.Task5.SortingUnit
 
         public Thread SortingUnitThread { get; set; }
 
-        public void RunSortInNewThread(T[] arr, Func<T, T, int> compareMethod)
+        public void RunSortInNewThread(T[] arr, Func<T, T, int> compareMethod, string threadName)
         {
             this.SortingUnitThread = new Thread(() => this.CustomSort(arr, compareMethod));
+            this.SortingUnitThread.Name = threadName;
             this.SortingUnitThread.Start();
         }
 
@@ -31,7 +32,7 @@ namespace Epam.Task5.SortingUnit
                 SortingUnit<T>.sw.Stop();
                 this.timePerformance = sw.Elapsed.TotalMilliseconds;
                 SortingUnit<T>.sw.Reset();
-                this.OnEndOfSorting(new SortingUnitEventArgs("End of sorting.", this.timePerformance));
+                this.OnEndOfSorting(new SortingUnitEventArgs($"End of sorting Thread {Thread.CurrentThread.Name}.", this.timePerformance));
             }
         }
 
