@@ -90,8 +90,9 @@ namespace Epam.Task5.NumberArraySum
             decimal[] decimalArr = new decimal[length];
             for (int i = 0; i < decimalArr.Length; i++)
             {
-                decimalArr[i] = Convert.ToDecimal(Math.Round((SingleRandom.Next(-100000, 100000) + SingleRandom.NextDouble()), 7));
+                decimalArr[i] = Convert.ToDecimal(Math.Round(SingleRandom.Next(-100000, 100000) + SingleRandom.NextDouble(), 7));
             }
+
             ConsolePrintArray(decimalArr);
             decimal decimalSum = decimalArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {decimalSum.ToString()}");
@@ -103,8 +104,9 @@ namespace Epam.Task5.NumberArraySum
             double[] doubleArr = new double[length];
             for (int i = 0; i < doubleArr.Length; i++)
             {
-                doubleArr[i] = Convert.ToDouble(Math.Round((SingleRandom.Next(-10000, 10000) + SingleRandom.NextDouble()), 5));
+                doubleArr[i] = Convert.ToDouble(Math.Round(SingleRandom.Next(-10000, 10000) + SingleRandom.NextDouble(), 5));
             }
+
             ConsolePrintArray(doubleArr);
             double doubleSum = doubleArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {doubleSum.ToString()}");
@@ -116,8 +118,9 @@ namespace Epam.Task5.NumberArraySum
             float[] floatArr = new float[length];
             for (int i = 0; i < floatArr.Length; i++)
             {
-                floatArr[i] = Convert.ToSingle(Math.Round((SingleRandom.Next(-1000, 1000) + SingleRandom.NextDouble()), 3));
+                floatArr[i] = Convert.ToSingle(Math.Round(SingleRandom.Next(-1000, 1000) + SingleRandom.NextDouble(), 3));
             }
+
             ConsolePrintArray(floatArr);
             float floatSum = floatArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {floatSum.ToString()}");
@@ -131,6 +134,7 @@ namespace Epam.Task5.NumberArraySum
             {
                 ulongArr[i] = Convert.ToUInt64(SingleRandom.Next(0, 10000000));
             }
+
             ConsolePrintArray(ulongArr);
             ulong ulongSum = ulongArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {ulongSum.ToString()}");
@@ -144,6 +148,7 @@ namespace Epam.Task5.NumberArraySum
             {
                 longArr[i] = Convert.ToInt64(SingleRandom.Next(-10000000, 10000000));
             }
+
             ConsolePrintArray(longArr);
             long longSum = longArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {longSum.ToString()}");
@@ -157,6 +162,7 @@ namespace Epam.Task5.NumberArraySum
             {
                 uintArr[i] = Convert.ToUInt32(SingleRandom.Next(0, 1000000));
             }
+
             ConsolePrintArray(uintArr);
             uint uintSum = uintArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {uintSum.ToString()}");
@@ -170,6 +176,7 @@ namespace Epam.Task5.NumberArraySum
             {
                 intArr[i] = SingleRandom.Next(-1000000, 1000000);
             }
+
             ConsolePrintArray(intArr);
             int intSum = intArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {intSum.ToString()}");
@@ -183,6 +190,7 @@ namespace Epam.Task5.NumberArraySum
             {
                 ushortArr[i] = Convert.ToUInt16(SingleRandom.Next(0, 1001));
             }
+
             ConsolePrintArray(ushortArr);
             ushort ushortSum = ushortArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {ushortSum.ToString()}");
@@ -196,6 +204,7 @@ namespace Epam.Task5.NumberArraySum
             {
                 shortArr[i] = Convert.ToInt16(SingleRandom.Next(-1000, 1001));
             }
+
             ConsolePrintArray(shortArr);
             short shortSum = shortArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {shortSum.ToString()}");
@@ -209,6 +218,7 @@ namespace Epam.Task5.NumberArraySum
             {
                 sbyteArr[i] = Convert.ToSByte(SingleRandom.Next(-10, 11));
             }
+
             ConsolePrintArray(sbyteArr);
             sbyte sumSbyte = sbyteArr.ArraySum();
             Console.WriteLine($"Sum of elements in array: {sumSbyte.ToString()}");
