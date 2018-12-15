@@ -12,7 +12,7 @@ namespace Epam.Task5.ISeekYou
         private static Stopwatch sw = new Stopwatch();
         private static int result;
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             Console.WriteLine("This is The Time Performance Comparing Program.");
             Console.WriteLine();
