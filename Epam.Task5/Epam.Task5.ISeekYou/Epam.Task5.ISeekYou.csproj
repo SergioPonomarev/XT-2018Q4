@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70FF93A1-4F8D-4951-9383-957648775209}</ProjectGuid>
+    <ProjectGuid>{CCEEEDDF-7896-4FDD-9DF5-17BC8A2A6729}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Epam.Task5.ToIntOrNotToInt</RootNamespace>
-    <AssemblyName>Epam.Task5.ToIntOrNotToInt</AssemblyName>
+    <RootNamespace>Epam.Task5.ISeekYou</RootNamespace>
+    <AssemblyName>Epam.Task5.ISeekYou</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,14 +45,13 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epam.Task5.NumberArraySum\Epam.Task5.NumberArraySum.csproj">
-      <Project>{7c309c79-9fdf-4f38-9750-8e8aa66478de}</Project>
+      <Project>{7C309C79-9FDF-4F38-9750-8E8AA66478DE}</Project>
       <Name>Epam.Task5.NumberArraySum</Name>
     </ProjectReference>
   </ItemGroup>

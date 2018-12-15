@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task5.NumberArraySum",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task5.ToIntOrNotToInt", "Epam.Task5.ToIntOrNotToInt\Epam.Task5.ToIntOrNotToInt.csproj", "{70FF93A1-4F8D-4951-9383-957648775209}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task5.ISeekYou", "Epam.Task5.ISeekYou\Epam.Task5.ISeekYou.csproj", "{CCEEEDDF-7896-4FDD-9DF5-17BC8A2A6729}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{70FF93A1-4F8D-4951-9383-957648775209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70FF93A1-4F8D-4951-9383-957648775209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70FF93A1-4F8D-4951-9383-957648775209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCEEEDDF-7896-4FDD-9DF5-17BC8A2A6729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCEEEDDF-7896-4FDD-9DF5-17BC8A2A6729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCEEEDDF-7896-4FDD-9DF5-17BC8A2A6729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCEEEDDF-7896-4FDD-9DF5-17BC8A2A6729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
