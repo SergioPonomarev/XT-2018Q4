@@ -112,21 +112,6 @@ namespace Epam.Task5.ISeekYou
             Console.WriteLine();
         }
 
-        private static string AverageTimeCountDelegate(int[] array, Func<int[], Func<int, bool>, int> func)
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                sw.Reset();
-                sw.Start();
-
-                int result = func(array, CompareToZero);
-
-                timeCounts.Add(sw.Elapsed.TotalMilliseconds);
-            }
-
-            return $"Average time: {timeCounts.Average()} msc.";
-        }
-
         private static void ArrayFill(int[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
