@@ -14,14 +14,14 @@ namespace Epam.Task6.BackupSystem
 
         public static void ClearDirectory(string directory)
         {
-            DirectoryInfo watchingDirectory = new DirectoryInfo(directory);
+            DirectoryInfo di = new DirectoryInfo(directory);
 
-            foreach (FileInfo file in watchingDirectory.GetFiles())
+            foreach (FileInfo file in di.GetFiles())
             {
                 file.Delete();
             }
 
-            foreach (DirectoryInfo dir in watchingDirectory.GetDirectories())
+            foreach (DirectoryInfo dir in di.GetDirectories())
             {
                 dir.Delete(true);
             }
