@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Epam.Task6.BackupSystem
@@ -25,16 +23,6 @@ namespace Epam.Task6.BackupSystem
 
                 serializer.Serialize(fs, logDaos);
             }
-        }
-
-        public static List<LogDao> GetAll(FileStream fs)
-        {
-            if (fs.Length > 0)
-            {
-                return (List<LogDao>)serializer.Deserialize(fs);
-            }
-
-            return new List<LogDao>();
         }
 
         public static List<LogDao> GetAll(FileStream fs, out int maxIndex, int capacityIfCreate = 1)
@@ -84,6 +72,16 @@ namespace Epam.Task6.BackupSystem
             }
 
             return actualLogDaos;
+        }
+
+        private static List<LogDao> GetAll(FileStream fs)
+        {
+            if (fs.Length > 0)
+            {
+                return (List<LogDao>)serializer.Deserialize(fs);
+            }
+
+            return new List<LogDao>();
         }
     }
 }
