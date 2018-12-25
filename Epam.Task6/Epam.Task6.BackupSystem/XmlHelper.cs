@@ -45,7 +45,7 @@ namespace Epam.Task6.BackupSystem
             return logDaos;
         }
 
-        public static List<LogDao> GetNeeded(DateTime dateForRollback, FileStream fs)
+        public static List<LogDao> GetNeeded(DateTime dateForBackup, FileStream fs)
         {
             List<LogDao> orderedAllLogDaos = GetAll(fs)
                                             .OrderByDescending(x => x.Date)
@@ -53,8 +53,8 @@ namespace Epam.Task6.BackupSystem
 
             DateTime startDate = orderedAllLogDaos.Last().Date;
 
-            dateForRollback = startDate < dateForRollback
-                ? dateForRollback
+            dateForBackup = startDate < dateForBackup
+                ? dateForBackup
                 : startDate;
 
             var grouping = orderedAllLogDaos.GroupBy(x => x.Path);
@@ -63,7 +63,7 @@ namespace Epam.Task6.BackupSystem
 
             foreach (IGrouping<string, LogDao> groupByPath in grouping)
             {
-                LogDao logDao = groupByPath.FirstOrDefault(x => x.Date <= dateForRollback);
+                LogDao logDao = groupByPath.FirstOrDefault(x => x.Date <= dateForBackup);
 
                 if (logDao != null && logDao.ChangeType != WatcherChangeTypes.Deleted)
                 {
