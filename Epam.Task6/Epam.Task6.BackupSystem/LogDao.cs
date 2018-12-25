@@ -10,10 +10,11 @@ namespace Epam.Task6.BackupSystem
         {
         }
 
-        public LogDao(int fileIndex, 
-                      string path, 
-                      DateTime date, 
-                      WatcherChangeTypes changeType)
+        public LogDao(
+                int fileIndex, 
+                string path, 
+                DateTime date, 
+                WatcherChangeTypes changeType)
         {
             this.FileIndex = fileIndex;
             this.Path = path;
