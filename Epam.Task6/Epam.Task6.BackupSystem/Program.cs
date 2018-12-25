@@ -180,6 +180,9 @@ namespace Epam.Task6.BackupSystem
             FileInfo logFile = new FileInfo(Path.Combine(backupDirectory.FullName, "Log.xml"));
             currentConfig.AppSettings.Settings["logFile"].Value = logFile.FullName;
 
+            currentConfig.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(currentConfig.AppSettings.SectionInformation.Name);
+
             Console.WriteLine();
         }
     }
