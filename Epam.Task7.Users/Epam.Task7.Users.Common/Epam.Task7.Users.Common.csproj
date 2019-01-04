@@ -50,9 +50,17 @@
       <Project>{7aa260d3-c9c5-4c11-8cfc-3e3c6fd60d19}</Project>
       <Name>Epam.Task7.Users.BLL.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Epam.Task7.Users.BLL\Epam.Task7.Users.BLL.csproj">
+      <Project>{70C85987-87D6-4E65-94AF-93E9F552744A}</Project>
+      <Name>Epam.Task7.Users.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epam.Task7.Users.DAL.Interfaces\Epam.Task7.Users.DAL.Interfaces.csproj">
       <Project>{C7E8D324-A907-43D5-AE56-8E36E5270EC6}</Project>
       <Name>Epam.Task7.Users.DAL.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Task7.Users.TextFileDAL\Epam.Task7.Users.TextFileDAL.csproj">
+      <Project>{26a34dc1-2b27-42ac-9245-3f4205bb7102}</Project>
+      <Name>Epam.Task7.Users.TextFileDAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

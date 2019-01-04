@@ -58,6 +58,10 @@
       <Project>{70C85987-87D6-4E65-94AF-93E9F552744A}</Project>
       <Name>Epam.Task7.Users.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Epam.Task7.Users.Common\Epam.Task7.Users.Common.csproj">
+      <Project>{DF40E637-555D-4A04-AF9A-8CAC86DFB445}</Project>
+      <Name>Epam.Task7.Users.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epam.Task7.Users.Entities\Epam.Task7.Users.Entities.csproj">
       <Project>{55644444-40eb-4c4b-9658-8f7c2c9d55d3}</Project>
       <Name>Epam.Task7.Users.Entities</Name>

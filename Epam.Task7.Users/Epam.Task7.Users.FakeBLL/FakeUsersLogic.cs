@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam.Task7.Users.FakeBLL.UsersLogic
+namespace Epam.Task7.Users.FakeBLL
 {
     public class FakeUsersLogic : IUsersLogic
     {
