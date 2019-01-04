@@ -1,6 +1,7 @@
 ﻿using Epam.Task7.Users.BLL;
 using Epam.Task7.Users.BLL.Interfaces;
 using Epam.Task7.Users.DAL.Interfaces;
+using Epam.Task7.Users.TextFileDAL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Epam.Task7.Users.Common
 {
-    public class DependencyResolver
+    public static class DependencyResolver
     {
         private static IUsersDao usersDao;
 
-        private static IUsersDao UsersDao
+        public static IUsersDao UsersDao
         {
             get
             {
@@ -24,9 +25,9 @@ namespace Epam.Task7.Users.Common
                 {
                     switch (key.ToLower())
                     {
-                        case "testfile":
+                        case "textfile":
                             {
-                                usersDao = new TextFileDAL.UsersDao();
+                                usersDao = new UsersDao();
                                 break;
                             }
 

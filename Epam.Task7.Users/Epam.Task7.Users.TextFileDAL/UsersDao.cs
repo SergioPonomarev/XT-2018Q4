@@ -54,7 +54,7 @@ namespace Epam.Task7.Users.TextFileDAL
                         {
                             Id = int.Parse(parts[0]),
                             Name = parts[1],
-                            DateOfBirth = DateTime.ParseExact(parts[1], DateFormat, CultureInfo.InvariantCulture),
+                            DateOfBirth = DateTime.ParseExact(parts[2], DateFormat, CultureInfo.InvariantCulture),
                         };
                     });
             }
@@ -95,7 +95,7 @@ namespace Epam.Task7.Users.TextFileDAL
 
         private static string UserSerialize(User user)
         {
-            return $"{user.Id}{Separator}{user.Name}{Separator}{user.DateOfBirth.ToShortDateString()}";
+            return $"{user.Id}{Separator}{user.Name}{Separator}{user.DateOfBirth.ToString(DateFormat)}";
         }
     }
 }

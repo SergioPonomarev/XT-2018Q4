@@ -13,11 +13,11 @@ namespace Epam.Task7.Users.ConsolePL
 {
     internal class Program
     {
-        private static IUsersLogic userLogic;
+        private static IUsersLogic usersLogic;
 
         private static void Main()
         {
-            userLogic = DependencyResolver.UsersLogic;
+            usersLogic = DependencyResolver.UsersLogic;
 
             Console.WriteLine("Greetings! You are using The User Creating Program.");
             Console.WriteLine();
@@ -60,7 +60,7 @@ namespace Epam.Task7.Users.ConsolePL
 
             if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
-                if (userLogic.RemoveAll())
+                if (usersLogic.RemoveAll())
                 {
                     Console.WriteLine("All users was removed successfully.");
                     Console.WriteLine();
@@ -81,7 +81,7 @@ namespace Epam.Task7.Users.ConsolePL
             string input = Console.ReadLine();
             if (int.TryParse(input, out int id))
             {
-                if (userLogic.Remove(id))
+                if (usersLogic.Remove(id))
                 {
                     Console.WriteLine("User was removed successfully.");
                     Console.WriteLine();
@@ -108,7 +108,7 @@ namespace Epam.Task7.Users.ConsolePL
 
             try
             {
-                userLogic.Add(userName, userDateOfBirth);
+                usersLogic.Add(userName, userDateOfBirth);
                 Console.WriteLine("User was added successfully.");
                 Console.WriteLine();
             }
@@ -127,7 +127,7 @@ namespace Epam.Task7.Users.ConsolePL
 
         private static void ShowAllUsers()
         {
-            IEnumerable<User> users = userLogic.GetAll();
+            IEnumerable<User> users = usersLogic.GetAll();
 
             foreach (User user in users)
             {
