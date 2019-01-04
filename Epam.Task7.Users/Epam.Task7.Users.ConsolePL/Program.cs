@@ -1,4 +1,6 @@
-﻿using Epam.Task7.Users.Entities;
+﻿using Epam.Task7.Users.BLL.Interfaces;
+using Epam.Task7.Users.Entities;
+using Epam.Task7.Users.FakeBLL.UsersLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,11 @@ namespace Epam.Task7.Users.ConsolePL
 {
     internal class Program
     {
-        private static IUserLogic userLogic;
+        private static IUsersLogic userLogic;
 
         private static void Main()
         {
-            userLogic = DependencyResolver.UserLogic;
+            userLogic = new FakeUsersLogic();
 
             Console.WriteLine("Greetings! You are using The User Creating Program.");
             Console.WriteLine();
@@ -106,6 +108,11 @@ namespace Epam.Task7.Users.ConsolePL
             {
                 userLogic.Create(userName, userDateOfBirth);
                 Console.WriteLine("User was created successfully.");
+                Console.WriteLine();
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine();
             }
             catch (Exception ex)

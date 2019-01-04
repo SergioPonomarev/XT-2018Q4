@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Epam.Task7.Users.BLL.Interfaces
 {
-    public interface IUserLogic
+    public interface IUsersLogic
     {
         IEnumerable<User> GetAll();
 
-        bool Create(string userName, string userDateOfBirth);
+        void Create(string userName, string userDateOfBirth);
 
         bool Delete(int id);
 
