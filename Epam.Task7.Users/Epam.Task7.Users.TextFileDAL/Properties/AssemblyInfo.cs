@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Epam.Task7.Users.FakeBLL.UsersLogic")]
+[assembly: AssemblyTitle("Epam.Task7.Users.TextFileDAL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Epam.Task7.Users.FakeBLL.UsersLogic")]
+[assembly: AssemblyProduct("Epam.Task7.Users.TextFileDAL")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1c0490c8-ab50-4c9c-96fd-687a0ff57579")]
+[assembly: Guid("26a34dc1-2b27-42ac-9245-3f4205bb7102")]
 
 // Version information for an assembly consists of the following four values:
 //

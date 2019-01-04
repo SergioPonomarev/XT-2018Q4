@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1C0490C8-AB50-4C9C-96FD-687A0FF57579}</ProjectGuid>
+    <ProjectGuid>{44BCB44D-FA9D-46C9-A0FD-25C531E831BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epam.Task7.Users.FakeBLL.UsersLogic</RootNamespace>
-    <AssemblyName>Epam.Task7.Users.FakeBLL.UsersLogic</AssemblyName>
+    <RootNamespace>Epam.Task7.Users.FakeBLL</RootNamespace>
+    <AssemblyName>Epam.Task7.Users.FakeBLL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -16,9 +16,9 @@ namespace Epam.Task7.Users.BLL
 
         private const string DateFormat = "yyyy-MM-dd";
 
-        public UsersLogic()
+        public UsersLogic(IUsersDao usersDao)
         {
-            this.usersDao = new InMemoryDAL.UsersDao();
+            this.usersDao = usersDao;
         }
 
         public void Add(string userName, string userDateOfBirth)

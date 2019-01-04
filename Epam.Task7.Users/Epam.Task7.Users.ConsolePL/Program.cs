@@ -1,6 +1,7 @@
-﻿using Epam.Task7.Users.BLL.Interfaces;
+﻿using Epam.Task7.Users.BLL;
+using Epam.Task7.Users.BLL.Interfaces;
+using Epam.Task7.Users.Common;
 using Epam.Task7.Users.Entities;
-using Epam.Task7.Users.FakeBLL.UsersLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Epam.Task7.Users.ConsolePL
 
         private static void Main()
         {
-            userLogic = new FakeUsersLogic();
+            userLogic = DependencyResolver.UsersLogic;
 
             Console.WriteLine("Greetings! You are using The User Creating Program.");
             Console.WriteLine();
@@ -139,8 +140,7 @@ namespace Epam.Task7.Users.ConsolePL
 
         private static void ShowUser(User user)
         {
-            Console.WriteLine($"Id: {user.Id}, Name: {user.Name}");
-            Console.WriteLine($"Date of birth: {user.DateOfBirth}, Age: {user.Age}");
+            Console.WriteLine($"Id: {user.Id}, Name: {user.Name}, Date of birth: {user.DateOfBirth.ToShortDateString()}, Age: {user.Age}");
         }
 
         private static string ReadMenuChoice()
