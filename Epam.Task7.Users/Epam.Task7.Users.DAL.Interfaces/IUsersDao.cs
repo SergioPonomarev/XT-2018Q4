@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam.Task7.Users.BLL.Interfaces
+namespace Epam.Task7.Users.DAL.Interfaces
 {
-    public interface IUsersLogic
+    public interface IUsersDao
     {
         IEnumerable<User> GetAll();
 
-        void Add(string userName, string userDateOfBirth);
+        void Add(User user);
 
         bool Remove(int id);
 

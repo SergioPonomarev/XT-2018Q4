@@ -20,7 +20,7 @@ namespace Epam.Task7.Users.FakeBLL.UsersLogic
             this.users = new Dictionary<int, User>();
         }
 
-        public void Create(string userName, string userDateOfBirth)
+        public void Add(string userName, string userDateOfBirth)
         {
             DateTime dateOfBirth;
 
@@ -48,12 +48,12 @@ namespace Epam.Task7.Users.FakeBLL.UsersLogic
             this.users.Add(user.Id, user);
         }
 
-        public bool Delete(int id)
+        public bool Remove(int id)
         {
             return this.users.Remove(id);
         }
 
-        public bool DeleteAll()
+        public bool RemoveAll()
         {
             this.users.Clear();
             return true;

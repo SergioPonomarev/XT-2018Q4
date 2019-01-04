@@ -30,16 +30,16 @@ namespace Epam.Task7.Users.ConsolePL
                         ShowAllUsers();
                         break;
 
-                    case "create":
-                        CreateNewUser();
+                    case "add":
+                        AddNewUser();
                         break;
 
-                    case "delete":
-                        DeleteUser();
+                    case "remove":
+                        RemoveUser();
                         break;
 
-                    case "delete all":
-                        DeleteAllUsers();
+                    case "remove all":
+                        RemoveAllUsers();
                         break;
 
                     case "quit":
@@ -51,21 +51,21 @@ namespace Epam.Task7.Users.ConsolePL
             }
         }
 
-        private static void DeleteAllUsers()
+        private static void RemoveAllUsers()
         {
-            Console.WriteLine("Are you sure you want to delete all users?");
-            Console.WriteLine("Press Enter to delete all users or any another key to get back to main menu:");
+            Console.WriteLine("Are you sure you want to remove all users?");
+            Console.WriteLine("Press Enter to remove all users or any another key to get back to main menu:");
 
             if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
-                if (userLogic.DeleteAll())
+                if (userLogic.RemoveAll())
                 {
-                    Console.WriteLine("All users was deleted successfully.");
+                    Console.WriteLine("All users was removed successfully.");
                     Console.WriteLine();
                 }
                 else
                 {
-                    Console.WriteLine("Users deleting error.");
+                    Console.WriteLine("Users removing error.");
                     Console.WriteLine();
                 }
             }
@@ -73,20 +73,20 @@ namespace Epam.Task7.Users.ConsolePL
             Console.WriteLine();
         }
 
-        private static void DeleteUser()
+        private static void RemoveUser()
         {
-            Console.Write("Enter an Id of user to delete: ");
+            Console.Write("Enter an Id of user to remove: ");
             string input = Console.ReadLine();
             if (int.TryParse(input, out int id))
             {
-                if (userLogic.Delete(id))
+                if (userLogic.Remove(id))
                 {
-                    Console.WriteLine("User was deleted successfully.");
+                    Console.WriteLine("User was removed successfully.");
                     Console.WriteLine();
                 }
                 else
                 {
-                    Console.WriteLine("User deleting error.");
+                    Console.WriteLine("User removing error.");
                     Console.WriteLine();
                 }
             }
@@ -97,7 +97,7 @@ namespace Epam.Task7.Users.ConsolePL
             }
         }
 
-        private static void CreateNewUser()
+        private static void AddNewUser()
         {
             Console.Write("Enter new user name: ");
             string userName = Console.ReadLine();
@@ -106,8 +106,8 @@ namespace Epam.Task7.Users.ConsolePL
 
             try
             {
-                userLogic.Create(userName, userDateOfBirth);
-                Console.WriteLine("User was created successfully.");
+                userLogic.Add(userName, userDateOfBirth);
+                Console.WriteLine("User was added successfully.");
                 Console.WriteLine();
             }
             catch (ArgumentException ex)
@@ -117,7 +117,7 @@ namespace Epam.Task7.Users.ConsolePL
             }
             catch (Exception ex)
             {
-                Console.WriteLine("User creation error.");
+                Console.WriteLine("User adding error.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine();
             }
@@ -151,9 +151,9 @@ namespace Epam.Task7.Users.ConsolePL
         private static void ShowMenu()
         {
             Console.WriteLine("List - show list of users.");
-            Console.WriteLine("Create - create new user.");
-            Console.WriteLine("Delete - delete specified user.");
-            Console.WriteLine("Delete all - delete all users.");
+            Console.WriteLine("Add - add new user.");
+            Console.WriteLine("Remove - remove specified user.");
+            Console.WriteLine("Remove all - remove all users.");
             Console.WriteLine("Quit - quit the program.");
             Console.Write("Choose your option: ");
         }
