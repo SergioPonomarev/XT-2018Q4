@@ -32,7 +32,7 @@ namespace Epam.Task7.Users.FakeBLL
 
             if (DateTime.Now < dateOfBirth)
             {
-                throw new ArgumentException("Inputed date of birth is greater than current date.");
+                throw new ArgumentException("Inputted date of birth is greater than current date.");
             }
 
             User user = new User

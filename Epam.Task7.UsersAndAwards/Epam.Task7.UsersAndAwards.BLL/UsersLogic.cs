@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Epam.Task7.Users.BLL.Interfaces;
-using Epam.Task7.Users.DAL.Interfaces;
-using Epam.Task7.Users.Entities;
+using Epam.Task7.UsersAndAwards.BLL.Interfaces;
+using Epam.Task7.UsersAndAwards.DAL.Interfaces;
+using Epam.Task7.UsersAndAwards.Entities;
 
-namespace Epam.Task7.Users.BLL
+namespace Epam.Task7.UsersAndAwards.BLL
 {
     public class UsersLogic : IUsersLogic
     {
@@ -49,7 +49,7 @@ namespace Epam.Task7.Users.BLL
 
             if (DateTime.Now < dateOfBirth)
             {
-                throw new ArgumentException("Inputted date of birth is greater than current date.");
+                throw new ArgumentException("Inputed date of birth is greater than current date.");
             }
 
             User user = new User
@@ -69,18 +69,6 @@ namespace Epam.Task7.Users.BLL
             }
         }
 
-        public bool Remove(int id)
-        {
-            this.cacheLogic.Delete(AllUsersCacheKey);
-            return this.usersDao.Remove(id);
-        }
-
-        public bool RemoveAll()
-        {
-            this.cacheLogic.Delete(AllUsersCacheKey);
-            return this.usersDao.RemoveAll();
-        }
-
         public IEnumerable<User> GetAll()
         {
             var cacheResult = this.cacheLogic.Get<IEnumerable<User>>(AllUsersCacheKey);
@@ -93,6 +81,18 @@ namespace Epam.Task7.Users.BLL
             }
 
             return cacheResult;
+        }
+
+        public bool Remove(int id)
+        {
+            this.cacheLogic.Delete(AllUsersCacheKey);
+            return this.usersDao.Remove(id);
+        }
+
+        public bool RemoveAll()
+        {
+            this.cacheLogic.Delete(AllUsersCacheKey);
+            return this.usersDao.RemoveAll();
         }
     }
 }
