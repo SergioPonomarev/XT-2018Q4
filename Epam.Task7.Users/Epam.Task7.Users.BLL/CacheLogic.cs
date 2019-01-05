@@ -1,9 +1,6 @@
-﻿using Epam.Task7.Users.BLL.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Epam.Task7.Users.BLL.Interfaces;
 
 namespace Epam.Task7.Users.BLL
 {

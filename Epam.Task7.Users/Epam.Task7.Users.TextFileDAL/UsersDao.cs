@@ -1,13 +1,11 @@
-﻿using Epam.Task7.Users.DAL.Interfaces;
-using Epam.Task7.Users.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Epam.Task7.Users.DAL.Interfaces;
+using Epam.Task7.Users.Entities;
 
 namespace Epam.Task7.Users.TextFileDAL
 {
@@ -26,7 +24,7 @@ namespace Epam.Task7.Users.TextFileDAL
 
             try
             {
-                maxId = int.Parse(File.ReadAllText(maxIdFilePath));
+                this.maxId = int.Parse(File.ReadAllText(this.maxIdFilePath));
             }
             catch
             {
@@ -36,17 +34,17 @@ namespace Epam.Task7.Users.TextFileDAL
 
         public void Add(User user)
         {
-            user.Id = ++maxId;
+            user.Id = ++this.maxId;
 
-            File.WriteAllText(maxIdFilePath, maxId.ToString());
-            File.AppendAllLines(usersFilePath, new[] { UserSerialize(user) });
+            File.WriteAllText(this.maxIdFilePath, this.maxId.ToString());
+            File.AppendAllLines(this.usersFilePath, new[] { UserSerialize(user) });
         }
 
         public IEnumerable<User> GetAll()
         {
             try
             {
-                return File.ReadAllLines(usersFilePath)
+                return File.ReadAllLines(this.usersFilePath)
                     .Select(line =>
                     {
                         var parts = line.Split(new[] { Separator }, 3);
@@ -66,7 +64,7 @@ namespace Epam.Task7.Users.TextFileDAL
 
         public bool Remove(int id)
         {
-            var users = GetAll().ToList();
+            var users = this.GetAll().ToList();
             var user = users.FirstOrDefault(u => u.Id == id);
             if (user == null)
             {
@@ -75,7 +73,7 @@ namespace Epam.Task7.Users.TextFileDAL
 
             users.Remove(user);
 
-            File.WriteAllLines(usersFilePath, users.Select(UserSerialize));
+            File.WriteAllLines(this.usersFilePath, users.Select(UserSerialize));
 
             return true;
         }
@@ -84,7 +82,7 @@ namespace Epam.Task7.Users.TextFileDAL
         {
             try
             {
-                File.WriteAllText(usersFilePath, string.Empty);
+                File.WriteAllText(this.usersFilePath, string.Empty);
                 return true;
             }
             catch

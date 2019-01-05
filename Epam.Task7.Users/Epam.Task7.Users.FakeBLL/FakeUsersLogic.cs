@@ -1,19 +1,16 @@
-﻿using Epam.Task7.Users.BLL.Interfaces;
-using Epam.Task7.Users.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Epam.Task7.Users.BLL.Interfaces;
+using Epam.Task7.Users.Entities;
 
 namespace Epam.Task7.Users.FakeBLL
 {
     public class FakeUsersLogic : IUsersLogic
     {
+        private const string DateFormat = "yyyy-MM-dd";
         private readonly IDictionary<int, User> users;
         private int maxId;
-        private const string DateFormat = "yyyy-MM-dd";
 
         public FakeUsersLogic()
         {

@@ -1,13 +1,10 @@
-﻿using Epam.Task7.Users.BLL;
+﻿using System;
+using System.Collections.Generic;
+using Epam.Task7.Users.BLL;
 using Epam.Task7.Users.BLL.Interfaces;
 using Epam.Task7.Users.Common;
 using Epam.Task7.Users.Entities;
 using Epam.Task7.Users.FakeBLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Task7.Users.ConsolePL
 {
@@ -135,8 +132,6 @@ namespace Epam.Task7.Users.ConsolePL
             }
 
             Console.WriteLine();
-
-            //PressAnyKey();
         }
 
         private static void ShowUser(User user)
@@ -158,11 +153,5 @@ namespace Epam.Task7.Users.ConsolePL
             Console.WriteLine("Quit - quit the program.");
             Console.Write("Choose your option: ");
         }
-
-        //private static void PressAnyKey()
-        //{
-        //    Console.WriteLine("Press any key to get back to manu.");
-        //    Console.ReadKey();
-        //}
     }
 }

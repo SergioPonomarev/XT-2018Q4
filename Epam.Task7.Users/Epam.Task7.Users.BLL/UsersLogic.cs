@@ -1,23 +1,20 @@
-﻿using Epam.Task7.Users.BLL.Interfaces;
-using Epam.Task7.Users.DAL.Interfaces;
-using Epam.Task7.Users.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Epam.Task7.Users.BLL.Interfaces;
+using Epam.Task7.Users.DAL.Interfaces;
+using Epam.Task7.Users.Entities;
 
 namespace Epam.Task7.Users.BLL
 {
     public class UsersLogic : IUsersLogic
     {
-        private const string ALL_USERS_CACHE_KEY = "GetAllUsers";
+        private const string AllUsersCacheKey = "GetAllUsers";
+        private const string DateFormat = "yyyy-MM-dd";
 
         private readonly IUsersDao usersDao;
         private readonly ICacheLogic cacheLogic;
-
-        private const string DateFormat = "yyyy-MM-dd";
 
         public UsersLogic(IUsersDao usersDao, ICacheLogic cacheLogic)
         {
@@ -63,8 +60,8 @@ namespace Epam.Task7.Users.BLL
 
             try
             {
-                cacheLogic.Delete(ALL_USERS_CACHE_KEY);
-                usersDao.Add(user);
+                this.cacheLogic.Delete(AllUsersCacheKey);
+                this.usersDao.Add(user);
             }
             catch
             {
@@ -74,29 +71,27 @@ namespace Epam.Task7.Users.BLL
 
         public bool Remove(int id)
         {
-            cacheLogic.Delete(ALL_USERS_CACHE_KEY);
-            return usersDao.Remove(id);
+            this.cacheLogic.Delete(AllUsersCacheKey);
+            return this.usersDao.Remove(id);
         }
 
         public bool RemoveAll()
         {
-            cacheLogic.Delete(ALL_USERS_CACHE_KEY);
-            return usersDao.RemoveAll();
+            this.cacheLogic.Delete(AllUsersCacheKey);
+            return this.usersDao.RemoveAll();
         }
 
         public IEnumerable<User> GetAll()
         {
-            var cacheResult = cacheLogic.Get<IEnumerable<User>>(ALL_USERS_CACHE_KEY);
+            var cacheResult = this.cacheLogic.Get<IEnumerable<User>>(AllUsersCacheKey);
 
             if (cacheResult == null)
             {
-                var result = usersDao.GetAll().ToArray();
-                cacheLogic.Add(ALL_USERS_CACHE_KEY, result);
-                Console.WriteLine("From dao");
+                var result = this.usersDao.GetAll().ToArray();
+                this.cacheLogic.Add(AllUsersCacheKey, result);
                 return result;
             }
 
-            Console.WriteLine("From cache");
             return cacheResult;
         }
     }

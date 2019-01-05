@@ -1,19 +1,17 @@
-﻿using Epam.Task7.Users.BLL;
+﻿using System;
+using System.Configuration;
+using Epam.Task7.Users.BLL;
 using Epam.Task7.Users.BLL.Interfaces;
 using Epam.Task7.Users.DAL.Interfaces;
 using Epam.Task7.Users.TextFileDAL;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Task7.Users.Common
 {
     public static class DependencyResolver
     {
         private static IUsersDao usersDao;
+        private static IUsersLogic usersLogic;
+        private static ICacheLogic cacheLogic;
 
         public static IUsersDao UsersDao
         {
@@ -40,11 +38,7 @@ namespace Epam.Task7.Users.Common
             }
         }
 
-        private static IUsersLogic usersLogic;
-
         public static IUsersLogic UsersLogic => usersLogic ?? (usersLogic = new UsersLogic(UsersDao, CacheLogic));
-
-        private static ICacheLogic cacheLogic;
 
         public static ICacheLogic CacheLogic => cacheLogic ?? (cacheLogic = new CacheLogic());
     }
