@@ -19,7 +19,7 @@ namespace Epam.Task7.UsersAndAwards.TextFileDAL
 
         public UsersDao()
         {
-            this.maxIdFilePath = ConfigurationManager.AppSettings["TextFileDALIdKey"];
+            this.maxIdFilePath = ConfigurationManager.AppSettings["TextFileDALUsersIdKey"];
             this.usersFilePath = ConfigurationManager.AppSettings["TextFileDALUsersKey"];
 
             try

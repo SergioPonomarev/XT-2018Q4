@@ -1,6 +1,6 @@
-﻿using Epam.Task7.UsersAndAwards.BLL.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Epam.Task7.UsersAndAwards.BLL.Interfaces;
 
 namespace Epam.Task7.UsersAndAwards.BLL
 {
