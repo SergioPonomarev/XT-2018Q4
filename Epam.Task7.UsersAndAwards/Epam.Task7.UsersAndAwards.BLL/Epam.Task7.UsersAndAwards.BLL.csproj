@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AwardsLogic.cs" />
+    <Compile Include="AwardUsersLogic.cs" />
     <Compile Include="CacheLogic.cs" />
     <Compile Include="UsersLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

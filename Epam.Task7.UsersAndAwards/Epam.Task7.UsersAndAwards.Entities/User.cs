@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Epam.Task7.UsersAndAwards.Entities
 {
@@ -17,6 +18,8 @@ namespace Epam.Task7.UsersAndAwards.Entities
                 return this.AgeCalculating();
             }
         }
+
+        public IEnumerable<Award> UserAwards { get; set; }
 
         private int AgeCalculating()
         {

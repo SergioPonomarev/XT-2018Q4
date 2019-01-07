@@ -10,11 +10,13 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
     {
         private static IUsersLogic usersLogic;
         private static IAwardsLogic awardsLogic;
+        private static IAwardUsersLogic awardUsersLogic;
 
         private static void Main()
         {
             usersLogic = DependencyResolver.UsersLogic;
             awardsLogic = DependencyResolver.AwardsLogic;
+            awardUsersLogic = DependencyResolver.AwardUsersLogic;
 
             Console.WriteLine("Greetings! You are using The User Creating Program.");
             Console.WriteLine();
@@ -72,7 +74,30 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
 
         private static void AwardUser()
         {
-            throw new NotImplementedException();
+            Console.Write("Enter Id of user to award: ");
+            string inputUserId = Console.ReadLine();
+            Console.Write("Enter Id of award: ");
+            string inputAwardId = Console.ReadLine();
+
+            if (int.TryParse(inputUserId, out int userId) &&
+                int.TryParse(inputAwardId, out int awardId))
+            {
+                if (awardUsersLogic.AddAwardUser(userId, awardId))
+                {
+                    Console.WriteLine("User successfully awarded.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("User awarding error.");
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wrong user or award Id.");
+                Console.WriteLine();
+            }
         }
 
         private static void RemoveAllAwards()
@@ -249,6 +274,13 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
         private static void ShowUser(User user)
         {
             Console.WriteLine($"Id: {user.Id}, Name: {user.Name}, Date of birth: {user.DateOfBirth.ToShortDateString()}, Age: {user.Age}");
+            Console.Write("Awards: ");
+            foreach (var award in user.UserAwards)
+            {
+                Console.Write($"*{award.Title}* ");
+            }
+
+            Console.WriteLine();
         }
 
         private static string ReadMenuChoice()

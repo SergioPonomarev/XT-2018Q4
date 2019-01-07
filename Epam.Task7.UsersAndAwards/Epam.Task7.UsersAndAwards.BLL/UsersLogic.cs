@@ -11,15 +11,18 @@ namespace Epam.Task7.UsersAndAwards.BLL
     public class UsersLogic : IUsersLogic
     {
         private const string AllUsersCacheKey = "GetAllUsers";
+        private const string AllAwardsCacheKey = "GetAllAwards";
         private const string DateFormat = "yyyy-MM-dd";
 
         private readonly IUsersDao usersDao;
         private readonly ICacheLogic cacheLogic;
+        private readonly IAwardUsersLogic awardUsersLogic;
 
-        public UsersLogic(IUsersDao usersDao, ICacheLogic cacheLogic)
+        public UsersLogic(IUsersDao usersDao, ICacheLogic cacheLogic, IAwardUsersLogic awardUsersLogic)
         {
             this.usersDao = usersDao;
             this.cacheLogic = cacheLogic;
+            this.awardUsersLogic = awardUsersLogic;
         }
 
         public void Add(string userName, string userDateOfBirth)
@@ -76,6 +79,12 @@ namespace Epam.Task7.UsersAndAwards.BLL
             if (cacheResult == null)
             {
                 var result = this.usersDao.GetAll().ToArray();
+
+                foreach (User user in result)
+                {
+                    user.UserAwards = this.awardUsersLogic.GetAwardsByUserId(user.Id);
+                }
+
                 this.cacheLogic.Add(AllUsersCacheKey, result);
                 return result;
             }
@@ -85,12 +94,14 @@ namespace Epam.Task7.UsersAndAwards.BLL
 
         public bool Remove(int id)
         {
+            this.cacheLogic.Delete(AllAwardsCacheKey);
             this.cacheLogic.Delete(AllUsersCacheKey);
             return this.usersDao.Remove(id);
         }
 
         public bool RemoveAll()
         {
+            this.cacheLogic.Delete(AllAwardsCacheKey);
             this.cacheLogic.Delete(AllUsersCacheKey);
             return this.usersDao.RemoveAll();
         }

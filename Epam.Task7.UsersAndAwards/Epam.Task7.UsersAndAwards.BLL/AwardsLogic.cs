@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Epam.Task7.UsersAndAwards.BLL.Interfaces;
 using Epam.Task7.UsersAndAwards.DAL.Interfaces;
 using Epam.Task7.UsersAndAwards.Entities;
@@ -12,6 +10,7 @@ namespace Epam.Task7.UsersAndAwards.BLL
     public class AwardsLogic : IAwardsLogic
     {
         private const string AllAwardsCacheKey = "GetAllAwards";
+        private const string AllUsersCacheKey = "GetAllUsers";
 
         private readonly IAwardsDao awardsDao;
         private readonly ICacheLogic cacheLogic;
@@ -62,12 +61,14 @@ namespace Epam.Task7.UsersAndAwards.BLL
 
         public bool Remove(int id)
         {
+            this.cacheLogic.Delete(AllUsersCacheKey);
             this.cacheLogic.Delete(AllAwardsCacheKey);
             return this.awardsDao.Remove(id);
         }
 
         public bool RemoveAll()
         {
+            this.cacheLogic.Delete(AllUsersCacheKey);
             this.cacheLogic.Delete(AllAwardsCacheKey);
             return this.awardsDao.RemoveAll();
         }

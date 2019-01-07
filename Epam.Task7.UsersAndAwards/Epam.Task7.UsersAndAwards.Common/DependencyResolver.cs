@@ -14,6 +14,33 @@ namespace Epam.Task7.UsersAndAwards.Common
         private static IUsersDao usersDao;
         private static IUsersLogic usersLogic;
         private static ICacheLogic cacheLogic;
+        private static IAwardUsersDao awardUsersDao;
+        private static IAwardUsersLogic awardUsersLogic;
+
+        public static IAwardUsersDao AwardUsersDao
+        {
+            get
+            {
+                var key = ConfigurationManager.AppSettings["AwardUsersDaoKey"];
+
+                if (awardUsersDao == null)
+                {
+                    switch (key.ToLower())
+                    {
+                        case "textfile":
+                            {
+                                awardUsersDao = new AwardUsersDao();
+                                break;
+                            }
+
+                        default:
+                            break;
+                    }
+                }
+
+                return awardUsersDao;
+            }
+        }
 
         public static IAwardsDao AwardsDao
         {
@@ -65,9 +92,11 @@ namespace Epam.Task7.UsersAndAwards.Common
             }
         }
 
+        public static IAwardUsersLogic AwardUsersLogic => awardUsersLogic ?? (awardUsersLogic = new AwardUsersLogic(UsersDao, AwardsDao, AwardUsersDao, CacheLogic));
+
         public static IAwardsLogic AwardsLogic => awardsLogic ?? (awardsLogic = new AwardsLogic(AwardsDao, CacheLogic));
 
-        public static IUsersLogic UsersLogic => usersLogic ?? (usersLogic = new UsersLogic(UsersDao, CacheLogic));
+        public static IUsersLogic UsersLogic => usersLogic ?? (usersLogic = new UsersLogic(UsersDao, CacheLogic, AwardUsersLogic));
 
         public static ICacheLogic CacheLogic => cacheLogic ?? (cacheLogic = new CacheLogic());
     }
