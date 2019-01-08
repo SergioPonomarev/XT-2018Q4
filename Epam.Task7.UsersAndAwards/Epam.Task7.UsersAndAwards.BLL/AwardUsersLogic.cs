@@ -49,6 +49,13 @@ namespace Epam.Task7.UsersAndAwards.BLL
                 AwardId = awardId,
             };
 
+            var awardsUser = this.awardUsersDao.GetAll();
+
+            if (awardsUser.Contains(awardUser))
+            {
+                throw new ArgumentException($"User with id {userId} allready has award with id {awardId}");
+            }
+
             this.cacheLogic.Delete(AllUsersCacheKey);
             this.cacheLogic.Delete(AllAwardsCacheKey);
 

@@ -79,23 +79,31 @@ namespace Epam.Task7.UsersAndAwards.ConsolePL
             Console.Write("Enter Id of award: ");
             string inputAwardId = Console.ReadLine();
 
-            if (int.TryParse(inputUserId, out int userId) &&
-                int.TryParse(inputAwardId, out int awardId))
+            try
             {
-                if (awardUsersLogic.AddAwardUser(userId, awardId))
+                if (int.TryParse(inputUserId, out int userId) &&
+                int.TryParse(inputAwardId, out int awardId))
                 {
-                    Console.WriteLine("User successfully awarded.");
-                    Console.WriteLine();
+                    if (awardUsersLogic.AddAwardUser(userId, awardId))
+                    {
+                        Console.WriteLine("User successfully awarded.");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("User awarding error.");
+                        Console.WriteLine();
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("User awarding error.");
+                    Console.WriteLine("Wrong user or award Id.");
                     Console.WriteLine();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Wrong user or award Id.");
+                Console.WriteLine(ex.Message);
                 Console.WriteLine();
             }
         }
