@@ -37,8 +37,8 @@ namespace Epam.Task7.UsersAndAwards.Entities
         {
             int num = 5381;
             int num2 = num;
-            num = ((num << 5) + num) ^ this.UserId;
-            num2 = ((num2 << 5) + num2) ^ this.AwardId;
+            num = num ^ this.UserId;
+            num2 = num2 ^ this.AwardId;
 
             return num + (num2 * 1566083941);
         }
