@@ -56,4 +56,5 @@ body {
     font-size: 0.75em;
     padding: 7px;
     background-color: #fadf8c;
+    border: 1px solid #fadf8c;
 }
