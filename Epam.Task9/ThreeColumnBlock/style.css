@@ -1,0 +1,64 @@
+body {
+    background: #526377;
+    font-family: sans-serif;
+}
+
+.block {
+    margin: 20px auto;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    width: 812px;
+    box-shadow: 0 15px 60px 0 rgba(0, 0, 0, 0.75);
+}
+
+.separator {
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+    margin: -13px 10px;
+    height: 219px;
+    display: inline-block;
+}
+
+.item {
+    display: inline-block;
+    width: 250px;
+    text-align: center;
+}
+
+.image {
+    background: url(images/icons.png) no-repeat;
+    margin: 0 auto;
+}
+
+.virtual {
+    background-position: -18px 1px;
+    width: 85px;
+    height: 85px;
+}
+
+.cloud {
+    background-position: 0 -85px;
+    width: 123px;
+    height: 85px;
+}
+
+.server {
+    background-position: -20px -169px;
+    width: 84px;
+    height: 85px;
+}
+
+.text {
+    color: #e46c42;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn {
+    color: white;
+    background: #e46c42;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+}
