@@ -1,0 +1,42 @@
+body {
+    color: white;
+    font-size: 20px;
+    background: rgb(51, 51, 51);
+}
+
+.wrapper {
+    display: table;
+    width: 95%;
+    margin: 40px auto;
+}
+
+.content {
+    background: rgb(133, 183, 210);
+    border: 3px solid rgb(190, 226, 245);
+    position: relative;
+    text-align: center;
+    height: 80px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content:after,
+.content:before {
+    content: '';
+    border: solid transparent;
+    position: absolute;
+    margin-left: -22px;
+    bottom: 80px;
+    width: 0;
+}
+
+.content:before {
+    border-bottom-color: rgb(190, 226, 245);
+    border-width: 22px;
+}
+
+.content:after {
+    border-bottom-color: rgb(133, 183, 210);
+    border-width: 16px;
+    margin-left: -16px;
+}
