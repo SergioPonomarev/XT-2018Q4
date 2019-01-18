@@ -15,7 +15,7 @@ body {
     border-radius: 5px 5px 0 0;
     vertical-align: bottom;
     background: repeating-linear-gradient(180deg, transparent, 
-    transparent 18px, #333333 18px, #333333 20px),  
+    transparent 18px, #333 18px, #333 20px),  
     linear-gradient(180deg, #FFCD55, #FF8D02);
 }
 
