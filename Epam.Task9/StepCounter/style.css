@@ -1,0 +1,73 @@
+body {
+    font-family: sans-serif;
+}
+
+.steps {
+    width: 400px;
+    margin: 40px auto;
+    overflow: hidden;
+}
+
+.steps label {
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+}
+
+.steps input {
+    position: absolute;
+    z-index: -1;
+    height: 0;
+}
+
+.steps span {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+.steps span::before,
+.steps span::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 51%;
+    left: 0;
+    z-index: -1;
+    margin-left: -4px;
+}
+
+.steps span::before {
+    top: 0;
+    transform: skew(25deg);
+    background: linear-gradient(180deg, #dddddd, #bfbfbf)
+}
+
+.steps span::after {
+    bottom: 0;
+    transform: skew(-25deg);
+    background: linear-gradient(180deg, #bfbfbf, #dddddd);
+}
+
+.steps input:checked + span {
+    color: white;
+}
+
+.steps input:checked + span::before {
+    background: linear-gradient(180deg, #a7df7f, #66c621);
+}
+
+.steps input:checked + span::after {
+    background: linear-gradient(0deg, #a7df7f, #66c621);
+}
+
+.steps label:last-child input:checked + span {
+    background: linear-gradient(180deg, #a7df7f, #66c621, #a7df7f);
+}
+
+.steps label:last-child input + span {
+    background: linear-gradient(180deg, #dddddd, #bfbfbf, #dddddd);
+}
+
