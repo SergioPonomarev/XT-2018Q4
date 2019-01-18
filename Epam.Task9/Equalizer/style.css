@@ -1,0 +1,41 @@
+body {
+    background: #333;
+}
+
+.wrapper {
+    margin: 30px;
+    height: 200px;
+    display: inline-block;
+}
+
+.eq {
+    display: inline-block;
+    width: 40px;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+    vertical-align: bottom;
+}
+
+.eq1 {
+    height: 50%;
+}
+
+.eq2 {
+    height: 20%;
+}
+
+.eq3 {
+    height: 80%;
+}
+
+.eq4 {
+    height: 100%;
+}
+
+.eq5 {
+    height: 50%;
+}
+
+.eq6 {
+    height: 30%;
+}
