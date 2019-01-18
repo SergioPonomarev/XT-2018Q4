@@ -1,0 +1,27 @@
+body {
+    background: black;
+    font-family: sans-serif;
+}
+
+.content {
+    width: 80%;
+    margin: 40px auto;
+    background: linear-gradient(white, #dfdfdf);
+    border: 2px solid white;
+    border-radius: 0 0 10px 10px;
+    padding: 50px 7px 10px 7px;
+    position: relative;
+}
+
+.content::before {
+    content: attr(title);
+    font-weight: bold;
+    font-size: 27px;
+    color: rgb(255, 177, 99);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    padding: 7px;
+    background: linear-gradient(120deg, black 100px, transparent 100px);
+}
