@@ -1,0 +1,21 @@
+.wrapper {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.header {
+    font-size: 20px;
+    background: #008b66;
+    color: white;
+    padding: 10px;
+}
+
+.content {
+    background: #dfe6e1;
+    width: 85%;
+    margin: -7px 0 0 auto;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    line-height: 20px;
+    padding: 10px;
+}
