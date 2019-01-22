@@ -421,7 +421,7 @@ li {
     float: left;
     margin-top: 60px;
     width: 542px;
-    border-radius: 2px 2px 0 0;
+    border-radius: 2px;
     box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
 
