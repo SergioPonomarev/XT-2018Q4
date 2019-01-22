@@ -12,7 +12,7 @@ li {
 }
 
 .wrapper {
-    width: 960px;
+    width: 968px;
     padding: 0 15px;
     margin: 0 auto;
 }
@@ -29,7 +29,7 @@ li {
 }
 
 .header_content {
-    width: 960px;
+    width: 968px;
     height: 42px;
     margin: 0 auto;
     font-size: 12.5px;
@@ -420,7 +420,7 @@ li {
     background: white;
     float: left;
     margin-top: 60px;
-    width: 542px;
+    width: 550px;
     border-radius: 2px;
     box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
