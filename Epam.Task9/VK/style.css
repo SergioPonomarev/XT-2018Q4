@@ -460,6 +460,14 @@ li {
     width: 100%;
 }
 
+.main_item__change {
+    cursor: pointer;
+}
+
+.main_item__change:hover a {
+    text-decoration: underline;
+}
+
 .main_item div {
     display: table-cell;
 }
@@ -533,6 +541,10 @@ li {
     background: url(images/special.svg) no-repeat;
     position: absolute;
     margin-left: 13px;
+}
+
+.address span {
+    color: #656565;
 }
 
 .main_item__last {
