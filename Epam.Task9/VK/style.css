@@ -520,6 +520,10 @@ li {
     background: url(images/checkbox_checked.svg) no-repeat;
 }
 
+.rs a:hover {
+    text-decoration: underline;
+}
+
 .checkbox + a {
     display: inline-block;
     margin-bottom: 10px;
@@ -565,6 +569,10 @@ li {
 .main_content__footer p {
     margin: 0;
     padding: 15px 0 17px;
+}
+
+.main_content__footer a:hover {
+    text-decoration: underline;
 }
 
 .right_menu {
