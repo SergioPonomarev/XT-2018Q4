@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="images/fav_logo.ico">
+    <title>Мои настройки</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="page_header">
+            <section class="header_content">
+                <div class="logo">
+                    <a href="#" class="logo_link">
+                        <img src="images/ic_head_logo.png" alt="VK logo" class="logo_img">
+                    </a>
+                </div>
+                <div class="search">
+                    <input type="search" class="search_line" placeholder="Поиск">
+                </div>
+                <div class="header_nav">
+                    <a href="#" class="notify_link">
+                        <div class="notify_icon"></div>
+                    </a>
+                    <a href="#" class="music_link">
+                        <div class="music_icon"></div>
+                    </a>
+                    <div class="header_nav__player"></div>
+                </div>
+                <div class="ava_block">
+                    <div class="user_name">UserName</div>
+                    <img src="images/ava.jpg" alt="user avatar" class="user_ava">
+                    <div class="ava_arrow"></div>
+                </div>
+            </section>
+        </header>
+        <nav class="left_menu">
+            <div class="main_sideMenu">
+                <ul class="sideMenu_list">
+                    <a href="#"><li class="sideMenu_item my_page">Моя Страница</li></a>
+                    <a href="#"><li class="sideMenu_item news">Новости</li></a>
+                    <a href="#"><li class="sideMenu_item messages">Сообщения</li><span>1</span></a>
+                    <a href="#"><li class="sideMenu_item friends">Друзья</li></a>
+                    <a href="#"><li class="sideMenu_item groups">Группы</li></a>
+                    <a href="#"><li class="sideMenu_item photos">Фотографии</li></a>
+                    <a href="#"><li class="sideMenu_item music">Музыка</li></a>
+                    <a href="#"><li class="sideMenu_item video">Видео</li></a>
+                    <a href="#"><li class="sideMenu_item games">Игры</li></a>
+                </ul>
+            </div>
+            <div class="services">
+                <ul class="services_list">
+                    <li class="separator"></li>
+                    <a href="#"><li class="services_item vkpay">VK Pay</li></a>
+                    <li class="separator"></li>
+                    <a href="#"><li class="services_item goods">Товары</li></a>
+                    <li class="separator"></li>
+                    <a href="#"><li class="services_item guests">Мои Гости</li></a>
+                </ul>
+            </div>
+            <div class="adverts">
+                <a href="#" class="adverts_link">
+                    <img src="images/advImage1.jpg" alt="advertisement">
+                    <h4 class="adverts_header">Реклама</h4>
+                    <p class="adverts_url">web.com</p>
+                </a>
+                <a href="#" class="adverts_link">
+                    <img src="images/advImage2.jpg" alt="advertisement">
+                    <h4 class="adverts_header">Реклама</h4>
+                    <p class="adverts_url">web.com</p>
+                </a>
+                <a href="#" class="adverts_link">
+                    <img src="images/advImage3.jpg" alt="advertisement">
+                    <h4 class="adverts_header">Реклама</h4>
+                    <p class="adverts_url">web.com</p>
+                </a>
+            </div>
+            <footer class="sideMenu_footer">
+                <div class="footer_menu">
+                    <a class="footer_menu__item">Блог</a>
+                    <a class="footer_menu__item">Разработчикам</a>
+                    <a class="footer_menu__item">Реклама</a>
+                    <a class="footer_menu__item footer_menu__item__last">Еще</a>
+                </div>
+            </footer>
+        </nav>
+        <section class="main_content">
+            <div class="main_content__header">
+                <h2>Общее</h2>
+            </div>
+            <div class="main_content__main">
+                <article class="main_item">
+                    <div class="ls">
+                        <p>Меню сайта</p>
+                    </div>
+                    <div class="rs">
+                        <a href="#">Настроить отображение пунктов меню</a>
+                    </div>
+                </article>
+                <article class="main_item">
+                    <div class="ls">
+                        <p>Настройки профиля</p>
+                    </div>
+                    <div class="rs">
+                        <input type="checkbox" id="gifts"><label for="gifts" class="checkbox">Скрывать блок подарков</label>
+                        <input type="checkbox" id="notes"><label for="notes" class="checkbox">При открытии профиля показывать мои записи</label>
+                        <input type="checkbox" id="comments"><label for="comments" class="checkbox">Отключить комментирование записей</label>
+                        <input type="checkbox" id="special"><label for="special" class="checkbox">Специальные возможности<span></span></label>
+                    </div>
+                </article>
+                <article class="main_item">
+                    <div class="ls">
+                        <p>Настройки контента</p>
+                    </div>
+                    <div class="rs">
+                        <input type="checkbox" id="autovideo"><label for="autovideo" class="checkbox">Автоматически воспроизводить видеозаписи</label>
+                        <input type="checkbox" id="autogif"><label for="autogif" class="checkbox">Автоматически воспроизводить GIF-анимации</label>
+                        <input type="checkbox" id="sticker"><label for="sticker" class="checkbox">Подсказывать стикеры в полях ввода</label>
+                        <input type="checkbox" id="autofriends"><label for="autofriends" class="checkbox">Автоматически отмечать друзей на фотографиях</label>
+                        <a href="#">Посмотреть заблокированные приложения</a>
+                    </div>
+                </article>
+                <article class="main_item">
+                    <div class="ls">
+                        <p>Пароль</p>
+                    </div>
+                    <div class="rs">
+                        <span>обновлен тридцать три года назад</span>
+                        <span class="rs_change"><a href="#">Изменить</a></span>
+                    </div>
+                </article>
+                <article class="main_item">
+                    <div class="ls">
+                        <p>Электронная почта</p>
+                    </div>
+                    <div class="rs">
+                        <span>mr***@mail.ru</span>
+                        <span class="rs_change"><a href="#">Изменить</a></span>
+                    </div>
+                </article>
+                <article class="main_item">
+                    <div class="ls">
+                        <p>Номер телефона</p>
+                    </div>
+                    <div class="rs">
+                        <span>+7 *** *** ** 11</span>
+                        <span class="rs_change"><a href="#">Изменить</a></span>
+                    </div>
+                </article>
+                <article class="main_item">
+                    <div class="ls">
+                        <p>Адрес страницы</p>
+                    </div>
+                    <div class="rs">
+                        <span class="address"><span>https://vk.com/</span>id123456789</span>
+                        <span class="rs_change"><a href="#">Изменить</a></span>
+                    </div>
+                </article>
+                <article class="main_item main_item__last">
+                    <div class="ls">
+                        <p>Язык</p>
+                    </div>
+                    <div class="rs">
+                        <span>Русский</span>
+                        <span class="rs_change"><a href="#">Изменить</a></span>
+                    </div>
+                </article>
+            </div>
+            <footer class="main_content__footer">
+                <p>Вы можете <a href="#">удалить свою страницу</a>.</p>
+            </footer>
+        </section>
+        <aside class="right_menu">
+            <form class="right_menu__list">
+                <label class="right_menu__item"><input type="radio" checked="checked" name="rm_item"><span>Общее</span></label>
+                <label class="right_menu__item"><input type="radio" name="rm_item"><span>Безопастность</span></label>
+                <label class="right_menu__item"><input type="radio" name="rm_item"><span>Приватность</span></label>
+                <label class="right_menu__item"><input type="radio" name="rm_item"><span>Оповещения</span></label>
+                <label class="right_menu__item"><input type="radio" name="rm_item"><span>Черный список</span></label>
+                <label class="right_menu__item"><input type="radio" name="rm_item"><span>Настройки приложений</span></label>
+                <label class="right_menu__item"><input type="radio" name="rm_item"><span>Мобильные сервисы</span></label>
+                <label class="right_menu__item"><input type="radio" name="rm_item"><span>Платежи, подписки, переводы</span></label>
+            </form>
+        </aside>
+    </div>
+</body>
+</html>
