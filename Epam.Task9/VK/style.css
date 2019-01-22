@@ -525,6 +525,10 @@ li {
     margin-top: 5px;
 }
 
+.checkbox + a:hover {
+    text-decoration: underline;
+}
+
 .rs_change {
     float: right;
 }
