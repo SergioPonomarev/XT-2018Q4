@@ -628,6 +628,7 @@ li {
 
 .main_item div {
     display: table-cell;
+    position: relative;
 }
 
 .ls {
@@ -716,7 +717,7 @@ li {
 .hiddenText {
     position: absolute;
     display: none;
-    left: 405px;
+    left: 42px;
     width: 287px;
     padding: 0 14px;
     background: white;
