@@ -464,7 +464,7 @@ li {
     content: '';
     position: absolute;
     left: 20px;
-    bottom: -10px;
+    bottom: -9px;
     height: 0;
     width: 0;
     border: solid transparent;
