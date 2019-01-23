@@ -215,6 +215,7 @@ li {
     text-decoration: none;
     display: block;
     position: relative;
+    color: #285473;
 }
 
 .main_sideMenu a:hover {
@@ -316,6 +317,10 @@ li {
 
 .services a:hover {
     background: rgba(42, 88, 133, 0.1);
+}
+
+.services a {
+    color: #285473;
 }
 
 .services a:visited {
