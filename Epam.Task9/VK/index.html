@@ -106,9 +106,21 @@
                     </div>
                     <div class="rs">
                         <input type="checkbox" id="gifts"><label for="gifts" class="checkbox">Скрывать блок подарков</label>
-                        <input type="checkbox" id="notes"><label for="notes" class="checkbox">При открытии профиля показывать мои записи</label>
-                        <input type="checkbox" id="comments"><label for="comments" class="checkbox">Отключить комментирование записей</label>
-                        <input type="checkbox" id="special"><label for="special" class="checkbox">Специальные возможности<span></span></label>
+                        <input type="checkbox" id="notes"><label for="notes" class="checkbox checkbox_notes">При открытии профиля показывать мои записи</label>
+                        <article class="hiddenText hiddenText_notes">
+                            <p>Если включить эту настройку, на Вашей стене будут выводиться только Ваши сообщения, а записи от друзей и других пользователей будут доступны по ссылке «ко всем записям».</p>
+                            <p>Подходит для пользователей, которые активно делятся новостями на своей странице и хотят сконцентрировать общение вокруг собственных записей.</p>
+                        </article>
+                        <input type="checkbox" id="comments"><label for="comments" class="checkbox checkbox_comments">Отключить комментирование записей</label>
+                        <article class="hiddenText hiddenText_comments">
+                            <p>Если включить эту настройку, другие пользователи смогут отвечать на Ваши записи только на своих страницах, упоминая Вас. При желании Вы сможете следить за такими ответами через раздел <a href="#">Уведомления</a>.</p>
+                            <p>Подходит для знаменитостей и публичных персон, которые поддерживают контакт с обширной аудиторией, но не имеют возможности постоянно модерировать комментарии.</p>
+                        </article>
+                        <input type="checkbox" id="special"><label for="special" class="checkbox">Специальные возможности<span class="checkbox_special"></span>
+                        <article class="hiddenText hiddenText_special">
+                            <p>Если включить эту настройку, элементы управления на сайте будут определены и озвучены синтезатором речи.</p>
+                            <p>Настройка повышает доступность сайта и подходит для пользователей с ограниченными возможностями.</p>
+                        </article></label>
                     </div>
                 </article>
                 <article class="main_item">
@@ -116,7 +128,10 @@
                         <p>Настройки контента</p>
                     </div>
                     <div class="rs">
-                        <input type="checkbox" id="autovideo"><label for="autovideo" class="checkbox">Автоматически воспроизводить видеозаписи</label>
+                        <input type="checkbox" id="autovideo"><label for="autovideo" class="checkbox checkbox_autovideo">Автоматически воспроизводить видеозаписи</label>
+                        <article class="hiddenText hiddenText_autovideo">
+                            <p>Если настройка включена, видеозаписи в новостях, на стенах сообществ и пользователей воспроизводятся автоматически и без звука. Чтобы включить звук, нажмите на видеозапись.</p>
+                        </article>
                         <input type="checkbox" id="autogif"><label for="autogif" class="checkbox">Автоматически воспроизводить GIF-анимации</label>
                         <input type="checkbox" id="sticker"><label for="sticker" class="checkbox">Подсказывать стикеры в полях ввода</label>
                         <input type="checkbox" id="autofriends"><label for="autofriends" class="checkbox">Автоматически отмечать друзей на фотографиях</label>

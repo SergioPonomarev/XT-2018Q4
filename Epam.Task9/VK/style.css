@@ -512,7 +512,7 @@ li {
     height: 15px;
 }
 
-.checkbox span {
+.checkbox_special {
     background: url(images/special.svg) no-repeat;
     width: 17px;
     height: 17px;
@@ -559,6 +559,77 @@ li {
 
 .address span {
     color: #656565;
+}
+
+.hiddenText {
+    position: absolute;
+    display: none;
+    left: 405px;
+    width: 287px;
+    padding: 0 14px;
+    background: white;
+    border: 1px solid #c5d0db;
+    z-index: 2;
+    font-size: 12.5px;
+    color: #222;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hiddenText::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    bottom: 100%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    border-width: 6px;
+    margin: 0 -6px;
+    border-bottom-color: #c5d0db;
+}
+
+.hiddenText::after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    bottom: 100%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    border-width: 5px;
+    margin: 0 -5px;
+    border-bottom-color: white;
+    transform: translate3d(0, 0.5px, 0);
+}
+
+.hiddenText:hover {
+    display: block;
+}
+
+.checkbox_notes:hover + .hiddenText_notes {
+    display: block;
+}
+
+.checkbox_comments:hover + .hiddenText_comments {
+    display: block;
+}
+
+.checkbox_special:hover + .hiddenText_special {
+    display: block;
+}
+
+.checkbox_autovideo:hover + .hiddenText_autovideo {
+    display: block;
+}
+
+.hiddenText_special {
+    left: 183px;
+    top: 26px;
+}
+
+.hiddenText p {
+    line-height: 17px;
 }
 
 .main_item__last {
