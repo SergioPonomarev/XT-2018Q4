@@ -1,3 +1,5 @@
+'use strict';
+
 var separators = ["?", "!", ":", ";", ",", ".", " ", "\t"],
     str, 
     arr, 
