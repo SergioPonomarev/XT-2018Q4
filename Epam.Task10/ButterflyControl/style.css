@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.wrapper {
+    margin: 40px auto;
+    width: 400px;
+}
+
+.wrapper article {
+    display: inline-block;
+    text-align: center;
+    margin: 10px
+}
+
+.optionsField select {
+    width: 130px;
+    height: 130px;
+}
+
+.optionsField option {
+    font-size: 16px;
+}
+
+.buttons {
+    vertical-align: super;
+}
+
+.buttons button {
+    display: block;
+    width: 40px;
+    height: 30px;
+    font-size: 16px;
+}
