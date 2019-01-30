@@ -1,0 +1,46 @@
+body {
+    font-family: sans-serif;
+}
+
+.wrapper {
+    width: 500px;
+    margin: 40px auto;
+    border: 1px solid black;
+}
+
+.buttons {
+    text-align: center;
+    margin: 20px;
+}
+
+.startButton {
+    width: 200px;
+    font-size: 40px;
+}
+
+.button {
+    width: 100px;
+    font-size: 15px;
+}
+
+.countBlock {
+    margin: 0 43px;
+}
+
+.countBlock span {
+    display: inline-block;
+}
+
+#counter {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.text {
+    text-align: center;
+    font-size: 24px;
+    margin: 50px 10px;
+}
