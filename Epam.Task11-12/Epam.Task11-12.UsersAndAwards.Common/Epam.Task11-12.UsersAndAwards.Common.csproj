@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78A58F94-A1B3-4135-9D8F-4516ED3936ED}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Epam.Task11_12.UsersAndAwards.ConsolePL</RootNamespace>
-    <AssemblyName>Epam.Task11-12.UsersAndAwards.ConsolePL</AssemblyName>
+    <ProjectGuid>{164F5505-6845-45C9-A1BC-1D7EC8A70C59}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epam.Task11_12.UsersAndAwards.Common</RootNamespace>
+    <AssemblyName>Epam.Task11-12.UsersAndAwards.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,24 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="DependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epam.Task11-12.UsersAndAwards.BLL.Interfaces\Epam.Task11-12.UsersAndAwards.BLL.Interfaces.csproj">
       <Project>{A4B2F94D-FEB1-4421-97F1-A4B4C6A53E2A}</Project>
       <Name>Epam.Task11-12.UsersAndAwards.BLL.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Epam.Task11-12.UsersAndAwards.Common\Epam.Task11-12.UsersAndAwards.Common.csproj">
-      <Project>{164F5505-6845-45C9-A1BC-1D7EC8A70C59}</Project>
-      <Name>Epam.Task11-12.UsersAndAwards.Common</Name>
+    <ProjectReference Include="..\Epam.Task11-12.UsersAndAwards.BLL\Epam.Task11-12.UsersAndAwards.BLL.csproj">
+      <Project>{56B366A4-DC09-4777-8398-356AB734100D}</Project>
+      <Name>Epam.Task11-12.UsersAndAwards.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Epam.Task11-12.UsersAndAwards.Entities\Epam.Task11-12.UsersAndAwards.Entities.csproj">
-      <Project>{8122B033-CE19-402D-9821-90A9165739E8}</Project>
-      <Name>Epam.Task11-12.UsersAndAwards.Entities</Name>
+    <ProjectReference Include="..\Epam.Task11-12.UsersAndAwards.DAL.Interfaces\Epam.Task11-12.UsersAndAwards.DAL.Interfaces.csproj">
+      <Project>{9BC8445D-C363-405D-8B02-1BC90BFC3B65}</Project>
+      <Name>Epam.Task11-12.UsersAndAwards.DAL.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Task11-12.UsersAndAwards.SqlDAL\Epam.Task11-12.UsersAndAwards.SqlDAL.csproj">
+      <Project>{F8B5D83E-CFF5-4AAD-91D5-FF44ED37E879}</Project>
+      <Name>Epam.Task11-12.UsersAndAwards.SqlDAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
