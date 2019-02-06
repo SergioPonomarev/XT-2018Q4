@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Award.cs" />
     <Compile Include="AwardUser.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
