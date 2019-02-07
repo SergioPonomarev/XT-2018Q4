@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SqlAwardsDao.cs" />
+    <Compile Include="SqlAwardsUsersDao.cs" />
     <Compile Include="SqlUsersDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

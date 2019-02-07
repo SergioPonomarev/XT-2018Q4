@@ -18,7 +18,7 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
         private static string input;
         private static string inputUserId;
         private static string inputAwardId;
-        private const string DateFormat = "yyyy.MM.dd";
+        private const string DateFormat = "yyyy-MM-dd";
 
         private static void Main()
         {
@@ -311,7 +311,7 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
                                 break;
 
                             case "date":
-                                Console.Write("Enter new user date of birth in format yyyy.MM.dd: ");
+                                Console.Write("Enter new user date of birth in format yyyy-MM-dd: ");
                                 input = Console.ReadLine();
 
                                 if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
@@ -366,7 +366,7 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
         {
             Console.Write("Enter new user name: ");
             userName = Console.ReadLine();
-            Console.Write("Enter date of birth in format yyyy.MM.dd: ");
+            Console.Write("Enter date of birth in format yyyy-MM-dd: ");
             input = Console.ReadLine();
 
             if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
