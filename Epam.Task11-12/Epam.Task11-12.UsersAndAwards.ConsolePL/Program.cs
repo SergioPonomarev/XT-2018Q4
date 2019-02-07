@@ -75,6 +75,8 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
                         return;
 
                     default:
+                        Console.WriteLine("Invalid command.");
+                        Console.WriteLine();
                         break;
                 }
             }
@@ -421,7 +423,7 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
         private static void ShowUser(User user)
         {
             Console.WriteLine($"Id: {user.UserId}, Name: {user.UserName}, Date of birth: {user.UserDateOfBirth.ToShortDateString()}, Age: {user.UserAge}");
-            Console.WriteLine("Awards: ");
+            Console.Write("Awards: ");
             foreach (Award award in user.UserAwards)
             {
                 Console.Write($"*{award.AwardTitle}* ");
