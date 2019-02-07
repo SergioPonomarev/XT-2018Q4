@@ -13,7 +13,7 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
 
         bool Add(User user);
 
-        bool Update(int userId, string userName, DateTime userDateOfBirth);
+        bool Update(User user);
 
         bool Remove(int userId);
 

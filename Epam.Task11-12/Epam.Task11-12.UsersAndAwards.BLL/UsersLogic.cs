@@ -25,7 +25,8 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             if (string.IsNullOrEmpty(userName) ||
                 string.IsNullOrWhiteSpace(userName))
             {
-                throw new ArgumentException("Wrong user name.");
+                //throw new ArgumentException("Wrong user name.");
+                return false;
             }
 
             if (userDateOfBirth >= DateTime.Now)
@@ -66,11 +67,11 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             {
                 User user = cacheResult.FirstOrDefault(u => u.UserId == userId);
 
-                if (user == null)
-                {
-                    //throw new ArgumentException("User is not found.");
-                    return null;
-                }
+                //if (user == null)
+                //{
+                //    //throw new ArgumentException("User is not found.");
+                //    return null;
+                //}
 
                 return user;
             }
@@ -92,14 +93,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             {
                 this.cacheLogic.Delete(AllUsersCacheKey);
 
-                string uName;
-                DateTime uDateOfBirth;
-
-                if (userName == default(string))
-                {
-                    uName = user.UserName;
-                }
-                else
+                if (userName != default(string))
                 {
                     if (string.IsNullOrEmpty(userName) ||
                         string.IsNullOrWhiteSpace(userName))
@@ -107,24 +101,20 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                         return false;
                     }
 
-                    uName = userName;
+                    user.UserName = userName;
                 }
 
-                if (userDateOfBirth == default(DateTime))
-                {
-                    uDateOfBirth = user.UserDateOfBirth;
-                }
-                else
+                if (userDateOfBirth != default(DateTime))
                 {
                     if (userDateOfBirth >= DateTime.Now)
                     {
                         return false;
                     }
 
-                    uDateOfBirth = userDateOfBirth;
+                    user.UserDateOfBirth = userDateOfBirth;
                 }
 
-                return this.usersDao.Update(userId, uName, uDateOfBirth);
+                return this.usersDao.Update(user);
             }
             else
             {
