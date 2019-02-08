@@ -32,13 +32,20 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                 return false;
             }
 
-            Award award = new Award
+            if (!this.GetAll().Any(a => a.AwardTitle.ToLower() == awardTitle.ToLower()))
             {
-                AwardTitle = awardTitle,
-            };
+                Award award = new Award
+                {
+                    AwardTitle = awardTitle,
+                };
 
-            this.cacheLogic.Delete(AllAwardsCacheKey);
-            return this.awardsDao.Add(award);
+                this.cacheLogic.Delete(AllAwardsCacheKey);
+                return this.awardsDao.Add(award);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public IEnumerable<Award> GetAll()

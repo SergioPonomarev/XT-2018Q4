@@ -48,6 +48,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                         {
                             AwardId = (int)reader["AwardId"],
                             AwardTitle = (string)reader["AwardTitle"],
+                            AwardImageId = (int)reader["AwardImageId"],
                         });
                 }
             }
@@ -72,6 +73,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 {
                     award.AwardId = (int)reader["AwardId"];
                     award.AwardTitle = (string)reader["AwardTitle"];
+                    award.AwardImageId = (int)reader["AwardImageId"];
                 }
             }
 

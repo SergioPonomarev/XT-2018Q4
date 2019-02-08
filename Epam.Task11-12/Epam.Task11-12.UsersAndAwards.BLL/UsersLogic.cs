@@ -35,14 +35,22 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                 return false;
             }
 
-            User user = new User
+            if (!this.GetAll().Any(u => u.UserName.ToLower() == userName.ToLower()))
             {
-                UserName = userName,
-                UserDateOfBirth = userDateOfBirth,
-            };
+                User user = new User
+                {
+                    UserName = userName,
+                    UserDateOfBirth = userDateOfBirth,
+                };
 
-            this.cacheLogic.Delete(AllUsersCacheKey);
-            return this.usersDao.Add(user);
+                this.cacheLogic.Delete(AllUsersCacheKey);
+                return this.usersDao.Add(user);
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public IEnumerable<User> GetAll()

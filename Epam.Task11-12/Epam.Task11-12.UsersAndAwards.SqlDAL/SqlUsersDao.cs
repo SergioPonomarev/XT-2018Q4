@@ -50,6 +50,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                             UserId = (int)reader["UserId"],
                             UserName = (string)reader["UserName"],
                             UserDateOfBirth = (DateTime)reader["UserDateOfBirth"],
+                            UserImageId = (int)reader["UserImageId"],
                         });
                 }
             }
@@ -80,6 +81,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                     user.UserId = (int)reader["UserId"];
                     user.UserName = (string)reader["UserName"];
                     user.UserDateOfBirth = (DateTime)reader["UserDateOfBirth"];
+                    user.UserImageId = (int)reader["UserImageId"];
                 }
             }
 
@@ -143,6 +145,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                         {
                             AwardId = (int)reader["AwardId"],
                             AwardTitle = (string)reader["AwardTitle"],
+                            AwardImageId = (int)reader["AwardImageId"],
                         });
                 }
             }

@@ -15,6 +15,8 @@ namespace Epam.Task11_12.UsersAndAwards.Entities
 
         public IEnumerable<Award> UserAwards { get; set; }
 
+        public int UserImageId { get; set; }
+
         private int AgeCalculating()
         {
             DateTime current = DateTime.Now;

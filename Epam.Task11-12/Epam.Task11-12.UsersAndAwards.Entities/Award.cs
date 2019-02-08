@@ -8,6 +8,8 @@ namespace Epam.Task11_12.UsersAndAwards.Entities
 
         public string AwardTitle { get; set; }
 
+        public int AwardImageId { get; set; }
+
         public override bool Equals(object obj)
         {
             return this.Equals(obj as Award);
