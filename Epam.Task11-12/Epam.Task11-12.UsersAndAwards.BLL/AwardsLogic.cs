@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Epam.Task11_12.UsersAndAwards.BLL.Interfaces;
 using Epam.Task11_12.UsersAndAwards.DAL.Interfaces;
 using Epam.Task11_12.UsersAndAwards.Entities;
@@ -111,6 +109,13 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             {
                 return false;
             }
+        }
+
+        public bool AddImageToAward(Image image, Award award)
+        {
+            this.cacheLogic.Delete(AllUsersCacheKey);
+            this.cacheLogic.Delete(AllAwardsCacheKey);
+            return this.awardsDao.AddImageToAward(image, award);
         }
     }
 }

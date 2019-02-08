@@ -152,5 +152,53 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
             return result;
         }
+
+        public bool AddImageToUser(Image image, User user)
+        {
+            int imageId = this.AddUserImage(image);
+
+            if (imageId == 0)
+            {
+                return false;
+            }
+
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Users_AddImageToUser";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserId", user.UserId);
+                cmd.Parameters.AddWithValue("@ImageId", imageId);
+
+                con.Open();
+                return cmd.ExecuteNonQuery() == 1;
+            }
+        }
+
+        public int AddUserImage(Image image)
+        {
+            int imageId = 0;
+
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "UsersImages_Add";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
+                cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+                cmd.Parameters.Add(new SqlParameter("@ImageId", SqlDbType.Int) { Direction = ParameterDirection.Output });
+
+                con.Open();
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    imageId = (int)cmd.Parameters["@ImageId"].Value;
+                }
+            }
+
+            return imageId;
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL.Interfaces
         bool Remove(int userId);
 
         User GetUserById(int userId);
+
+        bool AddImageToUser(Image image, User user);
     }
 }

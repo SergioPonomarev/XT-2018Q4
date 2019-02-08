@@ -129,5 +129,11 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                 return false;
             }
         }
+
+        public bool AddImageToUser(Image image, User user)
+        {
+            this.cacheLogic.Delete(AllUsersCacheKey);
+            return this.usersDao.AddImageToUser(image, user);
+        }
     }
 }

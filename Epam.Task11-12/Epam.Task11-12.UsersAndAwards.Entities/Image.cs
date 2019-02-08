@@ -10,8 +10,8 @@ namespace Epam.Task11_12.UsersAndAwards.Entities
     {
         public int ImageId { get; set; }
 
-        public string ImageName { get; set; }
+        public string MimeType { get; set; }
 
-        public byte[] ImageData { get; set; }
+        public string ImageData { get; set; }
     }
 }

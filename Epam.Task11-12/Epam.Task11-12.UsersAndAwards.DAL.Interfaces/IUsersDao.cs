@@ -20,5 +20,9 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
         User GetUserById(int userId);
 
         IEnumerable<Award> GetAwardsByUserId(int userId);
+
+        bool AddImageToUser(Image image, User user);
+
+        int AddUserImage(Image image);
     }
 }
