@@ -71,6 +71,10 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
                         AwardUser();
                         break;
 
+                    case "remove award from user":
+                        RemoveAwardFromUser();
+                        break;
+
                     case "quit":
                         return;
 
@@ -79,6 +83,32 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
                         Console.WriteLine();
                         break;
                 }
+            }
+        }
+
+        private static void RemoveAwardFromUser()
+        {
+            Console.Write("Enter an Id of user to award: ");
+            inputUserId = Console.ReadLine();
+            Console.Write("Enter an Id of award: ");
+            inputAwardId = Console.ReadLine();
+
+            if (int.TryParse(inputUserId, out int userId) &&
+                int.TryParse(inputAwardId, out int awardId))
+            {
+                if (awardsUsersLogic.RemoveAwardFromUser(userId, awardId))
+                {
+                    Console.WriteLine("Award was successfully removed from user.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    RemovingAwardFromUserError();
+                }
+            }
+            else
+            {
+                RemovingAwardFromUserError();
             }
         }
 
@@ -448,6 +478,7 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             Console.WriteLine("Update award - update specified award.");
             Console.WriteLine("Remove award - remove specified award.");
             Console.WriteLine("Award user - to award specified user with specified award.");
+            Console.WriteLine("Remove award from user - to remove specified award from specified user.");
             Console.WriteLine("Quit - quit the program.");
             Console.Write("Choose your option: ");
         }
@@ -498,6 +529,12 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
         private static void UserAwardingError()
         {
             Console.WriteLine("User awarding error.");
+            Console.WriteLine();
+        }
+
+        private static void RemovingAwardFromUserError()
+        {
+            Console.WriteLine("Removing award from user error.");
             Console.WriteLine();
         }
     }

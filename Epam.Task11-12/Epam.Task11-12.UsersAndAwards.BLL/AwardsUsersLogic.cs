@@ -53,5 +53,35 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
 
             return this.awardsUsersDao.AwardUser(awardUser);
         }
+
+        public bool RemoveAwardFromUser(int userId, int awardId)
+        {
+            User user = this.usersLogic.GetUserById(userId);
+            if (user == null)
+            {
+                return false;
+            }
+
+            Award award = this.awardsLogic.GetAwardById(awardId);
+            if (award == null)
+            {
+                return false;
+            }
+
+            if (!user.UserAwards.Contains(award))
+            {
+                return false;
+            }
+
+            this.cacheLogic.Delete(AllUsersCacheKey);
+
+            AwardUser awardUser = new AwardUser
+            {
+                UserId = user.UserId,
+                AwardId = award.AwardId,
+            };
+
+            return this.awardsUsersDao.RemoveAwardFromUser(awardUser);
+        }
     }
 }
