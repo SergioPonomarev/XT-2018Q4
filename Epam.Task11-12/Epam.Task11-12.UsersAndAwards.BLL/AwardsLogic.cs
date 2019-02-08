@@ -12,6 +12,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
     public class AwardsLogic : IAwardsLogic
     {
         private const string AllAwardsCacheKey = "GetAllAwards";
+        private const string AllUsersCacheKey = "GetAllUsers";
 
         private readonly IAwardsDao awardsDao;
         private readonly ICacheLogic cacheLogic;
@@ -76,6 +77,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
         public bool Remove(int awardId)
         {
             this.cacheLogic.Delete(AllAwardsCacheKey);
+            this.cacheLogic.Delete(AllUsersCacheKey);
             return this.awardsDao.Remove(awardId);
         }
 
@@ -85,15 +87,18 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
 
             if (award != null)
             {
-                this.cacheLogic.Delete(AllAwardsCacheKey);
-
                 if (string.IsNullOrEmpty(awardTitle) ||
                     string.IsNullOrWhiteSpace(awardTitle))
                 {
                     return false;
                 }
 
-                return this.awardsDao.Update(awardId, awardTitle);
+                award.AwardTitle = awardTitle;
+
+                this.cacheLogic.Delete(AllAwardsCacheKey);
+                this.cacheLogic.Delete(AllUsersCacheKey);
+
+                return this.awardsDao.Update(award);
             }
             else
             {

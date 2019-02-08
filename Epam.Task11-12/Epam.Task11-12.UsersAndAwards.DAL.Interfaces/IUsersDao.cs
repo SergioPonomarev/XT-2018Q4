@@ -18,5 +18,7 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
         bool Remove(int userId);
 
         User GetUserById(int userId);
+
+        IEnumerable<Award> GetAwardsByUserId(int userId);
     }
 }

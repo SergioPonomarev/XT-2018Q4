@@ -14,6 +14,6 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
 
         Award GetAwardById(int awardId);
 
-        bool Update(int awardId, string awardTitle);
+        bool Update(Award award);
     }
 }

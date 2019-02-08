@@ -83,6 +83,11 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 }
             }
 
+            if (user.UserId == 0)
+            {
+                return null;
+            }
+
             user.UserAwards = this.GetAwardsByUserId(userId);
 
             return user;
@@ -118,7 +123,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             }
         }
 
-        private IEnumerable<Award> GetAwardsByUserId(int userId)
+        public IEnumerable<Award> GetAwardsByUserId(int userId)
         {
             var result = new List<Award>();
             using (var con = new SqlConnection(conStr))
