@@ -69,6 +69,26 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             }
         }
 
+        public string[] GetRoles(string userName)
+        {
+            User user = this.usersLogic.GetUserByUserName(userName);
+
+            switch (user.UserRole.ToLower())
+            {
+                case "user":
+                    return new[] { "Users" };
+
+                case "admin":
+                    return new[] { "Users", "Admins" };
+
+                case "superadmin":
+                    return new[] { "Users", "Admins", "SuperAdmins" };
+
+                default:
+                    return new string[0];
+            }
+        }
+
         private string GetHashedPass(string input)
         {
             var sha256 = new SHA256CryptoServiceProvider();
