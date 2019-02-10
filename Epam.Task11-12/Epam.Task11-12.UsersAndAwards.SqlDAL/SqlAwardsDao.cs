@@ -9,6 +9,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 {
     public class SqlAwardsDao : IAwardsDao
     {
+        private const int defaultImageId = 1;
+
         private readonly string conStr;
 
         public SqlAwardsDao(string connectionString)
@@ -24,6 +26,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.CommandText = "Awards_Add";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@AwardTitle", award.AwardTitle);
+                cmd.Parameters.AddWithValue("@AwardImageId", defaultImageId);
 
                 con.Open();
                 return cmd.ExecuteNonQuery() == 1;

@@ -151,5 +151,17 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
         {
             return this.usersDao.AddDefaultUserImage(image);
         }
+
+        public bool PromoteToAdmin(string userName)
+        {
+            User user = this.GetUserByUserName(userName);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            return this.usersDao.PromoteToAdmin(userName);
+        }
     }
 }

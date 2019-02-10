@@ -10,6 +10,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
     public class SqlUsersDao : IUsersDao
     {
         private const int defaultImageId = 1;
+        private const string defaultRole = "User";
+        private const string adminRole = "Admin";
         private readonly string conStr;
 
         public SqlUsersDao(string connectionString)
@@ -26,6 +28,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserName", user.UserName);
                 cmd.Parameters.AddWithValue("@UserDateOfBirth", user.UserDateOfBirth);
+                cmd.Parameters.AddWithValue("@UserImage", defaultImageId);
+                cmd.Parameters.AddWithValue("@UserRole", defaultRole);
 
                 con.Open();
                 return cmd.ExecuteNonQuery() == 1;
@@ -52,6 +56,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                             UserName = (string)reader["UserName"],
                             UserDateOfBirth = (DateTime)reader["UserDateOfBirth"],
                             UserImageId = (int)reader["UserImageId"],
+                            UserRole = (string)reader["UserRole"],
                         });
                 }
             }
@@ -83,6 +88,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                     user.UserName = (string)reader["UserName"];
                     user.UserDateOfBirth = (DateTime)reader["UserDateOfBirth"];
                     user.UserImageId = (int)reader["UserImageId"];
+                    user.UserRole = (string)reader["UserRole"];
                 }
             }
 
@@ -115,6 +121,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                     user.UserName = (string)reader["UserName"];
                     user.UserDateOfBirth = (DateTime)reader["UserDateOfBirth"];
                     user.UserImageId = (int)reader["UserImageId"];
+                    user.UserRole = (string)reader["UserRole"];
                 }
             }
 
@@ -244,6 +251,21 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 //cmd.Parameters.AddWithValue("@ImageId", defaultImageId);
                 cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
                 cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+
+                con.Open();
+                return cmd.ExecuteNonQuery() == 1;
+            }
+        }
+
+        public bool PromoteToAdmin(string userName)
+        {
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Users_PromoteToAdmin";
+
+                cmd.Parameters.AddWithValue("@UserName", userName);
+                cmd.Parameters.AddWithValue("@UserRole", adminRole);
 
                 con.Open();
                 return cmd.ExecuteNonQuery() == 1;
