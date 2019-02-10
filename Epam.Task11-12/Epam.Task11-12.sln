@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task11-12.UsersAndAwar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task11-12.UsersAndAwards.SqlDAL", "Epam.Task11-12.UsersAndAwards.SqlDAL\Epam.Task11-12.UsersAndAwards.SqlDAL.csproj", "{F8B5D83E-CFF5-4AAD-91D5-FF44ED37E879}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task11-12.UsersAndAwards.WebPL", "Epam.Task11-12.UsersAndAwards.WebPL\Epam.Task11-12.UsersAndAwards.WebPL.csproj", "{507C318D-24D9-4F9E-8D8A-F6B4F0579C1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{F8B5D83E-CFF5-4AAD-91D5-FF44ED37E879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8B5D83E-CFF5-4AAD-91D5-FF44ED37E879}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8B5D83E-CFF5-4AAD-91D5-FF44ED37E879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{507C318D-24D9-4F9E-8D8A-F6B4F0579C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{507C318D-24D9-4F9E-8D8A-F6B4F0579C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{507C318D-24D9-4F9E-8D8A-F6B4F0579C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{507C318D-24D9-4F9E-8D8A-F6B4F0579C1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{164F5505-6845-45C9-A1BC-1D7EC8A70C59} = {8026B735-BF8C-4367-99A9-AD607B3F005E}
 		{9BC8445D-C363-405D-8B02-1BC90BFC3B65} = {F1BD0EC8-224D-4DBA-85E4-2ED27D4804A2}
 		{F8B5D83E-CFF5-4AAD-91D5-FF44ED37E879} = {F1BD0EC8-224D-4DBA-85E4-2ED27D4804A2}
+		{507C318D-24D9-4F9E-8D8A-F6B4F0579C1D} = {1464C3F1-22A6-47A6-9377-A7A634A59C5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {152327D3-E50F-4401-93D3-2830896FC28D}
