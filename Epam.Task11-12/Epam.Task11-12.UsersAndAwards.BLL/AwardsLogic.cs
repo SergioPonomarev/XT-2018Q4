@@ -79,6 +79,25 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             return this.awardsDao.GetAwardById(awardId);
         }
 
+        public Award GetAwardByAwardTitle(string awardTitle)
+        {
+            var cacheResult = this.cacheLogic.Get<IEnumerable<Award>>(AllAwardsCacheKey);
+
+            if (cacheResult != null)
+            {
+                Award award = cacheResult.FirstOrDefault(a => a.AwardTitle == awardTitle);
+
+                if (award == null)
+                {
+                    return null;
+                }
+
+                return award;
+            }
+
+            return this.awardsDao.GetAwardByAwardTitle(awardTitle);
+        }
+
         public bool Remove(int awardId)
         {
             this.cacheLogic.Delete(AllAwardsCacheKey);
@@ -111,11 +130,25 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             }
         }
 
-        public bool AddImageToAward(Image image, Award award)
+        public bool AddImageToAward(Image image, string awardTitle)
         {
-            this.cacheLogic.Delete(AllUsersCacheKey);
-            this.cacheLogic.Delete(AllAwardsCacheKey);
-            return this.awardsDao.AddImageToAward(image, award);
+            Award award = this.GetAwardByAwardTitle(awardTitle);
+
+            if (award != null)
+            {
+                this.cacheLogic.Delete(AllUsersCacheKey);
+                this.cacheLogic.Delete(AllAwardsCacheKey);
+                return this.awardsDao.AddImageToAward(image, award);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AddDefaultAwardImage(Image image)
+        {
+            return this.awardsDao.AddDefaultAwardImage(image);
         }
     }
 }

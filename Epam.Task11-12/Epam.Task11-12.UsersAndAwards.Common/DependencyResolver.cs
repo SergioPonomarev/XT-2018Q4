@@ -22,6 +22,8 @@ namespace Epam.Task11_12.UsersAndAwards.Common
         private static IAwardsLogic awardsLogic;
         private static IAwardsUsersDao awardsUsersDao;
         private static IAwardsUsersLogic awardsUsersLogic;
+        private static IAccountsLogic accountsLogic;
+        private static IAccountsDao accountsDao;
 
         public static IUsersDao UsersDao
         {
@@ -93,6 +95,29 @@ namespace Epam.Task11_12.UsersAndAwards.Common
             }
         }
 
+        public static IAccountsDao AccountsDao
+        {
+            get
+            {
+                if (accountsDao == null)
+                {
+                    var key = ConfigurationManager.AppSettings["AccountsDaoKey"];
+
+                    switch (key.ToLower())
+                    {
+                        case "sqldb":
+                            accountsDao = new SqlAccountsDao(conStr);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                return accountsDao;
+            }
+        }
+
         public static ICacheLogic CacheLogic => cacheLogic ?? (cacheLogic = new CacheLogic());
 
         public static IUsersLogic UsersLogic => usersLogic ?? (usersLogic = new UsersLogic(UsersDao, CacheLogic));
@@ -100,5 +125,7 @@ namespace Epam.Task11_12.UsersAndAwards.Common
         public static IAwardsLogic AwardsLogic => awardsLogic ?? (awardsLogic = new AwardsLogic(AwardsDao, CacheLogic));
 
         public static IAwardsUsersLogic AwardsUsersLogic => awardsUsersLogic ?? (awardsUsersLogic = new AwardsUsersLogic(AwardsUsersDao, CacheLogic, UsersLogic, AwardsLogic));
+
+        public static IAccountsLogic AccountsLogic => accountsLogic ?? (accountsLogic = new AccountsLogic(AccountsDao, UsersLogic, CacheLogic));
     }
 }

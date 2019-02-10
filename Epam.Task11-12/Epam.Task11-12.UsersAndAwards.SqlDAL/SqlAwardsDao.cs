@@ -85,6 +85,35 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             return award;
         }
 
+        public Award GetAwardByAwardTitle(string awardTitle)
+        {
+            Award award = new Award();
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Awards_GetAwardByTitle";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@AwardTitle", awardTitle);
+
+                con.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    award.AwardId = (int)reader["AwardId"];
+                    award.AwardTitle = (string)reader["AwardTitle"];
+                    award.AwardImageId = (int)reader["AwardImageId"];
+                }
+            }
+
+            if (award.AwardId == 0)
+            {
+                return null;
+            }
+
+            return award;
+        }
+
         public bool Remove(int awardId)
         {
             using (var con = new SqlConnection(conStr))
@@ -161,6 +190,22 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             }
 
             return imageId;
+        }
+
+        public bool AddDefaultAwardImage(Image image)
+        {
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "AwardsImage_AddDefault";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
+                cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+
+                con.Open();
+                return cmd.ExecuteNonQuery() == 1;
+            }
         }
     }
 }

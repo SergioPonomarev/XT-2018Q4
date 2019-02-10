@@ -324,46 +324,65 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
                     if (user != null)
                     {
                         ShowUser(user);
-                        ShowUserUpdateMenu();
-                        choice = Console.ReadLine();
-                        switch (choice)
+                        Console.Write("Enter new user date of birth in format yyyy-MM-dd: ");
+                        input = Console.ReadLine();
+
+                        if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
                         {
-                            case "name":
-                                Console.Write("Enter new user name: ");
-                                userName = Console.ReadLine();
-                                if (usersLogic.Update(userId, userName: userName))
-                                {
-                                    Console.WriteLine("User was updated successfully.");
-                                    Console.WriteLine();
-                                }
-                                else
-                                {
-                                    UserUpdatingError();
-                                }
-                                break;
-
-                            case "date":
-                                Console.Write("Enter new user date of birth in format yyyy-MM-dd: ");
-                                input = Console.ReadLine();
-
-                                if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
-                                {
-                                    if (usersLogic.Update(userId, userDateOfBirth: userDateOfBirth))
-                                    {
-                                        Console.WriteLine("User updated successfully.");
-                                        Console.WriteLine();
-                                    }
-                                    else
-                                    {
-                                        UserUpdatingError();
-                                    }
-                                }
-                                else
-                                {
-                                    UserUpdatingError();
-                                }
-                                break;
+                            if (usersLogic.Update(userId, userDateOfBirth))
+                            {
+                                Console.WriteLine("User updated successfully.");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                UserUpdatingError();
+                            }
                         }
+                        else
+                        {
+                            UserUpdatingError();
+                        }
+                    //ShowUserUpdateMenu();
+                    //    choice = Console.ReadLine();
+                    //    switch (choice)
+                    //    {
+                    //        case "name":
+                    //            Console.Write("Enter new user name: ");
+                    //            userName = Console.ReadLine();
+                    //            if (usersLogic.Update(userId, userName: userName))
+                    //            {
+                    //                Console.WriteLine("User was updated successfully.");
+                    //                Console.WriteLine();
+                    //            }
+                    //            else
+                    //            {
+                    //                UserUpdatingError();
+                    //            }
+                    //            break;
+
+                    //        case "date":
+                    //            Console.Write("Enter new user date of birth in format yyyy-MM-dd: ");
+                    //            input = Console.ReadLine();
+
+                    //            if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
+                    //            {
+                    //                if (usersLogic.Update(userId, userDateOfBirth: userDateOfBirth))
+                    //                {
+                    //                    Console.WriteLine("User updated successfully.");
+                    //                    Console.WriteLine();
+                    //                }
+                    //                else
+                    //                {
+                    //                    UserUpdatingError();
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                UserUpdatingError();
+                    //            }
+                    //            break;
+                    //    }
 
                     }
                     else
@@ -483,12 +502,12 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             Console.Write("Choose your option: ");
         }
 
-        private static void ShowUserUpdateMenu()
-        {
-            Console.WriteLine("Name - to update user name.");
-            Console.WriteLine("Date - to update user date of birth.");
-            Console.Write("Choose your option: ");
-        }
+        //private static void ShowUserUpdateMenu()
+        //{
+        //    Console.WriteLine("Name - to update user name.");
+        //    Console.WriteLine("Date - to update user date of birth.");
+        //    Console.Write("Choose your option: ");
+        //}
 
         private static void UserAddingError()
         {

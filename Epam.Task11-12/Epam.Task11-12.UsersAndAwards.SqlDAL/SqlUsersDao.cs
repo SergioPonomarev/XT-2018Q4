@@ -9,6 +9,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 {
     public class SqlUsersDao : IUsersDao
     {
+        private const int defaultImageId = 1;
         private readonly string conStr;
 
         public SqlUsersDao(string connectionString)
@@ -95,6 +96,38 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             return user;
         }
 
+        public User GetUserByUserName(string userName)
+        {
+            User user = new User();
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Users_GetUserByUserName";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserName", userName);
+
+                con.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    user.UserId = (int)reader["UserId"];
+                    user.UserName = (string)reader["UserName"];
+                    user.UserDateOfBirth = (DateTime)reader["UserDateOfBirth"];
+                    user.UserImageId = (int)reader["UserImageId"];
+                }
+            }
+
+            if (user.UserId == 0)
+            {
+                return null;
+            }
+
+            user.UserAwards = this.GetAwardsByUserId(user.UserId);
+
+            return user;
+        }
+
         public bool Remove(int userId)
         {
             using (var con = new SqlConnection(conStr))
@@ -117,7 +150,6 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.CommandText = "Users_Update";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserId", user.UserId);
-                cmd.Parameters.AddWithValue("@UserName", user.UserName);
                 cmd.Parameters.AddWithValue("@UserDateOfBirth", user.UserDateOfBirth);
 
                 con.Open();
@@ -199,6 +231,23 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             }
 
             return imageId;
+        }
+
+        public bool AddDefaultUserImage(Image image)
+        {
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "UsersImages_AddDefault";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //cmd.Parameters.AddWithValue("@ImageId", defaultImageId);
+                cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
+                cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+
+                con.Open();
+                return cmd.ExecuteNonQuery() == 1;
+            }
         }
     }
 }

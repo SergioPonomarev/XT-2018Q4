@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SqlAccountsDao.cs" />
     <Compile Include="SqlAwardsDao.cs" />
     <Compile Include="SqlAwardsUsersDao.cs" />
     <Compile Include="SqlUsersDao.cs" />

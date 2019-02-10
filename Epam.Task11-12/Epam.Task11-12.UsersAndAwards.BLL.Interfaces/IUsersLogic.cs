@@ -10,12 +10,16 @@ namespace Epam.Task11_12.UsersAndAwards.BLL.Interfaces
 
         bool Add(string userName, DateTime userDateOfBirth);
 
-        bool Update(int userId, string userName = default(string), DateTime userDateOfBirth = default(DateTime));
+        bool Update(int userId, DateTime userDateOfBirth);
 
         bool Remove(int userId);
 
         User GetUserById(int userId);
 
-        bool AddImageToUser(Image image, User user);
+        User GetUserByUserName(string userName);
+
+        bool AddImageToUser(Image image, string userName);
+
+        bool AddDefaultUserImage(Image image);
     }
 }

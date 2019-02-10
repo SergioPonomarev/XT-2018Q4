@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAccountsLogic.cs" />
     <Compile Include="IAwardsLogic.cs" />
     <Compile Include="IAwardsUsersLogic.cs" />
     <Compile Include="ICacheLogic.cs" />

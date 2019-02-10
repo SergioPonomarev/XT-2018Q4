@@ -87,31 +87,32 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             return usersDao.GetUserById(userId);
         }
 
+        public User GetUserByUserName(string userName)
+        {
+            var cacheResult = this.cacheLogic.Get<IEnumerable<User>>(AllUsersCacheKey);
+
+            if (cacheResult != null)
+            {
+                User user = cacheResult.FirstOrDefault(u => u.UserName == userName);
+
+                return user;
+            }
+
+            return usersDao.GetUserByUserName(userName);
+        }
+
         public bool Remove(int userId)
         {
             this.cacheLogic.Delete(AllUsersCacheKey);
             return this.usersDao.Remove(userId);
         }
 
-        public bool Update(int userId, string userName = default(string), DateTime userDateOfBirth = default(DateTime))
+        public bool Update(int userId, DateTime userDateOfBirth)
         {
             User user = this.GetUserById(userId);
 
             if (user != null)
             {
-                this.cacheLogic.Delete(AllUsersCacheKey);
-
-                if (userName != default(string))
-                {
-                    if (string.IsNullOrEmpty(userName) ||
-                        string.IsNullOrWhiteSpace(userName))
-                    {
-                        return false;
-                    }
-
-                    user.UserName = userName;
-                }
-
                 if (userDateOfBirth != default(DateTime))
                 {
                     if (userDateOfBirth >= DateTime.Now)
@@ -122,6 +123,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                     user.UserDateOfBirth = userDateOfBirth;
                 }
 
+                this.cacheLogic.Delete(AllUsersCacheKey);
                 return this.usersDao.Update(user);
             }
             else
@@ -130,10 +132,24 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             }
         }
 
-        public bool AddImageToUser(Image image, User user)
+        public bool AddImageToUser(Image image, string userName)
         {
-            this.cacheLogic.Delete(AllUsersCacheKey);
-            return this.usersDao.AddImageToUser(image, user);
+            User user = this.GetUserByUserName(userName);
+
+            if (user != null)
+            {
+                this.cacheLogic.Delete(AllUsersCacheKey);
+                return this.usersDao.AddImageToUser(image, user);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AddDefaultUserImage(Image image)
+        {
+            return this.usersDao.AddDefaultUserImage(image);
         }
     }
 }

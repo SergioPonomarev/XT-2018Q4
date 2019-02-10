@@ -17,6 +17,8 @@ namespace Epam.Task11_12.UsersAndAwards.Entities
 
         public int UserImageId { get; set; }
 
+        public string UserPassword { get; set; }
+
         private int AgeCalculating()
         {
             DateTime current = DateTime.Now;

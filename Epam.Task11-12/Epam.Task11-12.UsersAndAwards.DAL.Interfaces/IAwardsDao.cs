@@ -14,10 +14,14 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
 
         Award GetAwardById(int awardId);
 
+        Award GetAwardByAwardTitle(string awardTitle);
+
         bool Update(Award award);
 
         bool AddImageToAward(Image image, Award award);
 
         int AddAwardImage(Image image);
+
+        bool AddDefaultAwardImage(Image image);
     }
 }
