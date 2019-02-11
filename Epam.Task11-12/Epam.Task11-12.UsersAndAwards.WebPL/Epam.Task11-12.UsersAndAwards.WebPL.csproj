@@ -99,6 +99,8 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="index.cshtml" />
+    <Content Include="account\logout.cshtml" />
+    <Content Include="account\login.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\custom\registration.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -119,7 +121,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="users\index.cshtml" />
     <Content Include="users\uploadUserImage.cshtml" />
-    <Content Include="users\registration.cshtml" />
+    <Content Include="account\registration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

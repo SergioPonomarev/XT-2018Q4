@@ -1,0 +1,48 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+
+@{
+    string login = Request["login"];
+    string password = Request["password"];
+    string errorMessage = null;
+    if (IsPost)
+    {
+        if (dr.AccountsLogic.CanLogin(login, password))
+        {
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: false);
+            Response.Redirect("~/users");
+            return;
+        }
+        else
+        {
+            errorMessage = "Wrong login or password";
+        }
+    }
+}
+
+@section styles {
+    <link href="~/Content/custom/login.css" rel="stylesheet" />
+}
+
+    <div class="wrap">
+        <form method="post" class="loginForm">
+            <div class="regBlock">
+                <label for="login" class="regBlock_label">Login:</label>
+                <input type="text" id="login" name="login" value="@(IsPost ? login : null)" class="regBlock_input" />
+            </div>
+            <div class="regBlock">
+                <label for="password" class="regBlock_label">Password:</label>
+                <input type="password" id="password" name="password" class="regBlock_input"/>
+            </div>
+            <button type="submit" class="btnLogin">Log in</button>
+        </form>
+        @if (IsPost)
+        {
+            <div class="notSuccessRegistration">
+                <p>@errorMessage</p>
+            </div>
+        }
+    </div>
+    <div class="notRegistered">
+        <p class="notRegText">Not registered yet?</p>
+        <a href="~/account/registration" class="regLink">Registration</a>
+    </div>
