@@ -210,5 +210,34 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 return cmd.ExecuteNonQuery() == 1;
             }
         }
+
+        public Image GetAwardImageByAwardId(int awardImageId)
+        {
+            Image image = new Image();
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "AwardsImages_GetById";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ImageId", awardImageId);
+
+                con.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    image.ImageId = (int)reader["ImageId"];
+                    image.MimeType = (string)reader["MimeType"];
+                    image.ImageData = (string)reader["ImageData"];
+                }
+            }
+
+            if (image.ImageId == 0)
+            {
+                return null;
+            }
+
+            return image;
+        }
     }
 }

@@ -1,0 +1,61 @@
+﻿.wrap {
+    width: 372px;
+    margin: 0 auto 20px;
+}
+
+.addForm_header {
+    margin-bottom: 20px;
+}
+
+.addForm {
+    line-height: 24px;
+    width: 350px;
+    padding: 10px;
+    border: 1px solid #c4c4c4;
+    font-size: 20px;
+}
+
+.addForm_block {
+    margin-bottom: 20px;
+}
+
+.addForm_label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.addForm_input {
+    display: block;
+    line-height: 24px;
+    width: 345px;
+}
+
+.addForm_inputFile {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.inputFileText {
+    font-size: 12px;
+    color: grey;
+    line-height: 16px;
+}
+
+.createBtn {
+    width: 145px;
+    padding: 10px;
+    border: none;
+    font-size: 20px;
+    background-color: #007bff;
+    color: white;
+}
+
+.creatingError {
+    background-color: rgba(234, 22, 33, 0.3);
+    color: #cc0202;
+    font-size: 20px;
+    line-height: 35px;
+    width: 372px;
+    margin: 10px auto;
+    text-align: center;
+}

@@ -43,6 +43,13 @@
                     <a class="userBlock_logLink" href="/account/login">Log in</a>
                 }
             </div>
+            <div class="header_menuBlock">
+                @if (User.IsInRole("Admins"))
+                {
+                    <a href="/awards/createAward" class="menuBlock_link">Create Award</a>
+                    <a href="~/users/awardUser" class="menuBlock_link">Award User</a>
+                }
+            </div>
         </div>
     </header>
     <div class="wrapper">

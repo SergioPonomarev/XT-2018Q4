@@ -55,3 +55,25 @@ body {
     text-decoration: none;
     color: blue;
 }
+
+.header_menuBlock {
+    display: inline-block;
+    height: 50px;
+    position: relative;
+    vertical-align: top;
+    margin-left: 50px;
+}
+
+.menuBlock_link {
+    line-height: 30px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.menuBlock_link:active {
+    color: white;
+}

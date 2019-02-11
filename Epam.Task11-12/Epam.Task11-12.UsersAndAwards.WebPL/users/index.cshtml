@@ -1,8 +1,46 @@
-﻿@{
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+
+@{
     Page.Title = "Users and Awards";
+
+    var users = dr.UsersLogic.GetAll();
+
+    entities.Image image = null;
 }
 
+@section styles {
+    <link href="~/Content/custom/index.css" rel="stylesheet" />
+}
 
     <div>
-    
+        <h2 class="userList_header">List of users</h2>
+        <ul class="userList">
+            @foreach (var user in users)
+            {
+                image = dr.UsersLogic.GetUserImageByUserName(user.UserName);
+                <li class="userList_item">
+                    <img class="userList_item__image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image" />
+                    <p class="userList_item__name">@user.UserName</p>
+                    <p class="userList_item__date">Date of birth: @user.UserDateOfBirth.ToShortDateString()</p>
+                    <p class="userList_item__age">Age: @user.UserAge</p>
+                    <p class="userList_item__role">Status: @user.UserRole</p>
+                </li>
+                if (User.IsInRole("Users"))
+                {
+                    if (user.UserAwards.Count() > 0)
+                    {
+                        <li class="userAwardsList">
+                            <p class="userAwardsList_header">Awards:</p>
+                            @foreach (var award in user.UserAwards)
+                            {
+                                image = dr.AwardsLogic.GetAwardImageByAwardId(award.AwardImageId);
+                                <img class="userAwardsList_item__image" src="data:@image.MimeType;base64,@image.ImageData" alt="Award image" />
+                                <p class="userAwardsList_item__title">@award.AwardTitle</p>
+                            }
+                        </li>
+                    }
+                }
+            }
+        </ul>
     </div>

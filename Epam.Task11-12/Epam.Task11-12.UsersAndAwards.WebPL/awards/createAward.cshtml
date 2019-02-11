@@ -1,0 +1,61 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+
+@{
+    if (!User.IsInRole("Admins"))
+    {
+        Response.Redirect("~/users");
+    }
+
+    Page.Title = "Create Award";
+
+    WebImage photo = null;
+
+    if (IsPost)
+    {
+        string awardTitle = Request["title"];
+        if (dr.AwardsLogic.Add(awardTitle))
+        {
+            photo = WebImage.GetImageFromRequest();
+            if (photo != null)
+            {
+                entities.Image image = new entities.Image();
+                photo.Resize(300, 300, preserveAspectRatio: true, preventEnlarge: true);
+                image.MimeType = MimeMapping.GetMimeMapping(photo.FileName);
+                byte[] data = photo.GetBytes(photo.ImageFormat);
+                image.ImageData = Convert.ToBase64String(data);
+                dr.AwardsLogic.AddImageToAward(image, awardTitle);
+            }
+
+            Response.Redirect("~/users");
+            return;
+        }
+    }
+}
+
+@section styles{
+    <link href="~/Content/custom/createAward.css" rel="stylesheet" />
+}
+
+<div class="wrap">
+    <h2 class="addForm_header">Create Award</h2>
+    <form method="post" class="addForm">
+        <div class="addForm_block">
+            <label class="addForm_label" for="title">Title:</label>
+            <input type="text" class="addForm_input" id="title" name="title" required />
+        </div>
+        <div class="addForm_block">
+            <label class="addForm_label" for="image">Upload image:</label>
+            <input type="file" class="addForm_inputFile" id="image" name="image" />
+            <p class="inputFileText">In case if you don't want to upload image the will have default image.</p>
+        </div>
+        <button type="submit" class="createBtn">Create</button>
+    </form>
+
+    @if (IsPost)
+    {
+        <div class="creatingError">
+            <p>Something went wrong.</p>
+        </div>
+    }
+</div>

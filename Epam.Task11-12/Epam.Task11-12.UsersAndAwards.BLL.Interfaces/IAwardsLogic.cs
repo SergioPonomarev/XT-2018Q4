@@ -21,5 +21,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL.Interfaces
         bool AddImageToAward(Image image, string awardTitle);
 
         bool AddDefaultAwardImage(Image image);
+
+        Image GetAwardImageByAwardId(int awardImageId);
     }
 }

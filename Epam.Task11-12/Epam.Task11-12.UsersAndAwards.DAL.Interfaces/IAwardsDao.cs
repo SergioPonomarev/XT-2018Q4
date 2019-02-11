@@ -23,5 +23,7 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
         int AddAwardImage(Image image);
 
         bool AddDefaultAwardImage(Image image);
+
+        Image GetAwardImageByAwardId(int awardImageId);
     }
 }

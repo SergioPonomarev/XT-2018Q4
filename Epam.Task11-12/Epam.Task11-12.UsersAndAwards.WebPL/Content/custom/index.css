@@ -1,0 +1,26 @@
+﻿.userList {
+    list-style: none;
+    padding: 10px;
+}
+
+.userList_header {
+    text-align: center;
+    border-bottom: 1px solid #c4c4c4;
+    line-height: 50px;
+}
+
+.userList_item__image {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.userList_item p {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 40px;
+    margin-right: 10px;
+}
+
+.userList_item__name {
+    font-size: 20px;
+}

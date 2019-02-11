@@ -9,6 +9,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
 {
     public class AwardsLogic : IAwardsLogic
     {
+        private const int DefaultImageId = 1;
         private const string AllAwardsCacheKey = "GetAllAwards";
         private const string AllUsersCacheKey = "GetAllUsers";
 
@@ -149,6 +150,18 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
         public bool AddDefaultAwardImage(Image image)
         {
             return this.awardsDao.AddDefaultAwardImage(image);
+        }
+
+        public Image GetAwardImageByAwardId(int awardImageId)
+        {
+            Image image = null;
+            image = this.awardsDao.GetAwardImageByAwardId(awardImageId);
+            if (image == null)
+            {
+                image = this.awardsDao.GetAwardImageByAwardId(DefaultImageId);
+            }
+
+            return image;
         }
     }
 }
