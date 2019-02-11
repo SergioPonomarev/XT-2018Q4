@@ -9,6 +9,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
 {
     public class UsersLogic : IUsersLogic
     {
+        private const int DefaultImageId = 1;
         private const string AllUsersCacheKey = "GetAllUsers";
 
         private readonly IUsersDao usersDao;
@@ -162,6 +163,24 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             }
 
             return this.usersDao.PromoteToAdmin(userName);
+        }
+
+        public Image GetUserImageByUserName(string userName)
+        {
+            User user = GetUserByUserName(userName);
+            Image image = null;
+            image = this.usersDao.GetUserImageByImageId(user.UserImageId);
+            if (image == null)
+            {
+                image = this.GetDefaultUserImage();
+            }
+
+            return image;
+        }
+
+        public Image GetDefaultUserImage()
+        {
+            return this.usersDao.GetUserImageByImageId(DefaultImageId);
         }
     }
 }

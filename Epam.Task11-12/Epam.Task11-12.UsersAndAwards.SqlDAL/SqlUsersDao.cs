@@ -263,6 +263,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_PromoteToAdmin";
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@UserName", userName);
                 cmd.Parameters.AddWithValue("@UserRole", adminRole);
@@ -270,6 +271,35 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 con.Open();
                 return cmd.ExecuteNonQuery() == 1;
             }
+        }
+
+        public Image GetUserImageByImageId(int imageId)
+        {
+            Image image = new Image();
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "UsersImages_GetById";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ImageId", imageId);
+
+                con.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    image.ImageId = (int)reader["ImageId"];
+                    image.MimeType = (string)reader["MimeType"];
+                    image.ImageData = (string)reader["ImageData"];
+                }
+            }
+
+            if (image.ImageId == 0)
+            {
+                return null;
+            }
+
+            return image;
         }
     }
 }

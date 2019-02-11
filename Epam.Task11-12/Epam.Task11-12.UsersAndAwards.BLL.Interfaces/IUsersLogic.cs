@@ -23,5 +23,9 @@ namespace Epam.Task11_12.UsersAndAwards.BLL.Interfaces
         bool AddDefaultUserImage(Image image);
 
         bool PromoteToAdmin(string userName);
+
+        Image GetUserImageByUserName(string userName);
+
+        Image GetDefaultUserImage();
     }
 }

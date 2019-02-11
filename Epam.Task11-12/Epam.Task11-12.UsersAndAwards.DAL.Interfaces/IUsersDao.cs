@@ -30,5 +30,7 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
         bool AddDefaultUserImage(Image image);
 
         bool PromoteToAdmin(string userName);
+
+        Image GetUserImageByImageId(int imageId);
     }
 }

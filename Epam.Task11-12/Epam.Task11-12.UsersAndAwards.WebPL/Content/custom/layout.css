@@ -9,5 +9,49 @@ body {
 
 .wrapper {
     width: 960px;
-    margin: auto;
+    margin: 50px auto 0;
+    padding: 10px;
+}
+
+.header_main {
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    background-color: #6fb4ff;
+    top: 0;
+}
+
+.header_content {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.header_userBlock {
+    position: relative;
+    display: inline-block;
+    height: 50px;
+}
+
+.userBlock_name {
+    float: left;
+    line-height: 50px;
+}
+
+.userBlock_image {
+    width: 40px;
+    margin: 5px 10px;
+    float: left;
+}
+
+.userBlock_logLink {
+    line-height: 50px;
+    display: inline-block;
+    clear: right;
+    text-decoration: none;
+    color: blue;
+}
+
+.userBlock_logLink:active {
+    text-decoration: none;
+    color: blue;
 }

@@ -1,5 +1,21 @@
-﻿@{
+﻿@using entities = Epam.Task11_12.UsersAndAwards.Entities
+@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+
+@{
     Layout = null;
+
+    string userName = User.Identity.IsAuthenticated
+        ? User.Identity.Name
+        : "Guest";
+    entities.Image image = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        image = dr.UsersLogic.GetUserImageByUserName(User.Identity.Name);
+    }
+    else
+    {
+        image = dr.UsersLogic.GetDefaultUserImage();
+    }
 }
 
 <!DOCTYPE html>
@@ -13,6 +29,22 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
+    <header class="header_main">
+        <div class="header_content">
+            <div class="header_userBlock">
+                <p class="userBlock_name">Hello, @userName</p>
+                <img class="userBlock_image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image" />
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="userBlock_logLink" href="/account/logout">Log out</a>
+                }
+                else
+                {
+                    <a class="userBlock_logLink" href="/account/login">Log in</a>
+                }
+            </div>
+        </div>
+    </header>
     <div class="wrapper">
         @RenderBody()
     </div>
