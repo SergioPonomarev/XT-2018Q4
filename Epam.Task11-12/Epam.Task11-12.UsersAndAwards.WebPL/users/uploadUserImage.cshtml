@@ -1,0 +1,48 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+
+@{
+    WebImage photo = null;
+    string notSuccess = "File upload error.";
+    byte[] data;
+    entities.Image image = new entities.Image();
+    if (IsPost)
+    {
+        photo = WebImage.GetImageFromRequest();
+        if (photo != null)
+        {
+            photo.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+            image.MimeType = MimeMapping.GetMimeMapping(photo.FileName);
+            data = photo.GetBytes(photo.ImageFormat);
+            image.ImageData = Convert.ToBase64String(data);
+
+            if (dr.AwardsLogic.AddDefaultAwardImage(image))
+            {
+                Response.Redirect("~/users");
+                return;
+            }
+        }
+    }
+}
+
+
+<div class="">
+    <form method="post" enctype="multipart/form-data">
+        <div class="">
+            <div class="">
+                <label for="userImage">Upload user image</label>
+                <input type="file" name="image" class="" id="userImage" />
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="">Upload image</button>
+            </div>
+        </div>
+    </form>
+
+    @if (IsPost)
+    {
+        <div class="">
+            <p>@notSuccess</p>
+        </div>
+    }
+</div>

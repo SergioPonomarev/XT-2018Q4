@@ -1,0 +1,76 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+
+@{
+    Page.Title = "Registration";
+
+    string errorMessage = "";
+
+    if (IsPost)
+    {
+        string userName = Request["userName"];
+        string password = Request["password"];
+        DateTime dateOfBirth = DateTime.Parse(Request["dateOfBirth"]);
+
+        if (dr.UsersLogic.GetUserByUserName(userName) == null)
+        {
+            if (dr.AccountsLogic.UserRegistration(userName, dateOfBirth, password))
+            {
+                Response.Redirect("~/users");
+                return;
+            }
+            else
+            {
+                errorMessage = "Something went wrong.";
+            }
+        }
+        else
+        {
+            errorMessage = "User is allready exests.";
+        }
+    }
+}
+
+@section styles {
+    <link href="~/Content/custom/registration.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/Scripts/custom/registration.js"></script>
+}
+
+    <div class="wrap">
+        <form class="regform" method="post">
+            <div class="regblock">
+                <label class="regform_label" for="userName">User name</label>
+                <input class="regform_input__text" type="text" id="userName" name="userName" required />
+                <p class="errorMessage" id="nameError"></p>
+                <p class="okMessage" id="nameOk"></p>
+            </div>
+            <div class="regblock">
+                <label class="regform_label" for="password">Password</label>
+                <input class="regform_input__text" type="password" id="password" name="password" required />
+                <p class="errorMessage" id="passError"></p>
+                <p class="okMessage" id="passOk"></p>
+            </div>
+            <div class="regblock">
+                <label class="regform_label" for="repPassword">Repeat password</label>
+                <input class="regform_input__text" type="password" id="repPassword" required />
+                <p class="errorMessage" id="repPassError"></p>
+                <p class="okMessage" id="repPassOk"></p>
+            </div>
+            <div class="regblock">
+                <label class="regform_label" for="date">Date of birth</label>
+                <input class="regform_input__date" type="date" id="date" name="dateOfBirth" required />
+                <p class="errorMessage" id="dateError"></p>
+                <p class="okMessage" id="dateOk"></p>
+            </div>
+            <button id="btnSubmit" type="submit" class="btnReg">Submit</button>
+        </form>
+
+        @if (IsPost)
+        {
+            <div class="notSuccessRegistration">
+                <p>@errorMessage</p>
+            </div>
+        }
+    </div>

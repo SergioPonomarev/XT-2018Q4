@@ -28,7 +28,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserName", user.UserName);
                 cmd.Parameters.AddWithValue("@UserDateOfBirth", user.UserDateOfBirth);
-                cmd.Parameters.AddWithValue("@UserImage", defaultImageId);
+                cmd.Parameters.AddWithValue("@UserImageId", defaultImageId);
                 cmd.Parameters.AddWithValue("@UserRole", defaultRole);
 
                 con.Open();
