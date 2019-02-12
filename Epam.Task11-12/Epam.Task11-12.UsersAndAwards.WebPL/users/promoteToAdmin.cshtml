@@ -1,0 +1,23 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+
+@{
+    if (!IsPost)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+    }
+
+    string userName = Request["userName"];
+
+    var user = dr.UsersLogic.GetUserByUserName(userName);
+
+    if (user != null)
+    {
+        dr.UsersLogic.PromoteToAdmin(user.UserName);
+        Response.Redirect("/users/userManagement");
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+    }
+}

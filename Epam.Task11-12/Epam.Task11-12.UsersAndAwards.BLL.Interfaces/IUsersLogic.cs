@@ -27,5 +27,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL.Interfaces
         Image GetUserImageByUserName(string userName);
 
         Image GetDefaultUserImage();
+
+        IEnumerable<User> GetUsersByRole(string role);
     }
 }

@@ -299,5 +299,39 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
             return image;
         }
+
+        public IEnumerable<User> GetUsersByRole(string role)
+        {
+            var result = new List<User>();
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Users_GetUsersByRole";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserRole", role);
+
+                con.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(new User
+                    {
+                        UserId = (int)reader["UserId"],
+                        UserName = (string)reader["UserName"],
+                        UserDateOfBirth = (DateTime)reader["UserDateOfBirth"],
+                        UserImageId = (int)reader["UserImageId"],
+                        UserRole = (string)reader["UserRole"],
+                    });
+                }
+            }
+
+            foreach (var user in result)
+            {
+                user.UserAwards = this.GetAwardsByUserId(user.UserId);
+            }
+
+            return result;
+        }
     }
 }

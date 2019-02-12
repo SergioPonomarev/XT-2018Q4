@@ -98,7 +98,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
 
                 return user;
             }
-
+            
             return usersDao.GetUserByUserName(userName);
         }
 
@@ -162,6 +162,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                 return false;
             }
 
+            this.cacheLogic.Delete(AllUsersCacheKey);
             return this.usersDao.PromoteToAdmin(userName);
         }
 
@@ -181,6 +182,11 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
         public Image GetDefaultUserImage()
         {
             return this.usersDao.GetUserImageByImageId(DefaultImageId);
+        }
+
+        public IEnumerable<User> GetUsersByRole(string role)
+        {
+            return this.usersDao.GetUsersByRole(role);
         }
     }
 }

@@ -94,6 +94,7 @@
     <Content Include="Content\custom\layout.css" />
     <Content Include="Content\custom\login.css" />
     <Content Include="Content\custom\registration.css" />
+    <Content Include="Content\custom\userManagement.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -108,6 +109,7 @@
     <Content Include="awards\createAward.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\custom\registration.js" />
+    <Content Include="Scripts\custom\userManagement.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -128,6 +130,8 @@
     <Content Include="users\uploadUserImage.cshtml" />
     <Content Include="account\registration.cshtml" />
     <Content Include="users\awardUser.cshtml" />
+    <Content Include="users\userManagement.cshtml" />
+    <Content Include="users\promoteToAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

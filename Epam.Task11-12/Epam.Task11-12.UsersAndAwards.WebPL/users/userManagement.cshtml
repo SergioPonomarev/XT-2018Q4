@@ -1,0 +1,57 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+
+@{
+    if (!User.IsInRole("SuperAdmins"))
+    {
+        Response.Redirect("~/users");
+    }
+
+    Page.Title = "User Management";
+
+    var users = dr.UsersLogic.GetUsersByRole("User");
+    entities.Image image = null;
+}
+
+@section styles{
+    <link href="~/Content/custom/userManagement.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/custom/userManagement.js"></script>
+}
+
+<div>
+    <h2 class="userList_header">List of users</h2>
+    <ul class="userList" id="usersList">
+        @foreach (var user in users)
+        {
+            image = dr.UsersLogic.GetUserImageByUserName(user.UserName);
+            <li data-username="@user.UserName" data-userid="@user.UserId" class="userList_item">
+                <img class="userList_item__image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image" />
+                <p class="userList_item__name">@user.UserName</p>
+                <p class="userList_item__date">Date of birth: @user.UserDateOfBirth.ToShortDateString()</p>
+                <p class="userList_item__age">Age: @user.UserAge</p>
+                <p class="userList_item__role">Status: @user.UserRole</p>
+                <button class="btn btn_promoteUser" title="Promote to admin"><i class="fa fa-arrow-up"></i></button>
+                <button class="btn btn_deleteUser" title="Delete user"><i class="fa fa-times"></i></button>
+            
+                @if (user.UserAwards.Count() > 0)
+                {
+                    <div class="userAwardsList">
+                        <p class="userAwardsList_header">Awards:</p>
+                        @foreach (var award in user.UserAwards)
+                        {
+                            image = dr.AwardsLogic.GetAwardImageByAwardImageId(award.AwardImageId);
+                            <div data-userid="@user.UserId" data-awardid="@award.AwardId" class="awardWrapper">
+                                <i class="fa fa-star awardIcon" aria-hidden="true"></i>
+                                <img class="userAwardsList_item__image" src="data:@image.MimeType;base64,@image.ImageData" alt="Award image" />
+                                <p class="userAwardsList_item__title">@award.AwardTitle</p>
+                            </div>
+                        }
+                    </div>
+                }
+            </li>
+        }
+    </ul>
+</div>

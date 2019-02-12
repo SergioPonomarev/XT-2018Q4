@@ -47,8 +47,12 @@
                 <a href="~/users/index" class="menuBlock_link">Home</a>
                 @if (User.IsInRole("Admins"))
                 {
-                    <a href="/awards/createAward" class="menuBlock_link">Create Award</a>
-                    <a href="~/users/awardUser" class="menuBlock_link">Award User</a>
+                    <a href="/awards/createAward" class="menuBlock_link linkCreateAward">Create Award</a>
+                    <a href="/users/awardUser" class="menuBlock_link">Award User</a>
+                }
+                @if (User.IsInRole("SuperAdmins"))
+                {
+                    <a href="~/users/userManagement" class="menuBlock_link linkManagement">User Management</a>
                 }
             </div>
         </div>

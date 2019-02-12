@@ -34,8 +34,8 @@
                             <p class="userAwardsList_header">Awards:</p>
                             @foreach (var award in user.UserAwards)
                             {
-                                <i class="fa fa-star awardIcon" aria-hidden="true"></i>
                                 image = dr.AwardsLogic.GetAwardImageByAwardImageId(award.AwardImageId);
+                                <i class="fa fa-star awardIcon" aria-hidden="true"></i>
                                 <img class="userAwardsList_item__image" src="data:@image.MimeType;base64,@image.ImageData" alt="Award image" />
                                 <p class="userAwardsList_item__title">@award.AwardTitle</p>
                             }

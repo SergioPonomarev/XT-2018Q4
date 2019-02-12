@@ -32,5 +32,7 @@ namespace Epam.Task11_12.UsersAndAwards.DAL.Interfaces
         bool PromoteToAdmin(string userName);
 
         Image GetUserImageByImageId(int imageId);
+
+        IEnumerable<User> GetUsersByRole(string role);
     }
 }
