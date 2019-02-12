@@ -9,7 +9,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 {
     public class SqlAwardsDao : IAwardsDao
     {
-        private const int defaultImageId = 1;
+        private const int DefaultImageId = 1;
 
         private readonly string conStr;
 
@@ -26,7 +26,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.CommandText = "Awards_Add";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@AwardTitle", award.AwardTitle);
-                cmd.Parameters.AddWithValue("@AwardImageId", defaultImageId);
+                cmd.Parameters.AddWithValue("@AwardImageId", DefaultImageId);
 
                 con.Open();
                 return cmd.ExecuteNonQuery() == 1;
@@ -149,6 +149,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool AddImageToAward(Image image, Award award)
         {
+            int oldImageId = award.AwardImageId;
+            bool result;
             int imageId = this.AddAwardImage(image);
 
             if (imageId == 0)
@@ -166,8 +168,15 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.Parameters.AddWithValue("@ImageId", imageId);
 
                 con.Open();
-                return cmd.ExecuteNonQuery() == 1;
+                result = cmd.ExecuteNonQuery() == 1;
             }
+
+            if (oldImageId != DefaultImageId)
+            {
+                this.RemoveImageFromDB(award.AwardImageId);
+            }
+
+            return result;
         }
 
         public int AddAwardImage(Image image)
@@ -236,6 +245,21 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             }
 
             return image;
+        }
+
+        private bool RemoveImageFromDB(int imageId)
+        {
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "AwardsImages_RemoveImage";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ImageId", imageId);
+
+                con.Open();
+                return cmd.ExecuteNonQuery() == 1;
+            }
         }
     }
 }

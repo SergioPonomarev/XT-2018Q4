@@ -75,6 +75,6 @@
     background-color: #99d699;
 }
 
-.btn_deleteUser {
+.btn_deleteUser, .btn_deleteAwardFromUser {
     background-color: #eb9292;
 }

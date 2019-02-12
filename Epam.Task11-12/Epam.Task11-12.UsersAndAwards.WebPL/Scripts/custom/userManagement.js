@@ -36,4 +36,26 @@
                 alert("Cannot delete user.");
             })
     });
+
+    $usersList.on('click', '.btn_deleteAwardFromUser', function (e) {
+        var $target = $(e.target),
+            $listItem = $target.closest('div'),
+            userId = $listItem.data('userid'),
+            awardId = $listItem.data('awardid');
+
+        $.ajax({
+            url: '/users/deleteAwardFromUser',
+            type: 'post',
+            data: {
+                userId: userId,
+                awardId: awardId
+            }
+        })
+            .done(function () {
+                $listItem.remove();
+            })
+            .fail(function () {
+                alert("Cannot delete award from user.")
+            })
+    })
 })();

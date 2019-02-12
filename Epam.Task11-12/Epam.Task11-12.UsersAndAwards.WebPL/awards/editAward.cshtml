@@ -1,0 +1,68 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+@{
+    if (!User.IsInRole("Admins"))
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    string sAwardId = Request["id"];
+    string title = Request["title"];
+
+    if (sAwardId == null || !int.TryParse(sAwardId, out int awardId))
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+    var award = dr.AwardsLogic.GetAwardById(awardId);
+    if (award == null)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    if (IsPost)
+    {
+        if (!string.IsNullOrEmpty(title) ||
+            !string.IsNullOrWhiteSpace(title))
+        {
+            dr.AwardsLogic.Update(award.AwardId, title);
+        }
+
+        WebImage photo = null;
+        photo = WebImage.GetImageFromRequest();
+        if (photo != null)
+        {
+            entities.Image image = new entities.Image();
+            photo.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+            image.MimeType = MimeMapping.GetMimeMapping(photo.FileName);
+            byte[] data = photo.GetBytes(photo.ImageFormat);
+            image.ImageData = Convert.ToBase64String(data);
+            dr.AwardsLogic.AddImageToAward(image, award.AwardTitle);
+        }
+
+        Response.Redirect("~/users");
+        return;
+    }
+}
+
+@section styles{
+    <link href="~/Content/custom/editAward.css" rel="stylesheet" />
+}
+
+    <div>
+        <h2 class="updateForm_header">Award Editing</h2>
+        <form class="updateForm" method="post" enctype="multipart/form-data">
+            <div class="updateForm_block">
+                <label class="updateForm_label" for="title">Award Title:</label>
+                <input type="text" class="updateForm_textInput" id="title" name="title" value="@award.AwardTitle" />
+            </div>
+            <div class="updateForm_block">
+                <label class="updateForm_label" for="image">Award Image:</label>
+                <input type="file" class="updateForm_fileInput" id="image" name="image" />
+            </div>
+            <button type="submit" class="submitBtn">Save changes</button>
+        </form>
+    </div>

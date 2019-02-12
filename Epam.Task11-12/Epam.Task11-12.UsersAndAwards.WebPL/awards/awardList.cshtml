@@ -1,0 +1,41 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+@{
+    if (!User.IsInRole("Users"))
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    Page.Title = "Awards list";
+
+    var awards = dr.AwardsLogic.GetAll();
+    entities.Image image = null;
+}
+
+@section styles{
+    <link href="~/Content/custom/awardList.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/custom/awardList.js"></script>
+}
+
+<div>
+    <h2 class="awardList_header">List of Awards</h2>
+    <ul class="awardList" id="awardList">
+        @foreach (var award in awards)
+        {
+            image = dr.AwardsLogic.GetAwardImageByAwardImageId(award.AwardImageId);
+            <li class="awardList_item">
+                <img class="awardList_item__image" src="data:@image.MimeType;base64,@image.ImageData" alt="Award image" />
+                <p class="awardList_item__title">@award.AwardTitle</p>
+                @if (User.IsInRole("Admins"))
+                {
+                    <a href="/awards/editAward?id=@award.AwardId" class="btn btn_editAward" title="Edit award"><i class="fa fa-pencil"></i></a>
+                    <button class="btn btn_deleteAward" title="Delete award"><i class="fa fa-times"></i></button>
+                }
+            </li>
+        }
+    </ul>
+</div>

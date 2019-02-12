@@ -88,8 +88,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\custom\awardList.css" />
     <Content Include="Content\custom\awardUser.css" />
     <Content Include="Content\custom\createAward.css" />
+    <Content Include="Content\custom\editAward.css" />
     <Content Include="Content\custom\index.css" />
     <Content Include="Content\custom\layout.css" />
     <Content Include="Content\custom\login.css" />
@@ -107,7 +109,10 @@
     <Content Include="account\logout.cshtml" />
     <Content Include="account\login.cshtml" />
     <Content Include="awards\createAward.cshtml" />
+    <Content Include="awards\awardList.cshtml" />
+    <Content Include="awards\editAward.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\custom\awardList.js" />
     <Content Include="Scripts\custom\registration.js" />
     <Content Include="Scripts\custom\userManagement.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -133,6 +138,7 @@
     <Content Include="users\userManagement.cshtml" />
     <Content Include="users\promoteToAdmin.cshtml" />
     <Content Include="users\deleteUser.cshtml" />
+    <Content Include="users\deleteAwardFromUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
