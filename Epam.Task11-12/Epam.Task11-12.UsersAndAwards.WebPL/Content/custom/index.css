@@ -24,3 +24,33 @@
 .userList_item__name {
     font-size: 20px;
 }
+
+.userAwardsList {
+    margin-bottom: 10px;
+}
+
+.userAwardsList_header {
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 40px;
+    vertical-align: top;
+    font-size: 20px;
+}
+
+.awardIcon {
+    line-height: 40px;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+.userAwardsList_item__image {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.userAwardsList_item__title {
+    display: inline-block;
+    line-height: 40px;
+    vertical-align: top;
+    margin-right: 20px;
+}
