@@ -18,4 +18,22 @@
                 alert("Cannot promote user.");
             })
     });
+
+    $usersList.on('click', '.btn_deleteUser', function (e) {
+        var $target = $(e.target),
+            $listItem = $target.closest('li'),
+            userId = $listItem.data('userid');
+
+        $.ajax({
+            url: '/users/deleteUser',
+            type: 'post',
+            data: {userId: userId}
+        })
+            .done(function () {
+                $listItem.remove();
+            })
+            .fail(function () {
+                alert("Cannot delete user.");
+            })
+    });
 })();

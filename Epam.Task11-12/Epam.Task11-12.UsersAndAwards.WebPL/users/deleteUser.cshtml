@@ -8,13 +8,18 @@
         return;
     }
 
-    string userName = Request["userName"];
+    string sUserId = Request["userId"];
 
-    var user = dr.UsersLogic.GetUserByUserName(userName);
+    if (!int.TryParse(sUserId, out int userId))
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 
+    var user = dr.UsersLogic.GetUserById(userId);
     if (user != null)
     {
-        dr.UsersLogic.PromoteToAdmin(user.UserName);
+        dr.UsersLogic.Remove(user.UserId);
         Response.Redirect("/users/userManagement");
     }
     else

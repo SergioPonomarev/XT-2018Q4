@@ -132,6 +132,7 @@
     <Content Include="users\awardUser.cshtml" />
     <Content Include="users\userManagement.cshtml" />
     <Content Include="users\promoteToAdmin.cshtml" />
+    <Content Include="users\deleteUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
