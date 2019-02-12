@@ -152,13 +152,13 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             return this.awardsDao.AddDefaultAwardImage(image);
         }
 
-        public Image GetAwardImageByAwardId(int awardImageId)
+        public Image GetAwardImageByAwardImageId(int awardImageId)
         {
             Image image = null;
-            image = this.awardsDao.GetAwardImageByAwardId(awardImageId);
+            image = this.awardsDao.GetAwardImageByAwardImageId(awardImageId);
             if (image == null)
             {
-                image = this.awardsDao.GetAwardImageByAwardId(DefaultImageId);
+                image = this.awardsDao.GetAwardImageByAwardImageId(DefaultImageId);
             }
 
             return image;

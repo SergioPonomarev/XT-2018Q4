@@ -97,7 +97,7 @@
                 <ul class="awardList">
                     @foreach (var award in awards)
                     {
-                        image = dr.AwardsLogic.GetAwardImageByAwardId(award.AwardId);
+                        image = dr.AwardsLogic.GetAwardImageByAwardImageId(award.AwardImageId);
                         <li class="awardList_item">
                             <span class="item_awardId">Id: @award.AwardId</span>
                             <span class="item_awardImg"><img src="data:@image.MimeType;base64,@image.ImageData" alt="award image" /></span>

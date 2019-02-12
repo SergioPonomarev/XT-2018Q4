@@ -186,10 +186,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
                 con.Open();
 
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    imageId = (int)cmd.Parameters["@ImageId"].Value;
-                }
+                cmd.ExecuteNonQuery();
+                imageId = (int)cmd.Parameters["@ImageId"].Value;
             }
 
             return imageId;
@@ -211,7 +209,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             }
         }
 
-        public Image GetAwardImageByAwardId(int awardImageId)
+        public Image GetAwardImageByAwardImageId(int awardImageId)
         {
             Image image = new Image();
             using (var con = new SqlConnection(conStr))

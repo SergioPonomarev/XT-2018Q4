@@ -16,7 +16,7 @@
             data = photo.GetBytes(photo.ImageFormat);
             image.ImageData = Convert.ToBase64String(data);
 
-            if (dr.AwardsLogic.AddDefaultAwardImage(image))
+            if (dr.AwardsLogic.AddImageToAward(image, "Deadpan"))
             {
                 Response.Redirect("~/users");
                 return;

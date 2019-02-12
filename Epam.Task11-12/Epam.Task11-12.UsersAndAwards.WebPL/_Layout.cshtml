@@ -44,6 +44,7 @@
                 }
             </div>
             <div class="header_menuBlock">
+                <a href="~/users/index" class="menuBlock_link">Home</a>
                 @if (User.IsInRole("Admins"))
                 {
                     <a href="/awards/createAward" class="menuBlock_link">Create Award</a>

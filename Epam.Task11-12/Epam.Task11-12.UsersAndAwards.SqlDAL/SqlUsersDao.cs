@@ -231,10 +231,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
                 con.Open();
 
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    imageId = (int)cmd.Parameters["@ImageId"].Value;
-                }
+                cmd.ExecuteNonQuery();
+                imageId = (int)cmd.Parameters["@ImageId"].Value;
             }
 
             return imageId;
