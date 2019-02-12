@@ -1,7 +1,110 @@
-﻿@{
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+
+@{
+    if (!User.IsInRole("Admins"))
+    {
+        Response.Redirect("~/users");
+    }
+
     Page.Title = "Award User";
+
+    var users = dr.UsersLogic.GetAll();
+    var awards = dr.AwardsLogic.GetAll();
+    entities.Image image = null;
+    string errorMessage = null;
+    string successMessage = null;
+
+    string userId = Request["userId"];
+    string awardId = Request["awardId"];
+
+    if (IsPost)
+    {
+        if (int.TryParse(userId, out int uId) &&
+            int.TryParse(awardId, out int aId))
+        {
+            if (dr.AwardsUsersLogic.AwardUser(uId, aId))
+            {
+                successMessage = "User was awarded successfully.";
+            }
+            else
+            {
+                errorMessage = "Awarding error. This user allready has this award, or user or award with this Id doesn't exest.";
+            }
+        }
+        else
+        {
+            errorMessage = "Wrong input.";
+        }
+    }
+}
+
+@section styles{
+    <link href="~/Content/custom/awardUser.css" rel="stylesheet" />
 }
 
     <div>
-    
+        <div class="topBlock">
+            <form method="post" class="awardForm">
+                <div class="formBlock_left">
+                    <label class="awardForm_label" for="userId">Enter User id:</label>
+                    <input type="number" class="awardForm_input" id="userId" name="userId" value="@(IsPost ? userId : null)" required />
+                </div>
+                <div class="formBlock_right">
+                    <label class="awardForm_label" for="awardId">Enter Award id:</label>
+                    <input type="number" class="awardForm_input" id="awardId" name="awardId" value="@(IsPost ? awardId : null)" required />
+                </div>
+                <button type="submit" class="submitBtn">Award user</button>
+            </form>
+        </div>
+
+        @if (IsPost)
+        {
+            if (errorMessage != null)
+            {
+                <div class="awardingError">
+                    <p>@errorMessage</p>
+                </div>
+            }
+
+            if (successMessage != null)
+            {
+                <div class="awardingSuccess">
+                    <p>@successMessage</p>
+                </div>
+            }
+        }
+
+        <div class="mainContent">
+            <div class="leftSide">
+                <h2 class="listHeader">User list</h2>
+                <ul class="userList">
+                    @foreach (var user in users)
+                    {
+                        image = dr.UsersLogic.GetUserImageByUserName(user.UserName);
+                        <li class="userList_item">
+                            <span class="item_userId">Id: @user.UserId</span>
+                            <span class="item_userImg"><img src="data:@image.MimeType;base64,@image.ImageData" alt="user image" /></span>
+                            <span class="item_userName">@user.UserName</span>
+                            <span class="item_userAge">Age: @user.UserAge</span>
+                            <span class="item_userRole">Status: @user.UserRole</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="rightSide">
+                <h2 class="listHeader">Award list</h2>
+                <ul class="awardList">
+                    @foreach (var award in awards)
+                    {
+                        image = dr.AwardsLogic.GetAwardImageByAwardId(award.AwardId);
+                        <li class="awardList_item">
+                            <span class="item_awardId">Id: @award.AwardId</span>
+                            <span class="item_awardImg"><img src="data:@image.MimeType;base64,@image.ImageData" alt="award image" /></span>
+                            <span class="item_awardTitle">@award.AwardTitle</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
     </div>

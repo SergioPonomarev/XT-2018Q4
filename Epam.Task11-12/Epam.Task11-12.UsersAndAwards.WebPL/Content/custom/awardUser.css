@@ -1,0 +1,99 @@
+﻿.topBlock {
+    margin: 0 auto 20px;
+    width: 867px;
+    border-bottom: 1px solid #c4c4c4;
+    padding: 20px;
+}
+
+.formBlock_left, .formBlock_right {
+    float: left;
+    margin-right: 30px;
+}
+
+.submitBtn {
+    width: 145px;
+    padding: 10px;
+    border: none;
+    font-size: 20px;
+    background-color: #007bff;
+    color: white;
+}
+
+.awardForm_label {
+    line-height: 40px;
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.awardForm_input {
+    line-height: 30px;
+}
+
+.awardingError {
+    background-color: rgba(234, 22, 33, 0.3);
+    color: #cc0202;
+    font-size: 20px;
+    line-height: 35px;
+    width: 907px;
+    margin: 24px auto;
+    text-align: center;
+}
+
+.awardingSuccess {
+    background-color: rgba(22, 234, 38, 0.3);
+    color: #009127;
+    font-size: 20px;
+    line-height: 35px;
+    width: 907px;
+    margin: 24px auto;
+    text-align: center;
+}
+
+.leftSide {
+    width: 530px;
+    float: left;
+}
+
+.rightSide {
+    width: 380px;
+    float: right;
+}
+
+.listHeader {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c4c4c4;
+    margin-bottom: 20px;
+}
+
+.userList, .awardList {
+    list-style: none;
+}
+
+.userList_item, .awardList_item {
+    padding: 10px 5px;
+    font-size: 20px;
+}
+
+.item_userId, 
+.item_userImg, 
+.item_userName, 
+.item_userAge,
+.item_awardId,
+.item_awardImg,
+.item_awardTitle {
+    margin-right: 10px;
+}
+
+.item_userImg, .item_awardImg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.item_userImg img, .item_awardImg img {
+    height: 40px;
+}
+
+.item_userName, .item_awardTitle {
+    font-size: 24px;
+}
