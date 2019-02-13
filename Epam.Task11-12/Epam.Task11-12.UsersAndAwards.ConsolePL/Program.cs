@@ -9,22 +9,26 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
 {
     internal class Program
     {
+        private const string DateFormat = "yyyy-MM-dd";
         private static IUsersLogic usersLogic;
         private static IAwardsLogic awardsLogic;
         private static IAwardsUsersLogic awardsUsersLogic;
+        private static IAccountsLogic accountsLogic;
         private static string choice;
         private static string userName;
         private static string awardTitle;
         private static string input;
+        private static string inputPass;
+        private static string inputRepPass;
         private static string inputUserId;
         private static string inputAwardId;
-        private const string DateFormat = "yyyy-MM-dd";
 
         private static void Main()
         {
             usersLogic = DependencyResolver.UsersLogic;
             awardsLogic = DependencyResolver.AwardsLogic;
             awardsUsersLogic = DependencyResolver.AwardsUsersLogic;
+            accountsLogic = DependencyResolver.AccountsLogic;
 
             Console.WriteLine("Greetings! You are using The User Creating Program.");
             Console.WriteLine();
@@ -122,28 +126,15 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             if (int.TryParse(inputUserId, out int userId) &&
                 int.TryParse(inputAwardId, out int awardId))
             {
-                //try
-                //{
-                    if (awardsUsersLogic.AwardUser(userId, awardId))
-                    {
-                        Console.WriteLine("User was successfully awarded.");
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        UserAwardingError();
-                    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    UserAwardingError();
-                //    Console.WriteLine(ex.Message);
-                //}
-                //finally
-                //{
-                //    inputUserId = null;
-                //    inputAwardId = null;
-                //}
+                if (awardsUsersLogic.AwardUser(userId, awardId))
+                {
+                    Console.WriteLine("User was successfully awarded.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    UserAwardingError();
+                }
             }
             else
             {
@@ -157,27 +148,15 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             input = Console.ReadLine();
             if (int.TryParse(input, out int awardId))
             {
-                //try
-                //{
-                    if (awardsLogic.Remove(awardId))
-                    {
-                        Console.WriteLine("Award was removed successfully.");
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        AwardRemovingError();
-                    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    AwardRemovingError();
-                //    Console.WriteLine(ex.Message);
-                //}
-                //finally
-                //{
-                //    input = null;
-                //}
+                if (awardsLogic.Remove(awardId))
+                {
+                    Console.WriteLine("Award was removed successfully.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    AwardRemovingError();
+                }
             }
             else
             {
@@ -191,40 +170,28 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             input = Console.ReadLine();
             if (int.TryParse(input, out int awardId))
             {
-                //try
-                //{
-                    Award award = awardsLogic.GetAwardById(awardId);
+                Award award = awardsLogic.GetAwardById(awardId);
 
-                    if (award != null)
+                if (award != null)
+                {
+                    ShowAward(award);
+
+                    Console.Write("Enter new award title: ");
+                    awardTitle = Console.ReadLine();
+                    if (awardsLogic.Update(awardId, awardTitle))
                     {
-                        ShowAward(award);
-
-                        Console.Write("Enter new award title: ");
-                        awardTitle = Console.ReadLine();
-                        if (awardsLogic.Update(awardId, awardTitle))
-                        {
-                            Console.WriteLine("Award was updated successfully.");
-                            Console.WriteLine();
-                        }
-                        else
-                        {
-                            AwardUpdatingError();
-                        }
+                        Console.WriteLine("Award was updated successfully.");
+                        Console.WriteLine();
                     }
                     else
                     {
                         AwardUpdatingError();
                     }
-                //}
-                //catch (Exception ex)
-                //{
-                //    AwardUpdatingError();
-                //    Console.WriteLine(ex.Message);
-                //}
-                //finally
-                //{
-                //    awardTitle = null;
-                //}
+                }
+                else
+                {
+                    AwardUpdatingError();
+                }
             }
             else
             {
@@ -237,32 +204,15 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             Console.Write("Enter new award title: ");
             awardTitle = Console.ReadLine();
 
-            //try
-            //{
-                if (awardsLogic.Add(awardTitle))
-                {
-                    Console.WriteLine("Award was added successfully.");
-                    Console.WriteLine();
-                }
-                else
-                {
-                    AwardAddingError();
-                }
-            //}
-            //catch (ArgumentException ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //    Console.WriteLine();
-            //}
-            //catch (Exception ex)
-            //{
-            //    AwardAddingError();
-            //    Console.WriteLine(ex.Message);
-            //}
-            //finally
-            //{
-            //    awardTitle = null;
-            //}
+            if (awardsLogic.Add(awardTitle))
+            {
+                Console.WriteLine("Award was added successfully.");
+                Console.WriteLine();
+            }
+            else
+            {
+                AwardAddingError();
+            }
         }
 
         private static void ShowAllAwards()
@@ -288,23 +238,15 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             input = Console.ReadLine();
             if (int.TryParse(input, out int userId))
             {
-                //try
-                //{
-                    if (usersLogic.Remove(userId))
-                    {
-                        Console.WriteLine("User was removed successfully.");
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        UserRemovingError();
-                    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    UserRemovingError();
-                //    Console.WriteLine(ex.Message);
-                //}
+                if (usersLogic.Remove(userId))
+                {
+                    Console.WriteLine("User was removed successfully.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    UserRemovingError();
+                }
             }
             else
             {
@@ -318,94 +260,34 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             input = Console.ReadLine();
             if (int.TryParse(input, out int userId))
             {
-                //try
-                //{
-                    User user = usersLogic.GetUserById(userId);
-                    if (user != null)
-                    {
-                        ShowUser(user);
-                        Console.Write("Enter new user date of birth in format yyyy-MM-dd: ");
-                        input = Console.ReadLine();
+                User user = usersLogic.GetUserById(userId);
+                if (user != null)
+                {
+                    ShowUser(user);
+                    Console.Write("Enter new user date of birth in format yyyy-MM-dd: ");
+                    input = Console.ReadLine();
 
-                        if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
+                    if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
+                    {
+                        if (usersLogic.Update(userId, userDateOfBirth))
                         {
-                            if (usersLogic.Update(userId, userDateOfBirth))
-                            {
-                                Console.WriteLine("User updated successfully.");
-                                Console.WriteLine();
-                            }
-                            else
-                            {
-                                UserUpdatingError();
-                            }
+                            Console.WriteLine("User updated successfully.");
+                            Console.WriteLine();
                         }
                         else
                         {
                             UserUpdatingError();
                         }
-                    //ShowUserUpdateMenu();
-                    //    choice = Console.ReadLine();
-                    //    switch (choice)
-                    //    {
-                    //        case "name":
-                    //            Console.Write("Enter new user name: ");
-                    //            userName = Console.ReadLine();
-                    //            if (usersLogic.Update(userId, userName: userName))
-                    //            {
-                    //                Console.WriteLine("User was updated successfully.");
-                    //                Console.WriteLine();
-                    //            }
-                    //            else
-                    //            {
-                    //                UserUpdatingError();
-                    //            }
-                    //            break;
-
-                    //        case "date":
-                    //            Console.Write("Enter new user date of birth in format yyyy-MM-dd: ");
-                    //            input = Console.ReadLine();
-
-                    //            if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
-                    //            {
-                    //                if (usersLogic.Update(userId, userDateOfBirth: userDateOfBirth))
-                    //                {
-                    //                    Console.WriteLine("User updated successfully.");
-                    //                    Console.WriteLine();
-                    //                }
-                    //                else
-                    //                {
-                    //                    UserUpdatingError();
-                    //                }
-                    //            }
-                    //            else
-                    //            {
-                    //                UserUpdatingError();
-                    //            }
-                    //            break;
-                    //    }
-
                     }
                     else
                     {
                         UserUpdatingError();
                     }
-                //}
-                //catch (ArgumentException ex)
-                //{
-                //    Console.WriteLine(ex.Message);
-                //    Console.WriteLine();
-                //}
-                //catch (Exception ex)
-                //{
-                //    UserUpdatingError();
-                //    Console.WriteLine(ex.Message);
-                //}
-                //finally
-                //{
-                //    userName = null;
-                //    choice = null;
-                //    input = null;
-                //}
+                }
+                else
+                {
+                    UserUpdatingError();
+                }
             }
             else
             {
@@ -417,44 +299,36 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
         {
             Console.Write("Enter new user name: ");
             userName = Console.ReadLine();
+            Console.Write("Enter password: ");
+            inputPass = Console.ReadLine();
+            Console.Write("Repeat password: ");
+            inputRepPass = Console.ReadLine();
+            if (inputPass != inputRepPass)
+            {
+                Console.WriteLine("Passwords don't match.");
+                Console.WriteLine();
+                return;
+            }
+
             Console.Write("Enter date of birth in format yyyy-MM-dd: ");
             input = Console.ReadLine();
 
             if (DateTime.TryParseExact(input, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDateOfBirth))
-            {
-                //try
-                //{
-                    if (usersLogic.Add(userName, userDateOfBirth))
-                    {
-                        Console.WriteLine("User was added successfully.");
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        UserAddingError();
-                    }
-                //}
-                //catch (ArgumentException ex)
-                //{
-                //    Console.WriteLine(ex.Message);
-                //    Console.WriteLine();
-                //}
-                //catch (Exception ex)
-                //{
-                //    UserAddingError();
-                //    Console.WriteLine(ex.Message);
-                //}
-                //finally
-                //{
-                //    userName = null;
-                //    input = null;
-                //}
+            {                
+                if (accountsLogic.UserRegistration(userName, userDateOfBirth, inputPass))
+                {
+                    Console.WriteLine("User was added successfully.");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    UserAddingError();
+                }
             }
             else
             {
                 UserAddingError();
             }
-
         }
 
         private static void ShowAllUsers()
@@ -500,14 +374,7 @@ namespace Epam.Task11_12.UsersAndAwards.ConsolePL
             Console.WriteLine("Remove award from user - to remove specified award from specified user.");
             Console.WriteLine("Quit - quit the program.");
             Console.Write("Choose your option: ");
-        }
-
-        //private static void ShowUserUpdateMenu()
-        //{
-        //    Console.WriteLine("Name - to update user name.");
-        //    Console.WriteLine("Date - to update user date of birth.");
-        //    Console.Write("Choose your option: ");
-        //}
+        }   
 
         private static void UserAddingError()
         {

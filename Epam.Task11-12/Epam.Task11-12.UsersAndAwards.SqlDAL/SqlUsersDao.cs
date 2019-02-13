@@ -21,7 +21,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool Add(User user)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_Add";
@@ -39,7 +39,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public IEnumerable<User> GetAll()
         {
             var result = new List<User>();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_GetAll";
@@ -72,7 +72,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public User GetUserById(int userId)
         {
             User user = new User();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_GetUserById";
@@ -105,7 +105,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public User GetUserByUserName(string userName)
         {
             User user = new User();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_GetUserByUserName";
@@ -140,7 +140,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             int oldImageId = this.GetUserById(userId).UserImageId;
             bool result;
 
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_RemoveUserById";
@@ -161,7 +161,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool Update(User user)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_Update";
@@ -177,7 +177,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public IEnumerable<Award> GetAwardsByUserId(int userId)
         {
             var result = new List<Award>();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_GetAwardsByUserId";
@@ -213,7 +213,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 return false;
             }
 
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_AddImageToUser";
@@ -238,7 +238,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         {
             int imageId = 0;
 
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "UsersImages_Add";
@@ -259,13 +259,12 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool AddDefaultUserImage(Image image)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "UsersImages_AddDefault";
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                //cmd.Parameters.AddWithValue("@ImageId", defaultImageId);
+                
                 cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
                 cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
 
@@ -276,7 +275,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool PromoteToAdmin(string userName)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_PromoteToAdmin";
@@ -292,7 +291,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool DemoteToUser(string userName)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_DemoteToUser";
@@ -309,7 +308,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public Image GetUserImageByImageId(int imageId)
         {
             Image image = new Image();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "UsersImages_GetById";
@@ -338,7 +337,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public IEnumerable<User> GetUsersByRole(string role)
         {
             var result = new List<User>();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_GetUsersByRole";
@@ -373,7 +372,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         {
             var result = new List<User>();
 
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_GetUsersExeptRole";
@@ -406,7 +405,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         private bool RemoveImageFromDB(int imageId)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "UsersImages_RemoveImage";

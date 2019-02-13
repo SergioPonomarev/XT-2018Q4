@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Epam.Task11_12.UsersAndAwards.DAL.Interfaces;
 
 namespace Epam.Task11_12.UsersAndAwards.SqlDAL
@@ -22,7 +18,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         {
             string hashedPassFromDB = null;
 
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_GetPassByLogin";
@@ -44,7 +40,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool SetPassToUser(string userName, string hashedPass)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Users_SetPassToUser";

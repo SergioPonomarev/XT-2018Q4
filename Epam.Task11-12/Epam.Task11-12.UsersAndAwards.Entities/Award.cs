@@ -10,6 +10,26 @@ namespace Epam.Task11_12.UsersAndAwards.Entities
 
         public int AwardImageId { get; set; }
 
+        public static bool operator ==(Award lhs, Award rhs)
+        {
+            if (ReferenceEquals(lhs, null))
+            {
+                if (ReferenceEquals(rhs, null))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(Award lhs, Award rhs)
+        {
+            return !(lhs == rhs);
+        }
+
         public override bool Equals(object obj)
         {
             return this.Equals(obj as Award);
@@ -43,26 +63,6 @@ namespace Epam.Task11_12.UsersAndAwards.Entities
             num2 = this.AwardTitle.GetHashCode();
 
             return num + (num2 * 1566083941);
-        }
-
-        public static bool operator ==(Award lhs, Award rhs)
-        {
-            if (ReferenceEquals(lhs, null))
-            {
-                if (ReferenceEquals(rhs, null))
-                {
-                    return true;
-                }
-
-                return false;
-            }
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator !=(Award lhs, Award rhs)
-        {
-            return !(lhs == rhs);
         }
     }
 }

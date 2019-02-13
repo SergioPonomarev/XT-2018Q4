@@ -20,7 +20,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool Add(Award award)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_Add";
@@ -36,7 +36,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public IEnumerable<Award> GetAll()
         {
             var result = new List<Award>();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_GetAll";
@@ -62,7 +62,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public Award GetAwardById(int awardId)
         {
             Award award = new Award();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_GetAwardById";
@@ -91,7 +91,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public Award GetAwardByAwardTitle(string awardTitle)
         {
             Award award = new Award();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_GetAwardByTitle";
@@ -121,7 +121,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         {
             int oldImageId = this.GetAwardById(awardId).AwardImageId;
             bool result;
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_RemoveAwardsById";
@@ -142,7 +142,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool Update(Award award)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_Update";
@@ -167,7 +167,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 return false;
             }
 
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "Awards_AddImageToAward";
@@ -192,7 +192,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         {
             int imageId = 0;
 
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "AwardsImages_Add";
@@ -213,7 +213,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool AddDefaultAwardImage(Image image)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "AwardsImage_AddDefault";
@@ -230,7 +230,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
         public Image GetAwardImageByAwardImageId(int awardImageId)
         {
             Image image = new Image();
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "AwardsImages_GetById";
@@ -258,7 +258,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         private bool RemoveImageFromDB(int imageId)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "AwardsImages_RemoveImage";

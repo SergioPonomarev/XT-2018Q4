@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Epam.Task11_12.UsersAndAwards.DAL.Interfaces;
 using Epam.Task11_12.UsersAndAwards.Entities;
 
@@ -21,7 +17,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool AwardUser(AwardUser awardUser)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "AwardsUsers_Add";
@@ -37,7 +33,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool RemoveAwardFromUser(AwardUser awardUser)
         {
-            using (var con = new SqlConnection(conStr))
+            using (var con = new SqlConnection(this.conStr))
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "AwardsUsers_RemoveAwardFromUser";

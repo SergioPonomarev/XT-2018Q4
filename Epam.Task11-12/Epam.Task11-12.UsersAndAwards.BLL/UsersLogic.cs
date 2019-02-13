@@ -26,13 +26,11 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             if (string.IsNullOrEmpty(userName) ||
                 string.IsNullOrWhiteSpace(userName))
             {
-                //throw new ArgumentException("Wrong user name.");
                 return false;
             }
 
             if (userDateOfBirth >= DateTime.Now)
             {
-                //throw new ArgumentException("Wrong user date of birth.");
                 return false;
             }
 
@@ -51,7 +49,6 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             {
                 return false;
             }
-
         }
 
         public IEnumerable<User> GetAll()
@@ -76,16 +73,10 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             {
                 User user = cacheResult.FirstOrDefault(u => u.UserId == userId);
 
-                //if (user == null)
-                //{
-                //    //throw new ArgumentException("User is not found.");
-                //    return null;
-                //}
-
                 return user;
             }
 
-            return usersDao.GetUserById(userId);
+            return this.usersDao.GetUserById(userId);
         }
 
         public User GetUserByUserName(string userName)
@@ -99,7 +90,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                 return user;
             }
             
-            return usersDao.GetUserByUserName(userName);
+            return this.usersDao.GetUserByUserName(userName);
         }
 
         public bool Remove(int userId)
@@ -181,7 +172,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
 
         public Image GetUserImageByUserName(string userName)
         {
-            User user = GetUserByUserName(userName);
+            User user = this.GetUserByUserName(userName);
             Image image = null;
             image = this.usersDao.GetUserImageByImageId(user.UserImageId);
             if (image == null)

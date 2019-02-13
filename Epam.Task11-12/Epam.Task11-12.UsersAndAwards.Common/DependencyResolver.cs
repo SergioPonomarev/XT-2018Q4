@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Epam.Task11_12.UsersAndAwards.BLL;
 using Epam.Task11_12.UsersAndAwards.BLL.Interfaces;
 using Epam.Task11_12.UsersAndAwards.DAL.Interfaces;
@@ -29,7 +25,6 @@ namespace Epam.Task11_12.UsersAndAwards.Common
         {
             get
             {
-
                 if (usersDao == null)
                 {
                     var key = ConfigurationManager.AppSettings["UsersDaoKey"];

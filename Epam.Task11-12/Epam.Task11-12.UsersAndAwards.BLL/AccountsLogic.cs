@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using Epam.Task11_12.UsersAndAwards.BLL.Interfaces;
 using Epam.Task11_12.UsersAndAwards.DAL.Interfaces;
 using Epam.Task11_12.UsersAndAwards.Entities;
@@ -52,11 +49,11 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                     return false;
                 }
 
-                //if (string.IsNullOrEmpty(userPassword) ||
-                //    string.IsNullOrWhiteSpace(userPassword))
-                //{
-                //    return false;
-                //}
+                if (string.IsNullOrEmpty(userPassword) ||
+                    string.IsNullOrWhiteSpace(userPassword))
+                {
+                    return false;
+                }
 
                 string hashedPass = this.GetHashedPass(userName, userPassword);
 
@@ -94,7 +91,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             var sha256 = new SHA256CryptoServiceProvider();
             byte[] inputBytes = Encoding.UTF8.GetBytes(inputLogin + inputPass);
             byte[] hashedBytes = sha256.ComputeHash(inputBytes);
-            return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower();
         }
     }
 }

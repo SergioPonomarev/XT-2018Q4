@@ -9,7 +9,6 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
     public class AwardsUsersLogic : IAwardsUsersLogic
     {
         private const string AllUsersCacheKey = "GetAllUsers";
-        //private const string AllAwardsCacheKey = "GetAllAwards";
 
         private readonly IAwardsUsersDao awardsUsersDao;
         private readonly ICacheLogic cacheLogic;

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Security;
 using Epam.Task11_12.UsersAndAwards.Common;
 
@@ -9,9 +6,11 @@ namespace Epam.Task11_12.UsersAndAwards.WebPL
 {
     public class UserRoleProvider : RoleProvider
     {
+        public override string ApplicationName { get; set; }
+
         public override bool IsUserInRole(string username, string roleName)
         {
-            return Array.IndexOf(GetRolesForUser(username), roleName) > -1;
+            return Array.IndexOf(this.GetRolesForUser(username), roleName) > -1;
         }
 
         public override string[] GetRolesForUser(string username)
@@ -20,8 +19,6 @@ namespace Epam.Task11_12.UsersAndAwards.WebPL
         }
 
         #region NotImplemented
-
-        public override string ApplicationName { get; set; }
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {

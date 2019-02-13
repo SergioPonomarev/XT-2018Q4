@@ -27,7 +27,6 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             if (string.IsNullOrEmpty(awardTitle) ||
                 string.IsNullOrWhiteSpace(awardTitle))
             {
-                //throw new ArgumentException("Wrong award title.");
                 return false;
             }
 

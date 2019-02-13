@@ -34,6 +34,7 @@
     font-size: 20px;
     background-color: #007bff;
     color: white;
+    cursor: pointer;
 }
 
 .notSuccessRegistration {
