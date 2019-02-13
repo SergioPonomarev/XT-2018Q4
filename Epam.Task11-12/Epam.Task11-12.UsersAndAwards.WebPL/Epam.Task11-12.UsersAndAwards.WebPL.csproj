@@ -92,6 +92,7 @@
     <Content Include="Content\custom\awardUser.css" />
     <Content Include="Content\custom\createAward.css" />
     <Content Include="Content\custom\editAward.css" />
+    <Content Include="Content\custom\userPage.css" />
     <Content Include="Content\custom\index.css" />
     <Content Include="Content\custom\layout.css" />
     <Content Include="Content\custom\login.css" />
@@ -116,6 +117,7 @@
     <Content Include="Scripts\custom\awardList.js" />
     <Content Include="Scripts\custom\registration.js" />
     <Content Include="Scripts\custom\userManagement.js" />
+    <Content Include="Scripts\custom\userPage.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -133,13 +135,15 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="users\index.cshtml" />
-    <Content Include="users\uploadUserImage.cshtml" />
     <Content Include="account\registration.cshtml" />
     <Content Include="users\awardUser.cshtml" />
     <Content Include="users\userManagement.cshtml" />
     <Content Include="users\promoteToAdmin.cshtml" />
     <Content Include="users\deleteUser.cshtml" />
     <Content Include="users\deleteAwardFromUser.cshtml" />
+    <Content Include="users\userPage.cshtml" />
+    <Content Include="users\deleteProfile.cshtml" />
+    <Content Include="users\editProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

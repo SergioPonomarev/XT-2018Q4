@@ -1,0 +1,28 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@{
+    if (!IsPost)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    string sUserId = Request["userId"];
+
+    if (!int.TryParse(sUserId, out int userId))
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+    var user = dr.UsersLogic.GetUserById(userId);
+    if (user != null)
+    {
+        FormsAuthentication.SignOut();
+        dr.UsersLogic.Remove(user.UserId);
+        Response.Redirect("/users");
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+    }
+}

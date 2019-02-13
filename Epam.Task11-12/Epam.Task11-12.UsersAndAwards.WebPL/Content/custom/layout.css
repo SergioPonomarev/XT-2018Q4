@@ -26,6 +26,15 @@ body {
     margin: 0 auto;
 }
 
+.accountLink {
+    color: black;
+    text-decoration: none;
+}
+
+.accountLink:active {
+    color: black;
+}
+
 .header_userBlock {
     position: relative;
     display: inline-block;

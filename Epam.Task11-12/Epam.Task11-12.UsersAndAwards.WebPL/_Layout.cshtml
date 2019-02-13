@@ -32,8 +32,10 @@
     <header class="header_main">
         <div class="header_content">
             <div class="header_userBlock">
-                <p class="userBlock_name">Hello, @userName</p>
-                <img class="userBlock_image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image" />
+                <a href="~/users/userPage?name=@userName" class="accountLink">
+                    <p class="userBlock_name">Hello, @userName</p>
+                    <img class="userBlock_image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image" />
+                </a>
                 @if (User.Identity.IsAuthenticated)
                 {
                     <a class="userBlock_logLink" href="/account/logout">Log out</a>

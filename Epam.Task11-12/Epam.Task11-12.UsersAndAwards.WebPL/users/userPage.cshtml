@@ -1,0 +1,45 @@
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@{
+    if (!User.IsInRole("Users"))
+    {
+        Response.Redirect("~/account/registration");
+    }
+
+    string userName = Request["name"];
+    Page.Title = userName;
+
+    var user = dr.UsersLogic.GetUserByUserName(userName);
+    var image = dr.UsersLogic.GetUserImageByUserName(userName);
+}
+
+@section styles{
+    <link href="~/Content/custom/userPage.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/custom/userPage.js"></script>
+}
+
+    <div class="wrap">
+        <h2 class="userAcc_header">@userName</h2>
+        <img class="userAcc_image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image" />
+        <p class="userAcc_pText">Date of birth:<span class="userAcc_spanText">@user.UserDateOfBirth.ToShortDateString()</span></p>
+        <p class="userAcc_pText">Age:<span class="userAcc_spanText">@user.UserAge</span></p>
+        <div class="userAcc_awardsBlock">
+            <p class="awardsBlock_header">Awards:</p>
+            <ul class="awardsBlock_awardsList">
+                @foreach(var award in user.UserAwards)
+                {
+                    image = dr.AwardsLogic.GetAwardImageByAwardImageId(award.AwardImageId);
+                    <li class="awardsList_item">
+                        <i class="item_awardIcon fa fa-star awardIcon" aria-hidden="true"></i>
+                        <img class="item_awardImage" src="data:@image.MimeType;base64,@image.ImageData" alt="Award image" />
+                        <p class="item__awardTitle">@award.AwardTitle</p>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <a href="/users/editProfile?id=@user.UserId" class="btn btn_edit">Edit profile</a>
+        <button data-id="@user.UserId" id="deleteBtn" class="btn btn_delete">Delete profile</button>
+    </div>

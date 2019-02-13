@@ -9,7 +9,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 {
     public class SqlUsersDao : IUsersDao
     {
-        private const int defaultImageId = 1;
+        private const int DefaultImageId = 1;
         private const string defaultRole = "User";
         private const string adminRole = "Admin";
         private readonly string conStr;
@@ -28,7 +28,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserName", user.UserName);
                 cmd.Parameters.AddWithValue("@UserDateOfBirth", user.UserDateOfBirth);
-                cmd.Parameters.AddWithValue("@UserImageId", defaultImageId);
+                cmd.Parameters.AddWithValue("@UserImageId", DefaultImageId);
                 cmd.Parameters.AddWithValue("@UserRole", defaultRole);
 
                 con.Open();
@@ -137,6 +137,9 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool Remove(int userId)
         {
+            int oldImageId = this.GetUserById(userId).UserImageId;
+            bool result;
+
             using (var con = new SqlConnection(conStr))
             {
                 var cmd = con.CreateCommand();
@@ -145,8 +148,15 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.Parameters.AddWithValue("@UserId", userId);
 
                 con.Open();
-                return cmd.ExecuteNonQuery() == 1;
+                result = cmd.ExecuteNonQuery() == 1;
             }
+
+            if (oldImageId != DefaultImageId)
+            {
+                this.RemoveImageFromDB(oldImageId);
+            }
+
+            return result;
         }
 
         public bool Update(User user)
@@ -332,6 +342,21 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             }
 
             return result;
+        }
+
+        private bool RemoveImageFromDB(int imageId)
+        {
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "UserImages_RemoveImage";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ImageId", imageId);
+
+                con.Open();
+                return cmd.ExecuteNonQuery() == 1;
+            }
         }
     }
 }
