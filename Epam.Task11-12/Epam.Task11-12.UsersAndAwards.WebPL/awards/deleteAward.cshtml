@@ -1,25 +1,24 @@
 ﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
-
 @{
-    if (!IsPost)
+    if (!User.IsInRole("Admins"))
     {
         Response.SetStatus(HttpStatusCode.NotFound);
         return;
     }
 
-    string sUserId = Request["userId"];
+    string sAwardId = Request["awardId"];
 
-    if (!int.TryParse(sUserId, out int userId))
+    if (!int.TryParse(sAwardId, out int awardId))
     {
         Response.SetStatus(HttpStatusCode.BadRequest);
         return;
     }
 
-    var user = dr.UsersLogic.GetUserById(userId);
-    if (user != null)
+    var award = dr.AwardsLogic.GetAwardById(awardId);
+    if (award != null)
     {
-        dr.UsersLogic.Remove(user.UserId);
-        Response.Redirect("/users/userManagement");
+        dr.AwardsLogic.Remove(award.AwardId);
+        Response.Redirect("/awards/awardList");
     }
     else
     {

@@ -119,6 +119,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool Remove(int awardId)
         {
+            int oldImageId = this.GetAwardById(awardId).AwardImageId;
+            bool result;
             using (var con = new SqlConnection(conStr))
             {
                 var cmd = con.CreateCommand();
@@ -127,8 +129,15 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.Parameters.AddWithValue("@AwardId", awardId);
 
                 con.Open();
-                return cmd.ExecuteNonQuery() == 1;
+                result = cmd.ExecuteNonQuery() == 1;
             }
+
+            if (oldImageId != DefaultImageId)
+            {
+                this.RemoveImageFromDB(oldImageId);
+            }
+
+            return result;
         }
 
         public bool Update(Award award)
@@ -173,7 +182,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
             if (oldImageId != DefaultImageId)
             {
-                this.RemoveImageFromDB(award.AwardImageId);
+                this.RemoveImageFromDB(oldImageId);
             }
 
             return result;

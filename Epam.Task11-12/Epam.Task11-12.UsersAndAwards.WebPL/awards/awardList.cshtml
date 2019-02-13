@@ -27,7 +27,7 @@
         @foreach (var award in awards)
         {
             image = dr.AwardsLogic.GetAwardImageByAwardImageId(award.AwardImageId);
-            <li class="awardList_item">
+            <li data-id="@award.AwardId" class="awardList_item">
                 <img class="awardList_item__image" src="data:@image.MimeType;base64,@image.ImageData" alt="Award image" />
                 <p class="awardList_item__title">@award.AwardTitle</p>
                 @if (User.IsInRole("Admins"))

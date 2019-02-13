@@ -111,6 +111,7 @@
     <Content Include="awards\createAward.cshtml" />
     <Content Include="awards\awardList.cshtml" />
     <Content Include="awards\editAward.cshtml" />
+    <Content Include="awards\deleteAward.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\custom\awardList.js" />
     <Content Include="Scripts\custom\registration.js" />
