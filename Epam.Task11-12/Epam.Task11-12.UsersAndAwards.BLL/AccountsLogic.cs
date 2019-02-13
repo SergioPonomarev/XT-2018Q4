@@ -34,7 +34,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                 return false;
             }
 
-            string hashedPass = this.GetHashedPass(password);
+            string hashedPass = this.GetHashedPass(login, password);
 
             string hashedPassFromDB = this.accountsDao.GetPassByLogin(login);
 
@@ -58,7 +58,7 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
                 //    return false;
                 //}
 
-                string hashedPass = this.GetHashedPass(userPassword);
+                string hashedPass = this.GetHashedPass(userName, userPassword);
 
                 this.cacheLogic.Delete(AllUsersCacheKey);
                 return this.accountsDao.SetPassToUser(userName, hashedPass);
@@ -89,10 +89,10 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             }
         }
 
-        private string GetHashedPass(string input)
+        private string GetHashedPass(string inputLogin, string inputPass)
         {
             var sha256 = new SHA256CryptoServiceProvider();
-            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            byte[] inputBytes = Encoding.UTF8.GetBytes(inputLogin + inputPass);
             byte[] hashedBytes = sha256.ComputeHash(inputBytes);
             return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
         }
