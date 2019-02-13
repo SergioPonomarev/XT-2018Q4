@@ -166,6 +166,19 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
             return this.usersDao.PromoteToAdmin(userName);
         }
 
+        public bool DemoteToUser(string userName)
+        {
+            User user = this.GetUserByUserName(userName);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            this.cacheLogic.Delete(AllUsersCacheKey);
+            return this.usersDao.DemoteToUser(userName);
+        }
+
         public Image GetUserImageByUserName(string userName)
         {
             User user = GetUserByUserName(userName);
@@ -187,6 +200,11 @@ namespace Epam.Task11_12.UsersAndAwards.BLL
         public IEnumerable<User> GetUsersByRole(string role)
         {
             return this.usersDao.GetUsersByRole(role);
+        }
+
+        public IEnumerable<User> GetUsersExeptRole(string role)
+        {
+            return this.usersDao.GetUsersExeptRole(role);
         }
     }
 }

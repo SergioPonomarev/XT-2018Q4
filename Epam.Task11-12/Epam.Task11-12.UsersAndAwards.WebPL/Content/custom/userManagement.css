@@ -31,6 +31,7 @@
 
 .userAwardsList {
     margin-bottom: 10px;
+    margin-left: 55px;
 }
 
 .userAwardsList_header {
@@ -73,6 +74,10 @@
 
 .btn_promoteUser {
     background-color: #99d699;
+}
+
+.btn_demoteUser {
+    background-color: #f0eeaf;
 }
 
 .btn_deleteUser, .btn_deleteAwardFromUser {

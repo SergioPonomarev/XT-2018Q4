@@ -92,6 +92,7 @@
     <Content Include="Content\custom\awardUser.css" />
     <Content Include="Content\custom\createAward.css" />
     <Content Include="Content\custom\editAward.css" />
+    <Content Include="Content\custom\editProfile.css" />
     <Content Include="Content\custom\userPage.css" />
     <Content Include="Content\custom\index.css" />
     <Content Include="Content\custom\layout.css" />
@@ -144,6 +145,7 @@
     <Content Include="users\userPage.cshtml" />
     <Content Include="users\deleteProfile.cshtml" />
     <Content Include="users\editProfile.cshtml" />
+    <Content Include="users\demoteToUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

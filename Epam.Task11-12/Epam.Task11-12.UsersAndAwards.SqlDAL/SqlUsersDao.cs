@@ -10,8 +10,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
     public class SqlUsersDao : IUsersDao
     {
         private const int DefaultImageId = 1;
-        private const string defaultRole = "User";
-        private const string adminRole = "Admin";
+        private const string DefaultRole = "User";
+        private const string AdminRole = "Admin";
         private readonly string conStr;
 
         public SqlUsersDao(string connectionString)
@@ -29,7 +29,7 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.Parameters.AddWithValue("@UserName", user.UserName);
                 cmd.Parameters.AddWithValue("@UserDateOfBirth", user.UserDateOfBirth);
                 cmd.Parameters.AddWithValue("@UserImageId", DefaultImageId);
-                cmd.Parameters.AddWithValue("@UserRole", defaultRole);
+                cmd.Parameters.AddWithValue("@UserRole", DefaultRole);
 
                 con.Open();
                 return cmd.ExecuteNonQuery() == 1;
@@ -204,6 +204,8 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
 
         public bool AddImageToUser(Image image, User user)
         {
+            int oldImageId = user.UserImageId;
+            bool result;
             int imageId = this.AddUserImage(image);
 
             if (imageId == 0)
@@ -221,8 +223,15 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.Parameters.AddWithValue("@ImageId", imageId);
 
                 con.Open();
-                return cmd.ExecuteNonQuery() == 1;
+                result = cmd.ExecuteNonQuery() == 1;
             }
+
+            if (oldImageId != DefaultImageId)
+            {
+                this.RemoveImageFromDB(oldImageId);
+            }
+
+            return result;
         }
 
         public int AddUserImage(Image image)
@@ -274,7 +283,23 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@UserName", userName);
-                cmd.Parameters.AddWithValue("@UserRole", adminRole);
+                cmd.Parameters.AddWithValue("@UserRole", AdminRole);
+
+                con.Open();
+                return cmd.ExecuteNonQuery() == 1;
+            }
+        }
+
+        public bool DemoteToUser(string userName)
+        {
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Users_DemoteToUser";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserName", userName);
+                cmd.Parameters.AddWithValue("@UserRole", DefaultRole);
 
                 con.Open();
                 return cmd.ExecuteNonQuery() == 1;
@@ -344,12 +369,47 @@ namespace Epam.Task11_12.UsersAndAwards.SqlDAL
             return result;
         }
 
+        public IEnumerable<User> GetUsersExeptRole(string role)
+        {
+            var result = new List<User>();
+
+            using (var con = new SqlConnection(conStr))
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Users_GetUsersExeptRole";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserRole", role);
+
+                con.Open();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(new User
+                    {
+                        UserId = (int)reader["UserId"],
+                        UserName = (string)reader["UserName"],
+                        UserDateOfBirth = (DateTime)reader["UserDateOfBirth"],
+                        UserImageId = (int)reader["UserImageId"],
+                        UserRole = (string)reader["UserRole"],
+                    });
+                }
+            }
+
+            foreach (var user in result)
+            {
+                user.UserAwards = this.GetAwardsByUserId(user.UserId);
+            }
+
+            return result;
+        }
+
         private bool RemoveImageFromDB(int imageId)
         {
             using (var con = new SqlConnection(conStr))
             {
                 var cmd = con.CreateCommand();
-                cmd.CommandText = "UserImages_RemoveImage";
+                cmd.CommandText = "UsersImages_RemoveImage";
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@ImageId", imageId);

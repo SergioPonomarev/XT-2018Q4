@@ -1,5 +1,4 @@
 ﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
-
 @{
     if (!IsPost)
     {
@@ -13,7 +12,7 @@
 
     if (user != null)
     {
-        dr.UsersLogic.PromoteToAdmin(user.UserName);
+        dr.UsersLogic.DemoteToUser(user.UserName);
         Response.Redirect("/users/userManagement");
     }
     else

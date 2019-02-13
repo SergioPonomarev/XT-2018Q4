@@ -1,17 +1,92 @@
-﻿@{
-    Layout = null;
+﻿@using dr = Epam.Task11_12.UsersAndAwards.Common.DependencyResolver
+@using entities = Epam.Task11_12.UsersAndAwards.Entities
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    Page.Title = "Profile editing";
+
+    string sUserId = Request["id"];
+    string errorMessage = null;
+
+    if (sUserId == null || !int.TryParse(sUserId, out int userId))
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+    var user = dr.UsersLogic.GetUserById(userId);
+
+    if (IsPost)
+    {
+        string sDateOfBirth = Request["date"];
+        DateTime dateOfBirth;
+        if (sDateOfBirth != string.Empty)
+        {
+            if (!DateTime.TryParse(sDateOfBirth, out dateOfBirth))
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+                return;
+            }
+
+            if (DateTime.Now <= dateOfBirth)
+            {
+                errorMessage = "Wrong user date of birth";
+            }
+            else
+            {
+                dr.UsersLogic.Update(user.UserId, dateOfBirth);
+            }
+        }
+
+        if (errorMessage == null)
+        {
+            WebImage photo = WebImage.GetImageFromRequest();
+
+            if (photo != null)
+            {
+                entities.Image userImage = new entities.Image();
+                photo.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+                userImage.MimeType = MimeMapping.GetMimeMapping(photo.FileName);
+                byte[] data = photo.GetBytes(photo.ImageFormat);
+                userImage.ImageData = Convert.ToBase64String(data);
+                dr.UsersLogic.AddImageToUser(userImage, user.UserName);
+            }
+        }
+    }
+
+    var image = dr.UsersLogic.GetUserImageByUserName(user.UserName);
 }
 
-<!DOCTYPE html>
+@section styles{
+    <link href="~/Content/custom/editProfile.css" rel="stylesheet" />
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>
+<div class="wrap">
+    <form method="post" class="updateUserForm" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="@user.UserId" />
+        <h2 class="userAcc_header">@user.UserName</h2>
+        <img class="userAcc_image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image" />
+        <div class="form_block">
+            <label class="form_label" for="image">New user image:</label>
+            <input id="image" type="file" name="image" class="form_inputFile" />
+        </div>
+        <p class="userAcc_pText">Date of birth:<span class="userAcc_spanText">@user.UserDateOfBirth.ToShortDateString()</span></p>
+        <div class="form_block">
+            <label class="form_label" for="date">New user date of birth:</label>
+            <input id="date" type="date" name="date" class="form_inputDate" />
+        </div>
+
+        <button type="submit" class="btn_update">Update profile</button>
+    </form>
+
+    @if(IsPost)
+    {
+        <div class="errorMessage">
+            <p>@errorMessage</p>
+        </div>
+    }
+</div>

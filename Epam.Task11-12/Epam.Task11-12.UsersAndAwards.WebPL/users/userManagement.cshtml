@@ -9,7 +9,7 @@
 
     Page.Title = "User Management";
 
-    var users = dr.UsersLogic.GetUsersByRole("User");
+    var users = dr.UsersLogic.GetAll();
     entities.Image image = null;
 }
 
@@ -33,8 +33,18 @@
                 <p class="userList_item__date">Date of birth: @user.UserDateOfBirth.ToShortDateString()</p>
                 <p class="userList_item__age">Age: @user.UserAge</p>
                 <p class="userList_item__role">Status: @user.UserRole</p>
-                <button class="btn btn_promoteUser" title="Promote to admin"><i class="fa fa-arrow-up"></i></button>
-                <button class="btn btn_deleteUser" title="Delete user"><i class="fa fa-times"></i></button>
+                @if (user.UserRole == "User" && !(user.UserRole == "SuperAdmin"))
+                {
+                    <button class="btn btn_promoteUser" title="Promote to admin"><i class="fa fa-arrow-up"></i></button>
+                }
+                @if (user.UserRole == "Admin" && !(user.UserRole == "SuperAdmin"))
+                {
+                    <button class="btn btn_demoteUser" title="Demote to user"><i class="fa fa-arrow-down"></i></button>
+                }
+                @if (!(user.UserRole == "SuperAdmin"))
+                {
+                    <button class="btn btn_deleteUser" title="Delete user"><i class="fa fa-times"></i></button>
+                }
             
                 @if (user.UserAwards.Count() > 0)
                 {

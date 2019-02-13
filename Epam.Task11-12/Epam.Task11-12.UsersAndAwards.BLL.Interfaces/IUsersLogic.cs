@@ -24,10 +24,14 @@ namespace Epam.Task11_12.UsersAndAwards.BLL.Interfaces
 
         bool PromoteToAdmin(string userName);
 
+        bool DemoteToUser(string userName);
+
         Image GetUserImageByUserName(string userName);
 
         Image GetDefaultUserImage();
 
         IEnumerable<User> GetUsersByRole(string role);
+
+        IEnumerable<User> GetUsersExeptRole(string role);
     }
 }

@@ -8,7 +8,7 @@
 
     string sUserId = Request["userId"];
 
-    if (!int.TryParse(sUserId, out int userId))
+    if (sUserId == null || !int.TryParse(sUserId, out int userId))
     {
         Response.SetStatus(HttpStatusCode.BadRequest);
         return;

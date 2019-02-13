@@ -12,12 +12,30 @@
             data: { userName: userName }
         })
             .done(function () {
-                $listItem.remove();
+                window.location.href = "/users/userManagement";
             })
             .fail(function () {
                 alert("Cannot promote user.");
             })
     });
+
+    $usersList.on('click', '.btn_demoteUser', function (e) {
+        var $target = $(e.target),
+            $listItem = $target.closest('li'),
+            userName = $listItem.data('username');
+
+        $.ajax({
+            url: '/users/demoteToUser',
+            type: 'post',
+            data: { userName: userName }
+        })
+            .done(function () {
+                window.location.href = "/users/userManagement";
+            })
+            .fail(function () {
+                alert("Cannot demote user.");
+            })
+    })
 
     $usersList.on('click', '.btn_deleteUser', function (e) {
         var $target = $(e.target),
