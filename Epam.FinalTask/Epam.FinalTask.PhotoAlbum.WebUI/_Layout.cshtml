@@ -13,8 +13,11 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
-    <div>
-    
+    <header class="header">
+        @RenderPage("~/CommonPages/_HeaderPartial.cshtml")
+    </header>
+    <div class="mainWrapper">
+        @RenderBody()
     </div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
