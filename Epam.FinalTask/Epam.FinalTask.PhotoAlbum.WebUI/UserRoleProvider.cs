@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using Epam.FinalTask.PhotoAlbum.Common;
 
 namespace Epam.FinalTask.PhotoAlbum.WebUI
 {
@@ -10,12 +11,12 @@ namespace Epam.FinalTask.PhotoAlbum.WebUI
     {
         public override string[] GetRolesForUser(string username)
         {
-            throw new NotImplementedException();
+            return DependencyResolver.AccountsLogic.GetRoles(username);
         }
 
         public override bool IsUserInRole(string username, string roleName)
         {
-            throw new NotImplementedException();
+            return Array.IndexOf(this.GetRolesForUser(username), roleName) > -1;
         }
 
         #region NotImplemented
