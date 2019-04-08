@@ -1,7 +1,51 @@
-﻿@{
-    
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+
+@{
+    Page.Title = "Log In";
+
+    string login = Request["login"];
+    string password = Request["password"];
+    string errorMessage = null;
+
+    if (IsPost)
+    {
+        if (dr.AccountsLogic.CanLogin(login, password))
+        {
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
+            Response.Redirect("~/Index");
+            return;
+        }
+        else
+        {
+            errorMessage = "Wrong login or password";
+        }
+    }
 }
 
-    <div>
-    
+@section styles {
+    <link href="~/Content/Custom/login.css" rel="stylesheet" />
+}
+
+    <div class="wrap">
+        <form method="post" class="loginForm">
+            <div class="logBlock">
+                <label for="login" class="logBlock_label">Login:</label>
+                <input type="text" id="login" name="login" value="@(IsPost ? login : null)" class="logBlock_input" />
+            </div>
+            <div class="logBlock">
+                <label for="password" class="logBlock_label">Password:</label>
+                <input type="password" id="password" name="password" class="logBlock_input" />
+            </div>
+            <button type="submit" class="btnLogin">Log in</button>
+        </form>
+        @if (IsPost)
+        {
+            <div class="notSuccessLogin">
+                <p>@errorMessage</p>
+            </div>
+        }
+    </div>
+    <div class="notRegistered">
+        <p class="notRegText">Not registered yet?</p>
+        <a href="~/Account/Registration" class="regLink">Registration</a>
     </div>

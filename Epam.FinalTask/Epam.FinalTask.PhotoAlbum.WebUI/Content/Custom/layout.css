@@ -1,1 +1,85 @@
-﻿
+﻿.mainWrapper {
+    width: 960px;
+    margin: 50px auto 0;
+    padding: 10px;
+}
+
+.mainHeader {
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    background-color: #6fb4ff;
+    top: 0;
+}
+
+.header_content {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.accountLink {
+    color: black;
+    text-decoration: none;
+    float: left;
+    margin-right: 10px;
+}
+
+.accountLink:active {
+    color: black;
+}
+
+.header_userBlock {
+    position: relative;
+    display: inline-block;
+    height: 50px;
+}
+
+.userBlock_name {
+    float: left;
+    line-height: 50px;
+    margin: 0;
+}
+
+.userBlock_avatar {
+    width: 40px;
+    margin: 5px 10px;
+    float: left;
+}
+
+.userBlock_logLink {
+    line-height: 50px;
+    display: inline-block;
+    clear: right;
+    text-decoration: none;
+    color: blue;
+}
+
+.userBlock_logLink:active {
+    text-decoration: none;
+    color: blue;
+}
+
+.header_menuBlock {
+    display: inline-block;
+    height: 50px;
+    position: relative;
+    vertical-align: top;
+    margin-left: 50px;
+}
+
+.menuBlock_link {
+    line-height: 30px;
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 10px;
+    margin-right: 5px;
+    width: 90px;
+    text-align: center;
+}
+
+.menuBlock_link:active {
+    color: white;
+}

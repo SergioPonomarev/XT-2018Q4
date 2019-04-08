@@ -18,6 +18,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.usersDao = usersDao;
         }
 
+        public Avatar GetUserAvatarByUserName(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
         public User GetUserByUserName(string userName)
         {
             return this.usersDao.GetUserByUserName(userName);

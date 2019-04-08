@@ -87,13 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Custom\layout.css" />
+    <Content Include="Content\Custom\login.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\normalize.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="CommonPages\_HeaderPartial.cshtml" />
     <Content Include="Index.cshtml" />
     <Content Include="Account\Login.cshtml" />
     <Content Include="Account\Logout.cshtml" />
+    <Content Include="Images\uploadImage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -116,6 +119,7 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Users\userPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -123,9 +127,20 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Images\" />
-    <Folder Include="Users\" />
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.BLL.Contracts\Epam.FinalTask.PhotoAlbum.BLL.Contracts.csproj">
+      <Project>{84D41046-86BD-4464-8EB8-F5C91089C579}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.BLL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.Common\Epam.FinalTask.PhotoAlbum.Common.csproj">
+      <Project>{8C2565E4-C981-4FE7-9B84-731CE2FEEECE}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.Entities\Epam.FinalTask.PhotoAlbum.Entities.csproj">
+      <Project>{f063520a-5b34-42ff-ae59-1ac321665c42}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -15,5 +15,10 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             this.conStr = connectionString;
         }
+
+        public string GetPassByLogin(string login)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,1 +1,42 @@
-﻿
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+@using entities = Epam.FinalTask.PhotoAlbum.Entities
+
+@{ 
+    string userName = User.Identity.IsAuthenticated
+        ? User.Identity.Name
+        : "Guest";
+
+    entities.Avatar avatar = null;
+
+    if (User.Identity.IsAuthenticated)
+    {
+        avatar = dr.UsersLogic.GetUserAvatarByUserName(User.Identity.Name);
+    }
+}
+
+    <div class="header_content">
+        <div class="header_userBlock">
+            <a href="~/Users/userPage?name=@userName" class="accountLink">
+                <p class="userBlock_name">Hello, @userName!</p>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <img class="userBlock_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User avatar" />
+                }
+            </a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="userBlock_logLink" href="/Account/Logout">Log out</a>
+            }
+            else
+            {
+                <a class="userBlock_logLink" href="/Account/Login">Log in</a>
+            }
+        </div>
+        <div class="header_menuBlock">
+            <a href="/Index" class="menuBlock_link">Home</a>
+            @if (User.IsInRole("Users"))
+            {
+                <a href="/Images/uploadImage" class="menuBlock_link">Upload</a>
+            }
+        </div>
+    </div>

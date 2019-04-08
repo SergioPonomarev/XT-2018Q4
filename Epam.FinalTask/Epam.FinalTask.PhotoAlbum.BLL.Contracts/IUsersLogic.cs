@@ -10,5 +10,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
     public interface IUsersLogic
     {
         User GetUserByUserName(string userName);
+
+        Avatar GetUserAvatarByUserName(string userName);
     }
 }

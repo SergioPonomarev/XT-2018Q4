@@ -8,6 +8,8 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
 {
     public interface IAccountsLogic
     {
+        bool CanLogin(string login, string password);
+
         string[] GetRoles(string userName);
     }
 }

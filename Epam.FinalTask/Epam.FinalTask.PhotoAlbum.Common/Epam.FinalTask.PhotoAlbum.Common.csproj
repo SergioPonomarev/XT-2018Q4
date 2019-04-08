@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>8c2565e4-c981-4fe7-9b84-731ce2feeece</ProjectGuid>
+    <ProjectGuid>{8C2565E4-C981-4FE7-9B84-731CE2FEEECE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Epam.FinalTask.PhotoAlbum.Common</RootNamespace>
@@ -31,24 +31,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.BLL.Contracts\Epam.FinalTask.PhotoAlbum.BLL.Contracts.csproj">
+      <Project>{84D41046-86BD-4464-8EB8-F5C91089C579}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.BLL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.BLL\Epam.FinalTask.PhotoAlbum.BLL.csproj">
+      <Project>{3B29C36B-4AD3-4586-B4E4-D08336AA63B6}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.DAL.Contracts\Epam.FinalTask.PhotoAlbum.DAL.Contracts.csproj">
+      <Project>{E0387D39-9AEA-45B8-B3CD-D18AEA789553}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.DAL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.FakeDAL\Epam.FinalTask.PhotoAlbum.FakeDAL.csproj">
+      <Project>{08977779-4C5D-4A01-8279-8CD4959B4BA8}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.FakeDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.SqlDAL\Epam.FinalTask.PhotoAlbum.SqlDAL.csproj">
+      <Project>{9E3A9A76-EA2B-4960-BF0C-9A4AB23F7F5C}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.SqlDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>

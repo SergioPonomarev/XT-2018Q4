@@ -9,5 +9,9 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 {
     public class FakeAccountsDao : IAccountsDao
     {
+        public string GetPassByLogin(string login)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

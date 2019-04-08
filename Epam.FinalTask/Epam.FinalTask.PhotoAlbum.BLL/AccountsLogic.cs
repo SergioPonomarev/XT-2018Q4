@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.BLL.Contracts;
@@ -20,6 +21,22 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.usersLogic = usersLogic;
         }
 
+        public bool CanLogin(string login, string password)
+        {
+            User user = this.usersLogic.GetUserByUserName(login);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            string hashedPass = this.GetHashedPass(login, password);
+
+            string hashedPassFromDB = this.accountsDao.GetPassByLogin(login);
+
+            return hashedPass == hashedPassFromDB;
+        }
+
         public string[] GetRoles(string userName)
         {
             User user = this.usersLogic.GetUserByUserName(userName);
@@ -35,6 +52,14 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                 default:
                     return new string[0];
             }
+        }
+
+        private string GetHashedPass(string inputLogin, string inputPass)
+        {
+            var sha256 = new SHA256CryptoServiceProvider();
+            byte[] inputBytes = Encoding.UTF8.GetBytes(inputLogin + inputPass);
+            byte[] hashedBytes = sha256.ComputeHash(inputBytes);
+            return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower();
         }
     }
 }
