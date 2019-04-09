@@ -17,6 +17,16 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             this.conStr = connectionString;
         }
 
+        public bool Add(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public User GetUserByUserName(string userName)
         {
             throw new NotImplementedException();

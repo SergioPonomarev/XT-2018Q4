@@ -10,7 +10,7 @@
 
     if (User.Identity.IsAuthenticated)
     {
-        avatar = dr.UsersLogic.GetUserAvatarByUserName(User.Identity.Name);
+        avatar = dr.AvatarsLogic.GetUserAvatarByUserName(User.Identity.Name);
     }
 }
 

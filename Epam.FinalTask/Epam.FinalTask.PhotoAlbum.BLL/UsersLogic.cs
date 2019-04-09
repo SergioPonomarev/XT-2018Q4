@@ -18,9 +18,31 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.usersDao = usersDao;
         }
 
-        public Avatar GetUserAvatarByUserName(string userName)
+        public bool Add(string userName)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                return false;
+            }
+
+            if (this.GetUserByUserName(userName) == null)
+            {
+                User user = new User
+                {
+                    UserName = userName,
+                };
+
+                return this.usersDao.Add(user);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return this.usersDao.GetAll().ToArray();
         }
 
         public User GetUserByUserName(string userName)

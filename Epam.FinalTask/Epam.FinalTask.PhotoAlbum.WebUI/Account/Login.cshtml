@@ -11,7 +11,7 @@
     {
         if (dr.AccountsLogic.CanLogin(login, password))
         {
-            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: false);
             Response.Redirect("~/Index");
             return;
         }

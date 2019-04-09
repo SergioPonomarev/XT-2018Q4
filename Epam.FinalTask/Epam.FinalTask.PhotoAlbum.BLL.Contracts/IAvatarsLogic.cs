@@ -7,12 +7,8 @@ using Epam.FinalTask.PhotoAlbum.Entities;
 
 namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
 {
-    public interface IUsersLogic
+    public interface IAvatarsLogic
     {
-        User GetUserByUserName(string userName);
-
-        bool Add(string userName);
-
-        IEnumerable<User> GetAll();
+        Avatar GetUserAvatarByUserName(string userName);
     }
 }

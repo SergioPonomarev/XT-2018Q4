@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAccountsLogic.cs" />
+    <Compile Include="IAvatarsLogic.cs" />
     <Compile Include="IUsersLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

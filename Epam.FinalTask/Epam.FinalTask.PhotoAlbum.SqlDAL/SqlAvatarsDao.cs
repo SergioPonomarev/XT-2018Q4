@@ -4,24 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
+using Epam.FinalTask.PhotoAlbum.Entities;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
-    public class SqlAccountsDao : IAccountsDao
+    public class SqlAvatarsDao : IAvatarsDao
     {
         private readonly string conStr;
 
-        public SqlAccountsDao(string connectionString)
+        public SqlAvatarsDao(string connectionString)
         {
             this.conStr = connectionString;
         }
 
-        public string GetPassByLogin(string login)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool SetPassToUser(string userName, string hashedPass)
+        public Avatar GetUserAvatarByUserName(string userName)
         {
             throw new NotImplementedException();
         }

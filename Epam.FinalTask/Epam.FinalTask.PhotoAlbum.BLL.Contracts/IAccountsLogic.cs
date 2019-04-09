@@ -11,5 +11,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
         bool CanLogin(string login, string password);
 
         string[] GetRoles(string userName);
+
+        bool UserRegistration(string userName, string password);
     }
 }

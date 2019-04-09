@@ -88,6 +88,7 @@
   <ItemGroup>
     <Content Include="Content\Custom\layout.css" />
     <Content Include="Content\Custom\login.css" />
+    <Content Include="Content\Custom\registration.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\normalize.css" />
@@ -97,7 +98,9 @@
     <Content Include="Account\Login.cshtml" />
     <Content Include="Account\Logout.cshtml" />
     <Content Include="Images\uploadImage.cshtml" />
+    <Content Include="Account\Registration.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Custom\registration.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />

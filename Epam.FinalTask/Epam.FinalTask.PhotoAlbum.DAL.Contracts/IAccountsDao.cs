@@ -9,5 +9,7 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
     public interface IAccountsDao
     {
         string GetPassByLogin(string login);
+
+        bool SetPassToUser(string userName, string hashedPass);
     }
 }

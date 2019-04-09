@@ -49,8 +49,30 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                 case "admin":
                     return new[] { "Users", "Admins" };
 
+                case "superadmin":
+                    return new[] { "Users", "Admins", "SuperAdmins" };
+
                 default:
                     return new string[0];
+            }
+        }
+
+        public bool UserRegistration(string userName, string password)
+        {
+            if (this.usersLogic.Add(userName))
+            {
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    return false;
+                }
+
+                string hashedPass = this.GetHashedPass(userName, password);
+
+                return this.accountsDao.SetPassToUser(userName, hashedPass);
+            }
+            else
+            {
+                return false;
             }
         }
 

@@ -1,0 +1,70 @@
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+
+@{
+    Page.Title = "Registration";
+
+    string errorMessage = "";
+
+    if (IsPost)
+    {
+        string userName = Request["userName"];
+        string password = Request["password"];
+
+        if (dr.UsersLogic.GetUserByUserName(userName) == null)
+        {
+            if (dr.AccountsLogic.UserRegistration(userName, password))
+            {
+                Response.Redirect("~/Index");
+                return;
+            }
+            else
+            {
+                errorMessage = "User registration error.";
+            }
+        }
+        else
+        {
+            errorMessage = "User is allready exists.";
+        }
+    }
+}
+
+@section styles {
+    <link href="~/Content/Custom/registration.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/Scripts/Custom/registration.js"></script>
+}
+
+    <div class="wrap">
+        <h2 class="regFormHeader">Registration</h2>
+        <form class="regForm" method="post">
+            <div class="regBlock">
+                <label class="regForm_label" for="userName">User name</label>
+                <input class="regForm_input" type="text" id="userName" name="userName" required />
+                <p class="errorMessage" id="nameError"></p>
+                <p class="okMessage" id="nameOk"></p>
+            </div>
+            <div class="regBlock">
+                <label class="regForm_label" for="password">Password</label>
+                <input class="regForm_input" type="password" id="password" name="password" required />
+                <p class="errorMessage" id="passError"></p>
+                <p class="okMessage" id="passOk"></p>
+            </div>
+            <div class="regBlock">
+                <label class="regForm_label" for="repPassword">Repeat password</label>
+                <input class="regForm_input" type="password" id="repPassword" required />
+                <p class="errorMessage" id="repPassError"></p>
+                <p class="okMessage" id="repPassOk"></p>
+            </div>
+            <button id="btnSubmit" type="submit" class="btnReg">Submit</button>
+        </form>
+
+        @if (IsPost)
+        {
+            <div class="notSuccessRegistration">
+                <p>@errorMessage</p>
+            </div>
+        }
+    </div>
