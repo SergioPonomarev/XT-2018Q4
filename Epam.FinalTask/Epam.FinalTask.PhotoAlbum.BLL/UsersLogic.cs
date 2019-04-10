@@ -11,8 +11,6 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 {
     public class UsersLogic : IUsersLogic
     {
-        private static readonly int defaultAvatarId = 1;
-
         private readonly IUsersDao usersDao;
 
         public UsersLogic(IUsersDao usersDao)
@@ -32,7 +30,6 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                 User user = new User
                 {
                     UserName = userName,
-                    UserAvatarId = defaultAvatarId,
                 };
 
                 return this.usersDao.Add(user);

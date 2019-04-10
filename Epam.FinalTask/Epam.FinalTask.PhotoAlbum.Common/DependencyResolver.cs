@@ -22,6 +22,8 @@ namespace Epam.FinalTask.PhotoAlbum.Common
         private static IUsersDao usersDao;
         private static IAvatarsLogic avatarsLogic;
         private static IAvatarsDao avatarsDao;
+        private static IImagesLogic imagesLogic;
+        private static IImagesDao imagesDao;
 
         private static IAccountsDao AccountsDao
         {
@@ -104,10 +106,36 @@ namespace Epam.FinalTask.PhotoAlbum.Common
             }
         }
 
+        private static IImagesDao ImagesDao
+        {
+            get
+            {
+                if (imagesDao == null)
+                {
+                    string key = ConfigurationManager.AppSettings["ImagesDaoKey"];
+
+                    switch (key.ToLower())
+                    {
+                        case "sqldb":
+                            imagesDao = new SqlImagesDao(conStr);
+                            break;
+
+                        case "fakedb":
+                            imagesDao = new FakeImagesDao();
+                            break;
+                    }
+                }
+
+                return imagesDao;
+            }
+        }
+
         public static IAccountsLogic AccountsLogic => accountsLogic ?? (accountsLogic = new AccountsLogic(AccountsDao, UsersLogic));
 
         public static IUsersLogic UsersLogic => usersLogic ?? (usersLogic = new UsersLogic(UsersDao));
 
         public static IAvatarsLogic AvatarsLogic => avatarsLogic ?? (avatarsLogic = new AvatarsLogic(AvatarsDao));
+
+        public static IImagesLogic ImagesLogic => imagesLogic ?? (imagesLogic = new ImagesLogic(ImagesDao));
     }
 }

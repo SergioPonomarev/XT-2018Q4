@@ -1,8 +1,71 @@
-﻿@{
-    
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
+
+@{
+    if (!User.IsInRole("SuperAdmins"))
+    {
+        Response.Redirect("~/Index");
+        return;
+    }
+
+    Page.Title = "Photo Album";
+
+    Avatar defaultAvatar = dr.AvatarsLogic.GetDefaultAvatar();
+
+    string errorMessage = null;
+
+    if (IsPost)
+    {
+        WebImage image = WebImage.GetImageFromRequest();
+
+        if (image != null)
+        {
+            if (image.GetBytes(image.ImageFormat).Length <= 524288)
+            {
+                Avatar avatar = new Avatar();
+
+                image.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+
+                byte[] data = image.GetBytes(image.ImageFormat);
+
+                avatar.MimeType = MimeMapping.GetMimeMapping(image.FileName);
+
+                avatar.AvatarData = Convert.ToBase64String(data);
+
+                dr.AvatarsLogic.SetDefaultAvatar(avatar);
+            }
+            else
+            {
+                errorMessage = "File size must not exceed 0.5 mb.";
+            }
+        }
+    }
 }
 
+@section styles {
+    <link href="~/Content/Custom/management.css" rel="stylesheet" />
+}
 
-    <div>
-    
+<div class="wrap">
+    <div class="defaultAvatarBlock">
+        <div class="imageBlock">
+            <h2 class="imageHeader">Default Users Avatar</h2>
+            <img class="imageBlock_img" src="data:@defaultAvatar.MimeType;base64,@defaultAvatar.AvatarData" alt="Default Users Avatar" />
+        </div>
+
+        <div class="formBlock">
+            <form method="post" class="uploadDefaultAvatar" enctype="multipart/form-data">
+                <label class="formLabel" for="avatar">Change Default Avatar</label>
+                <input id="avatar" type="file" name="avatar" class="formInput_file" />
+                <button type="submit" class="btnSubmit">Upload Avatar</button>
+            </form>
+        </div>
+
+        @if (IsPost)
+        {
+            <div class="errorMessage">
+                <p>@errorMessage</p>
+            </div>
+        }
     </div>
+</div>

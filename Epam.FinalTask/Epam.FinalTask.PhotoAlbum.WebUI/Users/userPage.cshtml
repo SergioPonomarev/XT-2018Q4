@@ -1,17 +1,82 @@
-﻿@{
-    Layout = null;
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
+@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+@using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
+
+@{
+    if (!User.IsInRole("Users"))
+    {
+        Response.Redirect("~/Account/Registration");
+        return;
+    }
+
+    string userName = Request["name"];
+    Page.Title = userName;
+
+    User user = dr.UsersLogic.GetUserByUserName(userName);
+    Avatar avatar = dr.AvatarsLogic.GetUserAvatarByUserName(userName);
 }
 
-<!DOCTYPE html>
+@section styles {
+    <link href="~/Content/Custom/userPage.css" rel="stylesheet" />
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+    <div class="wrap">
+        <div class="userDataBlock">
+            <h2 class="userAcc_header">@userName</h2>
+            <img class="userAcc_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User Avatar" />
+
+            @if ((User.IsInRole("Admins") && user.UserRole == "User") || User.IsInRole("SuperAdmins"))
+            {
+                if (!user.Banned)
+                {
+                    <button class="btnUser btnUserBan" title="Ban this user"><i class="fa fa-ban"></i></button>
+                }
+                else
+                {
+                    <button class="btnUser btnUserUnban" title="Unban this user"><i class="fa fa-check-circle-o"></i></button>
+                }
+            }
+
+            @if (User.Identity.Name == user.UserName)
+            {
+                <a href="/Users/EditProfile?name=@user.UserName" class="btnProfile btnEditProfile">Edit profile</a>
+                <button data-id="@user.UserId" id="deleteBtn" class="btnProfile btnDeleteProfile">Delete profile</button>
+            }
+        </div>
+
+        <div class="imagesBlock">
+            @foreach (Image image in user.UserImages)
+            {
+                <div class="imageWrapper">
+                    @if (!image.Banned)
+                    {
+                        <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
+                    }
+                    else
+                    {
+                        Image bannedImage = dr.ImagesLogic.GetBannedImage();
+                        <img class="image" src="data:@bannedImage.MimeType;base64,@image.ImageData" alt="This image is banned" />
+                    }
+
+                    @if ((User.IsInRole("Admins") && user.UserRole == "User") || User.IsInRole("SuperAdmins"))
+                    {
+                        if (!image.Banned)
+                        {
+                            <button class="btnImage btnImageBan" title="Ban this image"><i class="fa fa-ban"></i></button>
+                        }
+                        else
+                        {
+                            <button class="btnImage btnImageUnban" title="Unban this image"><i class="fa fa-check-circle-o"></i></button>
+                        }
+                    }
+
+                    @if (User.Identity.Name == user.UserName)
+                    {
+                        <button class="btnImage btnEditImage" title="Edit image"><i class="fa fa-pencil"></i></button>
+                        <button class="btnImage btnDeleteImage" title="Delete image"><i class="fa fa-times"></i></button>
+                    }
+                </div>
+            }
+        </div>
     </div>
-</body>
-</html>

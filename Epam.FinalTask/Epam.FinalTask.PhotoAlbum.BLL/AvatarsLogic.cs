@@ -19,6 +19,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.avatarsDao = avatarsDao;
         }
 
+        public Avatar GetDefaultAvatar()
+        {
+            return this.avatarsDao.GetDefaultAvatar();
+        }
+
         public Avatar GetUserAvatarByUserName(string userName)
         {
             return this.avatarsDao.GetUserAvatarByUserName(userName);

@@ -11,8 +11,9 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
     public class FakeUsersDao : IUsersDao
     {
         private static readonly string defaultRole = "User";
-        private List<User> users;
+        private static readonly int defaultAvatarId = 1;
 
+        private List<User> users;
         private static int id = 1;
 
         public FakeUsersDao()
@@ -33,7 +34,14 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 
         public User GetUserByUserName(string userName)
         {
-            return this.users.FirstOrDefault(u => u.UserName == userName);
+            User user = this.users.FirstOrDefault(u => u.UserName == userName);
+
+            if (user != null)
+            {
+                user.UserImages = Enumerable.Empty<Image>();
+            }
+
+            return user;
         }
 
         public bool Add(User user)
@@ -42,6 +50,7 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             {
                 user.UserId = id++;
                 user.UserRole = defaultRole;
+                user.UserAvatarId = defaultAvatarId;
 
                 this.users.Add(user);
                 return true;

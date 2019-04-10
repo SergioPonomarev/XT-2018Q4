@@ -47,5 +47,10 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             avatar.AvatarId = defaultAvatarId;
             this.avatars[0] = avatar;
         }
+
+        public Avatar GetDefaultAvatar()
+        {
+            return this.avatars[0];
+        }
     }
 }

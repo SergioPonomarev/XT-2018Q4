@@ -1,50 +1,7 @@
-﻿@using  dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
-
-@{
+﻿@{
     Page.Title = "Photo Album";
-
-    string errorMessage = null;
-
-    if (IsPost)
-    {
-        WebImage image = WebImage.GetImageFromRequest();
-
-        if (image != null)
-        {
-            if (image.GetBytes(image.ImageFormat).Length <= 524288)
-            {
-                Avatar avatar = new Avatar();
-
-                image.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
-
-                byte[] data = image.GetBytes(image.ImageFormat);
-
-                avatar.MimeType = MimeMapping.GetMimeMapping(image.FileName);
-
-                avatar.AvatarData = Convert.ToBase64String(data);
-
-                dr.AvatarsLogic.SetDefaultAvatar(avatar);
-            }
-            else
-            {
-                errorMessage = "File size must not exceed 0.5 mb.";
-            }
-        }
-    }
 }
 
     <div class="wrap">
-        <form method="post" class="uploadDefaultAvatar" enctype="multipart/form-data">
-            <label class="formLabel" for="avatar">Default Users Avatar</label>
-            <input id="avatar" type="file" name="avatar" class="formInput_file" />
-            <button type="submit" class="btnSubmit">Upload Avatar</button>
-        </form>
-
-        @if (IsPost)
-        {
-            <div class="errorMessage">
-                <p>@errorMessage</p>
-            </div>
-        }
+        
     </div>

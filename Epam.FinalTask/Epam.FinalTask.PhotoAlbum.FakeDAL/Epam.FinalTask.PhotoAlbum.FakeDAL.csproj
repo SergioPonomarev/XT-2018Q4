@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="FakeAccountsDao.cs" />
     <Compile Include="FakeAvatarsDao.cs" />
+    <Compile Include="FakeImagesDao.cs" />
     <Compile Include="FakeUsersDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

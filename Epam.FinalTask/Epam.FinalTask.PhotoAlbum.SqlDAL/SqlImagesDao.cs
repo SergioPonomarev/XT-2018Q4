@@ -8,26 +8,16 @@ using Epam.FinalTask.PhotoAlbum.Entities;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
-    public class SqlAvatarsDao : IAvatarsDao
+    public class SqlImagesDao : IImagesDao
     {
         private readonly string conStr;
 
-        public SqlAvatarsDao(string connectionString)
+        public SqlImagesDao(string connectionString)
         {
             this.conStr = connectionString;
         }
 
-        public Avatar GetDefaultAvatar()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Avatar GetUserAvatarByUserName(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetDefaultAvatar(Avatar avatar)
+        public Image GetBannedImage()
         {
             throw new NotImplementedException();
         }

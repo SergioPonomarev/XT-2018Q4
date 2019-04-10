@@ -17,5 +17,7 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
         public int UserAvatarId { get; set; }
 
         public IEnumerable<Image> UserImages { get; set; }
+
+        public bool Banned { get; set; }
     }
 }

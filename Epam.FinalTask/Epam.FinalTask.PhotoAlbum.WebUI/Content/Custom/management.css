@@ -1,0 +1,29 @@
+﻿.imageBlock {
+    margin: 0 auto 20px;
+    width: 300px;
+}
+
+.formBlock {
+    width: 300px;
+    margin: 0 auto 20px;
+    line-height: 24px;
+}
+
+.formLabel {
+    margin-bottom: 10px;
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.formInput_file {
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+.btnSubmit {
+    border: none;
+    background-color: #92ebb1;
+    width: 300px;
+    height: 40px;
+}

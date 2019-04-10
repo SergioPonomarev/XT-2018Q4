@@ -12,10 +12,16 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 
         public string MimeType { get; set; }
 
-        public string ImageDate { get; set; }
+        public string ImageData { get; set; }
 
         public DateTime ImageDateOfUpload { get; set; }
 
         public IEnumerable<Comment> Comments { get; set; }
+
+        public string Description { get; set; }
+
+        public string ImageOwner { get; set; }
+
+        public bool Banned { get; set; }
     }
 }

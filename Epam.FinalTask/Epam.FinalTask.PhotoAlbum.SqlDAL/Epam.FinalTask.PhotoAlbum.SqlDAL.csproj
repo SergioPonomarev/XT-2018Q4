@@ -44,6 +44,7 @@
     <Compile Include="SqlAccountsDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlAvatarsDao.cs" />
+    <Compile Include="SqlImagesDao.cs" />
     <Compile Include="SqlUsersDao.cs" />
   </ItemGroup>
   <ItemGroup>
