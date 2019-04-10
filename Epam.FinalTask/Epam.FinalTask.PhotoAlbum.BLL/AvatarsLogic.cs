@@ -16,12 +16,17 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public AvatarsLogic(IAvatarsDao avatarsDao)
         {
-            this.avatarsDao = new FakeAvatarsDao();
+            this.avatarsDao = avatarsDao;
         }
 
         public Avatar GetUserAvatarByUserName(string userName)
         {
-            throw new NotImplementedException();
+            return this.avatarsDao.GetUserAvatarByUserName(userName);
+        }
+
+        public void SetDefaultAvatar(Avatar avatar)
+        {
+            this.avatarsDao.SetDefaultAvatar(avatar);
         }
     }
 }

@@ -13,5 +13,7 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
         public string CommentText { get; set; }
 
         public DateTime CommentDate { get; set; }
+
+        public User CommentAuthor { get; set; }
     }
 }

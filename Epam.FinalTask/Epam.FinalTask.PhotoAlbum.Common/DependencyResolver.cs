@@ -92,7 +92,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                             break;
 
                         case "fakedb":
-                            avatarsDao = new FakeAvatarsDao();
+                            avatarsDao = new FakeAvatarsDao(UsersDao);
                             break;
 
                         default:

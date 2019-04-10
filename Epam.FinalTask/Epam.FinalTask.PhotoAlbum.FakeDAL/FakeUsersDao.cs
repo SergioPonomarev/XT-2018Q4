@@ -24,6 +24,7 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
                     UserId = id,
                     UserName = "admin",
                     UserRole = "SuperAdmin",
+                    UserAvatarId = 1,
                 }
             };
 

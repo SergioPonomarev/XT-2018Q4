@@ -38,5 +38,9 @@
             {
                 <a href="/Images/uploadImage" class="menuBlock_link">Upload</a>
             }
+            @if (User.IsInRole("SuperAdmins"))
+            {
+                <a href="/Administration/Management" class="menuBlock_link">Management</a>
+            }
         </div>
     </div>

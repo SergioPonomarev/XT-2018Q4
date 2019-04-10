@@ -99,6 +99,7 @@
     <Content Include="Account\Logout.cshtml" />
     <Content Include="Images\uploadImage.cshtml" />
     <Content Include="Account\Registration.cshtml" />
+    <Content Include="Administration\Management.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\registration.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -122,7 +123,7 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Users\userPage.cshtml" />
+    <Content Include="Users\UserPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

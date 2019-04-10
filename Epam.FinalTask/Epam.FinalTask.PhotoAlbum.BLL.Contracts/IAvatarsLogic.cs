@@ -10,5 +10,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
     public interface IAvatarsLogic
     {
         Avatar GetUserAvatarByUserName(string userName);
+
+        void SetDefaultAvatar(Avatar avatar);
     }
 }
