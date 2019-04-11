@@ -1,0 +1,83 @@
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+@using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
+@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
+@using Comment = Epam.FinalTask.PhotoAlbum.Entities.Comment
+
+@{
+    string imageIdStr = Request["imageId"];
+    int imageId = int.Parse(imageIdStr);
+
+    Image image = dr.ImagesLogic.GetImageById(imageId);
+
+    User owner = image.ImageOwner;
+
+    Avatar avatarOwner = dr.AvatarsLogic.GetUserAvatarByUserName(owner.UserName);
+
+    User visiter = null;
+
+    bool liked = false;
+
+    if (User.Identity.IsAuthenticated)
+    {
+        visiter = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+        if (image.Likes.FirstOrDefault(u => u.UserName == visiter.UserName) != null)
+        {
+            liked = true;
+        }
+    }
+}
+
+@section styles {
+    <link href="~/Content/Custom/imagePage.css" rel="stylesheet" />
+}
+
+    <div class="wrap">
+        <div class="ownerBlock">
+            <a href="/Users/UserPage?userName=@owner.UserName" class="userPageLink">
+                <img src="data:@avatarOwner.MimeType;base64,@avatarOwner.AvatarData" class="ownerAvatar" alt="Image owner avatar" />
+                <p class="ownerName">@owner.UserName</p>
+            </a>
+        </div>
+
+        <div class="imageBlock">
+            <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="Image" />
+
+            <span class="likesCount">@image.Likes.Count()</span>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (!liked)
+                {
+                    <button class="btnImage btnLike" title="Like this image"><i class="fa fa-heart-o"></i></button>
+                }
+                else
+                {
+                    <button class="btnImage btnUnlike" title="Unlike this image"><i class="fa fa-heart"></i></button>
+                }
+            }
+            else
+            {
+                <span class="likeIcon"><i class="fa fa-heart"></i></span>
+            }
+
+            @if ((User.IsInRole("Admins") && owner.UserRole == "User") || User.IsInRole("SuperAdmins"))
+            {
+                if (!image.Banned)
+                {
+                    <button class="btnImage btnImageBan" title="Ban this image"><i class="fa fa-ban"></i></button>
+                }
+                else
+                {
+                    <button class="btnImage btnImageUnban" title="Unban this image"><i class="fa fa-check-circle-o"></i></button>
+                }
+            }
+
+            @if (User.Identity.Name == owner.UserName)
+            {
+                <button class="btnImage btnEditImage" title="Edit image"><i class="fa fa-pencil"></i></button>
+                <button class="btnImage btnDeleteImage" title="Delete image"><i class="fa fa-times"></i></button>
+            }
+        </div>
+    </div>

@@ -49,33 +49,17 @@
             @foreach (Image image in user.UserImages)
             {
                 <div class="imageWrapper">
-                    @if (!image.Banned)
-                    {
-                        <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
-                    }
-                    else
-                    {
-                        Image bannedImage = dr.ImagesLogic.GetBannedImage();
-                        <img class="image" src="data:@bannedImage.MimeType;base64,@image.ImageData" alt="This image is banned" />
-                    }
-
-                    @if ((User.IsInRole("Admins") && user.UserRole == "User") || User.IsInRole("SuperAdmins"))
-                    {
-                        if (!image.Banned)
+                    <a href="/Images/ImagePage?imageId=@image.ImageId" class="imagePageLink">
+                        @if (!image.Banned)
                         {
-                            <button class="btnImage btnImageBan" title="Ban this image"><i class="fa fa-ban"></i></button>
+                            <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
                         }
                         else
                         {
-                            <button class="btnImage btnImageUnban" title="Unban this image"><i class="fa fa-check-circle-o"></i></button>
+                            Image bannedImage = dr.ImagesLogic.GetBannedImage();
+                            <img class="image" src="data:@bannedImage.MimeType;base64,@image.ImageData" alt="This image is banned" />
                         }
-                    }
-
-                    @if (User.Identity.Name == user.UserName)
-                    {
-                        <button class="btnImage btnEditImage" title="Edit image"><i class="fa fa-pencil"></i></button>
-                        <button class="btnImage btnDeleteImage" title="Delete image"><i class="fa fa-times"></i></button>
-                    }
+                    </a>
                 </div>
             }
         </div>

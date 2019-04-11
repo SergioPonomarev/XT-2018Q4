@@ -14,5 +14,10 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         {
             throw new NotImplementedException();
         }
+
+        public Image GetImageById(int imageId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

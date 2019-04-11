@@ -20,7 +20,12 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public Image GetBannedImage()
         {
-            throw new NotImplementedException();
+            return this.imagesDao.GetBannedImage();
+        }
+
+        public Image GetImageById(int imageId)
+        {
+            return this.imagesDao.GetImageById(imageId);
         }
     }
 }

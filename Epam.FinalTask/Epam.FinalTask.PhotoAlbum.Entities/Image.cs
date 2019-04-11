@@ -20,8 +20,10 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 
         public string Description { get; set; }
 
-        public string ImageOwner { get; set; }
+        public User ImageOwner { get; set; }
 
         public bool Banned { get; set; }
+
+        public IEnumerable<User> Likes { get; set; }
     }
 }

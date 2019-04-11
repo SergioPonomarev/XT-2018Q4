@@ -14,7 +14,7 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 
         public DateTime CommentDate { get; set; }
 
-        public string CommentAuthor { get; set; }
+        public User CommentAuthor { get; set; }
 
         public bool Banned { get; set; }
     }

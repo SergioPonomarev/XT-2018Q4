@@ -10,5 +10,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
     public interface IImagesLogic
     {
         Image GetBannedImage();
+
+        Image GetImageById(int imageId);
     }
 }

@@ -10,5 +10,7 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
     public interface IImagesDao
     {
         Image GetBannedImage();
+
+        Image GetImageById(int imageId);
     }
 }
