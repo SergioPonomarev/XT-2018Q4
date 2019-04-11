@@ -23,6 +23,11 @@
 
     <div class="wrap">
         <div class="userDataBlock">
+            @if (user.Banned)
+            {
+                <p class="banMessage">This user is banned!</p>
+            }
+
             <h2 class="userAcc_header">@userName</h2>
             <img class="userAcc_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User Avatar" />
 
@@ -30,11 +35,15 @@
             {
                 if (!user.Banned)
                 {
-                    <button class="btnUser btnUserBan" title="Ban this user"><i class="fa fa-ban"></i></button>
+                    <button class="btnUser btnUserBan" title="Ban this user">
+                        <i class="fa fa-ban"></i>
+                    </button>
                 }
                 else
                 {
-                    <button class="btnUser btnUserUnban" title="Unban this user"><i class="fa fa-check-circle-o"></i></button>
+                    <button class="btnUser btnUserUnban" title="Unban this user">
+                        <i class="fa fa-check-circle-o"></i>
+                    </button>
                 }
             }
 

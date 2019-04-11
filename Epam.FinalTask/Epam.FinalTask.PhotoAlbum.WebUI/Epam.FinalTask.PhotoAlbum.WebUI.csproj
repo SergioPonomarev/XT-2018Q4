@@ -86,6 +86,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Custom\imagePage.css" />
     <Content Include="Content\Custom\layout.css" />
     <Content Include="Content\Custom\login.css" />
     <Content Include="Content\Custom\management.css" />
@@ -102,6 +103,7 @@
     <Content Include="Images\UploadImage.cshtml" />
     <Content Include="Account\Registration.cshtml" />
     <Content Include="Administration\Management.cshtml" />
+    <Content Include="Images\ImagePage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\registration.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
