@@ -1,1 +1,56 @@
-﻿
+﻿.userDataBlock {
+    width: 500px;
+    margin: auto;
+    position: relative;
+}
+
+.userAcc_header {
+    font-size: 30px;
+    padding: 10px;
+    border-bottom: 1px solid #c4c4c4;
+    margin-bottom: 20px;
+}
+
+.userAcc_avatar {
+    display: block;
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto 30px;
+}
+
+.btnUser {
+    position: absolute;
+    top: 10px;
+    right: -50px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.btnProfile {
+    border: none;
+    width: 242px;
+    text-align: center;
+    font-size: 20px;
+    height: 60px;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.btnProfile_edit {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: #f0eeaf;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+}
+
+.btnProfile_edit:active {
+    color: black;
+}
+
+.btnProfile_delete {
+    background-color: #eb9292;
+}
+

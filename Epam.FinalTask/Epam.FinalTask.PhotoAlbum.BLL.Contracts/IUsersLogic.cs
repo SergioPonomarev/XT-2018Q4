@@ -14,5 +14,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
         bool Add(string userName);
 
         IEnumerable<User> GetAll();
+
+        bool RemoveUser(string userName);
     }
 }

@@ -86,6 +86,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Custom\editProfile.css" />
     <Content Include="Content\Custom\imagePage.css" />
     <Content Include="Content\Custom\layout.css" />
     <Content Include="Content\Custom\login.css" />
@@ -106,6 +107,7 @@
     <Content Include="Images\ImagePage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\registration.js" />
+    <Content Include="Scripts\Custom\userPage.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -128,6 +130,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Users\UserPage.cshtml" />
+    <Content Include="Users\EditProfile.cshtml" />
+    <Content Include="Users\DeleteProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,79 @@
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
+
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    Page.Title = "Profile editing";
+
+    string userName = Request["userName"];
+
+    if (userName == null)
+    {
+        userName = User.Identity.Name;
+    }
+
+    string errorMessage = null;
+
+    if (IsPost)
+    {
+        WebImage image = WebImage.GetImageFromRequest();
+
+        if (image != null)
+        {
+            if (image.GetBytes(image.ImageFormat).Length <= 524288)
+            {
+                Avatar newAvatar = new Avatar();
+
+                image.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+
+                byte[] data = image.GetBytes(image.ImageFormat);
+
+                newAvatar.MimeType = MimeMapping.GetMimeMapping(image.FileName);
+
+                newAvatar.AvatarData = Convert.ToBase64String(data);
+
+                dr.AvatarsLogic.SetAvatarToUser(newAvatar, userName);
+            }
+            else
+            {
+                errorMessage = "File size must not exceed 0.5 mb.";
+            }
+        }
+    }
+
+
+    Avatar avatar = dr.AvatarsLogic.GetUserAvatarByUserName(userName);
+}
+
+@section styles {
+    <link href="~/Content/Custom/editProfile.css" rel="stylesheet" />
+}
+
+    <div class="wrap">
+        <div class="userDataBlock">
+            <h2 class="userName">@userName</h2>
+            <img class="userAvatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User avatar" />
+        </div>
+
+        <form method="post" class="updateUserForm" enctype="multipart/form-data">
+            <div class="formBlock">
+                <label for="avatar" class="formLabel">New user avatar</label>
+                <input id="avatar" type="file" name="avatar" class="formInput_file" />
+            </div>
+
+            <button type="submit" class="btnSubmit">Update profile</button>
+        </form>
+
+        @if (IsPost)
+        {
+            <div class="errorMessage">
+                <p>@errorMessage</p>
+            </div>
+        }
+    </div>

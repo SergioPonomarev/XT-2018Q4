@@ -49,5 +49,10 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
         {
             return this.usersDao.GetUserByUserName(userName);
         }
+
+        public bool RemoveUser(string userName)
+        {
+            return this.usersDao.RemoveUser(userName);
+        }
     }
 }

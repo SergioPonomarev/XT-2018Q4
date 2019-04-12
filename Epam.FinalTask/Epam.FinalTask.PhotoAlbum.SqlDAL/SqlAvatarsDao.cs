@@ -27,6 +27,11 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             throw new NotImplementedException();
         }
 
+        public void SetAvatarToUser(Avatar newAvatar, string userName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetDefaultAvatar(Avatar avatar)
         {
             throw new NotImplementedException();

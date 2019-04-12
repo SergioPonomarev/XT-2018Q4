@@ -52,5 +52,21 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         {
             return this.avatars[0];
         }
+
+        public void SetAvatarToUser(Avatar newAvatar, string userName)
+        {
+            newAvatar.AvatarId = avatarId++;
+            this.avatars.Add(newAvatar);
+            Avatar oldAvatar = this.GetUserAvatarByUserName(userName);
+            if (oldAvatar.AvatarId != defaultAvatarId)
+            {
+                this.avatars.Remove(oldAvatar);
+            }
+
+            User user = this.usersDao.GetUserByUserName(userName);
+            user.UserAvatarId = newAvatar.AvatarId;
+            this.usersDao.RemoveUser(user.UserName);
+            this.usersDao.Add(user);
+        }
     }
 }

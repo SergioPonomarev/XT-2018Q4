@@ -21,6 +21,10 @@
     <link href="~/Content/Custom/userPage.css" rel="stylesheet" />
 }
 
+@section scripts {
+    <script src="~/Scripts/Custom/userPage.js"></script>
+}
+
     <div class="wrap">
         <div class="userDataBlock">
             @if (user.Banned)
@@ -49,8 +53,8 @@
 
             @if (User.Identity.Name == user.UserName)
             {
-                <a href="/Users/EditProfile?name=@user.UserName" class="btnProfile btnEditProfile">Edit profile</a>
-                <button data-id="@user.UserId" id="deleteBtn" class="btnProfile btnDeleteProfile">Delete profile</button>
+                <a href="/Users/EditProfile?userName=@user.UserName" class="btnProfile btnProfile_edit">Edit profile</a>
+                <button data-name="@user.UserName" id="deleteBtn" class="btnProfile btnProfile_delete">Delete profile</button>
             }
         </div>
 

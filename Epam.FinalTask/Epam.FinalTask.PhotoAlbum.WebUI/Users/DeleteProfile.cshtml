@@ -1,0 +1,22 @@
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+
+@{
+    if (!IsPost)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    string userName = Request["userName"];
+
+    if (userName != null)
+    {
+        FormsAuthentication.SignOut();
+        dr.UsersLogic.RemoveUser(userName);
+        Response.Redirect("/Index");
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+    }
+}

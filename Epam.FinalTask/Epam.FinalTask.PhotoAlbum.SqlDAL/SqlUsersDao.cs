@@ -31,5 +31,10 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             throw new NotImplementedException();
         }
+
+        public bool RemoveUser(string userName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

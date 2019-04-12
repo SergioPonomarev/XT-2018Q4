@@ -48,9 +48,12 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         {
             try
             {
-                user.UserId = id++;
-                user.UserRole = defaultRole;
-                user.UserAvatarId = defaultAvatarId;
+                if (user.UserId == 0)
+                {
+                    user.UserId = id++;
+                    user.UserRole = defaultRole;
+                    user.UserAvatarId = defaultAvatarId;
+                }
 
                 this.users.Add(user);
                 return true;
@@ -64,6 +67,11 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         public IEnumerable<User> GetAll()
         {
             return this.users;
+        }
+
+        public bool RemoveUser(string userName)
+        {
+            return this.users.Remove(this.GetUserByUserName(userName));
         }
     }
 }
