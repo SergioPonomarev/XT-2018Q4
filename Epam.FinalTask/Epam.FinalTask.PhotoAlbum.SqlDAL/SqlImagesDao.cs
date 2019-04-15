@@ -17,12 +17,22 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             this.conStr = connectionString;
         }
 
+        public bool Add(Image image)
+        {
+            throw new NotImplementedException();
+        }
+
         public Image GetBannedImage()
         {
             throw new NotImplementedException();
         }
 
         public Image GetImageById(int imageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetBannedImage(Image image)
         {
             throw new NotImplementedException();
         }

@@ -12,5 +12,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
         Image GetBannedImage();
 
         Image GetImageById(int imageId);
+
+        bool Add(Image image);
+
+        void SetBannedImage(Image image);
     }
 }

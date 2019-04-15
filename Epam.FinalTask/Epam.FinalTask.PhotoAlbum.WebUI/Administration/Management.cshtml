@@ -1,5 +1,7 @@
 ﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
 @using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
+@using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
+@using User = Epam.FinalTask.PhotoAlbum.Entities.User
 
 @{
     if (!User.IsInRole("SuperAdmins"))
@@ -10,36 +12,72 @@
 
     Page.Title = "Photo Album";
 
-    Avatar defaultAvatar = dr.AvatarsLogic.GetDefaultAvatar();
+    string avatarOkMessage = null;
+    string avatarErrorMessage = null;
+    string imageOkMessage = null;
+    string imageErrorMessage = null;
 
-    string errorMessage = null;
+    int avatarMaxSize = 524288;
+    int imageMaxSize = 1048576;
 
     if (IsPost)
     {
-        WebImage image = WebImage.GetImageFromRequest();
+        WebImage avatarFile = WebImage.GetImageFromRequest("avatar");
 
-        if (image != null)
+        if (avatarFile != null)
         {
-            if (image.GetBytes(image.ImageFormat).Length <= 524288)
+            if (avatarFile.GetBytes(avatarFile.ImageFormat).Length <= avatarMaxSize)
             {
                 Avatar avatar = new Avatar();
 
-                image.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+                avatarFile.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
 
-                byte[] data = image.GetBytes(image.ImageFormat);
+                byte[] data = avatarFile.GetBytes(avatarFile.ImageFormat);
 
-                avatar.MimeType = MimeMapping.GetMimeMapping(image.FileName);
+                avatar.MimeType = MimeMapping.GetMimeMapping(avatarFile.FileName);
 
                 avatar.AvatarData = Convert.ToBase64String(data);
 
                 dr.AvatarsLogic.SetDefaultAvatar(avatar);
+
+                avatarOkMessage = "Avatar has been uploaded successfully.";
             }
             else
             {
-                errorMessage = "File size must not exceed 0.5 mb.";
+                avatarErrorMessage += "Avatar size must not exceed 0.5 mb.";
+            }
+        }
+
+        WebImage imageFile = WebImage.GetImageFromRequest("image");
+
+        if (imageFile != null)
+        {
+            if (imageFile.GetBytes(imageFile.ImageFormat).Length <= imageMaxSize)
+            {
+                Image image = new Image();
+
+                imageFile.Resize(width: 1000, height: 1000, preserveAspectRatio: true, preventEnlarge: true);
+
+                byte[] data = imageFile.GetBytes(imageFile.ImageFormat);
+
+                image.MimeType = MimeMapping.GetMimeMapping(imageFile.FileName);
+
+                image.ImageData = Convert.ToBase64String(data);
+
+                dr.ImagesLogic.SetBannedImage(image);
+
+                imageOkMessage += $"Image has been uploaded succesfully.";
+            }
+            else
+            {
+                imageErrorMessage += "Image size must not exceed 1 mb.";
             }
         }
     }
+
+    Avatar defaultAvatar = dr.AvatarsLogic.GetDefaultAvatar();
+
+    Image bannedImage = dr.ImagesLogic.GetBannedImage();
 }
 
 @section styles {
@@ -47,25 +85,41 @@
 }
 
 <div class="wrap">
-    <div class="defaultAvatarBlock">
+    <div class="imagesBlock">
         <div class="imageBlock">
             <h2 class="imageHeader">Default Users Avatar</h2>
             <img class="imageBlock_img" src="data:@defaultAvatar.MimeType;base64,@defaultAvatar.AvatarData" alt="Default Users Avatar" />
         </div>
 
-        <div class="formBlock">
-            <form method="post" class="uploadDefaultAvatar" enctype="multipart/form-data">
+        <div class="imageBlock">
+            <h2 class="imageHeader">Banned image</h2>
+            <img class="imageBlock_img" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="Banned image" />
+        </div>
+    </div>
+
+    <div class="formsBlock">
+        <form method="post" class="imageForm" enctype="multipart/form-data">
+            <div class="formBlock">
                 <label class="formLabel" for="avatar">Change Default Avatar</label>
                 <input id="avatar" type="file" name="avatar" class="formInput_file" />
-                <button type="submit" class="btnSubmit">Upload Avatar</button>
-            </form>
-        </div>
-
-        @if (IsPost)
-        {
-            <div class="errorMessage">
-                <p>@errorMessage</p>
             </div>
-        }
+            <div class="formBlock">
+                <label class="formLabel" for="image">Change Banned Image</label>
+                <input id="image" type="file" name="image" class="formInput_file" />
+            </div>
+            <button type="submit" class="btnSubmit">Update</button>
+        </form>
     </div>
+
+    @if (IsPost)
+    {
+        <div class="okMessage">
+            <p>@avatarOkMessage</p>
+            <p>@imageOkMessage</p>
+        </div>
+        <div class="errorMessage">
+            <p>@avatarErrorMessage</p>
+            <p>@imageErrorMessage</p>
+        </div>
+    }
 </div>

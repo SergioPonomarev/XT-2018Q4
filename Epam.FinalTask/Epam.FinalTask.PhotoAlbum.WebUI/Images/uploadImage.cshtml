@@ -1,17 +1,91 @@
-﻿@{
-    Layout = null;
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+@using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
+
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    Page.Title = "Upload image";
+
+    string errorMessage = null;
+
+    int imageMaxSize = 1048576;
+
+    if (IsPost)
+    {
+        WebImage photo = WebImage.GetImageFromRequest();
+
+        string description = Request["description"];
+
+        if (photo != null)
+        {
+            if (photo.GetBytes(photo.ImageFormat).Length <= imageMaxSize)
+            {
+                Image image = new Image();
+
+                User user = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+                photo.Resize(width: 1000, height: 1000, preserveAspectRatio: true, preventEnlarge: true);
+
+                byte[] data = photo.GetBytes(photo.ImageFormat);
+
+                image.MimeType = MimeMapping.GetMimeMapping(photo.FileName);
+
+                image.ImageData = Convert.ToBase64String(data);
+
+                image.ImageDateOfUpload = DateTime.Now;
+
+                image.ImageOwner = user;
+
+                if (dr.ImagesLogic.Add(image))
+                {
+                    Response.Redirect($"/Users/UserPage?name={User.Identity.Name}");
+                }
+                else
+                {
+                    errorMessage = "File uploading error.";
+                }
+
+            }
+            else
+            {
+                errorMessage = "File size must not exceed 1 mb.";
+            }
+        }
+    }
 }
 
-<!DOCTYPE html>
+@section styles {
+    <link href="~/Content/Custom/uploadImage.css" rel="stylesheet" />
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+@section scripts {
+    <script src="~/Scripts/Custom/uploadImage.js"></script>
+}
+
+    <div class="wrap">
+        <h2 class="header">Upload new image</h2>
+        <form method="post" class="uploadImageForm" enctype="multipart/form-data">
+            <div class="formBlock">
+                <label for="image" class="formLabel">New image</label>
+                <input id="image" type="file" name="image" class="formInput_file" />
+            </div>
+            <div class="formBlock">
+                <label for="description" class="formLabel">Add description</label>
+                <textarea id="description" name="description" class="formInput_text"></textarea>
+                <span class="charCountValid" id="charCount">140</span>
+            </div>
+            <button id="btnSubmit" type="submit" class="btnUpload">Upload</button>
+        </form>
+
+        @if (IsPost)
+        {
+            <div class="errorMessage">
+                <p>@errorMessage</p>
+            </div>
+        }
     </div>
-</body>
-</html>

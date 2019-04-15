@@ -1,12 +1,28 @@
-﻿.imageBlock {
-    margin: 0 auto 20px;
+﻿.imagesBlock {
+    width: 705px;
+    margin: auto;
+}
+
+.imageBlock {
+    display: inline-block;
     width: 300px;
+    margin: 0 25px 20px;
+}
+
+.imageBlock_img {
+    width: 100%;
+}
+
+.formsBlock {
+    width: 705px;
+    margin: 0 auto 20px;
+    line-height: 24px;
 }
 
 .formBlock {
     width: 300px;
-    margin: 0 auto 20px;
-    line-height: 24px;
+    display: inline-block;
+    margin: 0 25px 20px;
 }
 
 .formLabel {
@@ -22,8 +38,38 @@
 }
 
 .btnSubmit {
+    display: block;
+    margin: auto;
     border: none;
     background-color: #92ebb1;
     width: 300px;
-    height: 40px;
+    height: 50px;
+}
+
+.okMessage {
+    width: 500px;
+    text-align: center;
+    background-color: rgba(22, 234, 107, 0.3);
+    color: #2aa304;
+    font-size: 20px;
+    line-height:35px;
+    margin:10px auto;
+}
+
+.errorMessage {
+    width: 500px;
+    text-align: center;
+    background-color: rgba(234, 22, 33, 0.3);
+    color: #cc0202;
+    font-size: 20px;
+    line-height: 35px;
+    margin: 10px auto;
+}
+
+.okMessage p {
+    margin: 0;
+}
+
+.errorMessage p {
+    margin: 0;
 }

@@ -92,6 +92,7 @@
     <Content Include="Content\Custom\login.css" />
     <Content Include="Content\Custom\management.css" />
     <Content Include="Content\Custom\registration.css" />
+    <Content Include="Content\Custom\uploadImage.css" />
     <Content Include="Content\Custom\userPage.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -107,6 +108,7 @@
     <Content Include="Images\ImagePage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\registration.js" />
+    <Content Include="Scripts\Custom\uploadImage.js" />
     <Content Include="Scripts\Custom\userPage.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

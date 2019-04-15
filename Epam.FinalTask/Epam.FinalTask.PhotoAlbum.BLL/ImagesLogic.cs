@@ -18,6 +18,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.imagesDao = imagesDao;
         }
 
+        public bool Add(Image image)
+        {
+            return this.imagesDao.Add(image);
+        }
+
         public Image GetBannedImage()
         {
             return this.imagesDao.GetBannedImage();
@@ -26,6 +31,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
         public Image GetImageById(int imageId)
         {
             return this.imagesDao.GetImageById(imageId);
+        }
+
+        public void SetBannedImage(Image image)
+        {
+            this.imagesDao.SetBannedImage(image);
         }
     }
 }
