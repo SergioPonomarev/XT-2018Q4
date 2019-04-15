@@ -24,6 +24,6 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 
         public bool Banned { get; set; }
 
-        public IEnumerable<User> Likes { get; set; }
+        public IEnumerable<int> Likes { get; set; }
     }
 }

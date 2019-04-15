@@ -64,6 +64,10 @@
 
                 image.ImageData = Convert.ToBase64String(data);
 
+                image.ImageOwner = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+                image.ImageDateOfUpload = DateTime.Now;
+
                 dr.ImagesLogic.SetBannedImage(image);
 
                 imageOkMessage += $"Image has been uploaded succesfully.";

@@ -24,7 +24,7 @@
     {
         visiter = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
 
-        if (image.Likes.FirstOrDefault(u => u.UserName == visiter.UserName) != null)
+        if (image.Likes.Contains(visiter.UserId))
         {
             liked = true;
         }
@@ -37,7 +37,7 @@
 
     <div class="wrap">
         <div class="ownerBlock">
-            <a href="/Users/UserPage?userName=@owner.UserName" class="userPageLink">
+            <a href="/Users/UserPage?name=@owner.UserName" class="userPageLink">
                 <img src="data:@avatarOwner.MimeType;base64,@avatarOwner.AvatarData" class="ownerAvatar" alt="Image owner avatar" />
                 <p class="ownerName">@owner.UserName</p>
             </a>
@@ -54,55 +54,62 @@
                 <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage" alt="Image is banned" />
             }
 
-            <span class="likesCount">@image.Likes.Count()</span>
+            <div class="iconsBlock">
+                <div class="imageMenuBlock">
+                    @if ((User.IsInRole("Admins") && owner.UserRole == "User") || User.IsInRole("SuperAdmins"))
+                    {
+                        if (!image.Banned)
+                        {
+                            <button class="btnImage btnImageBan" title="Ban this image">
+                                <i class="fa fa-ban"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btnImage btnImageUnban" title="Unban this image">
+                                <i class="fa fa-check-circle-o"></i>
+                            </button>
+                        }
+                    }
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                if (!liked)
-                {
-                    <button class="btnImage btnLike" title="Like this image">
-                        <i class="fa fa-heart-o"></i>
-                    </button>
-                }
-                else
-                {
-                    <button class="btnImage btnUnlike" title="Unlike this image">
-                        <i class="fa fa-heart"></i>
-                    </button>
-                }
-            }
-            else
-            {
-                <span class="likeIcon">
-                    <i class="fa fa-heart"></i>
-                </span>
-            }
+                    @if (User.Identity.Name == owner.UserName)
+                    {
+                        <button class="btnImage btnEditImage" title="Edit image">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button class="btnImage btnDeleteImage" title="Delete image">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    }
+                </div>
 
-            @if ((User.IsInRole("Admins") && owner.UserRole == "User") || User.IsInRole("SuperAdmins"))
-            {
-                if (!image.Banned)
-                {
-                    <button class="btnImage btnImageBan" title="Ban this image">
-                        <i class="fa fa-ban"></i>
-                    </button>
-                }
-                else
-                {
-                    <button class="btnImage btnImageUnban" title="Unban this image">
-                        <i class="fa fa-check-circle-o"></i>
-                    </button>
-                }
-            }
+                <div class="likeBlock">
+                    <span class="likesCount">@image.Likes.Count()</span>
 
-            @if (User.Identity.Name == owner.UserName)
-            {
-                <button class="btnImage btnEditImage" title="Edit image">
-                    <i class="fa fa-pencil"></i>
-                </button>
-                <button class="btnImage btnDeleteImage" title="Delete image">
-                    <i class="fa fa-times"></i>
-                </button>
-            }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (!liked)
+                        {
+                            <button class="btnImage btnLike" title="Like this image">
+                                <i class="fa fa-heart-o"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btnImage btnUnlike" title="Unlike this image">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                        }
+                    }
+                    else
+                    {
+                        <span class="likeIcon">
+                            <i class="fa fa-heart"></i>
+                        </span>
+                    }
+                </div>
+                <div class="clear"></div>
+            </div>
 
             <p class="imageDescription">@image.Description</p>
         </div>
@@ -113,10 +120,11 @@
                 <div class="addCommentBlock">
                     <form class="addCommentForm" method="post">
                         <label for="newComment" class="commentForm_label">Add new comment</label>
-                        <input type="text" id="newComment" name="newComment" class="commentForm_input" />
+                        <textarea type="text" id="newComment" name="newComment" class="commentForm_input"></textarea>
                         <button class="btnImage btnImageNewComment" title="Add new comment">
                             <i class="fa fa-paper-plane"></i>
                         </button>
+                        <div class="clear"></div>
                     </form>
                 </div>
             }

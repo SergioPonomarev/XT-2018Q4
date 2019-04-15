@@ -4,11 +4,11 @@
 @using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
 
 @{
-    if (!User.IsInRole("Users"))
+    /*if (!User.IsInRole("Users"))
     {
         Response.Redirect("~/Account/Registration");
         return;
-    }
+    }*/
 
     string userName = Request["name"];
     Page.Title = userName;
@@ -61,8 +61,8 @@
         <div class="imagesBlock">
             @foreach (Image image in user.UserImages)
             {
-                <div class="imageWrapper">
-                    <a href="/Images/ImagePage?imageId=@image.ImageId" class="imagePageLink">
+                <a href="/Images/ImagePage?imageId=@image.ImageId" class="imagePageLink">
+                    <div class="imageWrapper">
                         @if (!image.Banned)
                         {
                             <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
@@ -72,8 +72,10 @@
                             Image bannedImage = dr.ImagesLogic.GetBannedImage();
                             <img class="image" src="data:@bannedImage.MimeType;base64,@image.ImageData" alt="This image is banned" />
                         }
-                    </a>
-                </div>
+                    </div>
+                </a>
             }
+
+            <div class="clear"></div>
         </div>
     </div>

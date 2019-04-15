@@ -32,6 +32,11 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Image> GetUserImages(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetBannedImage(Image image)
         {
             throw new NotImplementedException();

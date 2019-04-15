@@ -20,6 +20,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public bool Add(Image image)
         {
+            image.Likes = new List<int>();
             return this.imagesDao.Add(image);
         }
 

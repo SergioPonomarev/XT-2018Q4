@@ -1,1 +1,117 @@
-﻿
+﻿.ownerBlock {
+    height: 60px;
+}
+
+.userPageLink {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    height: 60px;
+}
+
+.userPageLink:active {
+    color: black;
+    text-decoration: none;
+}
+
+.ownerAvatar {
+    max-width: 60px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.ownerName {
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    top: -21px;
+    font-size: 25px;
+}
+
+.imageBlock {
+    width: 700px;
+    margin: auto;
+}
+
+.image {
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 15px 0;
+}
+
+.imageMenuBlock {
+    float: left;
+}
+
+.likeBlock {
+    float: right;
+}
+
+.btnImage {
+    padding: 0;
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    margin: 0 5px;
+}
+
+.btnLike {
+    color: red;
+}
+
+.likeIcon {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    color: red;
+}
+
+.likesCount {
+    margin-right: 5px;
+    font-weight: 600;
+}
+
+.imageDescription {
+    margin: 20px 0;
+}
+
+.imageComments {
+    width: 700px;
+    margin: auto;
+}
+
+.commentForm_label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.commentForm_input {
+    resize: none;
+    width: 630px;
+    height: 100px;
+    display: block;
+    float: left;
+}
+
+.btnImageNewComment {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    display: block;
+    float: right;
+    margin-top: 35px;
+}
+
+.loginLink {
+    color: blue;
+}
+
+.loginLink:active {
+    color: blue;
+}
+
+.clear {
+    clear: both;
+}
+

@@ -44,6 +44,7 @@
     <Compile Include="IAccountsDao.cs" />
     <Compile Include="IAvatarsDao.cs" />
     <Compile Include="IImagesDao.cs" />
+    <Compile Include="ICommentsDao.cs" />
     <Compile Include="IUsersDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

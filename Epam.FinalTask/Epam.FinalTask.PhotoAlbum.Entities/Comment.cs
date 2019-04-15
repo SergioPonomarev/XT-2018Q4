@@ -17,5 +17,7 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
         public User CommentAuthor { get; set; }
 
         public bool Banned { get; set; }
+
+        public int CommentImageId { get; set; }
     }
 }

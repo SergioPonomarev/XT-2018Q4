@@ -24,6 +24,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
         private static IAvatarsDao avatarsDao;
         private static IImagesLogic imagesLogic;
         private static IImagesDao imagesDao;
+        private static ICommentsDao commentsDao;
 
         private static IAccountsDao AccountsDao
         {
@@ -67,7 +68,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                             break;
 
                         case "fakedb":
-                            usersDao = new FakeUsersDao();
+                            usersDao = new FakeUsersDao(ImagesDao);
                             break;
 
                         default:
@@ -121,12 +122,42 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                             break;
 
                         case "fakedb":
-                            imagesDao = new FakeImagesDao();
+                            imagesDao = new FakeImagesDao(CommentsDao);
+                            break;
+
+                        default:
                             break;
                     }
                 }
 
                 return imagesDao;
+            }
+        }
+
+        private static ICommentsDao CommentsDao
+        {
+            get
+            {
+                if (commentsDao == null)
+                {
+                    string key = ConfigurationManager.AppSettings["CommentsDaoKey"];
+
+                    switch (key.ToLower())
+                    {
+                        case "sqldb":
+                            commentsDao = new SqlCommentsDao(conStr);
+                            break;
+
+                        case "fakedb":
+                            commentsDao = new FakeCommentsDao();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                return commentsDao;
             }
         }
 

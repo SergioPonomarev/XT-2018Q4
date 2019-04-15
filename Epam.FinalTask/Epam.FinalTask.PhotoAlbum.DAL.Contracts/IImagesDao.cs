@@ -16,5 +16,7 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
         bool Add(Image image);
 
         void SetBannedImage(Image image);
+
+        IEnumerable<Image> GetUserImages(int userId);
     }
 }
