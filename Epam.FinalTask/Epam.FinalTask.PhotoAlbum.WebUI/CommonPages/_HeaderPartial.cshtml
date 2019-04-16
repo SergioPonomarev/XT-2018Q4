@@ -1,17 +1,20 @@
 ﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using entities = Epam.FinalTask.PhotoAlbum.Entities
+@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
+@using User = Epam.FinalTask.PhotoAlbum.Entities.User
 
 @{ 
     string userName = User.Identity.IsAuthenticated
         ? User.Identity.Name
         : "Guest";
 
-    entities.Avatar avatar = null;
+    Avatar avatar = null;
 
     if (User.Identity.IsAuthenticated)
     {
         avatar = dr.AvatarsLogic.GetUserAvatarByUserName(User.Identity.Name);
     }
+
+    User user = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
 }
 
     <div class="header_content">
@@ -42,7 +45,7 @@
         </div>
         <div class="header_menuBlock">
             <a href="/Index" class="menuBlock_link">Home</a>
-            @if (User.IsInRole("Users"))
+            @if (User.IsInRole("Users") && !user.Banned)
             {
                 <a href="/Images/UploadImage" class="menuBlock_link">Upload</a>
             }

@@ -9,6 +9,14 @@
         return;
     }
 
+    User user = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+    if (user.Banned)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
     Page.Title = "Upload image";
 
     string errorMessage = null;
@@ -28,8 +36,6 @@
                 Image image = new Image();
 
                 image.Description = description;
-
-                User user = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
 
                 photo.Resize(width: 1000, height: 1000, preserveAspectRatio: true, preventEnlarge: true);
 
