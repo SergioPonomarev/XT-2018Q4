@@ -27,12 +27,22 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             throw new NotImplementedException();
         }
 
+        public void DemoteToUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }
 
         public User GetUserByUserName(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PromoteToAdmin(User user)
         {
             throw new NotImplementedException();
         }

@@ -45,6 +45,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.usersDao.BanUser(user);
         }
 
+        public void DemoteToUser(User user)
+        {
+            this.usersDao.DemoteToUser(user);
+        }
+
         public IEnumerable<User> GetAll()
         {
             return this.usersDao.GetAll().ToArray();
@@ -53,6 +58,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
         public User GetUserByUserName(string userName)
         {
             return this.usersDao.GetUserByUserName(userName);
+        }
+
+        public void PromoteToAdmin(User user)
+        {
+            this.usersDao.PromoteToAdmin(user);
         }
 
         public bool RemoveUser(string userName)

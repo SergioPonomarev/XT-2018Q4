@@ -26,10 +26,12 @@
     margin: 0 auto 30px;
 }
 
+.menuForAdmin {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
 .btnUser {
-    position: absolute;
-    top: 10px;
-    right: -50px;
     z-index: 1;
     width: 40px;
     height: 40px;
@@ -42,11 +44,19 @@
 }
 
 .btnUserUnban {
-    top: 77px;
     background-color: #92eb99;
 }
 
+.btnUserPromote {
+    background-color: #92eb99;
+}
+
+.btnUserDemote {
+    background-color: #eb9292;
+}
+
 .btnProfile {
+    display: block;
     border: none;
     width: 242px;
     text-align: center;
@@ -57,8 +67,7 @@
 }
 
 .btnProfile_edit {
-    display: inline-block;
-    margin-right: 10px;
+    float: left;
     background-color: #f0eeaf;
     box-sizing: border-box;
     text-decoration: none;
@@ -71,6 +80,7 @@
 
 .btnProfile_delete {
     background-color: #eb9292;
+    float: right;
 }
 
 .imagesBlock {

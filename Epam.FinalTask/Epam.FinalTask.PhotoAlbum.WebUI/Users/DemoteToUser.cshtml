@@ -1,0 +1,23 @@
+﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+
+@{
+    if (!IsPost)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    string userName = Request["userName"];
+
+    User user = dr.UsersLogic.GetUserByUserName(userName);
+
+    if (user != null)
+    {
+        dr.UsersLogic.DemoteToUser(user);
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+    }
+}

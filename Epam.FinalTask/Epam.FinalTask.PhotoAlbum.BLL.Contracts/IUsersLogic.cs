@@ -20,5 +20,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
         void BanUser(User user);
 
         void UnbanUser(User user);
+
+        void PromoteToAdmin(User user);
+
+        void DemoteToUser(User user);
     }
 }

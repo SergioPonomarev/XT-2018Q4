@@ -136,6 +136,8 @@
     <Content Include="Users\DeleteProfile.cshtml" />
     <Content Include="Users\BanUser.cshtml" />
     <Content Include="Users\UnbanUser.cshtml" />
+    <Content Include="Users\PromoteToAdmin.cshtml" />
+    <Content Include="Users\DemoteToUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

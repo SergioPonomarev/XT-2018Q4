@@ -95,5 +95,23 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 
             this.users.Add(user);
         }
+
+        public void PromoteToAdmin(User user)
+        {
+            this.users.Remove(user);
+
+            user.UserRole = "Admin";
+
+            this.users.Add(user);
+        }
+
+        public void DemoteToUser(User user)
+        {
+            this.users.Remove(user);
+
+            user.UserRole = "User";
+
+            this.users.Add(user);
+        }
     }
 }
