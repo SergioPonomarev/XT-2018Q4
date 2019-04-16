@@ -16,13 +16,21 @@
 
     <div class="header_content">
         <div class="header_userBlock">
-            <a href="~/Users/UserPage?name=@userName" class="accountLink">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="~/Users/UserPage?name=@userName" class="accountLink">
+                    <p class="userBlock_name">Hello, @userName!</p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <img class="userBlock_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User avatar" />
+                    }
+                </a>
+            }
+            else
+            {
                 <p class="userBlock_name">Hello, @userName!</p>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <img class="userBlock_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User avatar" />
-                }
-            </a>
+            }
+
             @if (User.Identity.IsAuthenticated)
             {
                 <a class="userBlock_logLink" href="/Account/Logout">Logout</a>

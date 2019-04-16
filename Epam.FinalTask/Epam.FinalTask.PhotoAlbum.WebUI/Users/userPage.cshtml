@@ -4,12 +4,6 @@
 @using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
 
 @{
-    /*if (!User.IsInRole("Users"))
-    {
-        Response.Redirect("~/Account/Registration");
-        return;
-    }*/
-
     string userName = Request["name"];
     Page.Title = userName;
 
@@ -32,20 +26,20 @@
                 <p class="banMessage">This user is banned!</p>
             }
 
-            <h2 class="userAcc_header">@userName</h2>
+            <h2 id="userName" data-name="@user.UserName" class="userAcc_header">@userName</h2>
             <img class="userAcc_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User Avatar" />
 
             @if ((User.IsInRole("Admins") && user.UserRole == "User") || User.IsInRole("SuperAdmins"))
             {
                 if (!user.Banned)
                 {
-                    <button class="btnUser btnUserBan" title="Ban this user">
+                    <button id="banUser" class="btnUser btnUserBan" title="Ban this user">
                         <i class="fa fa-ban"></i>
                     </button>
                 }
                 else
                 {
-                    <button class="btnUser btnUserUnban" title="Unban this user">
+                    <button id="unbanUser" class="btnUser btnUserUnban" title="Unban this user">
                         <i class="fa fa-check-circle-o"></i>
                     </button>
                 }

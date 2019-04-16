@@ -134,6 +134,8 @@
     <Content Include="Users\UserPage.cshtml" />
     <Content Include="Users\EditProfile.cshtml" />
     <Content Include="Users\DeleteProfile.cshtml" />
+    <Content Include="Users\BanUser.cshtml" />
+    <Content Include="Users\UnbanUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

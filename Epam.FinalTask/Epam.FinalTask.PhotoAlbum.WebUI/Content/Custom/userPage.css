@@ -4,6 +4,14 @@
     position: relative;
 }
 
+.banMessage {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    background-color: #eb9292;
+}
+
 .userAcc_header {
     font-size: 30px;
     padding: 10px;
@@ -31,6 +39,11 @@
 
 .btnUserBan {
     background-color: #eb9292;
+}
+
+.btnUserUnban {
+    top: 77px;
+    background-color: #92eb99;
 }
 
 .btnProfile {

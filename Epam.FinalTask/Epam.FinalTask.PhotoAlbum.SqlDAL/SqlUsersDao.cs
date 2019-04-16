@@ -22,6 +22,11 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             throw new NotImplementedException();
         }
 
+        public void BanUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
@@ -33,6 +38,11 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         }
 
         public bool RemoveUser(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnbanUser(User user)
         {
             throw new NotImplementedException();
         }

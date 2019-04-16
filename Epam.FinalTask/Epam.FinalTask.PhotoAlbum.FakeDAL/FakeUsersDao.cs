@@ -77,5 +77,23 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         {
             return this.users.Remove(this.GetUserByUserName(userName));
         }
+
+        public void BanUser(User user)
+        {
+            this.users.Remove(user);
+
+            user.Banned = true;
+
+            this.users.Add(user);
+        }
+
+        public void UnbanUser(User user)
+        {
+            this.users.Remove(user);
+
+            user.Banned = false;
+
+            this.users.Add(user);
+        }
     }
 }
