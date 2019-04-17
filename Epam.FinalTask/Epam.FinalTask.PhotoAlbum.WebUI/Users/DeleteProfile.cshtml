@@ -1,4 +1,4 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+﻿@using Epam.FinalTask.PhotoAlbum.Common
 
 @{
     if (!IsPost)
@@ -12,7 +12,7 @@
     if (userName != null)
     {
         FormsAuthentication.SignOut();
-        dr.UsersLogic.RemoveUser(userName);
+        DependencyResolver.UsersLogic.RemoveUser(userName);
         Response.Redirect("/Index");
     }
     else

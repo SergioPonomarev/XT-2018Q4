@@ -18,5 +18,9 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
         void SetBannedImage(Image image);
 
         IEnumerable<Image> GetUserImages(int userId);
+
+        void AddLikeToImage(Image image, int visitorId);
+
+        void RemoveLikeFromImage(Image image, int visitorId);
     }
 }

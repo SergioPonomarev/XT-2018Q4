@@ -51,6 +51,15 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             }
         }
 
+        public void AddLikeToImage(Image image, int visitorId)
+        {
+            this.images.Remove(image);
+
+            image.Likes.Add(visitorId);
+
+            this.images.Add(image);
+        }
+
         public Image GetBannedImage()
         {
             return this.images.FirstOrDefault(i => i.ImageId == bannedId);
@@ -68,6 +77,15 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         public IEnumerable<Image> GetUserImages(int userId)
         {
             return this.images.Where(i => i.ImageOwner.UserId == userId).ToArray();
+        }
+
+        public void RemoveLikeFromImage(Image image, int visitorId)
+        {
+            this.images.Remove(image);
+
+            image.Likes.Remove(visitorId);
+
+            this.images.Add(image);
         }
 
         public void SetBannedImage(Image image)

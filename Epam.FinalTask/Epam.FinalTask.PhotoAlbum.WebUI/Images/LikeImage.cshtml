@@ -1,0 +1,26 @@
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
+
+@{
+    if (!IsPost)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    string imageIdStr = Request["imageId"];
+    string visitorIdStr = Request["visitorId"];
+    int imageId = int.Parse(imageIdStr);
+    int visitorId = int.Parse(visitorIdStr);
+
+    Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+
+    if (image != null)
+    {
+        DependencyResolver.ImagesLogic.AddLikeToImage(image, visitorId);
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+    }
+}

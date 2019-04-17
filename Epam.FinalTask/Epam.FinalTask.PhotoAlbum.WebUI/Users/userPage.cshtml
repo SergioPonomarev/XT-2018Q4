@@ -1,14 +1,12 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
-@using User = Epam.FinalTask.PhotoAlbum.Entities.User
-@using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
 
 @{
     string userName = Request["name"];
     Page.Title = userName;
 
-    User user = dr.UsersLogic.GetUserByUserName(userName);
-    Avatar avatar = dr.AvatarsLogic.GetUserAvatarByUserName(userName);
+    User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(userName);
 }
 
 @section styles {
@@ -82,7 +80,7 @@
                         }
                         else
                         {
-                            Image bannedImage = dr.ImagesLogic.GetBannedImage();
+                            Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
                             <img class="image" src="data:@bannedImage.MimeType;base64,@image.ImageData" alt="This image is banned" />
                         }
                     </div>

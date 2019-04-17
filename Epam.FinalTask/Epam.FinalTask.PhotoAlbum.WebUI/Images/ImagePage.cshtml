@@ -1,30 +1,27 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
-@using User = Epam.FinalTask.PhotoAlbum.Entities.User
-@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
-@using Comment = Epam.FinalTask.PhotoAlbum.Entities.Comment
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
 
 @{
     string imageIdStr = Request["imageId"];
     int imageId = int.Parse(imageIdStr);
 
-    Image image = dr.ImagesLogic.GetImageById(imageId);
+    Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
 
-    IEnumerable<Comment> comments = image.Comments.OrderByDescending(c => c.CommentDate);
+    IEnumerable<Comment> comments = image.Comments.OrderByDescending(c => c.CommentDate).ToArray();
 
     User owner = image.ImageOwner;
 
-    Avatar avatarOwner = dr.AvatarsLogic.GetUserAvatarByUserName(owner.UserName);
+    Avatar avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(owner.UserName);
 
-    User visiter = null;
+    User visitor = null;
 
     bool liked = false;
 
     if (User.Identity.IsAuthenticated)
     {
-        visiter = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+        visitor = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
 
-        if (image.Likes.Contains(visiter.UserId))
+        if (image.Likes.Contains(visitor.UserId))
         {
             liked = true;
         }
@@ -35,6 +32,10 @@
     <link href="~/Content/Custom/imagePage.css" rel="stylesheet" />
 }
 
+@section scripts {
+    <script src="~/Scripts/Custom/imagePage.js"></script>
+}
+
     <div class="wrap">
         <div class="ownerBlock">
             <a href="/Users/UserPage?name=@owner.UserName" class="userPageLink">
@@ -43,14 +44,14 @@
             </a>
         </div>
 
-        <div class="imageBlock">
+        <div id="imageId" data-imageid="@image.ImageId" class="imageBlock">
             @if (!image.Banned)
             {
                 <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="Image" />
             }
             else
             {
-                Image bannedImage = dr.ImagesLogic.GetBannedImage();
+                Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
                 <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage" alt="Image is banned" />
             }
 
@@ -84,19 +85,27 @@
                 </div>
 
                 <div class="likeBlock">
-                    <span class="likesCount">@image.Likes.Count()</span>
+                    <span id="likesCount" data-likes="@image.Likes.Count" class="likesCount">@image.Likes.Count</span>
 
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (!liked)
                         {
-                            <button class="btnImage btnLike" title="Like this image">
+                            <button id="btnLike" data-visitorid="@visitor.UserId" class="btnImage btnLike" title="Like this image">
                                 <i class="fa fa-heart-o"></i>
+                            </button>
+
+                            <button id="btnUnlike" data-visitorid="@visitor.UserId" class="btnImage btnLike hidden" title="Unlike this image">
+                                <i class="fa fa-heart"></i>
                             </button>
                         }
                         else
                         {
-                            <button class="btnImage btnUnlike" title="Unlike this image">
+                            <button id="btnLike" data-visitorid="@visitor.UserId" class="btnImage btnLike hidden" title="Like this image">
+                                <i class="fa fa-heart-o"></i>
+                            </button>
+
+                            <button id="btnUnlike" data-visitorid="@visitor.UserId" class="btnImage btnLike" title="Unlike this image">
                                 <i class="fa fa-heart"></i>
                             </button>
                         }

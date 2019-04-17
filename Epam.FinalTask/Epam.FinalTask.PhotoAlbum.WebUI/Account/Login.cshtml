@@ -1,4 +1,4 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+﻿@using Epam.FinalTask.PhotoAlbum.Common
 
 @{
     Page.Title = "Log In";
@@ -9,7 +9,7 @@
 
     if (IsPost)
     {
-        if (dr.AccountsLogic.CanLogin(login, password))
+        if (DependencyResolver.AccountsLogic.CanLogin(login, password))
         {
             FormsAuthentication.SetAuthCookie(login, createPersistentCookie: false);
             Response.Redirect("~/Index");

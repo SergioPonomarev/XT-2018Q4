@@ -106,7 +106,10 @@
     <Content Include="Account\Registration.cshtml" />
     <Content Include="Administration\Management.cshtml" />
     <Content Include="Images\ImagePage.cshtml" />
+    <Content Include="Images\LikeImage.cshtml" />
+    <Content Include="Images\UnlikeImage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Custom\imagePage.js" />
     <Content Include="Scripts\Custom\registration.js" />
     <Content Include="Scripts\Custom\uploadImage.js" />
     <Content Include="Scripts\Custom\userPage.js" />

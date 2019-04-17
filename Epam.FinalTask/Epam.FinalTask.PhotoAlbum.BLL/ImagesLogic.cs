@@ -24,6 +24,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.imagesDao.Add(image);
         }
 
+        public void AddLikeToImage(Image image, int visitorId)
+        {
+            this.imagesDao.AddLikeToImage(image, visitorId);
+        }
+
         public Image GetBannedImage()
         {
             return this.imagesDao.GetBannedImage();
@@ -32,6 +37,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
         public Image GetImageById(int imageId)
         {
             return this.imagesDao.GetImageById(imageId);
+        }
+
+        public void RemoveLikeFromImage(Image image, int visitorId)
+        {
+            this.imagesDao.RemoveLikeFromImage(image, visitorId);
         }
 
         public void SetBannedImage(Image image)

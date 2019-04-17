@@ -1,6 +1,5 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
-@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
 
 @{ 
     string userName = User.Identity.IsAuthenticated
@@ -11,10 +10,10 @@
 
     if (User.Identity.IsAuthenticated)
     {
-        avatar = dr.AvatarsLogic.GetUserAvatarByUserName(User.Identity.Name);
+        avatar = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(User.Identity.Name);
     }
 
-    User user = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+    User user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
 }
 
     <div class="header_content">

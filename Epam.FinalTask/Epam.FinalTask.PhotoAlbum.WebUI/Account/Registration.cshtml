@@ -1,4 +1,4 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
+﻿@using Epam.FinalTask.PhotoAlbum.Common
 
 @{
     Page.Title = "Registration";
@@ -10,9 +10,9 @@
         string userName = Request["userName"];
         string password = Request["password"];
 
-        if (dr.UsersLogic.GetUserByUserName(userName) == null)
+        if (DependencyResolver.UsersLogic.GetUserByUserName(userName) == null)
         {
-            if (dr.AccountsLogic.UserRegistration(userName, password))
+            if (DependencyResolver.AccountsLogic.UserRegistration(userName, password))
             {
                 Response.Redirect("~/Index");
                 return;

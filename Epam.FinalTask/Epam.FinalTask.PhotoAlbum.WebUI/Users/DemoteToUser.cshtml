@@ -1,5 +1,5 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
 
 @{
     if (!IsPost)
@@ -10,11 +10,11 @@
 
     string userName = Request["userName"];
 
-    User user = dr.UsersLogic.GetUserByUserName(userName);
+    User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
 
     if (user != null)
     {
-        dr.UsersLogic.DemoteToUser(user);
+        DependencyResolver.UsersLogic.DemoteToUser(user);
     }
     else
     {

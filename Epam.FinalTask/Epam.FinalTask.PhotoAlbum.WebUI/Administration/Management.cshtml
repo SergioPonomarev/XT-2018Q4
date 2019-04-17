@@ -1,7 +1,5 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
-@using Image = Epam.FinalTask.PhotoAlbum.Entities.Image
-@using User = Epam.FinalTask.PhotoAlbum.Entities.User
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
 
 @{
     if (!User.IsInRole("SuperAdmins"))
@@ -38,7 +36,7 @@
 
                 avatar.AvatarData = Convert.ToBase64String(data);
 
-                dr.AvatarsLogic.SetDefaultAvatar(avatar);
+                DependencyResolver.AvatarsLogic.SetDefaultAvatar(avatar);
 
                 avatarOkMessage = "Avatar has been uploaded successfully.";
             }
@@ -64,11 +62,11 @@
 
                 image.ImageData = Convert.ToBase64String(data);
 
-                image.ImageOwner = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+                image.ImageOwner = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
 
                 image.ImageDateOfUpload = DateTime.Now;
 
-                dr.ImagesLogic.SetBannedImage(image);
+                DependencyResolver.ImagesLogic.SetBannedImage(image);
 
                 imageOkMessage += $"Image has been uploaded succesfully.";
             }
@@ -79,9 +77,9 @@
         }
     }
 
-    Avatar defaultAvatar = dr.AvatarsLogic.GetDefaultAvatar();
+    Avatar defaultAvatar = DependencyResolver.AvatarsLogic.GetDefaultAvatar();
 
-    Image bannedImage = dr.ImagesLogic.GetBannedImage();
+    Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
 }
 
 @section styles {

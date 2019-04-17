@@ -1,6 +1,5 @@
-﻿@using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver
-@using User = Epam.FinalTask.PhotoAlbum.Entities.User
-@using Avatar = Epam.FinalTask.PhotoAlbum.Entities.Avatar
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
 
 @{
     if (!User.Identity.IsAuthenticated)
@@ -38,7 +37,7 @@
 
                 newAvatar.AvatarData = Convert.ToBase64String(data);
 
-                dr.AvatarsLogic.SetAvatarToUser(newAvatar, userName);
+                DependencyResolver.AvatarsLogic.SetAvatarToUser(newAvatar, userName);
             }
             else
             {
@@ -48,7 +47,7 @@
     }
 
 
-    Avatar avatar = dr.AvatarsLogic.GetUserAvatarByUserName(userName);
+    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(userName);
 }
 
 @section styles {

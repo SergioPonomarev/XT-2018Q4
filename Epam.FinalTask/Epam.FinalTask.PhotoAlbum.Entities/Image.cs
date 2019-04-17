@@ -8,6 +8,11 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 {
     public class Image
     {
+        public Image()
+        {
+            this.Likes = new List<int>();
+        }
+
         public int ImageId { get; set; }
 
         public string MimeType { get; set; }
@@ -24,6 +29,6 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 
         public bool Banned { get; set; }
 
-        public IEnumerable<int> Likes { get; set; }
+        public List<int> Likes { get; set; }
     }
 }
