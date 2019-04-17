@@ -15,7 +15,7 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 
         IEnumerable<User> GetAll();
 
-        bool RemoveUser(string userName);
+        bool Remove(User user);
 
         void BanUser(User user);
 

@@ -65,9 +65,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.usersDao.PromoteToAdmin(user);
         }
 
-        public bool RemoveUser(string userName)
+        public bool Remove(User user)
         {
-            return this.usersDao.RemoveUser(userName);
+            return this.usersDao.Remove(user);
         }
 
         public void UnbanUser(User user)

@@ -27,6 +27,11 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             throw new NotImplementedException();
         }
 
+        public void BanImage(Image image)
+        {
+            throw new NotImplementedException();
+        }
+
         public Image GetBannedImage()
         {
             throw new NotImplementedException();
@@ -42,12 +47,22 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             throw new NotImplementedException();
         }
 
+        public void Remove(Image image)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RemoveLikeFromImage(Image image, int visitorId)
         {
             throw new NotImplementedException();
         }
 
         public void SetBannedImage(Image image)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnbanImage(Image image)
         {
             throw new NotImplementedException();
         }

@@ -8,15 +8,14 @@
         return;
     }
 
-    string userName = Request["userName"];
+    string imageIdStr = Request["imageId"];
+    int imageId = int.Parse(imageIdStr);
 
-    User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+    Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
 
-    if (user != null)
+    if (image != null)
     {
-        FormsAuthentication.SignOut();
-        DependencyResolver.UsersLogic.Remove(user);
-        Response.Redirect("/Index");
+        DependencyResolver.ImagesLogic.BanImage(image);
     }
     else
     {

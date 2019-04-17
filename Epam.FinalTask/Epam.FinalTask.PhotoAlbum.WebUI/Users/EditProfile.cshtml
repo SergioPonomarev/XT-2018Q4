@@ -11,6 +11,7 @@
     Page.Title = "Profile editing";
 
     string userName = Request["userName"];
+    int maxFileSize = 524288;
 
     if (userName == null)
     {
@@ -23,9 +24,11 @@
     {
         WebImage image = WebImage.GetImageFromRequest();
 
-        if (image != null)
+        User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+
+        if (image != null && user != null)
         {
-            if (image.GetBytes(image.ImageFormat).Length <= 524288)
+            if (image.GetBytes(image.ImageFormat).Length <= maxFileSize)
             {
                 Avatar newAvatar = new Avatar();
 
@@ -37,7 +40,7 @@
 
                 newAvatar.AvatarData = Convert.ToBase64String(data);
 
-                DependencyResolver.AvatarsLogic.SetAvatarToUser(newAvatar, userName);
+                DependencyResolver.AvatarsLogic.SetAvatarToUser(newAvatar, user);
             }
             else
             {

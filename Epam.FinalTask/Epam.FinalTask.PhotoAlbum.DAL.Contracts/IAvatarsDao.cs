@@ -15,6 +15,6 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 
         void SetDefaultAvatar(Avatar avatar);
 
-        void SetAvatarToUser(Avatar newAvatar, string userName);
+        void SetAvatarToUser(Avatar newAvatar, User user);
     }
 }

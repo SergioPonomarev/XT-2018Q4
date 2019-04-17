@@ -81,7 +81,7 @@
                         else
                         {
                             Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
-                            <img class="image" src="data:@bannedImage.MimeType;base64,@image.ImageData" alt="This image is banned" />
+                            <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="This image is banned" />
                         }
                     </div>
                 </a>

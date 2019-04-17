@@ -1,0 +1,31 @@
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
+
+@{
+    if (!IsPost)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    string imageIdStr = Request["imageId"];
+    int imageId = int.Parse(imageIdStr);
+
+    Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+
+    if (User.Identity.Name != image.ImageOwner.UserName)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    if (image != null)
+    {
+        DependencyResolver.ImagesLogic.Remove(image);
+        Response.Redirect("/Index");
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+    }
+}

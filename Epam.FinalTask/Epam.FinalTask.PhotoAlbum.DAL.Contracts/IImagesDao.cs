@@ -22,5 +22,11 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
         void AddLikeToImage(Image image, int visitorId);
 
         void RemoveLikeFromImage(Image image, int visitorId);
+
+        void BanImage(Image image);
+
+        void UnbanImage(Image image);
+
+        void Remove(Image image);
     }
 }

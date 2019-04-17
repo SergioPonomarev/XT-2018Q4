@@ -29,6 +29,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.imagesDao.AddLikeToImage(image, visitorId);
         }
 
+        public void BanImage(Image image)
+        {
+            this.imagesDao.BanImage(image);
+        }
+
         public Image GetBannedImage()
         {
             return this.imagesDao.GetBannedImage();
@@ -39,6 +44,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.imagesDao.GetImageById(imageId);
         }
 
+        public void Remove(Image image)
+        {
+            this.imagesDao.Remove(image);
+        }
+
         public void RemoveLikeFromImage(Image image, int visitorId)
         {
             this.imagesDao.RemoveLikeFromImage(image, visitorId);
@@ -47,6 +57,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
         public void SetBannedImage(Image image)
         {
             this.imagesDao.SetBannedImage(image);
+        }
+
+        public void UnbanImage(Image image)
+        {
+            this.imagesDao.UnbanImage(image);
         }
     }
 }
