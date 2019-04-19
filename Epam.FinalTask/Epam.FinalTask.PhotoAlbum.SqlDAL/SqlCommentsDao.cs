@@ -17,7 +17,32 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             this.conStr = connectionString;
         }
 
+        public bool Add(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BanComment(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Comment GetCommentById(int commentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Comment> GetCommentsForImage(int imageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnbanComment(Comment comment)
         {
             throw new NotImplementedException();
         }

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.Entities;
 
-namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
+namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
 {
-    public interface ICommentsDao
+    public interface ICommentsLogic
     {
-        IEnumerable<Comment> GetCommentsForImage(int imageId);
+        bool Add(string commentText, Image image, User visitor);
 
-        bool Add(Comment comment);
+        IEnumerable<Comment> GetCommentsForImage(int imageId);
 
         Comment GetCommentById(int commentId);
 

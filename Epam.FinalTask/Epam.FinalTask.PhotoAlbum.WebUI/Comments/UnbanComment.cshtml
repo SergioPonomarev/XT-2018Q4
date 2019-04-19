@@ -1,0 +1,24 @@
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
+
+@{
+    if (!IsPost)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    string commentIdStr = Request["commentId"];
+    int commentId = int.Parse(commentIdStr);
+
+    Comment comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
+
+    if (comment != null)
+    {
+        DependencyResolver.CommentsLogic.UnbanComment(comment);
+    }
+    else
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+    }
+}

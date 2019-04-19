@@ -1,0 +1,26 @@
+﻿.imagesBlock {
+    margin: 20px 0;
+}
+
+.imagePageLink {
+    width: 300px;
+    height: 300px;
+    float: left;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.imageWrapper {
+    line-height: 297px;
+    text-align: center;
+}
+
+.image {
+    max-width: 300px;
+    max-height: 300px;
+    vertical-align: middle;
+}
+
+.clear {
+    clear: both;
+}

@@ -7,6 +7,8 @@
 
     User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
     Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(userName);
+
+    IEnumerable<Image> images = user.UserImages.OrderByDescending(i => i.ImageDateOfUpload).ToArray();
 }
 
 @section styles {
@@ -70,7 +72,7 @@
         </div>
 
         <div class="imagesBlock">
-            @foreach (Image image in user.UserImages)
+            @foreach (Image image in images)
             {
                 <a href="/Images/ImagePage?imageId=@image.ImageId" class="imagePageLink">
                     <div class="imageWrapper">

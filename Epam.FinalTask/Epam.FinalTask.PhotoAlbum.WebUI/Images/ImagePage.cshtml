@@ -4,10 +4,9 @@
 @{
     string imageIdStr = Request["imageId"];
     int imageId = int.Parse(imageIdStr);
+    string errorMessage = null;
 
     Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
-
-    IEnumerable<Comment> comments = image.Comments.OrderByDescending(c => c.CommentDate).ToArray();
 
     User owner = image.ImageOwner;
 
@@ -26,6 +25,24 @@
             liked = true;
         }
     }
+
+    if (IsPost)
+    {
+        string commentText = Request["newComment"];
+
+        if (DependencyResolver.CommentsLogic.Add(commentText, image, visitor))
+        {
+            Response.Redirect(Request.RawUrl);
+        }
+        else
+        {
+            errorMessage = "Cannot add the comment.";
+        }
+    }
+
+    IEnumerable<Comment> comments = DependencyResolver.CommentsLogic.GetCommentsForImage(image.ImageId)
+                                                                    .OrderByDescending(c => c.CommentDate)
+                                                                    .ToArray();
 }
 
 @section styles {
@@ -123,16 +140,31 @@
         <div class="imageComments">
             @if (User.Identity.IsAuthenticated)
             {
+                if (!visitor.Banned)
+                {
                 <div class="addCommentBlock">
                     <form class="addCommentForm" method="post">
                         <label for="newComment" class="commentForm_label">Add new comment</label>
-                        <textarea type="text" id="newComment" name="newComment" class="commentForm_input"></textarea>
+                        <textarea type="text" name="newComment" class="commentForm_input"></textarea>
                         <button class="btnImage btnImageNewComment" title="Add new comment">
                             <i class="fa fa-paper-plane"></i>
                         </button>
                         <div class="clear"></div>
                     </form>
                 </div>
+                }
+                else
+                {
+                    <div class="errorMessage">
+                        <p>You are banned.</p>
+                    </div>
+                }
+                if (IsPost)
+                {
+                    <div class="errorMessage">
+                        <p>@errorMessage</p>
+                    </div>
+                }
             }
             else
             {
@@ -141,43 +173,64 @@
                 </p>
             }
 
-            <div class="comments">
+            <ul id="commentsList" class="comments">
                 @foreach (Comment comment in comments)
                 {
-                    <a href="/Users/UserPage?@comment.CommentAuthor.UserName" class="commentAuthorPageLink">
-                        <p class="commentAuthorName">
+                <li data-commentid="@comment.CommentId" class="comment">
+                    <div class="commentHeader">
+                        <a href="/Users/UserPage?name=@comment.CommentAuthor.UserName" class="commentAuthorPageLink">
                             @comment.CommentAuthor.UserName
+                        </a>
+
+                        <p class="commentDate">
+                            @comment.CommentDate.ToString()
                         </p>
-                    </a>
-                    if (!comment.Banned)
+
+                        @if (User.Identity.Name == comment.CommentAuthor.UserName)
+                        {
+                            <button class="btnComment btnCommentDelete" title="Delete this comment">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        }
+
+                        @if ((User.IsInRole("Admins") && comment.CommentAuthor.UserRole == "User") || User.IsInRole("SuperAdmins"))
+                        {
+                            if (!comment.Banned)
+                            {
+                                <button class="btnComment btnCommentBan" title="Ban this comment">
+                                    <i class="fa fa-ban"></i>
+                                </button>
+
+                                <button class="btnComment btnCommentUnban hidden" title="Unban this comment">
+                                    <i class="fa fa-check-circle-o"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btnComment btnCommentBan hidden" title="Ban this comment">
+                                    <i class="fa fa-ban"></i>
+                                </button>
+
+                                <button class="btnComment btnCommentUnban" title="Unban this comment">
+                                    <i class="fa fa-check-circle-o"></i>
+                                </button>
+                            }
+                        }
+                        <div class="clear"></div>
+                    </div>
+
+                    @if (!comment.Banned)
                     {
-                        <p class="commentText">@comment.CommentText</p>
+                        <p class="commentText textUnbanned">@comment.CommentText</p>
+                        <p class="commentText textBanned hidden">Comment is banned.</p>
                     }
                     else
                     {
-                        <p class="commentText">
-                            Comment is banned.
-                        </p>
+                        <p class="commentText textUnbanned hidden">@comment.CommentText</p>
+                        <p class="commentText textBanned">Comment is banned.</p>
                     }
-                    <p class="commentDate">
-                        @comment.CommentDate.ToString()
-                    </p>
-                    if ((User.IsInRole("Admins") && comment.CommentAuthor.UserRole == "User") || User.IsInRole("SuperAdmins"))
-                    {
-                        if (!comment.Banned)
-                        {
-                            <button class="btnComment btnCommentBan" title="Ban this comment">
-                                <i class="fa fa-ban"></i>
-                            </button>
-                        }
-                        else
-                        {
-                            <button class="btnComment btnCommentUnban" title="Unban this comment">
-                                <i class="fa fa-check-circle-o"></i>
-                            </button>
-                        }
-                    }
+                </li>
                 }
-            </div>
+            </ul>
         </div>
     </div>

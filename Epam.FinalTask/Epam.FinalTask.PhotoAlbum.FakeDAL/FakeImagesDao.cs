@@ -13,14 +13,10 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         private static readonly int bannedId = 1;
         private static int id = 2;
 
-        private readonly ICommentsDao commentsDao;
-
         private List<Image> images;
 
-        public FakeImagesDao(ICommentsDao commentsDao)
+        public FakeImagesDao()
         {
-            this.commentsDao = commentsDao;
-
             this.images = new List<Image>
             {
                 new Image
@@ -69,6 +65,11 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             this.images.Add(image);
         }
 
+        public IEnumerable<Image> GetAllImages()
+        {
+            return this.images.Where(i => i.ImageId != 1).ToArray();
+        }
+
         public Image GetBannedImage()
         {
             return this.images.FirstOrDefault(i => i.ImageId == bannedId);
@@ -77,8 +78,6 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         public Image GetImageById(int imageId)
         {
             Image image = this.images.FirstOrDefault(i => i.ImageId == imageId);
-
-            image.Comments = this.commentsDao.GetCommentsForImage(image.ImageId);
 
             return image;
         }

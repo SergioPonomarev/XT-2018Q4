@@ -19,9 +19,51 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             this.comments = new List<Comment>();
         }
 
+        public bool Add(Comment comment)
+        {
+            try
+            {
+                comment.CommentId = id++;
+                this.comments.Add(comment);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void BanComment(Comment comment)
+        {
+            this.comments.Remove(comment);
+
+            comment.Banned = true;
+
+            this.comments.Add(comment);
+        }
+
+        public Comment GetCommentById(int commentId)
+        {
+            return this.comments.FirstOrDefault(c => c.CommentId == commentId);
+        }
+
         public IEnumerable<Comment> GetCommentsForImage(int imageId)
         {
             return this.comments.Where(c => c.CommentImageId == imageId).ToArray();
+        }
+
+        public bool Remove(Comment comment)
+        {
+            return this.comments.Remove(comment);
+        }
+
+        public void UnbanComment(Comment comment)
+        {
+            this.comments.Remove(comment);
+
+            comment.Banned = false;
+
+            this.comments.Add(comment);
         }
     }
 }

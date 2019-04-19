@@ -28,5 +28,7 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
         void UnbanImage(Image image);
 
         void Remove(Image image);
+
+        IEnumerable<Image> GetAllImages();
     }
 }

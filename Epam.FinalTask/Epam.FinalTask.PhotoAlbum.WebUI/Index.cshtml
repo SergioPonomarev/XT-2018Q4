@@ -1,7 +1,35 @@
-﻿@{
+﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
+
+@{
     Page.Title = "Photo Album";
+
+    IEnumerable<Image> images = DependencyResolver.ImagesLogic.GetAllImages().OrderByDescending(i => i.ImageDateOfUpload).ToArray();
+}
+
+@section styles {
+    <link href="~/Content/Custom/index.css" rel="stylesheet" />
 }
 
     <div class="wrap">
-        
+        <div class="imagesBlock">
+            @foreach (Image image in images)
+            {
+            <a href="/Images/ImagePage?imageId=@image.ImageId" class="imagePageLink">
+                <div class="imageWrapper">
+                @if (!image.Banned)
+                {
+                    <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
+                }
+                else
+                {
+                    Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
+                    <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="This image is banned" />
+                }
+                </div>
+            </a>
+            }
+
+            <div class="clear"></div>
+        </div>
     </div>

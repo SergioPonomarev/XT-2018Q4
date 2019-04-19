@@ -34,6 +34,11 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.imagesDao.BanImage(image);
         }
 
+        public IEnumerable<Image> GetAllImages()
+        {
+            return this.imagesDao.GetAllImages().ToArray();
+        }
+
         public Image GetBannedImage()
         {
             return this.imagesDao.GetBannedImage();

@@ -97,10 +97,12 @@
 
 .imageWrapper {
     line-height: 297px;
+    text-align: center;
 }
 
 .image {
-    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
     vertical-align: middle;
 }
 

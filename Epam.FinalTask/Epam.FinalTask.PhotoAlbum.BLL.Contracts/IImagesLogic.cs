@@ -26,5 +26,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
         void UnbanImage(Image image);
 
         void Remove(Image image);
+
+        IEnumerable<Image> GetAllImages();
     }
 }

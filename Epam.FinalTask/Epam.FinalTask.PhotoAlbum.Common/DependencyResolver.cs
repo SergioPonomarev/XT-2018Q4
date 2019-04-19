@@ -24,6 +24,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
         private static IAvatarsDao avatarsDao;
         private static IImagesLogic imagesLogic;
         private static IImagesDao imagesDao;
+        private static ICommentsLogic commentsLogic;
         private static ICommentsDao commentsDao;
 
         private static IAccountsDao AccountsDao
@@ -122,7 +123,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                             break;
 
                         case "fakedb":
-                            imagesDao = new FakeImagesDao(CommentsDao);
+                            imagesDao = new FakeImagesDao();
                             break;
 
                         default:
@@ -168,5 +169,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
         public static IAvatarsLogic AvatarsLogic => avatarsLogic ?? (avatarsLogic = new AvatarsLogic(AvatarsDao));
 
         public static IImagesLogic ImagesLogic => imagesLogic ?? (imagesLogic = new ImagesLogic(ImagesDao));
+
+        public static ICommentsLogic CommentsLogic => commentsLogic ?? (commentsLogic = new CommentsLogic(CommentsDao));
     }
 }

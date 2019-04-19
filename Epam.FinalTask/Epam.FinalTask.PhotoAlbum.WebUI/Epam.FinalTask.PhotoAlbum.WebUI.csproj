@@ -88,6 +88,7 @@
   <ItemGroup>
     <Content Include="Content\Custom\editProfile.css" />
     <Content Include="Content\Custom\imagePage.css" />
+    <Content Include="Content\Custom\index.css" />
     <Content Include="Content\Custom\layout.css" />
     <Content Include="Content\Custom\login.css" />
     <Content Include="Content\Custom\management.css" />
@@ -111,6 +112,9 @@
     <Content Include="Images\BanImage.cshtml" />
     <Content Include="Images\UnbanImage.cshtml" />
     <Content Include="Images\DeleteImage.cshtml" />
+    <Content Include="Comments\DeleteComment.cshtml" />
+    <Content Include="Comments\BanComment.cshtml" />
+    <Content Include="Comments\UnbanComment.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Custom\imagePage.js" />
     <Content Include="Scripts\Custom\registration.js" />
