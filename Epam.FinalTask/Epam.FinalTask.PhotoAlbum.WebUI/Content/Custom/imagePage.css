@@ -105,7 +105,27 @@
     font-size: 30px;
     display: block;
     float: right;
-    margin-top: 35px;
+    margin-top: 20px;
+}
+
+.btnImageNewComment:disabled {
+    opacity: .3;
+}
+
+.charCountValid {
+    font-size: 14px;
+    font-weight: 600;
+    color: green;
+    position: relative;
+    left: 30px;
+}
+
+.charCountNotValid {
+    font-size: 14px;
+    font-weight: 600;
+    color: red;
+    position: relative;
+    left: 30px;
 }
 
 .errorMessage {

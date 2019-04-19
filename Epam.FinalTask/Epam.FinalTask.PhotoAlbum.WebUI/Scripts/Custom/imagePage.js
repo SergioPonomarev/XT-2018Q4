@@ -6,7 +6,22 @@
         $btnLike = $('#btnLike'),
         $btnUnlike = $('#btnUnlike'),
         $btnDeleteImage = $('#deleteImage'),
-        $commentsList = $('#commentsList');
+        $commentsList = $('#commentsList'),
+        commentText = document.getElementById('commentText'),
+        charCount = document.getElementById('charCount'),
+        btnSubmit = document.getElementById('btnSubmit');
+
+    commentText.oninput = function () {
+        var text = commentText.value;
+        charCount.innerText = 140 - text.length;
+        if (text.length > 140) {
+            charCount.className = 'charCountNotValid';
+            btnSubmit.disabled = true;
+        } else {
+            charCount.className = 'charCountValid';
+            btnSubmit.disabled = false;
+        }
+    }
 
     $btnBanImage.on('click', function () {
         var imageId = $imageId.data('imageid');
