@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.FinalTask.PhotoAlbum.ConsoleUI", "Epam.FinalTask.PhotoAlbum.ConsoleUI\Epam.FinalTask.PhotoAlbum.ConsoleUI.csproj", "{1F2B6837-8EAD-43B8-9CE9-403C050473E5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PL", "PL", "{7ABC2D2C-90C2-4E47-92BE-4CD4DCEFD860}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{0049F7F9-D4E8-48BC-A9B6-8ECCD62A3812}"
@@ -35,10 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1F2B6837-8EAD-43B8-9CE9-403C050473E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F2B6837-8EAD-43B8-9CE9-403C050473E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F2B6837-8EAD-43B8-9CE9-403C050473E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F2B6837-8EAD-43B8-9CE9-403C050473E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81E8DDEF-A63F-45B6-A990-1C06D3560752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81E8DDEF-A63F-45B6-A990-1C06D3560752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81E8DDEF-A63F-45B6-A990-1C06D3560752}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,7 +70,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1F2B6837-8EAD-43B8-9CE9-403C050473E5} = {7ABC2D2C-90C2-4E47-92BE-4CD4DCEFD860}
 		{81E8DDEF-A63F-45B6-A990-1C06D3560752} = {7ABC2D2C-90C2-4E47-92BE-4CD4DCEFD860}
 		{8C2565E4-C981-4FE7-9B84-731CE2FEEECE} = {F90A53BE-F84D-4CC7-B342-A6E03C61275C}
 		{3B29C36B-4AD3-4586-B4E4-D08336AA63B6} = {0049F7F9-D4E8-48BC-A9B6-8ECCD62A3812}
