@@ -10,9 +10,6 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 {
     public class FakeUsersDao : IUsersDao
     {
-        private static readonly string defaultRole = "User";
-        private static readonly int defaultAvatarId = 1;
-
         private readonly IImagesDao imagesDao;
 
         private List<User> users;
@@ -55,8 +52,6 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
                 if (user.UserId == 0)
                 {
                     user.UserId = id++;
-                    user.UserRole = defaultRole;
-                    user.UserAvatarId = defaultAvatarId;
                 }
 
                 this.users.Add(user);
@@ -66,11 +61,6 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             {
                 return false;
             }
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return this.users.ToArray();
         }
 
         public bool Remove(User user)
@@ -112,6 +102,18 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             user.UserRole = "User";
 
             this.users.Add(user);
+        }
+
+        public User GetUserById(int userId)
+        {
+            User user = this.users.FirstOrDefault(u => u.UserId == userId);
+
+            if (user != null)
+            {
+                user.UserImages = this.imagesDao.GetUserImages(user.UserId);
+            }
+
+            return user;
         }
     }
 }

@@ -7,13 +7,13 @@
         : "Guest";
 
     Avatar avatar = null;
+    User user = null;
 
     if (User.Identity.IsAuthenticated)
     {
-        avatar = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(User.Identity.Name);
+        user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+        avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
     }
-
-    User user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
 }
 
     <div class="header_content">

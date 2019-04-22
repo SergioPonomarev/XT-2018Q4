@@ -8,8 +8,8 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 {
     public interface IAccountsDao
     {
-        string GetPassByLogin(string login);
+        string GetPassByUserId(int userId);
 
-        bool SetPassToUser(string userName, string hashedPass);
+        bool SetPassToUser(int userId, string hashedPass);
     }
 }

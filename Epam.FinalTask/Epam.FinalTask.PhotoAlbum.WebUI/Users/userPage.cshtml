@@ -6,7 +6,7 @@
     Page.Title = userName;
 
     User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
-    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(userName);
+    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
 
     IEnumerable<Image> images = user.UserImages.OrderByDescending(i => i.ImageDateOfUpload).ToArray();
 }

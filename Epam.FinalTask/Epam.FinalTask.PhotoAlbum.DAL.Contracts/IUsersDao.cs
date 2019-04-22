@@ -11,9 +11,9 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
     {
         User GetUserByUserName(string userName);
 
-        bool Add(User user);
+        User GetUserById(int userId);
 
-        IEnumerable<User> GetAll();
+        bool Add(User user);
 
         bool Remove(User user);
 

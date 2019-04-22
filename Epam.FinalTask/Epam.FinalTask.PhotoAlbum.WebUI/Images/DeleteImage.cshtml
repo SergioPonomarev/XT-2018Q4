@@ -12,8 +12,9 @@
     int imageId = int.Parse(imageIdStr);
 
     Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+    User owner = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
 
-    if (User.Identity.Name != image.ImageOwner.UserName)
+    if (owner.UserId != image.ImageOwnerId)
     {
         Response.SetStatus(HttpStatusCode.NotFound);
         return;

@@ -11,6 +11,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 {
     public class UsersLogic : IUsersLogic
     {
+        private static readonly string defaultRole = "User";
+        private static readonly int defaultAvatarId = 1;
+
         private readonly IUsersDao usersDao;
 
         public UsersLogic(IUsersDao usersDao)
@@ -30,6 +33,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                 User user = new User
                 {
                     UserName = userName,
+                    UserRole = defaultRole,
+                    UserAvatarId = defaultAvatarId,
+                    Banned = false,
                 };
 
                 return this.usersDao.Add(user);
@@ -50,9 +56,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.usersDao.DemoteToUser(user);
         }
 
-        public IEnumerable<User> GetAll()
+        public User GetUserById(int userId)
         {
-            return this.usersDao.GetAll().ToArray();
+            return this.usersDao.GetUserById(userId);
         }
 
         public User GetUserByUserName(string userName)

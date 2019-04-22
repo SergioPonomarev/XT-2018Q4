@@ -9,7 +9,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
 {
     public interface IAvatarsLogic
     {
-        Avatar GetUserAvatarByUserName(string userName);
+        Avatar GetUserAvatar(int avatarId);
 
         Avatar GetDefaultAvatar();
 

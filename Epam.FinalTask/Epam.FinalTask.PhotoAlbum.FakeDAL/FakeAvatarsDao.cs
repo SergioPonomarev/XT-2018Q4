@@ -35,11 +35,9 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             };
         }
 
-        public Avatar GetUserAvatarByUserName(string userName)
+        public Avatar GetUserAvatar(int avatarId)
         {
-            User user = this.usersDao.GetUserByUserName(userName);
-
-            return this.avatars.First(a => a.AvatarId == user.UserAvatarId);
+            return this.avatars.FirstOrDefault(a => a.AvatarId == avatarId);
         }
 
         public void SetDefaultAvatar(Avatar avatar)
@@ -57,7 +55,7 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         {
             newAvatar.AvatarId = avatarId++;
             this.avatars.Add(newAvatar);
-            Avatar oldAvatar = this.GetUserAvatarByUserName(user.UserName);
+            Avatar oldAvatar = this.GetUserAvatar(user.UserAvatarId);
             if (oldAvatar.AvatarId != defaultAvatarId)
             {
                 this.avatars.Remove(oldAvatar);

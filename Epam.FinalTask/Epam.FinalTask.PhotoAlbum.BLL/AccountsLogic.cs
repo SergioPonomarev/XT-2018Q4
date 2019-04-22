@@ -32,7 +32,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
             string hashedPass = this.GetHashedPass(login, password);
 
-            string hashedPassFromDB = this.accountsDao.GetPassByLogin(login);
+            string hashedPassFromDB = this.accountsDao.GetPassByUserId(user.UserId);
 
             return hashedPass == hashedPassFromDB;
         }
@@ -68,7 +68,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
                 string hashedPass = this.GetHashedPass(userName, password);
 
-                return this.accountsDao.SetPassToUser(userName, hashedPass);
+                User user = this.usersLogic.GetUserByUserName(userName);
+
+                return this.accountsDao.SetPassToUser(user.UserId, hashedPass);
             }
             else
             {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +36,39 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
         public IEnumerable<Image> GetAllImages()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Image> images = new List<Image>();
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_GetAllImages";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        images.Add(new Image
+                        {
+                            ImageId = (int)reader["ImageId"],
+                            MimeType = (string)reader["MimeType"],
+                            ImageData = (string)reader["ImageData"],
+                            ImageDateOfUpload = (DateTime)reader["ImageDateOfUpload"],
+                            Description = reader["Description"] as string,
+                            ImageOwnerId = (int)reader["ImageOwnerId"],
+                            Banned = (bool)reader["Banned"],
+                        });
+                    }
+                }
+
+                return images;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Image GetBannedImage()
@@ -49,7 +83,41 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
         public IEnumerable<Image> GetUserImages(int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Image> images = new List<Image>();
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_GetUserImages";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        images.Add(new Image
+                        {
+                            ImageId = (int)reader["ImageId"],
+                            MimeType = (string)reader["MimeType"],
+                            ImageData = (string)reader["ImageData"],
+                            ImageDateOfUpload = (DateTime)reader["ImageDateOfUpload"],
+                            Description = reader["Description"] as string,
+                            ImageOwnerId = (int)reader["ImageOwnerId"],
+                            Banned = (bool)reader["Banned"],
+                        });
+                    }
+                }
+
+                return images;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Remove(Image image)

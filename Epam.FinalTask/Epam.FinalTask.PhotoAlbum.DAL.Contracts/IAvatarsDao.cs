@@ -9,7 +9,7 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 {
     public interface IAvatarsDao
     {
-        Avatar GetUserAvatarByUserName(string userName);
+        Avatar GetUserAvatar(int avatarId);
 
         Avatar GetDefaultAvatar();
 

@@ -10,6 +10,8 @@
 
     Page.Title = "Photo Album";
 
+    User user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+
     string avatarOkMessage = null;
     string avatarErrorMessage = null;
     string imageOkMessage = null;
@@ -62,7 +64,7 @@
 
                 image.ImageData = Convert.ToBase64String(data);
 
-                image.ImageOwner = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+                image.ImageOwnerId = user.UserId;
 
                 image.ImageDateOfUpload = DateTime.Now;
 

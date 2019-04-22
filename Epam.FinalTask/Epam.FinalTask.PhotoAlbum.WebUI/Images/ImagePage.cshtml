@@ -8,9 +8,9 @@
 
     Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
 
-    User owner = image.ImageOwner;
+    User owner = DependencyResolver.UsersLogic.GetUserById(image.ImageOwnerId);
 
-    Avatar avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(owner.UserName);
+    Avatar avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatar(owner.UserAvatarId);
 
     User visitor = null;
 

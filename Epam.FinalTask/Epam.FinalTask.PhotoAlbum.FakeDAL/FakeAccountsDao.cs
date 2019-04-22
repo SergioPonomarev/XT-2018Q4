@@ -4,26 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
+using Epam.FinalTask.PhotoAlbum.Entities;
 
 namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 {
     public class FakeAccountsDao : IAccountsDao
     {
-        private Dictionary<string, string> passwords;
+        private Dictionary<int, string> passwords;
 
         public FakeAccountsDao()
         {
-            this.passwords = new Dictionary<string, string>
+            this.passwords = new Dictionary<int, string>
             {
-                { "admin", "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9" }
+                { 1, "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9" }
             };
         }
 
-        public string GetPassByLogin(string login)
+        public string GetPassByUserId(int userId)
         {
-            if (this.passwords.ContainsKey(login))
+            if (this.passwords.ContainsKey(userId))
             {
-                return this.passwords[login];
+                return this.passwords[userId];
             }
             else
             {
@@ -31,11 +32,11 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             }
         }
 
-        public bool SetPassToUser(string userName, string hashedPass)
+        public bool SetPassToUser(int userId, string hashedPass)
         {
             try
             {
-                this.passwords.Add(userName, hashedPass);
+                this.passwords.Add(userId, hashedPass);
                 return true;
             }
             catch (Exception)

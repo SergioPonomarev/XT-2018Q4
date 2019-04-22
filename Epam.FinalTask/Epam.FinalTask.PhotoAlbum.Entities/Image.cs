@@ -25,7 +25,7 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 
         public string Description { get; set; }
 
-        public User ImageOwner { get; set; }
+        public int ImageOwnerId { get; set; }
 
         public bool Banned { get; set; }
 

@@ -65,7 +65,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                     switch (key.ToLower())
                     {
                         case "sqldb":
-                            usersDao = new SqlUsersDao(conStr);
+                            usersDao = new SqlUsersDao(conStr, ImagesDao);
                             break;
 
                         case "fakedb":

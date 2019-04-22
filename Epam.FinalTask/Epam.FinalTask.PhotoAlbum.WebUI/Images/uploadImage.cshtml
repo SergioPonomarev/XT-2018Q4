@@ -46,7 +46,7 @@
 
                 image.ImageDateOfUpload = DateTime.Now;
 
-                image.ImageOwner = user;
+                image.ImageOwnerId = user.UserId;
 
                 if (DependencyResolver.ImagesLogic.Add(image))
                 {
