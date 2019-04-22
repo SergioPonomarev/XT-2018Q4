@@ -38,9 +38,14 @@
 
                 avatar.AvatarData = Convert.ToBase64String(data);
 
-                DependencyResolver.AvatarsLogic.SetDefaultAvatar(avatar);
-
-                avatarOkMessage = "Avatar has been uploaded successfully.";
+                if (DependencyResolver.AvatarsLogic.SetDefaultAvatar(avatar))
+                {
+                    avatarOkMessage = "Avatar has been uploaded successfully.";
+                }
+                else
+                {
+                    avatarErrorMessage = "Avatar uploading error.";
+                }
             }
             else
             {
@@ -66,11 +71,14 @@
 
                 image.ImageOwnerId = user.UserId;
 
-                image.ImageDateOfUpload = DateTime.Now;
-
-                DependencyResolver.ImagesLogic.SetBannedImage(image);
-
-                imageOkMessage += $"Image has been uploaded succesfully.";
+                if (DependencyResolver.ImagesLogic.SetBannedImage(image))
+                {
+                    imageOkMessage += $"Image has been uploaded succesfully.";
+                }
+                else
+                {
+                    imageErrorMessage = "Image uploading error.";
+                }
             }
             else
             {

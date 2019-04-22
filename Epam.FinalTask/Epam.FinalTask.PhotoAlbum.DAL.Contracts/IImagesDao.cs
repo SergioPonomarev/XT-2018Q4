@@ -15,13 +15,13 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 
         bool Add(Image image);
 
-        void SetBannedImage(Image image);
+        bool SetBannedImage(Image image);
 
         IEnumerable<Image> GetUserImages(int userId);
 
-        void AddLikeToImage(Image image, int visitorId);
+        void AddLikeToImage(Image image, int userId);
 
-        void RemoveLikeFromImage(Image image, int visitorId);
+        void RemoveLikeFromImage(Image image, int userId);
 
         void BanImage(Image image);
 
@@ -30,5 +30,7 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
         void Remove(Image image);
 
         IEnumerable<Image> GetAllImages();
+
+        IEnumerable<int> GetLikesForImage(int imageId);
     }
 }

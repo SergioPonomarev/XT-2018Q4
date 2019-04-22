@@ -34,9 +34,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.avatarsDao.SetAvatarToUser(newAvatar, user);
         }
 
-        public void SetDefaultAvatar(Avatar avatar)
+        public bool SetDefaultAvatar(Avatar avatar)
         {
-            this.avatarsDao.SetDefaultAvatar(avatar);
+            return this.avatarsDao.SetDefaultAvatar(avatar);
         }
     }
 }

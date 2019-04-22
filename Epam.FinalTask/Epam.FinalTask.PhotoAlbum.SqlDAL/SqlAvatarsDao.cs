@@ -60,7 +60,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             throw new NotImplementedException();
         }
 
-        public void SetDefaultAvatar(Avatar avatar)
+        public bool SetDefaultAvatar(Avatar avatar)
         {
             throw new NotImplementedException();
         }

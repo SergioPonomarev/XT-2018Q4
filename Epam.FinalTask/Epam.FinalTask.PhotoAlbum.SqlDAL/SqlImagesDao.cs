@@ -12,6 +12,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
     public class SqlImagesDao : IImagesDao
     {
+        private static readonly int bannedImageId = 1;
         private readonly string conStr;
 
         public SqlImagesDao(string connectionString)
@@ -21,17 +22,81 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
         public bool Add(Image image)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_Add";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
+                    cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+                    cmd.Parameters.AddWithValue("@ImageDateOfUpload", image.ImageDateOfUpload);
+                    if (!string.IsNullOrWhiteSpace(image.Description))
+                    {
+                        cmd.Parameters.AddWithValue("@Description", image.Description);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Description", DBNull.Value);
+                    }
+                    cmd.Parameters.AddWithValue("@ImageOwnerId", image.ImageOwnerId);
+                    cmd.Parameters.AddWithValue("@Banned", image.Banned);
+
+                    con.Open();
+                    return cmd.ExecuteNonQuery() == 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public void AddLikeToImage(Image image, int visitorId)
+        public void AddLikeToImage(Image image, int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_AddLikeToImage";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void BanImage(Image image)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_ImageBan";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public IEnumerable<Image> GetAllImages()
@@ -73,12 +138,109 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
         public Image GetBannedImage()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Image image = new Image();
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_GetBannedImage";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", bannedImageId);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        image.ImageId = (int)reader["ImageId"];
+                        image.MimeType = (string)reader["MimeType"];
+                        image.ImageData = (string)reader["ImageData"];
+                        image.ImageDateOfUpload = (DateTime)reader["ImageDateOfUpload"];
+                        image.Description = reader["Description"] as string;
+                        image.ImageOwnerId = (int)reader["ImageOwnerId"];
+                        image.Banned = (bool)reader["Banned"];
+                    }
+                }
+
+                return image;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Image GetImageById(int imageId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Image image = new Image();
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_GetImageById";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", imageId);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        image.ImageId = (int)reader["ImageId"];
+                        image.MimeType = (string)reader["MimeType"];
+                        image.ImageData = (string)reader["ImageData"];
+                        image.ImageDateOfUpload = (DateTime)reader["ImageDateOfUpload"];
+                        image.Description = reader["Description"] as string;
+                        image.ImageOwnerId = (int)reader["ImageOwnerId"];
+                        image.Banned = (bool)reader["Banned"];
+                    }
+                }
+
+                if (image.ImageId == 0)
+                {
+                    return null;
+                }
+
+                return image;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<int> GetLikesForImage(int imageId)
+        {
+            try
+            {
+                List<int> likes = new List<int>();
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_GetLikesForImage";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", imageId);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        likes.Add((int)reader["UserId"]);
+                    }
+                }
+
+                return likes;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public IEnumerable<Image> GetUserImages(int userId)
@@ -122,22 +284,95 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
         public void Remove(Image image)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_Remove";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public void RemoveLikeFromImage(Image image, int visitorId)
+        public void RemoveLikeFromImage(Image image, int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_RemoveLikeFromImage";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public void SetBannedImage(Image image)
+        public bool SetBannedImage(Image image)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_SetBannedImage";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", bannedImageId);
+                    cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
+                    cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
+                    cmd.Parameters.AddWithValue("@ImageDateOfUpload", image.ImageDateOfUpload);
+                    cmd.Parameters.AddWithValue("@ImageOwnerId", image.ImageOwnerId);
+
+                    con.Open();
+                    return cmd.ExecuteNonQuery() == 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void UnbanImage(Image image)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Images_ImageUnban";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -40,10 +40,11 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return this.avatars.FirstOrDefault(a => a.AvatarId == avatarId);
         }
 
-        public void SetDefaultAvatar(Avatar avatar)
+        public bool SetDefaultAvatar(Avatar avatar)
         {
             avatar.AvatarId = defaultAvatarId;
             this.avatars[0] = avatar;
+            return true;
         }
 
         public Avatar GetDefaultAvatar()

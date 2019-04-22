@@ -44,8 +44,6 @@
 
                 image.ImageData = Convert.ToBase64String(data);
 
-                image.ImageDateOfUpload = DateTime.Now;
-
                 image.ImageOwnerId = user.UserId;
 
                 if (DependencyResolver.ImagesLogic.Add(image))

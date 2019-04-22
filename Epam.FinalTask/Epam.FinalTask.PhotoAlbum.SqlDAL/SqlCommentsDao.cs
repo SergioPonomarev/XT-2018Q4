@@ -34,7 +34,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
         public IEnumerable<Comment> GetCommentsForImage(int imageId)
         {
-            throw new NotImplementedException();
+            return Enumerable.Empty<Comment>();
         }
 
         public bool Remove(Comment comment)

@@ -20,13 +20,14 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public bool Add(Image image)
         {
-            image.Likes = new List<int>();
+            image.Banned = false;
+            image.ImageDateOfUpload = DateTime.Now;
             return this.imagesDao.Add(image);
         }
 
-        public void AddLikeToImage(Image image, int visitorId)
+        public void AddLikeToImage(Image image, int userId)
         {
-            this.imagesDao.AddLikeToImage(image, visitorId);
+            this.imagesDao.AddLikeToImage(image, userId);
         }
 
         public void BanImage(Image image)
@@ -49,19 +50,25 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.imagesDao.GetImageById(imageId);
         }
 
+        public IEnumerable<int> GetLikesForImage(int imageId)
+        {
+            return this.imagesDao.GetLikesForImage(imageId).ToArray();
+        }
+
         public void Remove(Image image)
         {
             this.imagesDao.Remove(image);
         }
 
-        public void RemoveLikeFromImage(Image image, int visitorId)
+        public void RemoveLikeFromImage(Image image, int userId)
         {
-            this.imagesDao.RemoveLikeFromImage(image, visitorId);
+            this.imagesDao.RemoveLikeFromImage(image, userId);
         }
 
-        public void SetBannedImage(Image image)
+        public bool SetBannedImage(Image image)
         {
-            this.imagesDao.SetBannedImage(image);
+            image.ImageDateOfUpload = DateTime.Now;
+            return this.imagesDao.SetBannedImage(image);
         }
 
         public void UnbanImage(Image image)

@@ -14,6 +14,7 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         private static int id = 2;
 
         private List<Image> images;
+        private List<KeyValuePair<int, int>> likes;
 
         public FakeImagesDao()
         {
@@ -28,6 +29,7 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
                     ImageDateOfUpload = DateTime.MinValue,
                 }
             };
+            this.likes = new List<KeyValuePair<int, int>>();
         }
 
         public bool Add(Image image)
@@ -44,13 +46,9 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             }
         }
 
-        public void AddLikeToImage(Image image, int visitorId)
+        public void AddLikeToImage(Image image, int userId)
         {
-            this.images.Remove(image);
-
-            image.Likes.Add(visitorId);
-
-            this.images.Add(image);
+            this.likes.Add(new KeyValuePair<int, int>(userId, image.ImageId));
         }
 
         public void BanImage(Image image)
@@ -79,6 +77,14 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return image;
         }
 
+        public IEnumerable<int> GetLikesForImage(int imageId)
+        {
+            return this.likes
+                .Where(p => p.Value == imageId)
+                .Select(p => p.Key)
+                .ToArray();
+        }
+
         public IEnumerable<Image> GetUserImages(int userId)
         {
             return this.images.Where(i => i.ImageOwnerId == userId).ToArray();
@@ -89,19 +95,16 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             this.images.Remove(image);
         }
 
-        public void RemoveLikeFromImage(Image image, int visitorId)
+        public void RemoveLikeFromImage(Image image, int userId)
         {
-            this.images.Remove(image);
-
-            image.Likes.Remove(visitorId);
-
-            this.images.Add(image);
+            this.likes.Remove(new KeyValuePair<int, int>(userId, image.ImageId));
         }
 
-        public void SetBannedImage(Image image)
+        public bool SetBannedImage(Image image)
         {
             image.ImageId = bannedId;
             this.images[0] = image;
+            return true;
         }
 
         public void UnbanImage(Image image)

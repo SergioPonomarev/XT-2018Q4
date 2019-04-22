@@ -8,6 +8,14 @@
 
     Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
 
+    if (image == null)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
+
+    IEnumerable<int> likes = DependencyResolver.ImagesLogic.GetLikesForImage(imageId).ToArray();
+
     User owner = DependencyResolver.UsersLogic.GetUserById(image.ImageOwnerId);
 
     Avatar avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatar(owner.UserAvatarId);
@@ -20,7 +28,7 @@
     {
         visitor = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
 
-        if (image.Likes.Contains(visitor.UserId))
+        if (likes.Contains(visitor.UserId))
         {
             liked = true;
         }
@@ -99,7 +107,7 @@
                 </div>
 
                 <div class="likeBlock">
-                    <span id="likesCount" class="likesCount">@image.Likes.Count</span>
+                    <span id="likesCount" class="likesCount">@likes.Count()</span>
 
                     @if (User.Identity.IsAuthenticated)
                     {

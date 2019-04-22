@@ -15,7 +15,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
 
         bool Add(Image image);
 
-        void SetBannedImage(Image image);
+        bool SetBannedImage(Image image);
 
         void AddLikeToImage(Image image, int visitorId);
 
@@ -28,5 +28,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
         void Remove(Image image);
 
         IEnumerable<Image> GetAllImages();
+
+        IEnumerable<int> GetLikesForImage(int imageId);
     }
 }
