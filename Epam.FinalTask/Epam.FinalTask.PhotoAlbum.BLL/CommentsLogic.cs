@@ -18,7 +18,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             this.commentsDao = commentsDao;
         }
 
-        public bool Add(string commentText, Image image, User visitor)
+        public bool Add(string commentText, Image image, User user)
         {
             if (string.IsNullOrWhiteSpace(commentText))
             {
@@ -29,7 +29,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             {
                 CommentText = commentText,
                 CommentDate = DateTime.Now,
-                CommentAuthor = visitor,
+                CommentAuthorId = user.UserId,
                 CommentImageId = image.ImageId,
                 Banned = false,
             };

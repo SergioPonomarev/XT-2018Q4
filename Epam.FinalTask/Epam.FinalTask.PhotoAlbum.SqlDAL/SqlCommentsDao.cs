@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,32 +21,172 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
         public bool Add(Comment comment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Comments_Add";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CommentText", comment.CommentText);
+                    cmd.Parameters.AddWithValue("@CommentDate", comment.CommentDate);
+                    cmd.Parameters.AddWithValue("@CommentAuthorId", comment.CommentAuthorId);
+                    cmd.Parameters.AddWithValue("@Banned", comment.Banned);
+                    cmd.Parameters.AddWithValue("@CommentImageId", comment.CommentImageId);
+
+                    con.Open();
+                    return cmd.ExecuteNonQuery() == 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void BanComment(Comment comment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Comments_CommentBan";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CommentId", comment.CommentId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Comment GetCommentById(int commentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Comment comment = new Comment();
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Comments_GetCommentById";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CommentId", commentId);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        comment.CommentId = (int)reader["CommentId"];
+                        comment.CommentText = (string)reader["CommentText"];
+                        comment.CommentDate = (DateTime)reader["CommentDate"];
+                        comment.CommentAuthorId = (int)reader["CommentAuthorId"];
+                        comment.Banned = (bool)reader["Banned"];
+                        comment.CommentImageId = (int)reader["CommentImageId"];
+                    }
+                }
+
+                if (comment.CommentId == 0)
+                {
+                    return null;
+                }
+
+                return comment;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public IEnumerable<Comment> GetCommentsForImage(int imageId)
         {
-            return Enumerable.Empty<Comment>();
+            try
+            {
+                List<Comment> comments = new List<Comment>();
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Comments_GetCommentsForImage";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ImageId", imageId);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        comments.Add(new Comment
+                        {
+                            CommentId = (int)reader["CommentId"],
+                            CommentText = (string)reader["CommentText"],
+                            CommentDate = (DateTime)reader["CommentDate"],
+                            CommentAuthorId = (int)reader["CommentAuthorId"],
+                            Banned = (bool)reader["Banned"],
+                            CommentImageId = (int)reader["CommentImageId"],
+                        });
+                    }
+                }
+
+                return comments;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool Remove(Comment comment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Comments_Remove";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CommentId", comment.CommentId);
+
+                    con.Open();
+                    return cmd.ExecuteNonQuery() == 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void UnbanComment(Comment comment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "Comments_CommentUnban";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@CommentId", comment.CommentId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

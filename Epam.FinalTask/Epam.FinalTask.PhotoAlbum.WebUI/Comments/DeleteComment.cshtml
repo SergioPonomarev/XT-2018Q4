@@ -12,8 +12,9 @@
     int commentId = int.Parse(commentIdStr);
 
     Comment comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
+    User commentAuthor = DependencyResolver.UsersLogic.GetUserById(comment.CommentAuthorId);
 
-    if (User.Identity.Name != comment.CommentAuthor.UserName)
+    if (User.Identity.Name != commentAuthor.UserName)
     {
         Response.SetStatus(HttpStatusCode.NotFound);
         return;
