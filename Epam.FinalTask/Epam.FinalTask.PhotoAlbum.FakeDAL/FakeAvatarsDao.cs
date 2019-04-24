@@ -54,17 +54,29 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 
         public void SetAvatarToUser(Avatar newAvatar, User user)
         {
-            newAvatar.AvatarId = avatarId++;
-            this.avatars.Add(newAvatar);
-            Avatar oldAvatar = this.GetUserAvatar(user.UserAvatarId);
-            if (oldAvatar.AvatarId != defaultAvatarId)
+            int newAvatarId = this.Add(newAvatar);
+            int oldAvatarId = user.UserAvatarId;
+            if (oldAvatarId != defaultAvatarId)
             {
-                this.avatars.Remove(oldAvatar);
+                this.Remove(oldAvatarId);
             }
 
             this.usersDao.Remove(user);
             user.UserAvatarId = newAvatar.AvatarId;
             this.usersDao.Add(user);
+        }
+
+        public int Add(Avatar avatar)
+        {
+            avatar.AvatarId = avatarId++;
+            this.avatars.Add(avatar);
+            return avatar.AvatarId;
+        }
+
+        public void Remove(int avatarId)
+        {
+            Avatar avatar = this.GetUserAvatar(avatarId);
+            this.avatars.Remove(avatar);
         }
     }
 }

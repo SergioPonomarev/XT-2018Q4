@@ -20,11 +20,12 @@
 
     string errorMessage = null;
 
+    User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+
     if (IsPost)
     {
         WebImage image = WebImage.GetImageFromRequest();
 
-        User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
 
         if (image != null && user != null)
         {
@@ -41,6 +42,8 @@
                 newAvatar.AvatarData = Convert.ToBase64String(data);
 
                 DependencyResolver.AvatarsLogic.SetAvatarToUser(newAvatar, user);
+
+                Response.Redirect($"/Users/UserPage?name={userName}");
             }
             else
             {
@@ -50,7 +53,7 @@
     }
 
 
-    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatarByUserName(userName);
+    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
 }
 
 @section styles {
