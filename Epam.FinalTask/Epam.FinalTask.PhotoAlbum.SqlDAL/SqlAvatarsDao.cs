@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
 using Epam.FinalTask.PhotoAlbum.Entities;
+using Epam.FinalTask.PhotoAlbum.Log;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
@@ -51,8 +52,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return avatar;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -80,20 +82,27 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     }
                 }
 
+                if (avatar.AvatarId == 0)
+                {
+                    return null;
+                }
+
                 return avatar;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
 
-        public void SetAvatarToUser(Avatar newAvatar, User user)
+        public bool SetAvatarToUser(Avatar newAvatar, User user)
         {
             try
             {
                 int oldAvatarId = user.UserAvatarId;
                 int newAvatarId = this.Add(newAvatar);
+                bool check = false;
 
                 using (SqlConnection con = new SqlConnection(conStr))
                 {
@@ -105,17 +114,23 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@AvatarId", newAvatarId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    check = cmd.ExecuteNonQuery() == 1;
                 }
 
                 if (oldAvatarId != defaultAvatarId)
                 {
-                    this.Remove(oldAvatarId);
+                    if (!this.Remove(oldAvatarId))
+                    {
+                        return false;
+                    }
                 }
+
+                return check;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
@@ -142,13 +157,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return avatarId;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
 
-        public void Remove(int avatarId)
+        public bool Remove(int avatarId)
         {
             try
             {
@@ -161,12 +177,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@AvatarId", avatarId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
@@ -188,9 +205,10 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
     }

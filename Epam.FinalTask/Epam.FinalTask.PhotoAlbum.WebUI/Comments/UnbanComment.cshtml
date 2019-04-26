@@ -10,14 +10,25 @@
 
     string commentIdStr = Request["commentId"];
     int commentId = int.Parse(commentIdStr);
+    Comment comment = null;
 
-    Comment comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
-
-    if (comment != null)
+    try
     {
-        DependencyResolver.CommentsLogic.UnbanComment(comment);
+        comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
+
+        if (comment == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
     }
-    else
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+    if (!DependencyResolver.CommentsLogic.UnbanComment(comment))
     {
         Response.SetStatus(HttpStatusCode.BadRequest);
     }

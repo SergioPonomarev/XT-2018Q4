@@ -1,10 +1,62 @@
 ﻿@using Epam.FinalTask.PhotoAlbum.Common
 @using Epam.FinalTask.PhotoAlbum.Entities
+@using Epam.FinalTask.PhotoAlbum.Log
 
 @{
     Page.Title = "Photo Album";
 
-    IEnumerable<Image> images = DependencyResolver.ImagesLogic.GetAllImages().OrderByDescending(i => i.ImageDateOfUpload).ToArray();
+    /*Logger.Log.Info("This is test");
+
+    int j = 0;
+
+    try
+    {
+        int res = 10 / j;
+    }
+    catch (DivideByZeroException ex)
+    {
+        Logger.Log.Error("Tried to devide by zero.", ex);
+    }*/
+
+    IEnumerable<Image> images = null;
+
+    try
+    {
+        images = DependencyResolver.ImagesLogic.GetAllImages()
+            .OrderByDescending(i => i.ImageDateOfUpload)
+            .ToArray();
+
+        if (images == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+
+    Image bannedImage = null;
+
+    try
+    {
+        bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
+
+        if (bannedImage == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
 }
 
 @section styles {
@@ -15,19 +67,18 @@
         <div class="imagesBlock">
             @foreach (Image image in images)
             {
-            <a href="/Images/ImagePage?imageId=@image.ImageId" class="imagePageLink">
-                <div class="imageWrapper">
-                @if (!image.Banned)
-                {
-                    <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
-                }
-                else
-                {
-                    Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
-                    <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="This image is banned" />
-                }
-                </div>
-            </a>
+                <a href="/Images/ImagePage?imageId=@image.ImageId" class="imagePageLink">
+                    <div class="imageWrapper">
+                    @if (!image.Banned)
+                    {
+                        <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
+                    }
+                    else
+                    {
+                        <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="This image is banned" />
+                    }
+                    </div>
+                </a>
             }
 
             <div class="clear"></div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,19 +38,33 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.commentsDao.Add(comment);
         }
 
-        public void BanComment(Comment comment)
+        public bool BanComment(Comment comment)
         {
-            this.commentsDao.BanComment(comment);
+            return this.commentsDao.BanComment(comment);
         }
 
         public Comment GetCommentById(int commentId)
         {
-            return this.commentsDao.GetCommentById(commentId);
+            try
+            {
+                return this.commentsDao.GetCommentById(commentId);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public IEnumerable<Comment> GetCommentsForImage(int imageId)
         {
-            return this.commentsDao.GetCommentsForImage(imageId).ToArray();
+            try
+            {
+                return this.commentsDao.GetCommentsForImage(imageId).ToArray();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public bool Remove(Comment comment)
@@ -57,9 +72,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.commentsDao.Remove(comment);
         }
 
-        public void UnbanComment(Comment comment)
+        public bool UnbanComment(Comment comment)
         {
-            this.commentsDao.UnbanComment(comment);
+            return this.commentsDao.UnbanComment(comment);
         }
     }
 }

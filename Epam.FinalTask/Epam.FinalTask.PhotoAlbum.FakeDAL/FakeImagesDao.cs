@@ -46,18 +46,21 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             }
         }
 
-        public void AddLikeToImage(Image image, int userId)
+        public bool AddLikeToImage(Image image, int userId)
         {
             this.likes.Add(new KeyValuePair<int, int>(userId, image.ImageId));
+            return true;
         }
 
-        public void BanImage(Image image)
+        public bool BanImage(Image image)
         {
             this.images.Remove(image);
 
             image.Banned = true;
 
             this.images.Add(image);
+
+            return true;
         }
 
         public IEnumerable<Image> GetAllImages()
@@ -90,14 +93,18 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return this.images.Where(i => i.ImageOwnerId == userId).ToArray();
         }
 
-        public void Remove(Image image)
+        public bool Remove(Image image)
         {
             this.images.Remove(image);
+
+            return true;
         }
 
-        public void RemoveLikeFromImage(Image image, int userId)
+        public bool RemoveLikeFromImage(Image image, int userId)
         {
             this.likes.Remove(new KeyValuePair<int, int>(userId, image.ImageId));
+
+            return true;
         }
 
         public bool SetBannedImage(Image image)
@@ -107,13 +114,15 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return true;
         }
 
-        public void UnbanImage(Image image)
+        public bool UnbanImage(Image image)
         {
             this.images.Remove(image);
 
             image.Banned = false;
 
             this.images.Add(image);
+
+            return true;
         }
     }
 }

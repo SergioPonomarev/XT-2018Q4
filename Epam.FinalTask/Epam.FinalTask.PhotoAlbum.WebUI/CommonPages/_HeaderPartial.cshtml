@@ -1,7 +1,7 @@
 ﻿@using Epam.FinalTask.PhotoAlbum.Common
 @using Epam.FinalTask.PhotoAlbum.Entities
 
-@{ 
+@{
     string userName = User.Identity.IsAuthenticated
         ? User.Identity.Name
         : "Guest";
@@ -11,46 +11,60 @@
 
     if (User.Identity.IsAuthenticated)
     {
-        user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
-        avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
+        try
+        {
+            user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+            avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
+
+            if (user == null || avatar == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
     }
 }
 
-    <div class="header_content">
-        <div class="header_userBlock">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href="~/Users/UserPage?name=@userName" class="accountLink">
-                    <p class="userBlock_name">Hello, @userName!</p>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <img class="userBlock_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User avatar" />
-                    }
-                </a>
-            }
-            else
-            {
+<div class="header_content">
+    <div class="header_userBlock">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="~/Users/UserPage?name=@userName" class="accountLink">
                 <p class="userBlock_name">Hello, @userName!</p>
-            }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <img class="userBlock_avatar" src="data:@avatar.MimeType;base64,@avatar.AvatarData" alt="User avatar" />
+                }
+            </a>
+        }
+        else
+        {
+            <p class="userBlock_name">Hello, @userName!</p>
+        }
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a class="userBlock_logLink" href="/Account/Logout">Logout</a>
-            }
-            else
-            {
-                <a class="userBlock_logLink" href="/Account/Login">Login</a>
-            }
-        </div>
-        <div class="header_menuBlock">
-            <a href="/Index" class="menuBlock_link">Home</a>
-            @if (User.IsInRole("Users") && !user.Banned)
-            {
-                <a href="/Images/UploadImage" class="menuBlock_link">Upload</a>
-            }
-            @if (User.IsInRole("SuperAdmins"))
-            {
-                <a href="/Administration/Management" class="menuBlock_link">Management</a>
-            }
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="userBlock_logLink" href="/Account/Logout">Logout</a>
+        }
+        else
+        {
+            <a class="userBlock_logLink" href="/Account/Login">Login</a>
+        }
     </div>
+    <div class="header_menuBlock">
+        <a href="/Index" class="menuBlock_link">Home</a>
+        @if (User.IsInRole("Users") && !user.Banned)
+        {
+            <a href="/Images/UploadImage" class="menuBlock_link">Upload</a>
+        }
+        @if (User.IsInRole("SuperAdmins"))
+        {
+            <a href="/Administration/Management" class="menuBlock_link">Management</a>
+        }
+    </div>
+</div>

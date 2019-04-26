@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -23,7 +24,20 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public bool CanLogin(string login, string password)
         {
-            User user = this.usersLogic.GetUserByUserName(login);
+            User user = null;
+            try
+            {
+                user = this.usersLogic.GetUserByUserName(login);
+
+                if (user == null)
+                {
+                    return false;
+                }
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
 
             if (user == null)
             {
@@ -32,14 +46,36 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
             string hashedPass = this.GetHashedPass(login, password);
 
-            string hashedPassFromDB = this.accountsDao.GetPassByUserId(user.UserId);
+            string hashedPassFromDB = null;
+
+            try
+            {
+                hashedPassFromDB = this.accountsDao.GetPassByUserId(user.UserId);
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
 
             return hashedPass == hashedPassFromDB;
         }
 
         public string[] GetRoles(string userName)
         {
-            User user = this.usersLogic.GetUserByUserName(userName);
+            User user = null;
+            try
+            {
+                user = this.usersLogic.GetUserByUserName(userName);
+
+                if (user == null)
+                {
+                    return new string[0];
+                }
+            }
+            catch (SqlException)
+            {
+                return new string[0];
+            }
 
             switch (user.UserRole.ToLower())
             {
@@ -68,7 +104,20 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
                 string hashedPass = this.GetHashedPass(userName, password);
 
-                User user = this.usersLogic.GetUserByUserName(userName);
+                User user = null;
+                try
+                {
+                    user = this.usersLogic.GetUserByUserName(userName);
+
+                    if (user == null)
+                    {
+                        return false;
+                    }
+                }
+                catch (SqlException)
+                {
+                    return false;
+                }
 
                 return this.accountsDao.SetPassToUser(user.UserId, hashedPass);
             }

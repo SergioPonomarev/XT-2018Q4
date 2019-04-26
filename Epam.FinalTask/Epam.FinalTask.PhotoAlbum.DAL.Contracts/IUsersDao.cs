@@ -17,12 +17,12 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 
         bool Remove(User user);
 
-        void BanUser(User user);
+        bool BanUser(User user);
 
-        void UnbanUser(User user);
+        bool UnbanUser(User user);
 
-        void PromoteToAdmin(User user);
+        bool PromoteToAdmin(User user);
 
-        void DemoteToUser(User user);
+        bool DemoteToUser(User user);
     }
 }

@@ -12,15 +12,27 @@
     string visitorIdStr = Request["visitorId"];
     int imageId = int.Parse(imageIdStr);
     int visitorId = int.Parse(visitorIdStr);
+    Image image = null;
 
-    Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+    try
+    {
+        image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 
     if (image != null)
     {
-        DependencyResolver.ImagesLogic.AddLikeToImage(image, visitorId);
+        if (!DependencyResolver.ImagesLogic.AddLikeToImage(image, visitorId))
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+        }
     }
     else
     {
-        Response.SetStatus(HttpStatusCode.BadRequest);
+        Response.SetStatus(HttpStatusCode.NotFound);
     }
 }

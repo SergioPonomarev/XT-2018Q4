@@ -68,40 +68,48 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return this.users.Remove(user);
         }
 
-        public void BanUser(User user)
+        public bool BanUser(User user)
         {
             this.users.Remove(user);
 
             user.Banned = true;
 
             this.users.Add(user);
+
+            return true;
         }
 
-        public void UnbanUser(User user)
+        public bool UnbanUser(User user)
         {
             this.users.Remove(user);
 
             user.Banned = false;
 
             this.users.Add(user);
+
+            return true;
         }
 
-        public void PromoteToAdmin(User user)
+        public bool PromoteToAdmin(User user)
         {
             this.users.Remove(user);
 
             user.UserRole = "Admin";
 
             this.users.Add(user);
+
+            return true;
         }
 
-        public void DemoteToUser(User user)
+        public bool DemoteToUser(User user)
         {
             this.users.Remove(user);
 
             user.UserRole = "User";
 
             this.users.Add(user);
+
+            return true;
         }
 
         public User GetUserById(int userId)

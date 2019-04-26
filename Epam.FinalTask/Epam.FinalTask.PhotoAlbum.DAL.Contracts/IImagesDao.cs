@@ -19,15 +19,15 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 
         IEnumerable<Image> GetUserImages(int userId);
 
-        void AddLikeToImage(Image image, int userId);
+        bool AddLikeToImage(Image image, int userId);
 
-        void RemoveLikeFromImage(Image image, int userId);
+        bool RemoveLikeFromImage(Image image, int userId);
 
-        void BanImage(Image image);
+        bool BanImage(Image image);
 
-        void UnbanImage(Image image);
+        bool UnbanImage(Image image);
 
-        void Remove(Image image);
+        bool Remove(Image image);
 
         IEnumerable<Image> GetAllImages();
 

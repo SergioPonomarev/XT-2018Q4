@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,9 +29,20 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                 return false;
             }
 
-            if (this.GetUserByUserName(userName) == null)
+            User user;
+
+            try
             {
-                User user = new User
+                user = this.GetUserByUserName(userName);
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
+
+            if (user == null)
+            {
+                User newUser = new User
                 {
                     UserName = userName,
                     UserRole = defaultRole,
@@ -38,7 +50,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                     Banned = false,
                 };
 
-                return this.usersDao.Add(user);
+                return this.usersDao.Add(newUser);
             }
             else
             {
@@ -46,29 +58,43 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             }
         }
 
-        public void BanUser(User user)
+        public bool BanUser(User user)
         {
-            this.usersDao.BanUser(user);
+            return this.usersDao.BanUser(user);
         }
 
-        public void DemoteToUser(User user)
+        public bool DemoteToUser(User user)
         {
-            this.usersDao.DemoteToUser(user);
+            return this.usersDao.DemoteToUser(user);
         }
 
         public User GetUserById(int userId)
         {
-            return this.usersDao.GetUserById(userId);
+            try
+            {
+                return this.usersDao.GetUserById(userId);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public User GetUserByUserName(string userName)
         {
-            return this.usersDao.GetUserByUserName(userName);
+            try
+            {
+                return this.usersDao.GetUserByUserName(userName);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
-        public void PromoteToAdmin(User user)
+        public bool PromoteToAdmin(User user)
         {
-            this.usersDao.PromoteToAdmin(user);
+            return this.usersDao.PromoteToAdmin(user);
         }
 
         public bool Remove(User user)
@@ -76,9 +102,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.usersDao.Remove(user);
         }
 
-        public void UnbanUser(User user)
+        public bool UnbanUser(User user)
         {
-            this.usersDao.UnbanUser(user);
+            return this.usersDao.UnbanUser(user);
         }
     }
 }

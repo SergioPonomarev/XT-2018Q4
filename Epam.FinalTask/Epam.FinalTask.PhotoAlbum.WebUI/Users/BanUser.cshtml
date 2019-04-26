@@ -9,15 +9,27 @@
     }
 
     string userName = Request["userName"];
+    User user = null;
 
-    User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+    try
+    {
+        user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 
     if (user != null)
     {
-        DependencyResolver.UsersLogic.BanUser(user);
+        if (!DependencyResolver.UsersLogic.BanUser(user))
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+        }
     }
     else
     {
-        Response.SetStatus(HttpStatusCode.BadRequest);
+        Response.SetStatus(HttpStatusCode.NotFound);
     }
 }

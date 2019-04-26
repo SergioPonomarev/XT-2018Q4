@@ -1,4 +1,5 @@
 ﻿@using Epam.FinalTask.PhotoAlbum.Common
+@using Epam.FinalTask.PhotoAlbum.Entities
 
 @{
     Page.Title = "Registration";
@@ -9,12 +10,23 @@
     {
         string userName = Request["userName"];
         string password = Request["password"];
+        User user = null;
 
-        if (DependencyResolver.UsersLogic.GetUserByUserName(userName) == null)
+        try
+        {
+            user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        if (user == null)
         {
             if (DependencyResolver.AccountsLogic.UserRegistration(userName, password))
             {
-                Response.Redirect("~/Index");
+                Response.Redirect("/Index");
                 return;
             }
             else
@@ -26,6 +38,7 @@
         {
             errorMessage = "User is allready exists.";
         }
+
     }
 }
 

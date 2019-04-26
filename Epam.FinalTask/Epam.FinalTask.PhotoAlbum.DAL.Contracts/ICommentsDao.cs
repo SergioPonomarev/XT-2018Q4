@@ -17,8 +17,8 @@ namespace Epam.FinalTask.PhotoAlbum.DAL.Contracts
 
         bool Remove(Comment comment);
 
-        void BanComment(Comment comment);
+        bool BanComment(Comment comment);
 
-        void UnbanComment(Comment comment);
+        bool UnbanComment(Comment comment);
     }
 }

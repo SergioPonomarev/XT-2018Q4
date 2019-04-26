@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
 using Epam.FinalTask.PhotoAlbum.Entities;
+using Epam.FinalTask.PhotoAlbum.Log;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
@@ -40,13 +41,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void BanUser(User user)
+        public bool BanUser(User user)
         {
             try
             {
@@ -59,16 +61,17 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@UserId", user.UserId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void DemoteToUser(User user)
+        public bool DemoteToUser(User user)
         {
             try
             {
@@ -81,12 +84,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@UserId", user.UserId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
@@ -125,8 +129,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return user;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -166,13 +171,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return user;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
 
-        public void PromoteToAdmin(User user)
+        public bool PromoteToAdmin(User user)
         {
             try
             {
@@ -185,12 +191,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@UserId", user.UserId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
@@ -210,13 +217,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void UnbanUser(User user)
+        public bool UnbanUser(User user)
         {
             try
             {
@@ -229,12 +237,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@UserId", user.UserId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
     }

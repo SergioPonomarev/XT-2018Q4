@@ -17,15 +17,15 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
 
         bool SetBannedImage(Image image);
 
-        void AddLikeToImage(Image image, int visitorId);
+        bool AddLikeToImage(Image image, int visitorId);
 
-        void RemoveLikeFromImage(Image image, int visitorId);
+        bool RemoveLikeFromImage(Image image, int visitorId);
 
-        void BanImage(Image image);
+        bool BanImage(Image image);
 
-        void UnbanImage(Image image);
+        bool UnbanImage(Image image);
 
-        void Remove(Image image);
+        bool Remove(Image image);
 
         IEnumerable<Image> GetAllImages();
 

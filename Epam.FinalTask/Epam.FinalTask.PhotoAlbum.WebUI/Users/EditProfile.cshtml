@@ -19,8 +19,23 @@
     }
 
     string errorMessage = null;
+    User user = null;
 
-    User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+    try
+    {
+        user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+    if (user == null)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
 
     if (IsPost)
     {
@@ -52,8 +67,23 @@
         }
     }
 
+    Avatar avatar = null;
 
-    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
+    try
+    {
+        avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
+
+        if (avatar == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 }
 
 @section styles {

@@ -100,6 +100,7 @@
     <Content Include="Content\normalize.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="CommonPages\_HeaderPartial.cshtml" />
+    <Content Include="Global.asax" />
     <Content Include="Index.cshtml" />
     <Content Include="Account\Login.cshtml" />
     <Content Include="Account\Logout.cshtml" />
@@ -124,11 +125,16 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="_Layout.cshtml" />
     <Content Include="_PageStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRoleProvider.cs" />
   </ItemGroup>
@@ -168,6 +174,10 @@
     <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.Entities\Epam.FinalTask.PhotoAlbum.Entities.csproj">
       <Project>{f063520a-5b34-42ff-ae59-1ac321665c42}</Project>
       <Name>Epam.FinalTask.PhotoAlbum.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.Log\Epam.FinalTask.PhotoAlbum.Log.csproj">
+      <Project>{15085EAB-4F5D-4760-87B3-FE9928C1CDFD}</Project>
+      <Name>Epam.FinalTask.PhotoAlbum.Log</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

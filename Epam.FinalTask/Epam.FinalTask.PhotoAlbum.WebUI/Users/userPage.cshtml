@@ -5,10 +5,47 @@
     string userName = Request["name"];
     Page.Title = userName;
 
-    User user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
-    Avatar avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
+    User user = null;
+    Avatar avatar = null;
+    IEnumerable<Image> images = null;
+    Image bannedImage = null;
 
-    IEnumerable<Image> images = user.UserImages.OrderByDescending(i => i.ImageDateOfUpload).ToArray();
+    try
+    {
+        user = DependencyResolver.UsersLogic.GetUserByUserName(userName);
+        avatar = DependencyResolver.AvatarsLogic.GetUserAvatar(user.UserAvatarId);
+        images = user.UserImages.OrderByDescending(i => i.ImageDateOfUpload).ToArray();
+        bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
+
+        if (user == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+
+        if (avatar == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+
+        if (images == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+
+        if (bannedImage == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 }
 
 @section styles {
@@ -82,7 +119,6 @@
                         }
                         else
                         {
-                            Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
                             <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="This image is banned" />
                         }
                     </div>

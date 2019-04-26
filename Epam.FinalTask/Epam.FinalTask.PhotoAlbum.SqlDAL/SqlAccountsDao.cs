@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
+using Epam.FinalTask.PhotoAlbum.Log;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
@@ -42,8 +43,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return result;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -65,9 +67,10 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
     }

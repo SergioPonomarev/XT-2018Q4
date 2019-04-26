@@ -15,6 +15,6 @@ namespace Epam.FinalTask.PhotoAlbum.BLL.Contracts
 
         bool SetDefaultAvatar(Avatar avatar);
 
-        void SetAvatarToUser(Avatar newAvatar, User user);
+        bool SetAvatarToUser(Avatar newAvatar, User user);
     }
 }

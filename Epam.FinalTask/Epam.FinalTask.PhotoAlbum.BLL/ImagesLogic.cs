@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,44 +26,72 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.imagesDao.Add(image);
         }
 
-        public void AddLikeToImage(Image image, int userId)
+        public bool AddLikeToImage(Image image, int userId)
         {
-            this.imagesDao.AddLikeToImage(image, userId);
+            return this.imagesDao.AddLikeToImage(image, userId);
         }
 
-        public void BanImage(Image image)
+        public bool BanImage(Image image)
         {
-            this.imagesDao.BanImage(image);
+            return this.imagesDao.BanImage(image);
         }
 
         public IEnumerable<Image> GetAllImages()
         {
-            return this.imagesDao.GetAllImages().ToArray();
+            try
+            {
+                return this.imagesDao.GetAllImages().ToArray();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public Image GetBannedImage()
         {
-            return this.imagesDao.GetBannedImage();
+            try
+            {
+                return this.imagesDao.GetBannedImage();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public Image GetImageById(int imageId)
         {
-            return this.imagesDao.GetImageById(imageId);
+            try
+            {
+                return this.imagesDao.GetImageById(imageId);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public IEnumerable<int> GetLikesForImage(int imageId)
         {
-            return this.imagesDao.GetLikesForImage(imageId).ToArray();
+            try
+            {
+                return this.imagesDao.GetLikesForImage(imageId).ToArray();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
-        public void Remove(Image image)
+        public bool Remove(Image image)
         {
-            this.imagesDao.Remove(image);
+            return this.imagesDao.Remove(image);
         }
 
-        public void RemoveLikeFromImage(Image image, int userId)
+        public bool RemoveLikeFromImage(Image image, int userId)
         {
-            this.imagesDao.RemoveLikeFromImage(image, userId);
+            return this.imagesDao.RemoveLikeFromImage(image, userId);
         }
 
         public bool SetBannedImage(Image image)
@@ -71,9 +100,9 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
             return this.imagesDao.SetBannedImage(image);
         }
 
-        public void UnbanImage(Image image)
+        public bool UnbanImage(Image image)
         {
-            this.imagesDao.UnbanImage(image);
+            return this.imagesDao.UnbanImage(image);
         }
     }
 }

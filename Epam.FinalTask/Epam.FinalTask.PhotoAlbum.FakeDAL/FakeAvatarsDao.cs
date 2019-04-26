@@ -52,7 +52,7 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return this.avatars[0];
         }
 
-        public void SetAvatarToUser(Avatar newAvatar, User user)
+        public bool SetAvatarToUser(Avatar newAvatar, User user)
         {
             int newAvatarId = this.Add(newAvatar);
             int oldAvatarId = user.UserAvatarId;
@@ -64,6 +64,8 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             this.usersDao.Remove(user);
             user.UserAvatarId = newAvatar.AvatarId;
             this.usersDao.Add(user);
+
+            return true;
         }
 
         public int Add(Avatar avatar)
@@ -73,10 +75,10 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return avatar.AvatarId;
         }
 
-        public void Remove(int avatarId)
+        public bool Remove(int avatarId)
         {
             Avatar avatar = this.GetUserAvatar(avatarId);
-            this.avatars.Remove(avatar);
+            return this.avatars.Remove(avatar);
         }
     }
 }

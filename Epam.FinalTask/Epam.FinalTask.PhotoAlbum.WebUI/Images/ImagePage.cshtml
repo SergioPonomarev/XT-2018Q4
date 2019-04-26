@@ -5,33 +5,118 @@
     string imageIdStr = Request["imageId"];
     int imageId = int.Parse(imageIdStr);
     string errorMessage = null;
+    bool liked = false;
 
-    Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+    User owner = null;
+    Avatar avatarOwner = null;
+    User visitor = null;
+    Image image = null;
+    Image bannedImage = null;
+    IEnumerable<int> likes = null;
+    IEnumerable<Comment> comments = null;
 
-    if (image == null)
+    try
     {
-        Response.SetStatus(HttpStatusCode.NotFound);
+        image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+
+        if (image == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
         return;
     }
 
-    IEnumerable<int> likes = DependencyResolver.ImagesLogic.GetLikesForImage(imageId).ToArray();
+    try
+    {
+        likes = DependencyResolver.ImagesLogic.GetLikesForImage(imageId).ToArray();
 
-    User owner = DependencyResolver.UsersLogic.GetUserById(image.ImageOwnerId);
+        if (likes == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 
-    Avatar avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatar(owner.UserAvatarId);
+    try
+    {
+        owner = DependencyResolver.UsersLogic.GetUserById(image.ImageOwnerId);
 
-    User visitor = null;
+        if (owner == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 
-    bool liked = false;
+    try
+    {
+        avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatar(owner.UserAvatarId);
+
+        if (avatarOwner == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 
     if (User.Identity.IsAuthenticated)
     {
-        visitor = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+        try
+        {
+            visitor = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+            if (visitor == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
 
         if (likes.Contains(visitor.UserId))
         {
             liked = true;
         }
+    }
+
+    try
+    {
+        bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
+
+        if (bannedImage == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
     }
 
     if (IsPost)
@@ -48,9 +133,23 @@
         }
     }
 
-    IEnumerable<Comment> comments = DependencyResolver.CommentsLogic.GetCommentsForImage(image.ImageId)
-                                                                    .OrderByDescending(c => c.CommentDate)
-                                                                    .ToArray();
+    try
+    {
+        comments = DependencyResolver.CommentsLogic.GetCommentsForImage(image.ImageId)
+            .OrderByDescending(c => c.CommentDate)
+            .ToArray();
+
+        if (comments == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 }
 
 @section styles {
@@ -61,95 +160,94 @@
     <script src="~/Scripts/Custom/imagePage.js"></script>
 }
 
-    <div class="wrap">
-        <div class="ownerBlock">
-            <a href="/Users/UserPage?name=@owner.UserName" class="userPageLink">
-                <img src="data:@avatarOwner.MimeType;base64,@avatarOwner.AvatarData" class="ownerAvatar" alt="Image owner avatar" />
-                <p class="ownerName">@owner.UserName</p>
-            </a>
-        </div>
+<div class="wrap">
+    <div class="ownerBlock">
+        <a href="/Users/UserPage?name=@owner.UserName" class="userPageLink">
+            <img src="data:@avatarOwner.MimeType;base64,@avatarOwner.AvatarData" class="ownerAvatar" alt="Image owner avatar" />
+            <p class="ownerName">@owner.UserName</p>
+        </a>
+    </div>
 
-        <div id="imageId" data-imageid="@image.ImageId" class="imageBlock">
-            @if (!image.Banned)
-            {
-                <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="Image" />
-            }
-            else
-            {
-                Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
-                <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="Image is banned" />
-            }
+    <div id="imageId" data-imageid="@image.ImageId" class="imageBlock">
+        @if (!image.Banned)
+        {
+            <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="Image" />
+        }
+        else
+        {
+            <img class="image" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="Image is banned" />
+        }
 
-            <div class="iconsBlock">
-                <div class="imageMenuBlock">
-                    @if ((User.IsInRole("Admins") && owner.UserRole == "User") || User.IsInRole("SuperAdmins"))
+        <div class="iconsBlock">
+            <div class="imageMenuBlock">
+                @if ((User.IsInRole("Admins") && owner.UserRole == "User") || User.IsInRole("SuperAdmins"))
+                {
+                    if (!image.Banned)
                     {
-                        if (!image.Banned)
-                        {
-                            <button id="banImage" class="btnImage btnImageBan" title="Ban this image">
-                                <i class="fa fa-ban"></i>
-                            </button>
-                        }
-                        else
-                        {
-                            <button id="unbanImage" class="btnImage btnImageUnban" title="Unban this image">
-                                <i class="fa fa-check-circle-o"></i>
-                            </button>
-                        }
-                    }
-
-                    @if (User.Identity.Name == owner.UserName)
-                    {
-                        <button id="deleteImage" class="btnImage btnDeleteImage" title="Delete image">
-                            <i class="fa fa-times"></i>
+                        <button id="banImage" class="btnImage btnImageBan" title="Ban this image">
+                            <i class="fa fa-ban"></i>
                         </button>
-                    }
-                </div>
-
-                <div class="likeBlock">
-                    <span id="likesCount" class="likesCount">@likes.Count()</span>
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        if (!liked)
-                        {
-                            <button id="btnLike" data-visitorid="@visitor.UserId" class="btnImage btnLike" title="Like this image">
-                                <i class="fa fa-heart-o"></i>
-                            </button>
-
-                            <button id="btnUnlike" data-visitorid="@visitor.UserId" class="btnImage btnLike hidden" title="Unlike this image">
-                                <i class="fa fa-heart"></i>
-                            </button>
-                        }
-                        else
-                        {
-                            <button id="btnLike" data-visitorid="@visitor.UserId" class="btnImage btnLike hidden" title="Like this image">
-                                <i class="fa fa-heart-o"></i>
-                            </button>
-
-                            <button id="btnUnlike" data-visitorid="@visitor.UserId" class="btnImage btnLike" title="Unlike this image">
-                                <i class="fa fa-heart"></i>
-                            </button>
-                        }
                     }
                     else
                     {
-                        <span class="likeIcon">
-                            <i class="fa fa-heart"></i>
-                        </span>
+                        <button id="unbanImage" class="btnImage btnImageUnban" title="Unban this image">
+                            <i class="fa fa-check-circle-o"></i>
+                        </button>
                     }
-                </div>
-                <div class="clear"></div>
-            </div>
-            <p class="uploadDate">@image.ImageDateOfUpload</p>
-            <p class="imageDescription">@image.Description</p>
-        </div>
+                }
 
-        <div class="imageComments">
-            @if (User.Identity.IsAuthenticated)
-            {
-                if (!visitor.Banned)
+                @if (User.Identity.Name == owner.UserName)
                 {
+                    <button id="deleteImage" class="btnImage btnDeleteImage" title="Delete image">
+                        <i class="fa fa-times"></i>
+                    </button>
+                }
+            </div>
+
+            <div class="likeBlock">
+                <span id="likesCount" class="likesCount">@likes.Count()</span>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (!liked)
+                    {
+                        <button id="btnLike" data-visitorid="@visitor.UserId" class="btnImage btnLike" title="Like this image">
+                            <i class="fa fa-heart-o"></i>
+                        </button>
+
+                        <button id="btnUnlike" data-visitorid="@visitor.UserId" class="btnImage btnLike hidden" title="Unlike this image">
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    }
+                    else
+                    {
+                        <button id="btnLike" data-visitorid="@visitor.UserId" class="btnImage btnLike hidden" title="Like this image">
+                            <i class="fa fa-heart-o"></i>
+                        </button>
+
+                        <button id="btnUnlike" data-visitorid="@visitor.UserId" class="btnImage btnLike" title="Unlike this image">
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    }
+                }
+                else
+                {
+                    <span class="likeIcon">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                }
+            </div>
+            <div class="clear"></div>
+        </div>
+        <p class="uploadDate">@image.ImageDateOfUpload</p>
+        <p class="imageDescription">@image.Description</p>
+    </div>
+
+    <div class="imageComments">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (!visitor.Banned)
+            {
                 <div class="addCommentBlock">
                     <form class="addCommentForm" method="post">
                         <label for="newComment" class="commentForm_label">Add new comment</label>
@@ -161,86 +259,101 @@
                         <div class="clear"></div>
                     </form>
                 </div>
-                }
-                else
-                {
-                    <div class="errorMessage">
-                        <p>You are banned.</p>
-                    </div>
-                }
-                if (IsPost)
-                {
-                    <div class="errorMessage">
-                        <p>@errorMessage</p>
-                    </div>
-                }
             }
             else
             {
-                <p class="guestMessage">
-                    <a href="/Account/Login" class="loginLink">Login</a> to add a comment.
-                </p>
+                <div class="errorMessage">
+                    <p>You are banned.</p>
+                </div>
             }
+            if (IsPost)
+            {
+                <div class="errorMessage">
+                    <p>@errorMessage</p>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="guestMessage">
+                <a href="/Account/Login" class="loginLink">Login</a> to add a comment.
+            </p>
+        }
 
-            <ul id="commentsList" class="comments">
-                @foreach (Comment comment in comments)
+        <ul id="commentsList" class="comments">
+            @foreach (Comment comment in comments)
+            {
+                try
                 {
                     User commentAuthor = DependencyResolver.UsersLogic.GetUserById(comment.CommentAuthorId);
-                    <li data-commentid="@comment.CommentId" class="comment">
-                        <div class="commentHeader">
-                            <a href="/Users/UserPage?name=@commentAuthor.UserName" class="commentAuthorPageLink">
-                                @commentAuthor.UserName
-                            </a>
 
-                            <p class="commentDate">
-                                @comment.CommentDate.ToString()
-                            </p>
+                    if (commentAuthor != null)
+                    {
+                        <li data-commentid="@comment.CommentId" class="comment">
+                            <div class="commentHeader">
+                                <a href="/Users/UserPage?name=@commentAuthor.UserName" class="commentAuthorPageLink">
+                                    @commentAuthor.UserName
+                                </a>
 
-                            @if (User.Identity.Name == commentAuthor.UserName)
-                            {
-                                <button class="btnComment btnCommentDelete" title="Delete this comment">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            }
+                                <p class="commentDate">
+                                    @comment.CommentDate.ToString()
+                                </p>
 
-                            @if ((User.IsInRole("Admins") && commentAuthor.UserRole == "User") || User.IsInRole("SuperAdmins"))
-                            {
-                                if (!comment.Banned)
+                                @if (User.Identity.Name == commentAuthor.UserName)
                                 {
-                                    <button class="btnComment btnCommentBan" title="Ban this comment">
-                                        <i class="fa fa-ban"></i>
-                                    </button>
-
-                                    <button class="btnComment btnCommentUnban hidden" title="Unban this comment">
-                                        <i class="fa fa-check-circle-o"></i>
+                                    <button class="btnComment btnCommentDelete" title="Delete this comment">
+                                        <i class="fa fa-times"></i>
                                     </button>
                                 }
-                                else
+
+                                @if ((User.IsInRole("Admins") && commentAuthor.UserRole == "User") || User.IsInRole("SuperAdmins"))
                                 {
-                                    <button class="btnComment btnCommentBan hidden" title="Ban this comment">
-                                        <i class="fa fa-ban"></i>
-                                    </button>
+                                    if (!comment.Banned)
+                                    {
+                                        <button class="btnComment btnCommentBan" title="Ban this comment">
+                                            <i class="fa fa-ban"></i>
+                                        </button>
 
-                                    <button class="btnComment btnCommentUnban" title="Unban this comment">
-                                        <i class="fa fa-check-circle-o"></i>
-                                    </button>
+                                        <button class="btnComment btnCommentUnban hidden" title="Unban this comment">
+                                            <i class="fa fa-check-circle-o"></i>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btnComment btnCommentBan hidden" title="Ban this comment">
+                                            <i class="fa fa-ban"></i>
+                                        </button>
+
+                                        <button class="btnComment btnCommentUnban" title="Unban this comment">
+                                            <i class="fa fa-check-circle-o"></i>
+                                        </button>
+                                    }
                                 }
-                            }
-                            <div class="clear"></div>
-                        </div>
+                                <div class="clear"></div>
+                            </div>
 
-                        @if (!comment.Banned)
-                        {
-                            <p class="commentText textUnbanned">@comment.CommentText</p>
-                            <p class="commentText textBanned hidden">Comment is banned.</p>
-                        }
-                        else
-                        {
-                            <p class="commentText textUnbanned hidden">@comment.CommentText</p>
-                            <p class="commentText textBanned">Comment is banned.</p>
-                        }
-                    </li>
+                            @if (!comment.Banned)
+                            {
+                                <p class="commentText textUnbanned">@comment.CommentText</p>
+                                <p class="commentText textBanned hidden">Comment is banned.</p>
+                            }
+                            else
+                            {
+                                <p class="commentText textUnbanned hidden">@comment.CommentText</p>
+                                <p class="commentText textBanned">Comment is banned.</p>
+                            }
+                        </li>
+                    }
+                    else
+                    { 
+                        <li data-commentid="@comment.CommentId" class="comment">Comment is not available.</li>
+                    }
                 }
-            </ul>
-        </div>
+                catch (Exception)
+                {
+                    <li data-commentid="@comment.CommentId" class="comment">Comment is not available.</li>
+                }
+            }
+        </ul>
     </div>
+</div>

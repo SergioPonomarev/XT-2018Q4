@@ -10,15 +10,27 @@
 
     string imageIdStr = Request["imageId"];
     int imageId = int.Parse(imageIdStr);
+    Image image = null;
 
-    Image image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+    try
+    {
+        image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
 
     if (image != null)
     {
-        DependencyResolver.ImagesLogic.BanImage(image);
+        if (!DependencyResolver.ImagesLogic.BanImage(image))
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+        }
     }
     else
     {
-        Response.SetStatus(HttpStatusCode.BadRequest);
+        Response.SetStatus(HttpStatusCode.NotFound);
     }
 }

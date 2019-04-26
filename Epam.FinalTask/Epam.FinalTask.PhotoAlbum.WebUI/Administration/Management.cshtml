@@ -10,12 +10,31 @@
 
     Page.Title = "Photo Album";
 
-    User user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
-
     string avatarOkMessage = null;
     string avatarErrorMessage = null;
     string imageOkMessage = null;
     string imageErrorMessage = null;
+    string errorMessage = null;
+
+    Avatar defaultAvatar = null;
+    Image bannedImage = null;
+    User user = null;
+
+    try
+    {
+        user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+    if (user == null)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
 
     int avatarMaxSize = 524288;
     int imageMaxSize = 1048576;
@@ -87,9 +106,23 @@
         }
     }
 
-    Avatar defaultAvatar = DependencyResolver.AvatarsLogic.GetDefaultAvatar();
+    try
+    {
+        defaultAvatar = DependencyResolver.AvatarsLogic.GetDefaultAvatar();
+        bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
 
-    Image bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
+        if (defaultAvatar == null || bannedImage == null)
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
+            return;
+        }
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
 }
 
 @section styles {
@@ -97,41 +130,50 @@
 }
 
 <div class="wrap">
-    <div class="imagesBlock">
-        <div class="imageBlock">
-            <h2 class="imageHeader">Default Users Avatar</h2>
-            <img class="imageBlock_img" src="data:@defaultAvatar.MimeType;base64,@defaultAvatar.AvatarData" alt="Default Users Avatar" />
-        </div>
-
-        <div class="imageBlock">
-            <h2 class="imageHeader">Banned image</h2>
-            <img class="imageBlock_img" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="Banned image" />
-        </div>
-    </div>
-
-    <div class="formsBlock">
-        <form method="post" class="imageForm" enctype="multipart/form-data">
-            <div class="formBlock">
-                <label class="formLabel" for="avatar">Change Default Avatar</label>
-                <input id="avatar" type="file" name="avatar" class="formInput_file" />
-            </div>
-            <div class="formBlock">
-                <label class="formLabel" for="image">Change Banned Image</label>
-                <input id="image" type="file" name="image" class="formInput_file" />
-            </div>
-            <button type="submit" class="btnSubmit">Update</button>
-        </form>
-    </div>
-
-    @if (IsPost)
+    @if (errorMessage != null)
     {
-        <div class="okMessage">
-            <p>@avatarOkMessage</p>
-            <p>@imageOkMessage</p>
-        </div>
         <div class="errorMessage">
-            <p>@avatarErrorMessage</p>
-            <p>@imageErrorMessage</p>
+            <p>@errorMessage</p>
         </div>
+    }
+    else
+    {
+        <div class="imagesBlock">
+            <div class="imageBlock">
+                <h2 class="imageHeader">Default Users Avatar</h2>
+                <img class="imageBlock_img" src="data:@defaultAvatar.MimeType;base64,@defaultAvatar.AvatarData" alt="Default Users Avatar" />
+            </div>
+
+            <div class="imageBlock">
+                <h2 class="imageHeader">Banned image</h2>
+                <img class="imageBlock_img" src="data:@bannedImage.MimeType;base64,@bannedImage.ImageData" alt="Banned image" />
+            </div>
+        </div>
+
+        <div class="formsBlock">
+            <form method="post" class="imageForm" enctype="multipart/form-data">
+                <div class="formBlock">
+                    <label class="formLabel" for="avatar">Change Default Avatar</label>
+                    <input id="avatar" type="file" name="avatar" class="formInput_file" />
+                </div>
+                <div class="formBlock">
+                    <label class="formLabel" for="image">Change Banned Image</label>
+                    <input id="image" type="file" name="image" class="formInput_file" />
+                </div>
+                <button type="submit" class="btnSubmit">Update</button>
+            </form>
+        </div>
+
+        if (IsPost)
+        {
+            <div class="okMessage">
+                <p>@avatarOkMessage</p>
+                <p>@imageOkMessage</p>
+            </div>
+            <div class="errorMessage">
+                <p>@avatarErrorMessage</p>
+                <p>@imageErrorMessage</p>
+            </div>
+        }
     }
 </div>

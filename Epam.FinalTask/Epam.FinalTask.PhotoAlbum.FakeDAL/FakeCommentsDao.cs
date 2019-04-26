@@ -33,13 +33,15 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             }
         }
 
-        public void BanComment(Comment comment)
+        public bool BanComment(Comment comment)
         {
             this.comments.Remove(comment);
 
             comment.Banned = true;
 
             this.comments.Add(comment);
+
+            return true;
         }
 
         public Comment GetCommentById(int commentId)
@@ -57,13 +59,15 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
             return this.comments.Remove(comment);
         }
 
-        public void UnbanComment(Comment comment)
+        public bool UnbanComment(Comment comment)
         {
             this.comments.Remove(comment);
 
             comment.Banned = false;
 
             this.comments.Add(comment);
+
+            return true;
         }
     }
 }

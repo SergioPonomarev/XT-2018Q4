@@ -8,17 +8,32 @@
         return;
     }
 
-    User user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+    Page.Title = "Upload image";
+
+    string errorMessage = null;
+    User user = null;
+
+    try
+    {
+        user = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+    }
+    catch (Exception)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+        return;
+    }
+
+    if (user == null)
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+        return;
+    }
 
     if (user.Banned)
     {
         Response.SetStatus(HttpStatusCode.BadRequest);
         return;
     }
-
-    Page.Title = "Upload image";
-
-    string errorMessage = null;
 
     int imageMaxSize = 1048576;
 
@@ -54,7 +69,6 @@
                 {
                     errorMessage = "File uploading error.";
                 }
-
             }
             else
             {
@@ -72,25 +86,25 @@
     <script src="~/Scripts/Custom/uploadImage.js"></script>
 }
 
-    <div class="wrap">
-        <h2 class="header">Upload new image</h2>
-        <form method="post" class="uploadImageForm" enctype="multipart/form-data">
-            <div class="formBlock">
-                <label for="image" class="formLabel">New image</label>
-                <input id="image" type="file" name="image" class="formInput_file" />
-            </div>
-            <div class="formBlock">
-                <label for="description" class="formLabel">Add description</label>
-                <textarea id="description" name="description" class="formInput_text"></textarea>
-                <span class="charCountValid" id="charCount">140</span>
-            </div>
-            <button id="btnSubmit" type="submit" class="btnUpload">Upload</button>
-        </form>
+<div class="wrap">
+    <h2 class="header">Upload new image</h2>
+    <form method="post" class="uploadImageForm" enctype="multipart/form-data">
+        <div class="formBlock">
+            <label for="image" class="formLabel">New image</label>
+            <input id="image" type="file" name="image" class="formInput_file" />
+        </div>
+        <div class="formBlock">
+            <label for="description" class="formLabel">Add description</label>
+            <textarea id="description" name="description" class="formInput_text"></textarea>
+            <span class="charCountValid" id="charCount">140</span>
+        </div>
+        <button id="btnSubmit" type="submit" class="btnUpload">Upload</button>
+    </form>
 
-        @if (IsPost)
-        {
-            <div class="errorMessage">
-                <p>@errorMessage</p>
-            </div>
-        }
-    </div>
+    @if (IsPost)
+    {
+        <div class="errorMessage">
+            <p>@errorMessage</p>
+        </div>
+    }
+</div>

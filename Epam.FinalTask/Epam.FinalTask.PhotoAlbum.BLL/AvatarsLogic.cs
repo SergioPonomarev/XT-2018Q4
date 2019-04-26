@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,31 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public Avatar GetDefaultAvatar()
         {
-            return this.avatarsDao.GetDefaultAvatar();
+            try
+            {
+                return this.avatarsDao.GetDefaultAvatar();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public Avatar GetUserAvatar(int avatarId)
         {
-            return this.avatarsDao.GetUserAvatar(avatarId);
+            try
+            {
+                return this.avatarsDao.GetUserAvatar(avatarId);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
-        public void SetAvatarToUser(Avatar newAvatar, User user)
+        public bool SetAvatarToUser(Avatar newAvatar, User user)
         {
-            this.avatarsDao.SetAvatarToUser(newAvatar, user);
+            return this.avatarsDao.SetAvatarToUser(newAvatar, user);
         }
 
         public bool SetDefaultAvatar(Avatar avatar)

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
 using Epam.FinalTask.PhotoAlbum.Entities;
+using Epam.FinalTask.PhotoAlbum.Log;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
@@ -48,13 +49,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void AddLikeToImage(Image image, int userId)
+        public bool AddLikeToImage(Image image, int userId)
         {
             try
             {
@@ -68,16 +70,17 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void BanImage(Image image)
+        public bool BanImage(Image image)
         {
             try
             {
@@ -90,12 +93,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
@@ -130,8 +134,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return images;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -166,8 +171,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return image;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -207,8 +213,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return image;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -237,8 +244,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return likes;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -276,13 +284,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return images;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
 
-        public void Remove(Image image)
+        public bool Remove(Image image)
         {
             try
             {
@@ -295,16 +304,17 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void RemoveLikeFromImage(Image image, int userId)
+        public bool RemoveLikeFromImage(Image image, int userId)
         {
             try
             {
@@ -318,12 +328,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
@@ -347,13 +358,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void UnbanImage(Image image)
+        public bool UnbanImage(Image image)
         {
             try
             {
@@ -366,12 +378,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@ImageId", image.ImageId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
     }

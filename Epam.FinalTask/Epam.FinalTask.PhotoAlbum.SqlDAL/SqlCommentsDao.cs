@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
 using Epam.FinalTask.PhotoAlbum.Entities;
+using Epam.FinalTask.PhotoAlbum.Log;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
@@ -39,13 +40,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void BanComment(Comment comment)
+        public bool BanComment(Comment comment)
         {
             try
             {
@@ -58,12 +60,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@CommentId", comment.CommentId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
@@ -101,8 +104,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return comment;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -139,8 +143,9 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 
                 return comments;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                Logger.Log.Error("Connection with DB error.", ex);
                 throw;
             }
         }
@@ -161,13 +166,14 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
 
-        public void UnbanComment(Comment comment)
+        public bool UnbanComment(Comment comment)
         {
             try
             {
@@ -180,12 +186,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     cmd.Parameters.AddWithValue("@CommentId", comment.CommentId);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                throw;
+                Logger.Log.Error("Connection with DB error.", ex);
+                return false;
             }
         }
     }
