@@ -13,7 +13,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
     public class SqlImagesDao : IImagesDao
     {
-        private static readonly int bannedImageId = 1;
+        private static readonly int BannedImageId = 1;
         private readonly string conStr;
 
         public SqlImagesDao(string connectionString)
@@ -25,7 +25,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_Add";
@@ -42,6 +42,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     {
                         cmd.Parameters.AddWithValue("@Description", DBNull.Value);
                     }
+
                     cmd.Parameters.AddWithValue("@ImageOwnerId", image.ImageOwnerId);
                     cmd.Parameters.AddWithValue("@Banned", image.Banned);
 
@@ -60,7 +61,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_AddLikeToImage";
@@ -84,7 +85,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_ImageBan";
@@ -109,7 +110,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 List<Image> images = new List<Image>();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_GetAllImages";
@@ -147,13 +148,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 Image image = new Image();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_GetBannedImage";
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@ImageId", bannedImageId);
+                    cmd.Parameters.AddWithValue("@ImageId", BannedImageId);
 
                     con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -184,7 +185,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 Image image = new Image();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_GetImageById";
@@ -226,7 +227,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 List<int> likes = new List<int>();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_GetLikesForImage";
@@ -257,7 +258,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 List<Image> images = new List<Image>();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_GetUserImages";
@@ -295,7 +296,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_Remove";
@@ -318,7 +319,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_RemoveLikeFromImage";
@@ -342,13 +343,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_SetBannedImage";
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@ImageId", bannedImageId);
+                    cmd.Parameters.AddWithValue("@ImageId", BannedImageId);
                     cmd.Parameters.AddWithValue("@MimeType", image.MimeType);
                     cmd.Parameters.AddWithValue("@ImageData", image.ImageData);
                     cmd.Parameters.AddWithValue("@ImageDateOfUpload", image.ImageDateOfUpload);
@@ -369,7 +370,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Images_ImageUnban";

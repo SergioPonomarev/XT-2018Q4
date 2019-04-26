@@ -21,14 +21,10 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 
         public DateTime ImageDateOfUpload { get; set; }
 
-        //public IEnumerable<Comment> Comments { get; set; }
-
         public string Description { get; set; }
 
         public int ImageOwnerId { get; set; }
 
         public bool Banned { get; set; }
-
-        //public IEnumerable<int> Likes { get; set; }
     }
 }

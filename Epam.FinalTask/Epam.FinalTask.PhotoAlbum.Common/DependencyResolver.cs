@@ -14,7 +14,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
 {
     public class DependencyResolver
     {
-        private static readonly string conStr = ConfigurationManager.ConnectionStrings["PhotoAlbumDB"].ConnectionString;
+        private static readonly string ConStr = ConfigurationManager.ConnectionStrings["PhotoAlbumDB"].ConnectionString;
 
         private static IAccountsLogic accountsLogic;
         private static IAccountsDao accountsDao;
@@ -27,6 +27,16 @@ namespace Epam.FinalTask.PhotoAlbum.Common
         private static ICommentsLogic commentsLogic;
         private static ICommentsDao commentsDao;
 
+        public static IAccountsLogic AccountsLogic => accountsLogic ?? (accountsLogic = new AccountsLogic(AccountsDao, UsersLogic));
+
+        public static IUsersLogic UsersLogic => usersLogic ?? (usersLogic = new UsersLogic(UsersDao));
+
+        public static IAvatarsLogic AvatarsLogic => avatarsLogic ?? (avatarsLogic = new AvatarsLogic(AvatarsDao));
+
+        public static IImagesLogic ImagesLogic => imagesLogic ?? (imagesLogic = new ImagesLogic(ImagesDao));
+
+        public static ICommentsLogic CommentsLogic => commentsLogic ?? (commentsLogic = new CommentsLogic(CommentsDao));
+
         private static IAccountsDao AccountsDao
         {
             get
@@ -38,7 +48,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                     switch (key.ToLower())
                     {
                         case "sqldb":
-                            accountsDao = new SqlAccountsDao(conStr);
+                            accountsDao = new SqlAccountsDao(ConStr);
                             break;
 
                         case "fakedb":
@@ -65,7 +75,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                     switch (key.ToLower())
                     {
                         case "sqldb":
-                            usersDao = new SqlUsersDao(conStr, ImagesDao);
+                            usersDao = new SqlUsersDao(ConStr, ImagesDao);
                             break;
 
                         case "fakedb":
@@ -92,7 +102,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                     switch (key.ToLower())
                     {
                         case "sqldb":
-                            avatarsDao = new SqlAvatarsDao(conStr);
+                            avatarsDao = new SqlAvatarsDao(ConStr);
                             break;
 
                         case "fakedb":
@@ -119,7 +129,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                     switch (key.ToLower())
                     {
                         case "sqldb":
-                            imagesDao = new SqlImagesDao(conStr);
+                            imagesDao = new SqlImagesDao(ConStr);
                             break;
 
                         case "fakedb":
@@ -146,7 +156,7 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                     switch (key.ToLower())
                     {
                         case "sqldb":
-                            commentsDao = new SqlCommentsDao(conStr);
+                            commentsDao = new SqlCommentsDao(ConStr);
                             break;
 
                         case "fakedb":
@@ -161,15 +171,5 @@ namespace Epam.FinalTask.PhotoAlbum.Common
                 return commentsDao;
             }
         }
-
-        public static IAccountsLogic AccountsLogic => accountsLogic ?? (accountsLogic = new AccountsLogic(AccountsDao, UsersLogic));
-
-        public static IUsersLogic UsersLogic => usersLogic ?? (usersLogic = new UsersLogic(UsersDao));
-
-        public static IAvatarsLogic AvatarsLogic => avatarsLogic ?? (avatarsLogic = new AvatarsLogic(AvatarsDao));
-
-        public static IImagesLogic ImagesLogic => imagesLogic ?? (imagesLogic = new ImagesLogic(ImagesDao));
-
-        public static ICommentsLogic CommentsLogic => commentsLogic ?? (commentsLogic = new CommentsLogic(CommentsDao));
     }
 }

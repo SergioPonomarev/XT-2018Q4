@@ -12,8 +12,8 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 {
     public class UsersLogic : IUsersLogic
     {
-        private static readonly string defaultRole = "User";
-        private static readonly int defaultAvatarId = 1;
+        private static readonly string DefaultRole = "User";
+        private static readonly int DefaultAvatarId = 1;
 
         private readonly IUsersDao usersDao;
 
@@ -45,8 +45,8 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                 User newUser = new User
                 {
                     UserName = userName,
-                    UserRole = defaultRole,
-                    UserAvatarId = defaultAvatarId,
+                    UserRole = DefaultRole,
+                    UserAvatarId = DefaultAvatarId,
                     Banned = false,
                 };
 

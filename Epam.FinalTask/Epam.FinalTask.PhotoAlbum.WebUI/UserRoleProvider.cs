@@ -9,6 +9,8 @@ namespace Epam.FinalTask.PhotoAlbum.WebUI
 {
     public class UserRoleProvider : RoleProvider
     {
+        public override string ApplicationName { get; set; }
+
         public override string[] GetRolesForUser(string username)
         {
             return DependencyResolver.AccountsLogic.GetRoles(username);
@@ -20,8 +22,6 @@ namespace Epam.FinalTask.PhotoAlbum.WebUI
         }
 
         #region NotImplemented
-        public override string ApplicationName { get; set; }
-
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             throw new NotImplementedException();

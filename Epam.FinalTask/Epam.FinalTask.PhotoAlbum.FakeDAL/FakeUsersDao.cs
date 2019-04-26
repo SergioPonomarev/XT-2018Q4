@@ -10,10 +10,10 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 {
     public class FakeUsersDao : IUsersDao
     {
+        private static int id = 1;
         private readonly IImagesDao imagesDao;
 
         private List<User> users;
-        private static int id = 1;
 
         public FakeUsersDao(IImagesDao imagesDao)
         {

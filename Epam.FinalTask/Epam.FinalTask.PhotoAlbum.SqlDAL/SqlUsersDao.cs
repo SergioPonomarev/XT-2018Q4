@@ -26,7 +26,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_Add";
@@ -52,7 +52,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_UserBan";
@@ -75,7 +75,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_DemoteToUser";
@@ -100,7 +100,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 User user = new User();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_GetUserById";
@@ -142,7 +142,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 User user = new User();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_GetUserByUserName";
@@ -182,7 +182,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_PromoteToAdmin";
@@ -205,7 +205,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_Remove";
@@ -228,7 +228,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Users_UserUnban";

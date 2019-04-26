@@ -24,7 +24,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Comments_Add";
@@ -51,7 +51,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Comments_CommentBan";
@@ -76,7 +76,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 Comment comment = new Comment();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Comments_GetCommentById";
@@ -117,7 +117,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 List<Comment> comments = new List<Comment>();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Comments_GetCommentsForImage";
@@ -154,7 +154,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Comments_Remove";
@@ -177,7 +177,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Comments_CommentUnban";

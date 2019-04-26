@@ -13,7 +13,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {
     public class SqlAvatarsDao : IAvatarsDao
     {
-        private static readonly int defaultAvatarId = 1;
+        private static readonly int DefaultAvatarId = 1;
         private readonly string conStr;
 
         public SqlAvatarsDao(string connectionString)
@@ -27,13 +27,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 Avatar avatar = new Avatar();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Avatars_GetDefaultAvatar";
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@AvatarId", defaultAvatarId);
+                    cmd.Parameters.AddWithValue("@AvatarId", DefaultAvatarId);
 
                     con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -65,7 +65,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 Avatar avatar = new Avatar();
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Avatars_GetUserAvatar";
@@ -104,7 +104,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                 int newAvatarId = this.Add(newAvatar);
                 bool check = false;
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Avatars_SetAvatarToUser";
@@ -117,7 +117,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
                     check = cmd.ExecuteNonQuery() == 1;
                 }
 
-                if (oldAvatarId != defaultAvatarId)
+                if (oldAvatarId != DefaultAvatarId)
                 {
                     if (!this.Remove(oldAvatarId))
                     {
@@ -140,7 +140,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 int avatarId;
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Avatars_Add";
@@ -168,7 +168,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Avatars_Remove";
@@ -191,13 +191,13 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Avatars_SetDefaultAvatar";
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@AvatarId", defaultAvatarId);
+                    cmd.Parameters.AddWithValue("@AvatarId", DefaultAvatarId);
                     cmd.Parameters.AddWithValue("@MimeType", avatar.MimeType);
                     cmd.Parameters.AddWithValue("@AvatarData", avatar.AvatarData);
 

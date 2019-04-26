@@ -25,7 +25,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
             {
                 string result = null;
 
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Accounts_GetPassByUserId";
@@ -54,7 +54,7 @@ namespace Epam.FinalTask.PhotoAlbum.SqlDAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(conStr))
+                using (SqlConnection con = new SqlConnection(this.conStr))
                 {
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandText = "Accounts_SetPassToUser";
