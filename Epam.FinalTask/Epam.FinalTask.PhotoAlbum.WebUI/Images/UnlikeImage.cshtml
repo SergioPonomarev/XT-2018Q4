@@ -10,29 +10,34 @@
 
     string imageIdStr = Request["imageId"];
     string visitorIdStr = Request["visitorId"];
-    int imageId = int.Parse(imageIdStr);
-    int visitorId = int.Parse(visitorIdStr);
-    Image image = null;
+    if (int.TryParse(imageIdStr, out int imageId) && int.TryParse(visitorIdStr, out int visitorId))
+    {
+        Image image;
 
-    try
-    {
-        image = DependencyResolver.ImagesLogic.GetImageById(imageId);
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    if (image != null)
-    {
-        if (!DependencyResolver.ImagesLogic.RemoveLikeFromImage(image, visitorId))
+        try
+        {
+            image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+        }
+        catch (Exception)
         {
             Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        if (image != null)
+        {
+            if (!DependencyResolver.ImagesLogic.RemoveLikeFromImage(image, visitorId))
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+            }
+        }
+        else
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
         }
     }
     else
     {
-        Response.SetStatus(HttpStatusCode.NotFound);
+        Response.SetStatus(HttpStatusCode.BadRequest);
     }
 }

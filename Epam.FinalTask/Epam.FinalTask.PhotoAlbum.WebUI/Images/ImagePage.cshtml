@@ -2,8 +2,8 @@
 @using Epam.FinalTask.PhotoAlbum.Entities
 
 @{
+    Page.Title = "Image";
     string imageIdStr = Request["imageId"];
-    int imageId = int.Parse(imageIdStr);
     string errorMessage = null;
     bool liked = false;
 
@@ -15,77 +15,13 @@
     IEnumerable<int> likes = null;
     IEnumerable<Comment> comments = null;
 
-    try
-    {
-        image = DependencyResolver.ImagesLogic.GetImageById(imageId);
-
-        if (image == null)
-        {
-            Response.SetStatus(HttpStatusCode.NotFound);
-            return;
-        }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    try
-    {
-        likes = DependencyResolver.ImagesLogic.GetLikesForImage(imageId).ToArray();
-
-        if (likes == null)
-        {
-            Response.SetStatus(HttpStatusCode.NotFound);
-            return;
-        }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    try
-    {
-        owner = DependencyResolver.UsersLogic.GetUserById(image.ImageOwnerId);
-
-        if (owner == null)
-        {
-            Response.SetStatus(HttpStatusCode.NotFound);
-            return;
-        }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    try
-    {
-        avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatar(owner.UserAvatarId);
-
-        if (avatarOwner == null)
-        {
-            Response.SetStatus(HttpStatusCode.NotFound);
-            return;
-        }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    if (User.Identity.IsAuthenticated)
+    if (int.TryParse(imageIdStr, out int imageId))
     {
         try
         {
-            visitor = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+            image = DependencyResolver.ImagesLogic.GetImageById(imageId);
 
-            if (visitor == null)
+            if (image == null)
             {
                 Response.SetStatus(HttpStatusCode.NotFound);
                 return;
@@ -97,58 +33,129 @@
             return;
         }
 
-        if (likes.Contains(visitor.UserId))
+        try
         {
-            liked = true;
+            likes = DependencyResolver.ImagesLogic.GetLikesForImage(imageId).ToArray();
+
+            if (likes == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
         }
-    }
-
-    try
-    {
-        bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
-
-        if (bannedImage == null)
+        catch (Exception)
         {
-            Response.SetStatus(HttpStatusCode.NotFound);
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        try
+        {
+            owner = DependencyResolver.UsersLogic.GetUserById(image.ImageOwnerId);
+
+            if (owner == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        try
+        {
+            avatarOwner = DependencyResolver.AvatarsLogic.GetUserAvatar(owner.UserAvatarId);
+
+            if (avatarOwner == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        if (User.Identity.IsAuthenticated)
+        {
+            try
+            {
+                visitor = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+                if (visitor == null)
+                {
+                    Response.SetStatus(HttpStatusCode.NotFound);
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+                return;
+            }
+
+            if (likes.Contains(visitor.UserId))
+            {
+                liked = true;
+            }
+        }
+
+        try
+        {
+            bannedImage = DependencyResolver.ImagesLogic.GetBannedImage();
+
+            if (bannedImage == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        if (IsPost)
+        {
+            string commentText = Request["newComment"];
+
+            if (DependencyResolver.CommentsLogic.Add(commentText, image, visitor))
+            {
+                Response.Redirect(Request.RawUrl);
+            }
+            else
+            {
+                errorMessage = "Cannot add the comment.";
+            }
+        }
+
+        try
+        {
+            comments = DependencyResolver.CommentsLogic.GetCommentsForImage(image.ImageId)
+                .OrderByDescending(c => c.CommentDate)
+                .ToArray();
+
+            if (comments == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
             return;
         }
     }
-    catch (Exception)
+    else
     {
         Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    if (IsPost)
-    {
-        string commentText = Request["newComment"];
-
-        if (DependencyResolver.CommentsLogic.Add(commentText, image, visitor))
-        {
-            Response.Redirect(Request.RawUrl);
-        }
-        else
-        {
-            errorMessage = "Cannot add the comment.";
-        }
-    }
-
-    try
-    {
-        comments = DependencyResolver.CommentsLogic.GetCommentsForImage(image.ImageId)
-            .OrderByDescending(c => c.CommentDate)
-            .ToArray();
-
-        if (comments == null)
-        {
-            Response.SetStatus(HttpStatusCode.NotFound);
-            return;
-        }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
     }
 }
 

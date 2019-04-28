@@ -9,28 +9,34 @@
     }
 
     string imageIdStr = Request["imageId"];
-    int imageId = int.Parse(imageIdStr);
-    Image image = null;
+    if (int.TryParse(imageIdStr, out int imageId))
+    {
+        Image image;
 
-    try
-    {
-        image = DependencyResolver.ImagesLogic.GetImageById(imageId);
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    if (image != null)
-    {
-        if (!DependencyResolver.ImagesLogic.BanImage(image))
+        try
+        {
+            image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+        }
+        catch (Exception)
         {
             Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        if (image != null)
+        {
+            if (!DependencyResolver.ImagesLogic.BanImage(image))
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+            }
+        }
+        else
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
         }
     }
     else
     {
-        Response.SetStatus(HttpStatusCode.NotFound);
+        Response.SetStatus(HttpStatusCode.BadRequest);
     }
 }

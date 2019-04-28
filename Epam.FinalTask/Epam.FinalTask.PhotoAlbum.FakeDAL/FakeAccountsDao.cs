@@ -22,14 +22,9 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
 
         public string GetPassByUserId(int userId)
         {
-            if (this.passwords.ContainsKey(userId))
-            {
-                return this.passwords[userId];
-            }
-            else
-            {
-                return string.Empty;
-            }
+            this.passwords.TryGetValue(userId, out string result);
+
+            return result;
         }
 
         public bool SetPassToUser(int userId, string hashedPass)

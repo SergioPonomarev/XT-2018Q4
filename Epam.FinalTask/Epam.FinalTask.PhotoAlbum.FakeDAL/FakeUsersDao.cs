@@ -49,11 +49,7 @@ namespace Epam.FinalTask.PhotoAlbum.FakeDAL
         {
             try
             {
-                if (user.UserId == 0)
-                {
-                    user.UserId = id++;
-                }
-
+                user.UserId = id++;
                 this.users.Add(user);
                 return true;
             }

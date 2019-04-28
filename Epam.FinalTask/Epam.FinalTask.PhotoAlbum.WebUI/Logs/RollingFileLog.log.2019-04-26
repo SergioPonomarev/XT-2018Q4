@@ -1,0 +1,100 @@
+10:57:03,081
+INFO
+This is test
+
+10:57:03,134
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 13
+
+10:58:35,191
+INFO
+This is test
+
+10:58:35,243
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 13
+
+11:16:31,826
+INFO
+This is test
+
+11:16:31,877
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+
+11:24:00,572
+INFO
+This is test
+
+11:24:00,621
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+
+11:24:07,528
+INFO
+This is test
+
+11:24:07,541
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+
+11:24:17,623
+INFO
+This is test
+
+11:24:17,635
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+
+11:24:22,448
+INFO
+This is test
+
+11:24:22,462
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+
+11:24:26,982
+INFO
+This is test
+
+11:24:27,004
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+
+11:27:26,008
+INFO
+This is test
+
+11:27:26,056
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+
+11:27:34,068
+INFO
+This is test
+
+11:27:34,079
+ERROR
+Tried to devide by zero.
+System.DivideByZeroException: Попытка деления на нуль.
+   в ASP._Page_Index_cshtml.Execute() в C:\Users\SergeyPonomarev\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.WebUI\Index.cshtml:строка 14
+

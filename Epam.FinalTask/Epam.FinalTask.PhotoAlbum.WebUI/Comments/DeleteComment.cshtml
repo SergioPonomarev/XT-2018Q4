@@ -9,50 +9,56 @@
     }
 
     string commentIdStr = Request["commentId"];
-    int commentId = int.Parse(commentIdStr);
-    Comment comment = null;
-
-    try
+    if (int.TryParse(commentIdStr, out int commentId))
     {
-        comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
+        Comment comment;
 
-        if (comment == null)
+        try
         {
-            Response.SetStatus(HttpStatusCode.NotFound);
+            comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
+
+            if (comment == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
             return;
         }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
 
-    User commentAuthor = null;
+        User commentAuthor;
 
-    try
-    {
-        commentAuthor = DependencyResolver.UsersLogic.GetUserById(comment.CommentAuthorId);
-
-        if (commentAuthor == null)
+        try
         {
-            Response.SetStatus(HttpStatusCode.NotFound);
+            commentAuthor = DependencyResolver.UsersLogic.GetUserById(comment.CommentAuthorId);
+
+            if (commentAuthor == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
             return;
         }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
 
-    if (User.Identity.Name != commentAuthor.UserName)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
+        if (User.Identity.Name != commentAuthor.UserName)
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
 
-    if (!DependencyResolver.CommentsLogic.Remove(comment))
+        if (!DependencyResolver.CommentsLogic.Remove(comment))
+        {
+            Response.SetStatus(HttpStatusCode.BadRequest);
+        }
+    }
+    else
     {
         Response.SetStatus(HttpStatusCode.BadRequest);
     }

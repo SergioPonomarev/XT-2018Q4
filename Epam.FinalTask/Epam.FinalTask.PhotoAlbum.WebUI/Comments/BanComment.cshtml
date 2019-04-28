@@ -9,28 +9,34 @@
     }
 
     string commentIdStr = Request["commentId"];
-    int commentId = int.Parse(commentIdStr);
-    Comment comment = null;
+    if (int.TryParse(commentIdStr, out int commentId))
+    {
+        Comment comment;
 
-    try
-    {
-        comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadRequest);
-        return;
-    }
-
-    if (comment != null)
-    {
-        if (!DependencyResolver.CommentsLogic.BanComment(comment))
+        try
+        {
+            comment = DependencyResolver.CommentsLogic.GetCommentById(commentId);
+        }
+        catch (Exception)
         {
             Response.SetStatus(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        if (comment != null)
+        {
+            if (!DependencyResolver.CommentsLogic.BanComment(comment))
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+            }
+        }
+        else
+        {
+            Response.SetStatus(HttpStatusCode.NotFound);
         }
     }
     else
     {
-        Response.SetStatus(HttpStatusCode.NotFound);
+        Response.SetStatus(HttpStatusCode.BadRequest);
     }
 }

@@ -5,10 +5,10 @@
     string userName = Request["name"];
     Page.Title = userName;
 
-    User user = null;
-    Avatar avatar = null;
-    IEnumerable<Image> images = null;
-    Image bannedImage = null;
+    User user;
+    Avatar avatar;
+    IEnumerable<Image> images;
+    Image bannedImage;
 
     try
     {

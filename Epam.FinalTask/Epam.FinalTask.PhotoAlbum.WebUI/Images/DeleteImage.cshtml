@@ -9,46 +9,45 @@
     }
 
     string imageIdStr = Request["imageId"];
-    int imageId = int.Parse(imageIdStr);
-
-    Image image = null;
-    User owner = null;
-
-    try
+    if (int.TryParse(imageIdStr, out int imageId))
     {
-        image = DependencyResolver.ImagesLogic.GetImageById(imageId);
-        owner = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+        Image image;
+        User owner;
 
-        if (image == null)
+        try
+        {
+            image = DependencyResolver.ImagesLogic.GetImageById(imageId);
+            owner = DependencyResolver.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+            if (image == null || owner == null)
+            {
+                Response.SetStatus(HttpStatusCode.NotFound);
+                return;
+            }
+        }
+        catch (Exception)
+        {
+            Response.SetStatus(HttpStatusCode.BadGateway);
+            return;
+        }
+
+        if (owner.UserId != image.ImageOwnerId)
         {
             Response.SetStatus(HttpStatusCode.NotFound);
             return;
         }
 
-        if (owner == null)
+        if (DependencyResolver.ImagesLogic.Remove(image))
+        {
+            Response.Redirect("/Index");
+        }
+        else
         {
             Response.SetStatus(HttpStatusCode.NotFound);
-            return;
         }
-    }
-    catch (Exception)
-    {
-        Response.SetStatus(HttpStatusCode.BadGateway);
-        return;
-    }
-
-    if (owner.UserId != image.ImageOwnerId)
-    {
-        Response.SetStatus(HttpStatusCode.NotFound);
-        return;
-    }
-
-    if (DependencyResolver.ImagesLogic.Remove(image))
-    {
-        Response.Redirect("/Index");
     }
     else
     {
-        Response.SetStatus(HttpStatusCode.NotFound);
+        Response.SetStatus(HttpStatusCode.BadRequest);
     }
 }

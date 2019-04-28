@@ -24,7 +24,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public bool CanLogin(string login, string password)
         {
-            User user = null;
+            User user;
             try
             {
                 user = this.usersLogic.GetUserByUserName(login);
@@ -35,11 +35,6 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
                 }
             }
             catch (SqlException)
-            {
-                return false;
-            }
-
-            if (user == null)
             {
                 return false;
             }
@@ -62,7 +57,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public string[] GetRoles(string userName)
         {
-            User user = null;
+            User user;
             try
             {
                 user = this.usersLogic.GetUserByUserName(userName);
@@ -104,7 +99,7 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
                 string hashedPass = this.GetHashedPass(userName, password);
 
-                User user = null;
+                User user;
                 try
                 {
                     user = this.usersLogic.GetUserByUserName(userName);
