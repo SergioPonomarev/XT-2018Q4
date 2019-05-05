@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
-using Epam.FinalTask.PhotoAlbum.Log;
+using Epam.FinalTask.PhotoAlbum.Logging;
 
 namespace Epam.FinalTask.PhotoAlbum.WebUI
 {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Epam.FinalTask.PhotoAlbum.DAL.Contracts;
-using Epam.FinalTask.PhotoAlbum.Log;
+using Epam.FinalTask.PhotoAlbum.Logging;
 
 namespace Epam.FinalTask.PhotoAlbum.SqlDAL
 {

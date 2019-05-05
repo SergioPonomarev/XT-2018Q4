@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E3A9A76-EA2B-4960-BF0C-9A4AB23F7F5C}</ProjectGuid>
+    <ProjectGuid>{AEC49431-740E-4BCE-9453-26B1247F4777}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epam.FinalTask.PhotoAlbum.SqlDAL</RootNamespace>
-    <AssemblyName>Epam.FinalTask.PhotoAlbum.SqlDAL</AssemblyName>
+    <RootNamespace>Epam.FinalTask.PhotoAlbum.Logging</RootNamespace>
+    <AssemblyName>Epam.FinalTask.PhotoAlbum.Logging</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,26 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SqlAccountsDao.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlAvatarsDao.cs" />
-    <Compile Include="SqlCommentsDao.cs" />
-    <Compile Include="SqlImagesDao.cs" />
-    <Compile Include="SqlUsersDao.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.DAL.Contracts\Epam.FinalTask.PhotoAlbum.DAL.Contracts.csproj">
-      <Project>{E0387D39-9AEA-45B8-B3CD-D18AEA789553}</Project>
-      <Name>Epam.FinalTask.PhotoAlbum.DAL.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.Entities\Epam.FinalTask.PhotoAlbum.Entities.csproj">
-      <Project>{F063520A-5B34-42FF-AE59-1AC321665C42}</Project>
-      <Name>Epam.FinalTask.PhotoAlbum.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.FinalTask.PhotoAlbum.Logging\Epam.FinalTask.PhotoAlbum.Logging.csproj">
-      <Project>{aec49431-740e-4bce-9453-26b1247f4777}</Project>
-      <Name>Epam.FinalTask.PhotoAlbum.Logging</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
