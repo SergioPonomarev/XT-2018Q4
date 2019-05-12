@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header class="header">
+        <div class="header_userBlock">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.Action("GetUserBlock", "Home", new { userName = User.Identity.Name })
+            }
+            else
+            {
+                <p>Hello, Guest!</p>
+            }
+        </div>
+
+        <div class="header_loginBlock">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Log out", "Logout", "Account")
+            }
+            else
+            {
+                @Html.ActionLink("Log in", "Login", "Account")
+            }
+        </div>
+
+        <div class="navbar-wrapper">
+            @Html.Action("GetHeaderMenu", "Home")
+        </div>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

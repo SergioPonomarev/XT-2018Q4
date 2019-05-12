@@ -1,0 +1,75 @@
+﻿.header {
+    background-color: #6fb4ff;
+}
+
+.header_userBlock {
+    display: inline-block;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.header_userBlock p {
+    display: inline-block;
+    margin: 0;
+}
+
+.header_userBlock img {
+    display: inline-block;
+    max-width: 45px;
+    margin-left: 1rem;
+}
+
+.header_loginBlock {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+}
+
+.header_loginBlock a {
+    color: #212529;
+}
+
+.header_loginBlock a:active {
+    color: #212529;
+}
+
+.navbar-wrapper {
+    display: inline-block;
+}
+
+.imagesBlock {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.imagePageLink {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.imageWrapper {
+    line-height: 297px;
+    text-align: center;
+}
+
+.image {
+    max-width: 300px;
+    max-height: 300px;
+    vertical-align: middle;
+}
+
+.btn-default {
+    background-color: #6fb4ff;
+}
+
+.notRegBlock {
+    width: 225px;
+    margin: auto;
+}
+
+.notRegText {
+    display: inline-block;
+    margin: 0;
+}

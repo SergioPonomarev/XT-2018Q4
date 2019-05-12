@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.FinalTask.PhotoAlbum.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.FinalTask.PhotoAlbum.Logging", "Epam.FinalTask.PhotoAlbum.Logging\Epam.FinalTask.PhotoAlbum.Logging.csproj", "{AEC49431-740E-4BCE-9453-26B1247F4777}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.FinalTask.PhotoAlbum.MVCWebUI", "Epam.FinalTask.PhotoAlbum.MVCWebUI\Epam.FinalTask.PhotoAlbum.MVCWebUI.csproj", "{F2D56CB2-A003-4DFF-AEE3-DAFBA2C53E6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{AEC49431-740E-4BCE-9453-26B1247F4777}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEC49431-740E-4BCE-9453-26B1247F4777}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEC49431-740E-4BCE-9453-26B1247F4777}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D56CB2-A003-4DFF-AEE3-DAFBA2C53E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D56CB2-A003-4DFF-AEE3-DAFBA2C53E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D56CB2-A003-4DFF-AEE3-DAFBA2C53E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D56CB2-A003-4DFF-AEE3-DAFBA2C53E6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{F063520A-5B34-42FF-AE59-1AC321665C42} = {F90A53BE-F84D-4CC7-B342-A6E03C61275C}
 		{9E3A9A76-EA2B-4960-BF0C-9A4AB23F7F5C} = {377CA304-C3FC-45A8-BF84-E715D9DA3DF6}
 		{AEC49431-740E-4BCE-9453-26B1247F4777} = {F90A53BE-F84D-4CC7-B342-A6E03C61275C}
+		{F2D56CB2-A003-4DFF-AEE3-DAFBA2C53E6D} = {7ABC2D2C-90C2-4E47-92BE-4CD4DCEFD860}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50883AB9-CFE5-49EF-9C18-9E171E773B2D}

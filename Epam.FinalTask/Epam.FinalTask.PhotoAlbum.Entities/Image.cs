@@ -8,11 +8,6 @@ namespace Epam.FinalTask.PhotoAlbum.Entities
 {
     public class Image
     {
-        /*public Image()
-        {
-            this.Likes = new List<int>();
-        }*/
-
         public int ImageId { get; set; }
 
         public string MimeType { get; set; }

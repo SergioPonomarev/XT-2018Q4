@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Epam.FinalTask.PhotoAlbum.MVCWebUI.Models.ImageModel>
+
+<div class="imagesBlock">
+    @foreach (var image in Model)
+    {
+        <a href='@Url.Action("ImagePage", "Image", new { imageId = image.ImageId })' class="imagePageLink">
+            <div class="imageWrapper">
+                <img class="image" src="data:@image.MimeType;base64,@image.ImageData" alt="User image id: @image.ImageId" />
+            </div>
+        </a>
+    }
+</div>
