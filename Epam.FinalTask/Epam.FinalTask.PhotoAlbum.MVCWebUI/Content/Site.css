@@ -36,6 +36,10 @@
     display: inline-block;
 }
 
+.nav-link {
+    font-weight: 500;
+}
+
 .imagesBlock {
     margin: 20px 0;
     text-align: center;
