@@ -7,6 +7,7 @@ using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 using Epam.FinalTask.PhotoAlbum.Entities;
 using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
 using System.Net;
+using System.Web.Helpers;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -44,6 +45,63 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                 }
 
                 return PartialView(imageModels);
+            }
+            catch (Exception)
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
+        }
+
+        [Authorize]
+        public ActionResult UploadImage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult UploadImage(UploadImageModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UserModel user = dr.UsersLogic.GetUserByUserName(User.Identity.Name);
+
+                    if (user != null)
+                    {
+                        ImageModel image = new ImageModel();
+
+                        WebImage webImage = new WebImage(model.Image.InputStream);
+
+                        webImage.Resize(width: 1000, height: 1000, preserveAspectRatio: true, preventEnlarge: true);
+
+                        image.ImageOwnerId = user.UserId;
+
+                        image.Description = model.Description;
+
+                        image.MimeType = MimeMapping.GetMimeMapping(model.Image.FileName);
+
+                        byte[] data = webImage.GetBytes(webImage.ImageFormat);
+
+                        image.ImageData = Convert.ToBase64String(data);
+
+                        if (dr.ImagesLogic.Add((Image)image))
+                        {
+                            return RedirectToAction("UserPage", "User", new { name = user.UserName });
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Uploading image error.");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Uploading image error.");
+                    }
+                }
+
+                return View(model);
             }
             catch (Exception)
             {

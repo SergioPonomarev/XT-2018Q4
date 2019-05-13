@@ -73,3 +73,7 @@
     display: inline-block;
     margin: 0;
 }
+
+.inputFileWrapper {
+    padding-left: 15px;
+}

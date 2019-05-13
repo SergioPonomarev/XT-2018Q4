@@ -21,9 +21,16 @@ namespace Epam.FinalTask.PhotoAlbum.BLL
 
         public bool Add(Image image)
         {
-            image.Banned = false;
-            image.ImageDateOfUpload = DateTime.Now;
-            return this.imagesDao.Add(image);
+            try
+            {
+                image.Banned = false;
+                image.ImageDateOfUpload = DateTime.Now;
+                return this.imagesDao.Add(image);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public bool AddLikeToImage(Image image, int userId)

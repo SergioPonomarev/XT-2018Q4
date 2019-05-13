@@ -7,6 +7,7 @@ using System.Web.Security;
 using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
 using Epam.FinalTask.PhotoAlbum.Entities;
+using System.Net;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -21,24 +22,31 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (dr.AccountsLogic.CanLogin(model.UserName, model.Password))
+                if (ModelState.IsValid)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
-                    return RedirectToAction("Index", "Home");
+                    if (dr.AccountsLogic.CanLogin(model.UserName, model.Password))
+                    {
+                        FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Wrong login or password.");
+                    }
                 }
                 else
                 {
                     ModelState.AddModelError("", "Wrong login or password.");
                 }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Wrong login or password.");
-            }
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         public ActionResult Logout()
@@ -55,28 +63,35 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         [HttpPost]
         public ActionResult Registration(RegistrationModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                User user = dr.UsersLogic.GetUserByUserName(model.UserName);
+                if (ModelState.IsValid)
+                {
+                    User user = dr.UsersLogic.GetUserByUserName(model.UserName);
 
-                if (user != null)
-                {
-                    ModelState.AddModelError("", "User already exists.");
-                }
-                else
-                {
-                    if (dr.AccountsLogic.UserRegistration(model.UserName, model.Password))
+                    if (user != null)
                     {
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError("", "User already exists.");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Registration error.");
+                        if (dr.AccountsLogic.UserRegistration(model.UserName, model.Password))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Registration error.");
+                        }
                     }
                 }
-            }
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
     }
 }

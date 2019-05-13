@@ -47,7 +47,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
             }
             catch (Exception)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("~/Views/Shared/Error.cshtml");
             }
         }
 
