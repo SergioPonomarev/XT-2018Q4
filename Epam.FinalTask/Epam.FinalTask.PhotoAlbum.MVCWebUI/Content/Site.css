@@ -168,6 +168,11 @@
     height: 55px;
 }
 
+.avatarEditFormWrapper {
+    width: 500px;
+    margin: 20px auto;
+}
+
 @media (max-width: 991px) {
     .defaultAvatarWrapper {
         margin-right: 0;

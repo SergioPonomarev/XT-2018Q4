@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
 using System.Net;
+using System.Web.Helpers;
+using Epam.FinalTask.PhotoAlbum.Entities;
+using System.Web.Security;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -44,9 +47,17 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 
             try
             {
-                UserModel model = dr.UsersLogic.GetUserByUserName(userName);
+                UserModel user = dr.UsersLogic.GetUserByUserName(userName);
 
-                return View(model);
+                if (user == null)
+                {
+                    return new HttpNotFoundResult();
+                }
+
+                ViewBag.UserName = user.UserName;
+                ViewBag.AvatarId = user.UserAvatarId;
+
+                return View();
             }
             catch (Exception)
             {
@@ -55,9 +66,49 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProfile(HttpPostedFileBase avatar)
+        public ActionResult EditProfile(EditUserModel model)
         {
-            return View();
+            try
+            {
+                if (model.UserName == null)
+                {
+                    return new HttpNotFoundResult();
+                }
+
+                if (User.Identity.Name != model.UserName)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                User user = dr.UsersLogic.GetUserByUserName(model.UserName);
+
+                if (user == null)
+                {
+                    return new HttpNotFoundResult();
+                }
+
+                if (model.Avatar != null)
+                {
+                    AvatarModel avatarModel = new AvatarModel();
+                    WebImage webImage = new WebImage(model.Avatar.InputStream);
+
+                    webImage.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+                    avatarModel.MimeType = MimeMapping.GetMimeMapping(model.Avatar.FileName);
+                    byte[] data = webImage.GetBytes(webImage.ImageFormat);
+                    avatarModel.AvatarData = Convert.ToBase64String(data);
+
+                    if (dr.AvatarsLogic.SetAvatarToUser((Avatar)avatarModel, user))
+                    {
+                        return RedirectToAction("EditProfile", "User", new { userName = model.UserName });
+                    }
+                }
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         [HttpPost]
@@ -68,7 +119,23 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return RedirectToAction("Index", "Home");
+            User user = dr.UsersLogic.GetUserByUserName(userName);
+
+            if (user == null)
+            {
+                return new HttpNotFoundResult();
+            }
+
+            FormsAuthentication.SignOut();
+
+            if (dr.UsersLogic.Remove(user))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
     }
 }
