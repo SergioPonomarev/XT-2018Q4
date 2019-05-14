@@ -1,0 +1,24 @@
+01:19:26,351
+ERROR
+Connection with DB error.
+System.Exception: some exception
+   at Epam.FinalTask.PhotoAlbum.SqlDAL.SqlImagesDao.GetAllImages() in C:\Users\SergioPono\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.SqlDAL\SqlImagesDao.cs:line 111
+
+01:24:16,573
+ERROR
+Connection with DB error.
+System.Exception: some exception
+   at Epam.FinalTask.PhotoAlbum.SqlDAL.SqlImagesDao.GetAllImages() in C:\Users\SergioPono\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.SqlDAL\SqlImagesDao.cs:line 111
+
+01:25:54,556
+ERROR
+Connection with DB error.
+System.Exception: some exception
+   at Epam.FinalTask.PhotoAlbum.SqlDAL.SqlImagesDao.GetAllImages() in C:\Users\SergioPono\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.SqlDAL\SqlImagesDao.cs:line 111
+
+01:27:13,034
+ERROR
+Connection with DB error.
+System.Exception: some exception
+   at Epam.FinalTask.PhotoAlbum.SqlDAL.SqlImagesDao.GetAllImages() in C:\Users\SergioPono\source\repos\XT-2018Q4\Epam.FinalTask\Epam.FinalTask.PhotoAlbum.SqlDAL\SqlImagesDao.cs:line 111
+

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Management";
+}
+
+<h2>Management</h2>
+
+<hr />
+
+<div class="manageContentWrapper">
+    <div class="defaultAvatarWrapper">
+        <div class="imageBlock">
+            <h2 class="imageHeader">Default Users Avatar</h2>
+            <img class="imageBlock_img" src="data:@ViewBag.Avatar.MimeType;base64,@ViewBag.Avatar.AvatarData" alt="Default Users Avatar" />
+        </div>
+    </div>
+
+    <div class="bannedImageWrapper">
+        <div class="imageBlock">
+            <h2 class="imageHeader">Banned image</h2>
+            <img class="imageBlock_img" src="data:@ViewBag.Image.MimeType;base64,@ViewBag.Image.ImageData" alt="Banned image" />
+        </div>
+    </div>
+
+    <div class="messages">
+        @if (ViewBag.AvatarErrorMessage != null)
+        {
+            <p class="text-danger">@ViewBag.AvatarErrorMessage</p>
+        }
+        @if (ViewBag.ImageErrorMessage != null)
+        {
+            <p class="text-danger">@ViewBag.ImageErrorMessage</p>
+        }
+        @if (ViewBag.AvatarSuccessMessage != null)
+        {
+            <p class="text-success">@ViewBag.AvatarSuccessMessage</p>
+        }
+        @if (ViewBag.ImageSuccessMessage != null)
+        {
+            <p class="text-success">@ViewBag.ImageSuccessMessage</p>
+        }
+    </div>
+
+    <div class="manageFormWrapper">
+        @using (Html.BeginForm("Manage", "Administration", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="avatarFormWrapper">
+                <div class="custom-file">
+                    <input type="file" name="avatar" class="custom-file-input" id="avatar" />
+                    <label class="custom-file-label" for="avatar">Choose new default avatar</label>
+                </div>
+            </div>
+
+            <div class="imageFormWrapper">
+                <div class="custom-file">
+                    <input type="file" name="image" class="custom-file-input" id="image" />
+                    <label class="custom-file-label" for="image">Choose new banned image</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-default updateBtn">Update</button>
+        }
+    </div>
+</div>

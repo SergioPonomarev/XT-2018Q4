@@ -1,0 +1,27 @@
+﻿@model Epam.FinalTask.PhotoAlbum.MVCWebUI.Models.UserModel
+
+@{
+    ViewBag.Title = Model.UserName;
+}
+
+@section scripts {
+    <script src="~/Scripts/Custom/userPage.js"></script>
+}
+
+<div class="userDataBlock">
+    <h2>@Model.UserName</h2>
+
+    <hr />
+
+    @Html.Action("GetUserAvatar", "Avatar", new { avatarId = Model.UserAvatarId })
+
+    @if (User.Identity.Name == Model.UserName)
+    {
+        @Html.ActionLink("Edit profile", "EditProfile", "User", new { userName = Model.UserName }, new { @class = "btn btn-warning userPageBtn" })
+
+        <button data-name="@Model.UserName" id="deleteBtn" class="btn btn-danger userPageBtn">Delete profile</button>
+    }
+
+</div>
+
+@Html.Action("GetImageList", "Image", new { userId = Model.UserId })

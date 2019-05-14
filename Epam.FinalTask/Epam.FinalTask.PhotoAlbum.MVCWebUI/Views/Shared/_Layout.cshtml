@@ -13,7 +13,9 @@
         <div class="header_userBlock">
             @if (User.Identity.IsAuthenticated)
             {
-                @Html.Action("GetUserBlock", "Home", new { userName = User.Identity.Name })
+                <a class="header_userPageLink" href='@Url.Action("UserPage", "User", new { userName = User.Identity.Name })'>
+                    @Html.Action("GetUserBlock", "Home", new { userName = User.Identity.Name })
+                </a>
             }
             else
             {
@@ -43,6 +45,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/unobajax")
     @RenderSection("scripts", required: false)
 </body>
 </html>
