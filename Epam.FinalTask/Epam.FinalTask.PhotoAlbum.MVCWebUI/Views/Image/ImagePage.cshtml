@@ -1,0 +1,91 @@
+﻿@model Epam.FinalTask.PhotoAlbum.MVCWebUI.Models.ImageModel
+
+@{
+    ViewBag.Title = "ImagePage";
+}
+
+@section scripts {
+    <script src="~/Scripts/Custom/imagePage.js"></script>
+}
+
+<div class="ownerBlock">
+    <a href='@Url.Action("UserPage", "User", new { userName = ViewBag.Owner.UserName })' class="userPageLink">
+        <img src="data:@ViewBag.Avatar.MimeType;base64,@ViewBag.Avatar.AvatarData" class="ownerAvatar" alt="Image owner avatar" />
+        <p class="ownerName">@ViewBag.Owner.UserName</p>
+    </a>
+</div>
+
+<div id="imageId" data-imageid="@Model.ImageId" class="imageBlock">
+    @if (!Model.Banned)
+    {
+        <img class="imageBlock_image" src="data:@Model.MimeType;base64,@Model.ImageData" alt="Image" />
+    }
+    else
+    {
+        <img class="imageBlock_image" src="data:@ViewBag.BannedImage.MimeType;base64,@ViewBag.BannedImage.ImageData" alt="Image is banned" />
+    }
+
+    <div class="iconsBlock">
+        <div class="imageMenuBlock">
+            @if ((User.IsInRole("Admins") && ViewBag.Owner.UserRole == "User") || User.IsInRole("SuperAdmins"))
+            {
+                if (!Model.Banned)
+                {
+                    <button id="banImage" class="btnImage btnImageBan" title="Ban this image">
+                        <i class="fa fa-ban"></i>
+                    </button>
+                }
+                else
+                {
+                    <button id="unbanImage" class="btnImage btnImageUnban" title="Unban this image">
+                        <i class="fa fa-check-circle-o"></i>
+                    </button>
+                }
+            }
+
+            @if (User.Identity.Name == ViewBag.Owner.UserName)
+            {
+                <button id="deleteImage" class="btnImage btnDeleteImage" title="Delete image">
+                    <i class="fa fa-times"></i>
+                </button>
+            }
+        </div>
+
+        <div class="likeBlock">
+            <span id="likesCount" class="likesCount">@ViewBag.Likes.Count</span>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (!ViewBag.Liked)
+                {
+                    <button id="btnLike" data-visitorid="@ViewBag.Visitor.UserId" class="btnImage btnLike" title="Like this image">
+                        <i class="fa fa-heart-o"></i>
+                    </button>
+
+                    <button id="btnUnlike" data-visitorid="@ViewBag.Visitor.UserId" class="btnImage btnLike hidden" title="Unlike this image">
+                        <i class="fa fa-heart"></i>
+                    </button>
+                }
+                else
+                {
+                    <button id="btnLike" data-visitorid="@ViewBag.Visitor.UserId" class="btnImage btnLike hidden" title="Like this image">
+                        <i class="fa fa-heart-o"></i>
+                    </button>
+
+                    <button id="btnUnlike" data-visitorid="@ViewBag.Visitor.UserId" class="btnImage btnLike" title="Unlike this image">
+                        <i class="fa fa-heart"></i>
+                    </button>
+                }
+            }
+            else
+            {
+                <span class="likeIcon">
+                    <i class="fa fa-heart display-inline-block"></i>
+                </span>
+            }
+        </div>
+        <div class="clear"></div>
+    </div>
+    <p class="uploadDate">@Model.ImageDateOfUpload</p>
+    <p class="imageDescription">@Model.Description</p>
+</div>

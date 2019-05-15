@@ -142,6 +142,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public void BanUser(string userName)
         {
             try
@@ -177,6 +178,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public void UnbanUser(string userName)
         {
             try
@@ -212,6 +214,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public void PromoteToAdmin(string userName)
         {
             try
@@ -247,6 +250,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public void DemoteToUser(string userName)
         {
             try
