@@ -156,14 +156,40 @@
     margin: 0 auto;
 }
 
+.banMessage {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: #dc3545;
+}
+
 .userAvatarWrapper {
     width: 300px;
     margin: 0 auto 20px;
 }
 
+.menuForAdmin {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.fa {
+    display: block;
+}
+
+.btnUser {
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border: none;
+    font-size: 30px;
+}
+
 .userPageBtn {
     margin: 0 10px;
-    width: 230px;
+    width: 227px;
     font-size: 1.5rem;
     height: 55px;
 }

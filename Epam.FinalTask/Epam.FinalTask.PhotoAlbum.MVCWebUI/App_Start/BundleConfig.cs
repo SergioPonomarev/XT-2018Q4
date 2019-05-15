@@ -27,6 +27,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/normalize.css",
                       "~/Content/bootstrap.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/Site.css"));
         }
     }

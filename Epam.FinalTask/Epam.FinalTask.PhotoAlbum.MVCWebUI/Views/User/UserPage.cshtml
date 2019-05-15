@@ -9,17 +9,56 @@
 }
 
 <div class="userDataBlock">
-    <h2>@Model.UserName</h2>
+    @if (Model.Banned)
+    {
+        <p class="banMessage">This user is banned!</p>
+    }
+    <h2 id="username" data-name="@Model.UserName">@Model.UserName</h2>
 
     <hr />
 
     @Html.Action("GetUserAvatar", "Avatar", new { avatarId = Model.UserAvatarId })
 
+    <div class="menuForAdmin">
+        @if ((User.IsInRole("Admins") && Model.UserRole == "User") || User.IsInRole("SuperAdmins"))
+        {
+            if (!Model.Banned)
+            {
+                <button id="banUser" class="btnUser btn-danger" title="Ban this user">
+                    <i class="fa fa-ban"></i>
+                </button>
+            }
+            else
+            {
+                <button id="unbanUser" class="btnUser btn-success" title="Unban this user">
+                    <i class="fa fa-check-circle-o"></i>
+                </button>
+            }
+
+            if (User.IsInRole("SuperAdmins"))
+            {
+                if (Model.UserRole == "User")
+                {
+                    <button id="promoteUser" class="btnUser btn-success" title="Promote to admin">
+                        <i class="fa fa-arrow-up"></i>
+                    </button>
+                }
+
+                if (Model.UserRole == "Admin")
+                {
+                    <button id="demoteUser" class="btnUser btn-danger" title="Demote to user">
+                        <i class="fa fa-arrow-down"></i>
+                    </button>
+                }
+            }
+        }
+    </div>
+
     @if (User.Identity.Name == Model.UserName)
     {
         @Html.ActionLink("Edit profile", "EditProfile", "User", new { userName = Model.UserName }, new { @class = "btn btn-warning userPageBtn" })
 
-        <button data-name="@Model.UserName" id="deleteBtn" class="btn btn-danger userPageBtn">Delete profile</button>
+        <button id="deleteBtn" class="btn btn-danger userPageBtn">Delete profile</button>
     }
 
 </div>

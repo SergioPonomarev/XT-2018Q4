@@ -9,6 +9,8 @@ using System.Net;
 using System.Web.Helpers;
 using Epam.FinalTask.PhotoAlbum.Entities;
 using System.Web.Security;
+using System.Net.Http;
+using System.Web.WebPages;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -68,18 +70,13 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         [HttpPost]
         public ActionResult EditProfile(EditUserModel model)
         {
+            if (User.Identity.Name != model.UserName)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             try
             {
-                if (model.UserName == null)
-                {
-                    return new HttpNotFoundResult();
-                }
-
-                if (User.Identity.Name != model.UserName)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-
                 User user = dr.UsersLogic.GetUserByUserName(model.UserName);
 
                 if (user == null)
@@ -87,7 +84,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                     return new HttpNotFoundResult();
                 }
 
-                if (model.Avatar != null)
+                if (ModelState.IsValid)
                 {
                     AvatarModel avatarModel = new AvatarModel();
                     WebImage webImage = new WebImage(model.Avatar.InputStream);
@@ -103,6 +100,9 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                     }
                 }
 
+                ViewBag.UserName = model.UserName;
+                ViewBag.AvatarId = user.UserAvatarId;
+
                 return View(model);
             }
             catch (Exception)
@@ -112,29 +112,172 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteProfile(string userName)
+        public void DeleteProfile(string userName)
         {
             if (User.Identity.Name != userName)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Response.SetStatus(HttpStatusCode.BadRequest);
             }
 
-            User user = dr.UsersLogic.GetUserByUserName(userName);
-
-            if (user == null)
+            try
             {
-                return new HttpNotFoundResult();
+                User user = dr.UsersLogic.GetUserByUserName(userName);
+
+                if (user == null)
+                {
+                    Response.SetStatus(HttpStatusCode.NotFound);
+                }
+
+                FormsAuthentication.SignOut();
+
+                if (!dr.UsersLogic.Remove(user))
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
             }
-
-            FormsAuthentication.SignOut();
-
-            if (dr.UsersLogic.Remove(user))
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Home");
+                Response.SetStatus(HttpStatusCode.BadRequest);
             }
-            else
+        }
+
+        [HttpPost]
+        public void BanUser(string userName)
+        {
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                User userToBan = dr.UsersLogic.GetUserByUserName(userName);
+
+                if (userToBan == null)
+                {
+                    Response.SetStatus(HttpStatusCode.NotFound);
+                }
+
+                if (userToBan.Banned)
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+
+                if ((User.IsInRole("Admins") && userToBan.UserRole == "User") || User.IsInRole("SuperAdmins"))
+                {
+                    if (!dr.UsersLogic.BanUser(userToBan))
+                    {
+                        Response.SetStatus(HttpStatusCode.BadRequest);
+                    }
+                }
+                else
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+            }
+            catch (Exception)
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpPost]
+        public void UnbanUser(string userName)
+        {
+            try
+            {
+                User userToUnban = dr.UsersLogic.GetUserByUserName(userName);
+
+                if (userToUnban == null)
+                {
+                    Response.SetStatus(HttpStatusCode.NotFound);
+                }
+
+                if (!userToUnban.Banned)
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+
+                if ((User.IsInRole("Admins") && userToUnban.UserRole == "User") || User.IsInRole("SuperAdmins"))
+                {
+                    if (!dr.UsersLogic.UnbanUser(userToUnban))
+                    {
+                        Response.SetStatus(HttpStatusCode.BadRequest);
+                    }
+                }
+                else
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+            }
+            catch (Exception)
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpPost]
+        public void PromoteToAdmin(string userName)
+        {
+            try
+            {
+                User userToPromote = dr.UsersLogic.GetUserByUserName(userName);
+
+                if (userToPromote == null)
+                {
+                    Response.SetStatus(HttpStatusCode.NotFound);
+                }
+
+                if (userToPromote.UserRole == "Admin")
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+
+                if (User.IsInRole("SuperAdmins"))
+                {
+                    if (!dr.UsersLogic.PromoteToAdmin(userToPromote))
+                    {
+                        Response.SetStatus(HttpStatusCode.BadRequest);
+                    }
+                }
+                else
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+            }
+            catch (Exception)
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpPost]
+        public void DemoteToUser(string userName)
+        {
+            try
+            {
+                User userToDemote = dr.UsersLogic.GetUserByUserName(userName);
+
+                if (userToDemote == null)
+                {
+                    Response.SetStatus(HttpStatusCode.NotFound);
+                }
+
+                if (userToDemote.UserRole == "User")
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+
+                if (User.IsInRole("SuperAdmins"))
+                {
+                    if (!dr.UsersLogic.DemoteToUser(userToDemote))
+                    {
+                        Response.SetStatus(HttpStatusCode.BadRequest);
+                    }
+                }
+                else
+                {
+                    Response.SetStatus(HttpStatusCode.BadRequest);
+                }
+            }
+            catch (Exception)
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
             }
         }
     }
