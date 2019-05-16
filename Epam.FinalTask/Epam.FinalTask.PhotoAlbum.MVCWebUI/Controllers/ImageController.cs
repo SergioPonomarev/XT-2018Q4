@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using System.Net;
+using System.Web;
 using System.Web.Helpers;
+using System.Web.Mvc;
 using System.Web.WebPages;
-using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 using Epam.FinalTask.PhotoAlbum.Entities;
 using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
+using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -45,18 +45,18 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                     imageModels.Add(imageModel);
                 }
 
-                return PartialView(imageModels);
+                return this.PartialView(imageModels);
             }
             catch (Exception)
             {
-                return View("~/Views/Shared/Error.cshtml");
+                return this.View("~/Views/Shared/Error.cshtml");
             }
         }
 
         [Authorize]
         public ActionResult UploadImage()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -89,20 +89,20 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 
                         if (dr.ImagesLogic.Add((Image)image))
                         {
-                            return RedirectToAction("UserPage", "User", new { name = user.UserName });
+                            return this.RedirectToAction("UserPage", "User", new { userName = user.UserName });
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Uploading image error.");
+                            ModelState.AddModelError(string.Empty, "Uploading image error.");
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Uploading image error.");
+                        ModelState.AddModelError(string.Empty, "Uploading image error.");
                     }
                 }
 
-                return View(model);
+                return this.View(model);
             }
             catch (Exception)
             {
@@ -164,7 +164,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                 ViewBag.BannedImage = bannedImage;
                 ViewBag.Likes = likes;
 
-                return View(image);
+                return this.View(image);
             }
             catch (Exception)
             {

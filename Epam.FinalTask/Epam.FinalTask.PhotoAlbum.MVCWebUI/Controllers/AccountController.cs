@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
 using System.Web.Security;
-using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
-using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
 using Epam.FinalTask.PhotoAlbum.Entities;
-using System.Net;
+using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
+using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -15,7 +12,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
     {
         public ActionResult Login()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -29,19 +26,19 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                     if (dr.AccountsLogic.CanLogin(model.UserName, model.Password))
                     {
                         FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
-                        return RedirectToAction("Index", "Home");
+                        return this.RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Wrong login or password.");
+                        ModelState.AddModelError(string.Empty, "Wrong login or password.");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Wrong login or password.");
+                    ModelState.AddModelError(string.Empty, "Wrong login or password.");
                 }
 
-                return View(model);
+                return this.View(model);
             }
             catch (Exception)
             {
@@ -52,12 +49,12 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home");
         }
 
         public ActionResult Registration()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -71,22 +68,22 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 
                     if (user != null)
                     {
-                        ModelState.AddModelError("", "User already exists.");
+                        ModelState.AddModelError(string.Empty, "User already exists.");
                     }
                     else
                     {
                         if (dr.AccountsLogic.UserRegistration(model.UserName, model.Password))
                         {
-                            return RedirectToAction("Index", "Home");
+                            return this.RedirectToAction("Index", "Home");
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Registration error.");
+                            ModelState.AddModelError(string.Empty, "Registration error.");
                         }
                     }
                 }
 
-                return View(model);
+                return this.View(model);
             }
             catch (Exception)
             {

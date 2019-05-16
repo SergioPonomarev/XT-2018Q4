@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
-using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
-using Epam.FinalTask.PhotoAlbum.Entities;
 using System.Net;
+using System.Web.Mvc;
+using Epam.FinalTask.PhotoAlbum.Entities;
+using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
+using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -14,7 +11,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult GetUserBlock(string userName)
@@ -38,7 +35,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 
                     ViewBag.Avatar = avatarModel;
 
-                    return PartialView(userModel);
+                    return this.PartialView(userModel);
                 }
                 else
                 {
@@ -47,13 +44,13 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
             }
             catch (Exception)
             {
-                return View("~/Views/Shared/Error.cshtml");
+                return this.View("~/Views/Shared/Error.cshtml");
             }
         }
 
         public ActionResult GetHeaderMenu()
         {
-            return PartialView();
+            return this.PartialView();
         }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
-using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
+using System.Web.WebPages;
 using Epam.FinalTask.PhotoAlbum.Entities;
 using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
-using System.Net;
-using System.Web.WebPages;
+using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -17,13 +16,13 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
         {
             try
             {
-                List<CommentModel> commentModels = GetCommentsByImageId(imageId);
+                List<CommentModel> commentModels = this.GetCommentsByImageId(imageId);
 
-                return PartialView(commentModels.OrderByDescending(c => c.CommentDate));
+                return this.PartialView(commentModels.OrderByDescending(c => c.CommentDate));
             }
             catch (Exception)
             {
-                return View("~/Views/Shared/Error.cshtml");
+                return this.View("~/Views/Shared/Error.cshtml");
             }
         }
 
@@ -46,11 +45,11 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 
                     if (dr.CommentsLogic.Add(model.CommentText, image, user))
                     {
-                        return RedirectToAction("ImagePage", "Image", new { imageId = image.ImageId });
+                        return this.RedirectToAction("ImagePage", "Image", new { imageId = image.ImageId });
                     }
                 }
 
-                return PartialView(model);
+                return this.PartialView(model);
             }
             catch (Exception)
             {
@@ -76,7 +75,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return PartialView();
+            return this.PartialView();
         }
 
         [HttpPost]

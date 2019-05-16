@@ -9,7 +9,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Models
 {
     public class RegistrationModel
     {
-        private const string passFormat = @"(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}";
+        private const string PassFormat = @"(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}";
 
         [Display(Name = "User name")]
         [Required]
@@ -19,7 +19,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Models
         [Required]
         [DataType(DataType.Password)]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "The password must contain at least 6 characters.")]
-        [RegularExpression(passFormat, ErrorMessage = "The password must contain only latin letters, at least 1 character must be in upper and lower case, at least 1 character must be a number.")]
+        [RegularExpression(PassFormat, ErrorMessage = "The password must contain only latin letters, at least 1 character must be in upper and lower case, at least 1 character must be a number.")]
         public string Password { get; set; }
 
         [Display(Name = "Confirm password")]

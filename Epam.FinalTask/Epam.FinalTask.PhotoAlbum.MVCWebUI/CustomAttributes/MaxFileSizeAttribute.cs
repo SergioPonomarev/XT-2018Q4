@@ -24,7 +24,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.CustomAttributes
                 return false;
             }
 
-            if (file.ContentLength > maxSize)
+            if (file.ContentLength > this.maxSize)
             {
                 return false;
             }

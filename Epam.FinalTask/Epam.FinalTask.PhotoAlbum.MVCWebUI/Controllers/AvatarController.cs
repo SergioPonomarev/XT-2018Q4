@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
+using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -16,11 +13,11 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
             {
                 AvatarModel model = dr.AvatarsLogic.GetUserAvatar(avatarId);
 
-                return PartialView(model);
+                return this.PartialView(model);
             }
             catch (Exception)
             {
-                return View("~/Views/Shared/Error.cshtml");
+                return this.View("~/Views/Shared/Error.cshtml");
             }
         }
     }

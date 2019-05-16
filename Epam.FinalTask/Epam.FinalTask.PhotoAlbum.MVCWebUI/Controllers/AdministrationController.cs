@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
-using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
 using System.Net;
+using System.Web;
 using System.Web.Helpers;
+using System.Web.Mvc;
 using Epam.FinalTask.PhotoAlbum.Entities;
+using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
+using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -19,6 +17,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
             {
                 return new HttpNotFoundResult();
             }
+
             try
             {
                 AvatarModel avatar = dr.AvatarsLogic.GetDefaultAvatar();
@@ -47,8 +46,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                     ViewBag.ImageSuccessMessage = imageSuccess;
                 }
 
-                return View();
-
+                return this.View();
             }
             catch (Exception)
             {
@@ -73,16 +71,16 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
             {
                 if (avatar.ContentLength <= 524288)
                 {
-                    AvatarModel avatarModel = new AvatarModel();
-                    WebImage webImage = new WebImage(avatar.InputStream);
-
-                    webImage.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
-                    avatarModel.MimeType = MimeMapping.GetMimeMapping(avatar.FileName);
-                    byte[] data = webImage.GetBytes(webImage.ImageFormat);
-                    avatarModel.AvatarData = Convert.ToBase64String(data);
-
                     try
                     {
+                        AvatarModel avatarModel = new AvatarModel();
+                        WebImage webImage = new WebImage(avatar.InputStream);
+
+                        webImage.Resize(width: 300, height: 300, preserveAspectRatio: true, preventEnlarge: true);
+                        avatarModel.MimeType = MimeMapping.GetMimeMapping(avatar.FileName);
+                        byte[] data = webImage.GetBytes(webImage.ImageFormat);
+                        avatarModel.AvatarData = Convert.ToBase64String(data);
+
                         if (dr.AvatarsLogic.SetDefaultAvatar((Avatar)avatarModel))
                         {
                             avatarSuccess = "Avatar has been uploaded successfully.";
@@ -96,7 +94,6 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
-
                 }
                 else
                 {
@@ -149,13 +146,16 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                 }
             }
 
-            return RedirectToAction("Manage", "Administration", new
-            {
-                avatarError = avatarError,
-                avatarSuccess = avatarSuccess,
-                imageError = imageError,
-                imageSuccess = imageSuccess
-            });
+            return this.RedirectToAction(
+                "Manage", 
+                "Administration", 
+                new
+                {
+                    avatarError = avatarError,
+                    avatarSuccess = avatarSuccess,
+                    imageError = imageError,
+                    imageSuccess = imageSuccess
+                });
         }
     }
 }

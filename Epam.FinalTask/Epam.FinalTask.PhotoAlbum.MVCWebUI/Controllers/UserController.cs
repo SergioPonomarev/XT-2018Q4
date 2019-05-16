@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
-using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
 using System.Net;
+using System.Web;
 using System.Web.Helpers;
-using Epam.FinalTask.PhotoAlbum.Entities;
+using System.Web.Mvc;
 using System.Web.Security;
-using System.Net.Http;
 using System.Web.WebPages;
+using Epam.FinalTask.PhotoAlbum.Entities;
+using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models;
+using dr = Epam.FinalTask.PhotoAlbum.Common.DependencyResolver;
 
 namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 {
@@ -32,7 +29,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                     return new HttpNotFoundResult();
                 }
 
-                return View(user);
+                return this.View(user);
             }
             catch (Exception)
             {
@@ -59,7 +56,7 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
                 ViewBag.UserName = user.UserName;
                 ViewBag.AvatarId = user.UserAvatarId;
 
-                return View();
+                return this.View();
             }
             catch (Exception)
             {
@@ -96,14 +93,14 @@ namespace Epam.FinalTask.PhotoAlbum.MVCWebUI.Controllers
 
                     if (dr.AvatarsLogic.SetAvatarToUser((Avatar)avatarModel, user))
                     {
-                        return RedirectToAction("EditProfile", "User", new { userName = model.UserName });
+                        return this.RedirectToAction("EditProfile", "User", new { userName = model.UserName });
                     }
                 }
 
                 ViewBag.UserName = model.UserName;
                 ViewBag.AvatarId = user.UserAvatarId;
 
-                return View(model);
+                return this.View(model);
             }
             catch (Exception)
             {
