@@ -5,6 +5,7 @@
 }
 
 @section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/Custom/imagePage.js"></script>
 }
 
@@ -88,4 +89,6 @@
     </div>
     <p class="uploadDate">@Model.ImageDateOfUpload</p>
     <p class="imageDescription">@Model.Description</p>
+
+    @Html.Action("Comments", "Comment", new { imageId = Model.ImageId })
 </div>

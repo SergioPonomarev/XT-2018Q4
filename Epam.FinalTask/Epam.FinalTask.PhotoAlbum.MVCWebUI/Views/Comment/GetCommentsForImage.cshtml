@@ -1,0 +1,69 @@
+﻿@using Epam.FinalTask.PhotoAlbum.MVCWebUI.Models
+@model IEnumerable<Epam.FinalTask.PhotoAlbum.MVCWebUI.Models.CommentModel>
+
+    <ul id="commentsList" class="comments">
+        @foreach (CommentModel comment in Model)
+        {
+            if (comment.CommentAuthor != null)
+            {
+                <li data-commentid="@comment.CommentId" class="comment">
+                    <div class="commentHeader">
+                        <a href='@Url.Action("UserPage", "User", new { userName = comment.CommentAuthor.UserName })' class="commentAuthorPageLink">
+                            @comment.CommentAuthor.UserName
+                        </a>
+
+                        <p class="commentDate">
+                            @comment.CommentDate.ToString()
+                        </p>
+
+                        @if (User.Identity.Name == comment.CommentAuthor.UserName)
+                        {
+                            <button class="btnComment btnCommentDelete" title="Delete this comment">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        }
+
+                        @if ((User.IsInRole("Admins") && comment.CommentAuthor.UserRole == "User") || User.IsInRole("SuperAdmins"))
+                        {
+                            if (!comment.Banned)
+                            {
+                                <button class="btnComment btnCommentBan" title="Ban this comment">
+                                    <i class="fa fa-ban"></i>
+                                </button>
+
+                                <button class="btnComment btnCommentUnban hidden" title="Unban this comment">
+                                    <i class="fa fa-check-circle-o"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btnComment btnCommentBan hidden" title="Ban this comment">
+                                    <i class="fa fa-ban"></i>
+                                </button>
+
+                                <button class="btnComment btnCommentUnban" title="Unban this comment">
+                                    <i class="fa fa-check-circle-o"></i>
+                                </button>
+                            }
+                        }
+                        <div class="clear"></div>
+                    </div>
+
+                    @if (!comment.Banned)
+                    {
+                        <p class="commentText textUnbanned">@comment.CommentText</p>
+                        <p class="commentText textBanned hidden">Comment is banned.</p>
+                    }
+                    else
+                    {
+                        <p class="commentText textUnbanned hidden">@comment.CommentText</p>
+                        <p class="commentText textBanned">Comment is banned.</p>
+                    }
+                </li>
+            }
+            else
+            {
+                <li data-commentid="@comment.CommentId" class="comment">Comment is not available.</li>
+            }
+        }
+    </ul>

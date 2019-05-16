@@ -5,8 +5,8 @@
         $likesCount = $('#likesCount'),
         $btnLike = $('#btnLike'),
         $btnUnlike = $('#btnUnlike'),
-        $btnDeleteImage = $('#deleteImage');
-        //$commentsList = $('#commentsList'),
+        $btnDeleteImage = $('#deleteImage'),
+        $commentsList = $('#commentsList');
         //commentText = document.getElementById('commentText'),
         //charCount = document.getElementById('charCount'),
         //btnSubmit = document.getElementById('btnSubmit');
@@ -121,75 +121,75 @@
         }
     })
 
-    //$commentsList.on('click', '.btnCommentDelete', function (e) {
-    //    var $target = $(e.target),
-    //        $listItem = $target.closest('li'),
-    //        commentId = $listItem.data('commentid');
+    $commentsList.on('click', '.btnCommentDelete', function (e) {
+        var $target = $(e.target),
+            $listItem = $target.closest('li'),
+            commentId = $listItem.data('commentid');
 
-    //    if (confirm('Are you sure you want to delete this comment? You will not be able to restore it.')) {
-    //        $.ajax({
-    //            url: '/Comments/DeleteComment',
-    //            type: 'post',
-    //            data: { commentId: commentId }
-    //        })
-    //            .done(function () {
-    //                $listItem.remove();
-    //            })
-    //            .fail(function () {
-    //                alert('Cannot delete this comment');
-    //            })
-    //    } else {
-    //        return;
-    //    }
-    //})
+        if (confirm('Are you sure you want to delete this comment? You will not be able to restore it.')) {
+            $.ajax({
+                url: '/Comment/DeleteComment',
+                type: 'post',
+                data: { commentId: commentId }
+            })
+                .done(function () {
+                    $listItem.remove();
+                })
+                .fail(function () {
+                    alert('Cannot delete this comment');
+                })
+        } else {
+            return;
+        }
+    })
 
-    //$commentsList.on('click', '.btnCommentBan', function (e) {
-    //    var $target = $(e.target),
-    //        $listItem = $target.closest('li'),
-    //        commentId = $listItem.data('commentid'),
-    //        $btnBan = $listItem.find('.btnCommentBan'),
-    //        $btnUnban = $listItem.find('.btnCommentUnban'),
-    //        $textUnbanned = $listItem.children('.textUnbanned'),
-    //        $textBanned = $listItem.children('.textBanned');
+    $commentsList.on('click', '.btnCommentBan', function (e) {
+        var $target = $(e.target),
+            $listItem = $target.closest('li'),
+            commentId = $listItem.data('commentid'),
+            $btnBan = $listItem.find('.btnCommentBan'),
+            $btnUnban = $listItem.find('.btnCommentUnban'),
+            $textUnbanned = $listItem.children('.textUnbanned'),
+            $textBanned = $listItem.children('.textBanned');
 
-    //    $.ajax({
-    //        url: '/Comments/BanComment',
-    //        type: 'post',
-    //        data: { commentId: commentId }
-    //    })
-    //        .done(function () {
-    //            $btnBan.toggleClass('hidden');
-    //            $btnUnban.toggleClass('hidden');
-    //            $textBanned.removeClass('hidden');
-    //            $textUnbanned.addClass('hidden');
-    //        })
-    //        .fail(function () {
-    //            alert('Cannot ban this comment.');
-    //        })
-    //})
+        $.ajax({
+            url: '/Comment/BanComment',
+            type: 'post',
+            data: { commentId: commentId }
+        })
+            .done(function () {
+                $btnBan.toggleClass('hidden');
+                $btnUnban.toggleClass('hidden');
+                $textBanned.removeClass('hidden');
+                $textUnbanned.addClass('hidden');
+            })
+            .fail(function () {
+                alert('Cannot ban this comment.');
+            })
+    })
 
-    //$commentsList.on('click', '.btnCommentUnban', function (e) {
-    //    var $target = $(e.target),
-    //        $listItem = $target.closest('li'),
-    //        commentId = $listItem.data('commentid'),
-    //        $btnBan = $listItem.find('.btnCommentBan'),
-    //        $btnUnban = $listItem.find('.btnCommentUnban'),
-    //        $textUnbanned = $listItem.children('.textUnbanned'),
-    //        $textBanned = $listItem.children('.textBanned');
+    $commentsList.on('click', '.btnCommentUnban', function (e) {
+        var $target = $(e.target),
+            $listItem = $target.closest('li'),
+            commentId = $listItem.data('commentid'),
+            $btnBan = $listItem.find('.btnCommentBan'),
+            $btnUnban = $listItem.find('.btnCommentUnban'),
+            $textUnbanned = $listItem.children('.textUnbanned'),
+            $textBanned = $listItem.children('.textBanned');
 
-    //    $.ajax({
-    //        url: '/Comments/UnbanComment',
-    //        type: 'post',
-    //        data: { commentId: commentId }
-    //    })
-    //        .done(function () {
-    //            $btnBan.toggleClass('hidden');
-    //            $btnUnban.toggleClass('hidden');
-    //            $textUnbanned.removeClass('hidden');
-    //            $textBanned.addClass('hidden');
-    //        })
-    //        .fail(function () {
-    //            alert('Cannot unban this comment.');
-    //        })
-    //})
+        $.ajax({
+            url: '/Comment/UnbanComment',
+            type: 'post',
+            data: { commentId: commentId }
+        })
+            .done(function () {
+                $btnBan.toggleClass('hidden');
+                $btnUnban.toggleClass('hidden');
+                $textUnbanned.removeClass('hidden');
+                $textBanned.addClass('hidden');
+            })
+            .fail(function () {
+                alert('Cannot unban this comment.');
+            })
+    })
 })();

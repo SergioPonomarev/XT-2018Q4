@@ -1,0 +1,44 @@
+﻿@model Epam.FinalTask.PhotoAlbum.MVCWebUI.Models.CommentModel
+
+    <div class="commentFormWrapper">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (!ViewBag.Visitor.Banned)
+            {
+                using (Html.BeginForm("AddComment", "Comment"))
+                {
+                    <input type="hidden" value="@ViewBag.ImageId" name="CommentImageId" />
+
+                    <div class="form-group addComment-formGroup">
+                        @Html.LabelFor(model => model.CommentText, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10 max-width-100">
+                            @Html.TextAreaFor(model => model.CommentText, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CommentText, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btnSubmit" class="btnImage btnImageNewComment" title="Add new comment">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+
+                    <div class="clear"></div>
+                }
+            }
+            else
+            {
+                <div class="errorMessage">
+                    <p>You are banned.</p>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="guestMessage">
+                @Html.ActionLink("Login", "Login", "Account", null, new { @class = "loginLink" }) to add a comment.
+            </p>
+        }
+    </div>
+
+<div class="commentsListWrapper">
+    @Html.Action("GetCommentsForImage", "Comment", new { imageId = ViewBag.ImageId })
+</div>

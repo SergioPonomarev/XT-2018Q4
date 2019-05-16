@@ -3,6 +3,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 1;
 }
 
 .header_userBlock {
@@ -280,9 +281,17 @@
     margin: 0 0 20px 0;
 }
 
-.imageComments {
-    width: 700px;
-    margin: auto;
+.guestMessage {
+    text-align: center;
+}
+
+.addComment-formGroup {
+    width: 88%;
+    float: left;
+}
+
+.max-width-100 {
+    max-width: 100%;
 }
 
 .commentForm_label {
@@ -290,45 +299,17 @@
     margin-bottom: 5px;
 }
 
-.commentForm_input {
-    resize: none;
-    width: 630px;
-    height: 100px;
-    display: block;
-    float: left;
-}
-
 .btnImageNewComment {
     width: 40px;
     height: 40px;
     font-size: 30px;
     display: block;
-    float: right;
-    margin-top: 20px;
-}
-
-.btnImageNewComment:disabled {
-    opacity: .3;
-}
-
-.charCountValid {
-    font-size: 14px;
-    font-weight: 600;
-    color: green;
-    position: relative;
-    left: 30px;
-}
-
-.charCountNotValid {
-    font-size: 14px;
-    font-weight: 600;
-    color: red;
-    position: relative;
-    left: 30px;
+    float: left;
+    margin-top: 40px;
 }
 
 .errorMessage {
-    width: 700px;
+    width: 100%;
     text-align: center;
     background-color: rgba(234, 22, 33, 0.3);
     color: #cc0202;
